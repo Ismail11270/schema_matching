@@ -1,5 +1,7 @@
 package pl.polsl.iat.thesis.sql;
 
+import java.util.Locale;
+
 public enum DatabaseType {
 
     MYSQL("mysql"), ORACLE, POSTGRES;
@@ -12,5 +14,9 @@ public enum DatabaseType {
 
     DatabaseType(){
         prefix = "";
+    }
+
+    public static DatabaseType getType(String type){
+        return DatabaseType.valueOf(type.toUpperCase());
     }
 }

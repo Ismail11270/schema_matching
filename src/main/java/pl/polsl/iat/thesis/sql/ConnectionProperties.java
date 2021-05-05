@@ -1,79 +1,96 @@
 package pl.polsl.iat.thesis.sql;
 
+import java.security.InvalidParameterException;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Stream;
+
 public class ConnectionProperties {
 
-    private String host;
-    private int port;
+    // properties file parameters
+    public static final String HOST = "host";
+    public static final String PORT = "port";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
+    public static final String SCHEMA = "schema";
+    public static final String PROPERTIES_SEPARATOR = ":";
 
-    private String username;
-    private String password;
+    public enum PropertyName {
+        ID,
+        DATABASE_TYPE,
+        HOST,
+        PORT,
+        USERNAME,
+        PASSWORD,
+        SCHEMA;
 
-    private String schemaName;
-    private DatabaseType databaseType;
-
-    private ConnectionProperties(){
-
+        public static PropertyName getPropertyName(String name) {
+            return valueOf(name.toUpperCase());
+        }
     }
+
+    public ConnectionProperties() {
+    }
+
+    public void setId(int id) {
+        propertiesMap.put(PropertyName.ID, id);
+    }
+
+    private Map<PropertyName, Object> propertiesMap = Stream.of(PropertyName.values()).collect(HashMap::new, (m, p) -> m.put(p, null), HashMap::putAll);
 
     public String getHost() {
-        return host;
+        return (String) propertiesMap.get(PropertyName.HOST);
     }
 
-    public int getPort() {
-        return port;
+    public Integer getPort() {
+        return propertiesMap.get(PropertyName.PORT) instanceof String ? Integer.parseInt((String) propertiesMap.get(PropertyName.PORT)) : null;
     }
 
     public String getUsername() {
-        return username;
+        return (String) propertiesMap.get(PropertyName.USERNAME);
     }
 
     public String getPassword() {
-        return password;
+        return (String) propertiesMap.get(PropertyName.PASSWORD);
     }
 
     public String getSchemaName() {
-        return schemaName;
+        return (String) propertiesMap.get(PropertyName.SCHEMA);
     }
 
     public DatabaseType getDatabaseType() {
-        return databaseType;
+        return (DatabaseType) propertiesMap.get(PropertyName.DATABASE_TYPE);
     }
 
-
-    public static class Builder {
-        ConnectionProperties properties;
-
-        public Builder() {
-            properties = new ConnectionProperties();
+    public void putProperty(String propName, String propValue) {
+        PropertyName pa = PropertyName.valueOf(propName.toUpperCase(Locale.ROOT));
+        if (!propertiesMap.containsKey(pa)) {
+            throw new InvalidParameterException("Invalid property in properties file - " + propName + ".");
         }
-
-        public void setHost(String host) {
-            properties.host = host;
-        }
-
-        public void setPort(int port) {
-            properties.port = port;
-        }
-
-        public void setUsername(String username) {
-            properties.username = username;
-        }
-
-        public void setPassword(String password) {
-            properties.password = password;
-        }
-
-        public void setDatabaseType(DatabaseType type) {
-            properties.databaseType = type;
-        }
-
-        public void setSchemaName(String schema) {
-            properties.schemaName = schema;
-        }
-
-        public ConnectionProperties build(){
-            return properties;
+        if (pa == PropertyName.PORT) {
+            try {
+                propertiesMap.put(pa, Integer.parseInt(propValue));
+            } catch (NumberFormatException e) {
+                throw new InvalidParameterException("Wrong value for PORT property in properties file.");
+            }
+        } else if (pa == PropertyName.DATABASE_TYPE) {
+            try {
+                propertiesMap.put(pa, DatabaseType.getType(propValue));
+            } catch (IllegalArgumentException iae) {
+                throw new InvalidParameterException("Database type specified in properties file is not supported - " + propValue + ".");
+            }
+        } else {
+            propertiesMap.put(pa, propValue);
         }
     }
 
+    public ConnectionProperties confirm() {
+        if (propertiesMap.containsValue(null))
+            throw new InvalidParameterException("Error parsing connection properties. Please make sure the provided properties are correct.");
+        System.out.println("Properties verified:");
+        propertiesMap.entrySet().forEach(x -> System.out.println(x.getKey() + ": " + x.getValue()));
+        return this;
+    }
 }
+

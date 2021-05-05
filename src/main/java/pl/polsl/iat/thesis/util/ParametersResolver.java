@@ -1,43 +1,79 @@
 package pl.polsl.iat.thesis.util;
 
+import pl.polsl.iat.thesis.exception.InvalidInputArgumentException;
 import pl.polsl.iat.thesis.sql.ConnectionProperties;
 
+import java.io.*;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Stack;
-import java.util.Vector;
+import java.util.List;
 
 public class ParametersResolver {
 
     private final String SCHEMA_ONE = "-s1";
     private final String SCHEMA_TWO = "-s2";
-    private final String PROPERTIES = "-p";
+    private final String PROPERTIES_FILE = "-f";
 
-    public ConnectionProperties resolveParams(String args[]){
-        //-s1 -p c:\projects\thesis\schema_matching\resources\schema1.properties
-        //-s2 -p c:\projects\thesis\schema_matching\resources\schema2.properties
-        ConnectionProperties.Builder b1 = new ConnectionProperties.Builder(), b2 = new ConnectionProperties.Builder();
-        if(args.length == 0){
+    private List<ConnectionProperties> connectionProperties = new ArrayList<>();
+
+    public ParametersResolver() {
+
+    }
+
+    public ParametersResolver(String args[]) {
+        resolveParams(args);
+    }
+
+    public void resolveParams(String args[]) throws InvalidParameterException {
+        //-s1 -f c:\projects\thesis\schema_matching\resources\schema1.properties
+        //-s2 -f c:\projects\thesis\schema_matching\resources\schema2.properties
+        if (args.length == 0) {
             throw new InvalidParameterException("Missing parameters");
         }
-        Stack<String> argsStack = new Stack<>();
-        argsStack.addAll(Arrays.asList(args));
-        while(!argsStack.empty()){
-            String argSwitch = argsStack.pop();
-            if(argSwitch.startsWith("-")){
-                switch(argSwitch){
-                    case(SCHEMA_ONE):
-                    {
-                        String val = argsStack.pop();
-                        //process props
-                    }
-                    case(SCHEMA_TWO):
-                    {
-
-                    }
+        ArrayList<String> argsList = new ArrayList<>(Arrays.asList(args));
+        int counter = 0;
+        while (!argsList.isEmpty()) {
+            String argSwitch = argsList.remove(0);
+            if (argSwitch.startsWith("-s")) {
+                try {
+                    if (Integer.parseInt(argSwitch.substring(2)) != ++counter)
+                        throw new InvalidInputArgumentException("Invalid connection id.");
+                    String inputType = argsList.remove(0);
+                    if (PROPERTIES_FILE.equals(inputType))
+                        prepareSchemaConnectionFromPropertiesFile(counter, argsList.remove(0));
+                    else
+                        throw new InvalidInputArgumentException("Unsupported input parameter.", inputType);
+                    //TODO implement some other type of connection settings ......
+                } catch (Exception e) {
+                    throw new InvalidInputArgumentException(e.getMessage(), argSwitch);
                 }
+            } else {
+                throw new InvalidInputArgumentException("Wrong input parameters.");
             }
         }
+    }
 
+    private void prepareSchemaConnectionFromPropertiesFile(int id, String path) {
+        try {
+            connectionProperties.add(createConnectionFromProperties(id, Files.readAllLines(Paths.get(new File(path).toURI()))));
+        } catch (IOException e) {
+            throw new InvalidParameterException("Failed to access the provided properties file - " + path + " does not exist or cannot be opened.");
+        }
+    }
+
+    private ConnectionProperties createConnectionFromProperties(int id, List<String> lines) {
+        ConnectionProperties properties = new ConnectionProperties();
+        properties.setId(id);
+        for (int i = 0; i < lines.size(); i++) {
+            String[] property = lines.get(i).split(ConnectionProperties.PROPERTIES_SEPARATOR);
+            if (property.length > 2)
+                throw new InvalidParameterException("Invalid property at line " + i);
+            properties.putProperty(property[0].trim(), property[1].trim());
+        }
+        return properties.confirm();
     }
 }
