@@ -4,7 +4,6 @@ import pl.polsl.iat.thesis.exception.InvalidInputArgumentException;
 import pl.polsl.iat.thesis.sql.ConnectionProperties;
 
 import java.io.*;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.InvalidParameterException;
@@ -14,9 +13,8 @@ import java.util.List;
 
 public class ParametersResolver {
 
-    private final String SCHEMA_ONE = "-s1";
-    private final String SCHEMA_TWO = "-s2";
-    private final String PROPERTIES_FILE = "-f";
+    private final String SWITCH_SCHEMA= "-s";
+    private final String SWITCH_PROPERTIES_FILE = "-f";
 
     private List<ConnectionProperties> connectionProperties = new ArrayList<>();
 
@@ -38,12 +36,12 @@ public class ParametersResolver {
         int counter = 0;
         while (!argsList.isEmpty()) {
             String argSwitch = argsList.remove(0);
-            if (argSwitch.startsWith("-s")) {
+            if (argSwitch.startsWith(SWITCH_SCHEMA)) {
                 try {
                     if (Integer.parseInt(argSwitch.substring(2)) != ++counter)
                         throw new InvalidInputArgumentException("Invalid connection id.");
                     String inputType = argsList.remove(0);
-                    if (PROPERTIES_FILE.equals(inputType))
+                    if (SWITCH_PROPERTIES_FILE.equals(inputType))
                         prepareSchemaConnectionFromPropertiesFile(counter, argsList.remove(0));
                     else
                         throw new InvalidInputArgumentException("Unsupported input parameter.", inputType);
@@ -74,6 +72,6 @@ public class ParametersResolver {
                 throw new InvalidParameterException("Invalid property at line " + i);
             properties.putProperty(property[0].trim(), property[1].trim());
         }
-        return properties.confirm();
+        return properties.confirm(true);
     }
 }

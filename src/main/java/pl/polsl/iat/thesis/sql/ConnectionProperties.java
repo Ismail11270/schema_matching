@@ -8,12 +8,6 @@ import java.util.stream.Stream;
 
 public class ConnectionProperties {
 
-    // properties file parameters
-    public static final String HOST = "host";
-    public static final String PORT = "port";
-    public static final String USERNAME = "username";
-    public static final String PASSWORD = "password";
-    public static final String SCHEMA = "schema";
     public static final String PROPERTIES_SEPARATOR = ":";
 
     public enum PropertyName {
@@ -38,6 +32,10 @@ public class ConnectionProperties {
     }
 
     private Map<PropertyName, Object> propertiesMap = Stream.of(PropertyName.values()).collect(HashMap::new, (m, p) -> m.put(p, null), HashMap::putAll);
+
+    public Object getProperty(PropertyName propertyName){
+        return propertiesMap.get(propertyName);
+    }
 
     public String getHost() {
         return (String) propertiesMap.get(PropertyName.HOST);
@@ -85,9 +83,10 @@ public class ConnectionProperties {
         }
     }
 
-    public ConnectionProperties confirm() {
+    public ConnectionProperties confirm(boolean print) {
         if (propertiesMap.containsValue(null))
             throw new InvalidParameterException("Error parsing connection properties. Please make sure the provided properties are correct.");
+        if(!print) return this;
         System.out.println("Properties verified:");
         propertiesMap.entrySet().forEach(x -> System.out.println(x.getKey() + ": " + x.getValue()));
         return this;
