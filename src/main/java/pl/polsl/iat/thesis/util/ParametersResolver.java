@@ -22,11 +22,11 @@ public class ParametersResolver {
 
     }
 
-    public ParametersResolver(String args[]) {
+    public ParametersResolver(String[] args) {
         resolveParams(args);
     }
 
-    public void resolveParams(String args[]) throws InvalidParameterException {
+    public void resolveParams(String[] args) throws InvalidParameterException {
         //-s1 -f c:\projects\thesis\schema_matching\resources\schema1.properties
         //-s2 -f c:\projects\thesis\schema_matching\resources\schema2.properties
         if (args.length == 0) {
@@ -73,5 +73,9 @@ public class ParametersResolver {
             properties.putProperty(property[0].trim(), property[1].trim());
         }
         return properties.confirm(true);
+    }
+
+    public List<ConnectionProperties> getConnectionProperties(){
+        return connectionProperties;
     }
 }

@@ -4,11 +4,14 @@ import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class ConnectionProperties {
 
     public static final String PROPERTIES_SEPARATOR = ":";
+
+    private String url = null;
 
     public enum PropertyName {
         ID,
@@ -42,7 +45,7 @@ public class ConnectionProperties {
     }
 
     public Integer getPort() {
-        return propertiesMap.get(PropertyName.PORT) instanceof String ? Integer.parseInt((String) propertiesMap.get(PropertyName.PORT)) : null;
+        return propertiesMap.get(PropertyName.PORT) instanceof Integer ? (Integer) propertiesMap.get(PropertyName.PORT) : Integer.parseInt(propertiesMap.get(PropertyName.PORT).toString());
     }
 
     public String getUsername() {
@@ -88,8 +91,16 @@ public class ConnectionProperties {
             throw new InvalidParameterException("Error parsing connection properties. Please make sure the provided properties are correct.");
         if(!print) return this;
         System.out.println("Properties verified:");
-        propertiesMap.entrySet().forEach(x -> System.out.println(x.getKey() + ": " + x.getValue()));
+        propertiesMap.forEach((key, value) -> System.out.println(key + ": " + value));
         return this;
+    }
+
+    public void setUrl(String url){
+        this.url = url;
+    }
+
+    public Optional<String> getUrl(){
+        return Optional.of(url);
     }
 }
 
