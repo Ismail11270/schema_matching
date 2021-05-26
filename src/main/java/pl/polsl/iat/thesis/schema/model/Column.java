@@ -1,4 +1,11 @@
 package pl.polsl.iat.thesis.schema.model;
 
-public class Column {
+public interface Column {
+
+    String getName();
+
+    Type getType();
+
+    Constraints getConstraints();
+
 }

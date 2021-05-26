@@ -1,4 +1,5 @@
 package pl.polsl.iat.thesis.schema.model;
 
-public class Table {
+public interface Table {
+
 }
