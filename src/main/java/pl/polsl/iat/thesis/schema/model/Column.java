@@ -1,10 +1,10 @@
 package pl.polsl.iat.thesis.schema.model;
 
-public interface Column {
+public interface Column extends AttributesProvider {
 
     String getName();
 
-    Type getType();
+    ColumnType getType();
 
     Constraints getConstraints();
 
