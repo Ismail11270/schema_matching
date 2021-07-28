@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<matching-result>
+	<!-- compare schema_A to all other schemas -->
+	<component type='schema' name='schema_A'>
+		<component-match type='schema' name='schema_B' match='50%'>
+			<!-- compare table_A from schema_A to all tables from tables from schema_B -->
+			<component type='table' name='schema_A.table_A'>
+				<component-match type='table' name='schema_B.table_A' match='30%'>
+					<!-- compare column_A from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_A.column_A'>
+						<component-match type='column' name='schema_B.talbe_A.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_D' match='60%'/>
+					</component>
+					<!-- compare column_B from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_A.column_B'>
+						<component-match type='column' name='schema_B.talbe_A.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_D' match='60%'/>
+					</component>
+					<!-- compare column_C from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_A.column_C'>
+						<component-match type='column' name='schema_B.talbe_A.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_D' match='60%'/>
+					</component>
+					<!-- compare column_D from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_A.column_D'>
+						<component-match type='column' name='schema_B.talbe_A.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_D' match='60%'/>
+					</component>
+				</component-match>
+				<component-match type='table' name='schema_B.table_B' match='30%'>
+					<!-- compare column_A from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_A.column_A'>
+						<component-match type='column' name='schema_B.talbe_B.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_D' match='60%'/>
+					</component>
+					<!-- compare column_B from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_A.column_B'>
+						<component-match type='column' name='schema_B.talbe_B.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_D' match='60%'/>
+					</component>
+					<!-- compare column_C from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_A.column_C'>
+						<component-match type='column' name='schema_B.talbe_B.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_D' match='60%'/>
+					</component>
+					<!-- compare column_D from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_A.column_D'>
+						<component-match type='column' name='schema_B.talbe_B.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_D' match='60%'/>
+					</component>
+				</component-match>
+			</component>
+			
+			<component type='table' name='schema_A.table_B'>
+				<component-match type='table' name='schema_B.table_A' match='30%'>
+					<!-- compare column_A from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_B.column_A'>
+						<component-match type='column' name='schema_B.talbe_A.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_D' match='60%'/>
+					</component>
+					<!-- compare column_B from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_B.column_B'>
+						<component-match type='column' name='schema_B.talbe_A.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_D' match='60%'/>
+					</component>
+					<!-- compare column_C from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_B.column_C'>
+						<component-match type='column' name='schema_B.talbe_A.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_D' match='60%'/>
+					</component>
+					<!-- compare column_D from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_B.column_D'>
+						<component-match type='column' name='schema_B.talbe_A.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_A.column_D' match='60%'/>
+					</component>
+				</component-match>
+				<component-match type='table' name='schema_B.table_B' match='30%'>
+					<!-- compare column_A from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_B.column_A'>
+						<component-match type='column' name='schema_B.talbe_B.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_D' match='60%'/>
+					</component>
+					<!-- compare column_B from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_B.column_B'>
+						<component-match type='column' name='schema_B.talbe_B.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_D' match='60%'/>
+					</component>
+					<!-- compare column_C from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_B.column_C'>
+						<component-match type='column' name='schema_B.talbe_B.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_D' match='60%'/>
+					</component>
+					<!-- compare column_D from schema_A table_A to all columns from table_A schema_B -->
+					<component type='column' name='schema_A.table_B.column_D'>
+						<component-match type='column' name='schema_B.talbe_B.column_A' match='30%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_B' match='40%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_C' match='20%'/>
+						<component-match type='column' name='schema_B.talbe_B.column_D' match='60%'/>
+					</component>
+				</component-match>
+			</component>
+		</component-match>
+	</component>
+</matching-result>
