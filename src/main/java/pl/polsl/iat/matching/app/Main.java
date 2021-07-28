@@ -5,6 +5,7 @@ import pl.polsl.iat.matching.exception.SchemaExtractorException;
 import pl.polsl.iat.matching.schema.model.Schema;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 import pl.polsl.iat.matching.sql.ConnectionProperties;
+import pl.polsl.iat.matching.util.MatcherSettings;
 import pl.polsl.iat.matching.util.ParametersResolver;
 
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ public class Main {
         for(ConnectionProperties p : parametersResolver.getConnectionProperties()){
             schemas.add(extractor.load(p));
         }
+
+        
+
+//        MatcherSettings.check();
+
 
         // TODO
         // for each schema pair run schema matcher

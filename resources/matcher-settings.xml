@@ -1,0 +1,17 @@
+<?xml version = "1.0"?>
+<class>
+   <matcher id="0">
+	<type>exact</type>
+	<active>true</active>
+   </matcher>
+  
+   <matcher id="1">
+	<type>fuzzy</type>
+	<active>true</active>
+   </matcher>
+
+   <matcher id="2">
+	<type>dictionary</type>
+	<active>true</active>
+   </matcher>
+</class>
