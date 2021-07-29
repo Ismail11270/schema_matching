@@ -2,6 +2,7 @@ package pl.polsl.iat.matching.app;
 
 import pl.polsl.iat.matching.exception.DatabaseException;
 import pl.polsl.iat.matching.exception.SchemaExtractorException;
+import pl.polsl.iat.matching.matchers.SchemaMatcher;
 import pl.polsl.iat.matching.schema.model.Schema;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 import pl.polsl.iat.matching.sql.ConnectionProperties;
@@ -25,10 +26,10 @@ public class Main {
             schemas.add(extractor.load(p));
         }
 
-        
 
 //        MatcherSettings.check();
 
+        SchemaMatcher schemaMatcher = new SchemaMatcher();
 
         // TODO
         // for each schema pair run schema matcher
