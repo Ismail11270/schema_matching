@@ -17,4 +17,11 @@ public class Const {
         public static final String GET_TABLE_SCHEMA_NAME = "TABLE_SCHEM";
     }
 
+    public static class SettingsXml {
+        public static final String MATCHER_TAG = "matcher";
+        public static final String TYPE_TAG = "type";
+        public static final String ACTIVE_TAG = "active";
+        public static final String ID = "id";
+    }
+
 }

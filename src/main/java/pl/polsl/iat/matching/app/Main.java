@@ -24,7 +24,6 @@ public class Main {
             schemas.add(new SchemaExtractor(p).load(SchemaExtractor.Mode.LAZY));
         }
 
-        MatcherSettings.check();
 
         SchemaMatcher schemaMatcher = new SchemaMatcher();
 
