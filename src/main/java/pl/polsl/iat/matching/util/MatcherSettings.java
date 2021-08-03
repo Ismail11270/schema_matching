@@ -7,14 +7,15 @@ import org.w3c.dom.NodeList;
 import pl.polsl.iat.matching.matchers.ComponentMatcher;
 import pl.polsl.iat.matching.matchers.MatcherFactory;
 import pl.polsl.iat.matching.matchers.MatcherType;
+import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.*;
 
 public class MatcherSettings {
-    public static Map<MatcherType,ComponentMatcher<?>> availableMatchers;
-    private final static String MATCHER_SETTINGS_VAR = "MATCHER_SETTINGS_FILE";
+    private static Map<MatcherType,ComponentMatcher<?>> availableMatchers;
+    public static SchemaExtractor.Mode loaderMode;
 
     public static boolean hasMatcher(MatcherType type){
         return availableMatchers.containsKey(type);
@@ -27,11 +28,11 @@ public class MatcherSettings {
     public static ComponentMatcher<?> getMatcher(MatcherType type){
         return availableMatchers.get(type);
     }
-    
+
     static {
         availableMatchers = new Hashtable<>();
         try {
-            File inputFile = new File(System.getenv(MATCHER_SETTINGS_VAR));
+            File inputFile = new File(System.getenv(Const.SettingsXml.MATCHER_SETTINGS_VAR));
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName(Const.SettingsXml.MATCHER_TAG);
@@ -49,6 +50,8 @@ public class MatcherSettings {
                     }
                 }
             }
+            NodeList modeTag = doc.getElementsByTagName(Const.SettingsXml.MODE);
+            loaderMode = SchemaExtractor.Mode.valueOf(modeTag.item(0).getTextContent().toUpperCase());
         } catch (Exception e) {
             e.printStackTrace();
         }

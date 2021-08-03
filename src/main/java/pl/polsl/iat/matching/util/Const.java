@@ -21,7 +21,8 @@ public class Const {
         public static final String MATCHER_TAG = "matcher";
         public static final String TYPE_TAG = "type";
         public static final String ACTIVE_TAG = "active";
-        public static final String ID = "id";
+        public static final String MODE = "mode";
+        public static final String MATCHER_SETTINGS_VAR = "MATCHER_SETTINGS_FILE";
     }
 
 }

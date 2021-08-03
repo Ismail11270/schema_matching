@@ -10,6 +10,8 @@ public class MatcherFactory {
      * @return
      */
     public static ComponentMatcher getMatcherOfType(MatcherType type){
-        return null;
+        return new ComponentMatcher() {
+
+        };
     }
 }

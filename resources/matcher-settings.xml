@@ -1,17 +1,20 @@
 <?xml version = "1.0"?>
 <settings>
-   <matcher id="0">
+   <matcher>
 	<type>exact</type>
 	<active>true</active>
    </matcher>
   
-   <matcher id="1">
+   <matcher>
 	<type>fuzzy</type>
 	<active>true</active>
    </matcher>
 
-   <matcher id="2">
+   <matcher>
 	<type>dictionary</type>
 	<active>true</active>
    </matcher>
+   
+   <mode>LAZY</mode>
+   
 </settings>

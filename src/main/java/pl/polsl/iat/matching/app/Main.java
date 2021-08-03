@@ -2,6 +2,7 @@ package pl.polsl.iat.matching.app;
 
 import pl.polsl.iat.matching.exception.DatabaseException;
 import pl.polsl.iat.matching.exception.SchemaExtractorException;
+import pl.polsl.iat.matching.matchers.MatcherType;
 import pl.polsl.iat.matching.matchers.SchemaMatcher;
 import pl.polsl.iat.matching.schema.model.Schema;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
@@ -16,16 +17,17 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws DatabaseException, SchemaExtractorException {
-        System.out.println(Arrays.toString(args));
-        //load schemas from parameters
         ParametersResolver parametersResolver = new ParametersResolver(args);
         List<Schema> schemas = new ArrayList<>();
         for(ConnectionProperties p : parametersResolver.getConnectionProperties()){
-            schemas.add(new SchemaExtractor(p).load(SchemaExtractor.Mode.LAZY));
+            schemas.add(new SchemaExtractor(p).load(MatcherSettings.loaderMode));
         }
 
 
+        MatcherSettings.hasMatcher(MatcherType.EXACT);
+
         SchemaMatcher schemaMatcher = new SchemaMatcher();
+
 
         // TODO
         // for each schema pair run schema matcher
