@@ -1,14 +1,11 @@
 package pl.polsl.iat.matching.matchers;
 
 import pl.polsl.iat.matching.matchers.exception.MatchingException;
-import pl.polsl.iat.matching.schema.model.Attribute;
-import pl.polsl.iat.matching.schema.model.AttributesProvider;
-
-import java.util.stream.Stream;
+import pl.polsl.iat.matching.schema.model.CharacteristicProvider;
 
 public class AttributeMatcher {
-    private AttributesProvider A, B;
-    public AttributeMatcher(AttributesProvider A, AttributesProvider B) throws MatchingException {
+    private CharacteristicProvider A, B;
+    public AttributeMatcher(CharacteristicProvider A, CharacteristicProvider B) throws MatchingException {
         this.A = A;
         this.B = B;
         if(!A.getClass().equals(B.getClass())) {
@@ -17,8 +14,8 @@ public class AttributeMatcher {
     }
 
     public float doMatch() {
-        Stream<Attribute<?>> attributes = A.getAttributes();
-        Stream<Attribute<?>> attributes1 = B.getAttributes();
+//        Stream<Characteristic<?,?>> attributes = A.getCharacteristics();
+//        Stream<Characteristic<?>> attributes1 = B.getCharacteristics();
 
 
 

@@ -7,8 +7,8 @@ import java.sql.*;
 
 public class SchemaConnection {
 
-    private Connection connection;
-    private ConnectionProperties properties;
+    private final Connection connection;
+    private final ConnectionProperties properties;
 
     public SchemaConnection(ConnectionProperties properties) throws DatabaseException {
         try {
@@ -43,11 +43,6 @@ public class SchemaConnection {
             throw new DatabaseException("Failed to get metadata for schema " + properties.getSchemaName(), e);
         }
     }
-
-//    public ResultSet queryColumnsMetadata(){
-//        return connection.getMetaData().getColumns()
-//    }
-
 
     public void whatTables() {
         try {

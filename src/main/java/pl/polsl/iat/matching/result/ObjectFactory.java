@@ -5,6 +5,8 @@
 //
 package pl.polsl.iat.matching.result;//
 
+import pl.polsl.iat.matching.schema.model.Schema;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
@@ -37,6 +39,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+
+    public MatchingResult createMatchingResult(Schema... schema) {
+        var result = new MatchingResult();
+        //todo implement initialization of matching result based on the schemas
+        // potentially for N schemas but first for 2 only
+        return result;
     }
 
     /**

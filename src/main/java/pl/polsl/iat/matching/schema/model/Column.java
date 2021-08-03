@@ -1,11 +1,5 @@
 package pl.polsl.iat.matching.schema.model;
 
-public interface Column extends AttributesProvider {
-
+public interface Column extends CharacteristicProvider {
     String getName();
-
-    ColumnType getType();
-
-    Constraints getConstraints();
-
 }

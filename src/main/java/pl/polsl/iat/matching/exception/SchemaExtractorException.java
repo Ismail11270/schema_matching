@@ -1,6 +1,6 @@
 package pl.polsl.iat.matching.exception;
 
-public class SchemaExtractorException extends Exception{
+public class SchemaExtractorException extends RuntimeException{
     private String msg;
 
     public SchemaExtractorException(Throwable t){

@@ -19,15 +19,12 @@ public class Main {
         System.out.println(Arrays.toString(args));
         //load schemas from parameters
         ParametersResolver parametersResolver = new ParametersResolver(args);
-        SchemaExtractor extractor = new SchemaExtractor(SchemaExtractor.Mode.EAGER);
         List<Schema> schemas = new ArrayList<>();
-//        SchemaConnection connection = new SchemaConnection(parametersResolver.getConnectionProperties().get(0));
         for(ConnectionProperties p : parametersResolver.getConnectionProperties()){
-            schemas.add(extractor.load(p));
+            schemas.add(new SchemaExtractor(p).load(SchemaExtractor.Mode.LAZY));
         }
 
-
-//        MatcherSettings.check();
+        MatcherSettings.check();
 
         SchemaMatcher schemaMatcher = new SchemaMatcher();
 
