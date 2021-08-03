@@ -10,15 +10,24 @@ import pl.polsl.iat.matching.matchers.MatcherType;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MatcherSettings {
-    public static Map<MatcherType,ComponentMatcher> availableMatchers;
+    public static Map<MatcherType,ComponentMatcher<?>> availableMatchers;
     private final static String MATCHER_SETTINGS_VAR = "MATCHER_SETTINGS_FILE";
 
+    public static boolean hasMatcher(MatcherType type){
+        return availableMatchers.containsKey(type);
+    }
+
+    public static List<ComponentMatcher<?>> getAvailableMatchers(){
+        return Collections.unmodifiableList(new ArrayList<>(availableMatchers.values()));
+    }
+
+    public static ComponentMatcher<?> getMatcher(MatcherType type){
+        return availableMatchers.get(type);
+    }
+    
     static {
         availableMatchers = new Hashtable<>();
         try {
