@@ -39,4 +39,9 @@ public class BasicCharacteristic implements Characteristic<String> {
     public int compareTo(Characteristic<String> o) {
         return 1;
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

@@ -1,7 +1,7 @@
 package pl.polsl.iat.matching.schema.model;
 
 /**
- * Enum holding names of all column attributes that are loaded
+ * Enum holding names of all column attributes that are loadedSSs
  */
 public enum ColumnCharacteristicType {
     TABLE_CAT, TABLE_SCHEM, TABLE_NAME, COLUMN_NAME, DATA_TYPE,

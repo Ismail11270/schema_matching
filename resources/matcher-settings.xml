@@ -15,6 +15,6 @@
 	<active>true</active>
    </matcher>
    
-   <mode>LAZY</mode>
+   <mode>EAGER</mode>
    
 </settings>

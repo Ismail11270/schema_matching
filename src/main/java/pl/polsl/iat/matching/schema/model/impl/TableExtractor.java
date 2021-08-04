@@ -26,16 +26,12 @@ public class TableExtractor {
         this.schema = schema;
     }
 
-    public TableExtractor(DatabaseMetaData metaData, String schema, SchemaExtractor.Mode loaderMode){
-        this(metaData,schema);
+    public TableExtractor(DatabaseMetaData metaData, String schema, SchemaExtractor.Mode loaderMode) {
+        this(metaData, schema);
         this.loaderMode = loaderMode;
     }
 
-    public void setLoaderMode(SchemaExtractor.Mode mode) {
-        loaderMode = mode;
-    }
-
-    public Table load(String tableName) throws DatabaseException {
+    public Table load1(String tableName) throws DatabaseException {
         TableImpl.Builder builder = new TableImpl.Builder(loaderMode);
         try {
             builder.setName(tableName);
@@ -45,6 +41,18 @@ public class TableExtractor {
             } else {
                 builder.setColumns(Stream.empty());
             }
+        } catch (Exception e) {
+            throw new DatabaseException("Failed to acquire columns metadata", e);
+        }
+        return builder.build();
+    }
+
+    public Table load(String tableName) throws DatabaseException {
+        TableImpl.Builder builder = new TableImpl.Builder(loaderMode);
+        try {
+            builder.setName(tableName);
+            ColumnsGenerator generator = new ColumnsGenerator(metaData, schema, tableName);
+            builder.setColumns(Stream.generate(generator).takeWhile(generator));
         } catch (Exception e) {
             throw new DatabaseException("Failed to acquire columns metadata", e);
         }

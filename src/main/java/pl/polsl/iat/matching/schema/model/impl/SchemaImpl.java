@@ -24,10 +24,17 @@ class SchemaImpl implements Schema {
     }
 
     @Override
-    public Stream<Table> getComponents() {
-        return loaded ? tablesList.stream() : tablesStream;
+    public List<Table> getComponents() {
+        loadComponents();
+        return tablesList;
     }
 
+    private void loadComponents() {
+        if(!loaded){
+            tablesList = tablesStream.collect(Collectors.toList());
+            loaded = true;
+        }
+    }
     /**
      * @return name of the schema extracted from attributes list
      */
@@ -49,14 +56,20 @@ class SchemaImpl implements Schema {
             return this;
         }
 
-        public Builder setTablesSource(Stream<Table> tableStream){
+        public Builder setTablesSource(Stream<Table> tablesStream){
             if(loaderMode == SchemaExtractor.Mode.LAZY) {
-                schema.tablesStream = tableStream;
+                schema.tablesStream = tablesStream;
                 schema.loaded = false;
             } else {
-                schema.tablesList = tableStream.collect(Collectors.toList());
+                schema.tablesList = tablesStream.collect(Collectors.toList());
                 schema.loaded = true;
             }
+            return this;
+        }
+
+        public Builder setTablesList(List<Table> tablesList){
+            schema.loaded = true;
+            schema.tablesList = tablesList;
             return this;
         }
 

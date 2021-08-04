@@ -35,4 +35,9 @@ public class ColumnCharacteristic implements Characteristic<ColumnCharacteristic
     public int compareTo(Characteristic<ColumnCharacteristicType> o) {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

@@ -19,10 +19,11 @@ public class Main {
     public static void main(String[] args) throws DatabaseException, SchemaExtractorException {
         ParametersResolver parametersResolver = new ParametersResolver(args);
         List<Schema> schemas = new ArrayList<>();
-        for(ConnectionProperties p : parametersResolver.getConnectionProperties()){
+        long start = System.currentTimeMillis();
+        for(ConnectionProperties p : List.of(parametersResolver.getConnectionProperties().get(0))){
             schemas.add(new SchemaExtractor(p).load(MatcherSettings.loaderMode));
         }
-
+        System.out.println("Time taken = " + (System.currentTimeMillis() - start));
 
         MatcherSettings.hasMatcher(MatcherType.EXACT);
 

@@ -13,24 +13,25 @@ class TableImpl implements Table {
     private int columnN;
     private Stream<Column> columnsStream;
     private List<Column> columnsList;
-    private List<Characteristic<?>> characteristics;
     private BasicCharacteristic tableName;
     private boolean loaded;
 
-    private TableImpl(){
-
-    }
-
-    //TODO
     @Override
     public Stream<Characteristic<?>> getCharacteristics() {
-        return characteristics.stream();
+        return Stream.of(tableName);
     }
 
-    //TODO
+    private void loadComponents() {
+        if(!loaded){
+            columnsList = columnsStream.collect(Collectors.toList());
+            loaded = true;
+        }
+    }
+
     @Override
-    public Stream<Column> getComponents() {
-        return columnsStream;
+    public List<Column> getComponents() {
+        loadComponents();
+        return columnsList;
     }
 
     @Override
@@ -65,6 +66,12 @@ class TableImpl implements Table {
                 table.columnsList = columnsSource.collect(Collectors.toList());
                 table.loaded = true;
             }
+            return this;
+        }
+
+        public Builder setColumns(List<Column> columnsList){
+            table.loaded = true;
+            table.columnsList = columnsList;
             return this;
         }
 

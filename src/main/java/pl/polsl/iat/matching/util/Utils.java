@@ -8,7 +8,8 @@ import java.sql.SQLException;
 public class Utils {
     public static boolean unsafeResultSetNext(ResultSet rs){
         try {
-            return rs.next();
+            var bool = rs.next();
+            return bool;
         } catch(SQLException e){
             throw new RuntimeDatabaseException(e);
         }
