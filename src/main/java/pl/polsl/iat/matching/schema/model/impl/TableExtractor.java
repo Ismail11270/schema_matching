@@ -31,22 +31,6 @@ public class TableExtractor {
         this.loaderMode = loaderMode;
     }
 
-    public Table load1(String tableName) throws DatabaseException {
-        TableImpl.Builder builder = new TableImpl.Builder(loaderMode);
-        try {
-            builder.setName(tableName);
-            ResultSet columnsRs = metaData.getColumns(schema, null, tableName, null);
-            if (Utils.unsafeResultSetNext(columnsRs)) {
-                builder.setColumns(Stream.iterate(prepareColumn(columnsRs), t -> Utils.unsafeResultSetNext(columnsRs), table -> prepareColumn(columnsRs)).filter(Objects::nonNull));
-            } else {
-                builder.setColumns(Stream.empty());
-            }
-        } catch (Exception e) {
-            throw new DatabaseException("Failed to acquire columns metadata", e);
-        }
-        return builder.build();
-    }
-
     public Table load(String tableName) throws DatabaseException {
         TableImpl.Builder builder = new TableImpl.Builder(loaderMode);
         try {
@@ -57,26 +41,6 @@ public class TableExtractor {
             throw new DatabaseException("Failed to acquire columns metadata", e);
         }
         return builder.build();
-    }
-
-    private Column prepareColumn(ResultSet columnsRs) {
-        try {
-            var columnBuilder = new ColumnImpl.Builder();
-            var charStream = Arrays.stream(ColumnCharacteristicType.values()).map(column -> {
-                try {
-                    String colVal = columnsRs.getString(column.name());
-                    var colChar = new ColumnCharacteristic(column, colVal);
-                    return colChar;
-                } catch (SQLException throwables) {
-                    return null;
-                }
-            }).filter(Objects::nonNull);
-            columnBuilder.setCharacteristics(charStream);
-            columnBuilder.setName(columnsRs.getString(ColumnCharacteristicType.COLUMN_NAME.name()));
-            return columnBuilder.build();
-        } catch (Exception e) {
-            throw new RuntimeDatabaseException(e);
-        }
     }
 
 }
