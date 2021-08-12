@@ -30,6 +30,11 @@ class ColumnImpl implements Column {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     static class Builder{
         private final ColumnImpl col = new ColumnImpl();
 

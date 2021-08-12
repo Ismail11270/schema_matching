@@ -1,11 +1,10 @@
 package pl.polsl.iat.matching.schema.model.impl;
 
-import pl.polsl.iat.matching.schema.model.Characteristic;
+import pl.polsl.iat.matching.schema.model.BaseCharacteristic;
 import pl.polsl.iat.matching.schema.model.CharacteristicType;
-import pl.polsl.iat.matching.schema.model.Column;
 import pl.polsl.iat.matching.schema.model.ColumnCharacteristicType;
 
-public class ColumnCharacteristic implements Characteristic<ColumnCharacteristicType> {
+public class ColumnCharacteristic implements BaseCharacteristic<ColumnCharacteristicType> {
 
     private ColumnCharacteristicType key;
     private String value;
@@ -32,12 +31,12 @@ public class ColumnCharacteristic implements Characteristic<ColumnCharacteristic
     }
 
     @Override
-    public int compareTo(Characteristic<ColumnCharacteristicType> o) {
+    public int compareTo(BaseCharacteristic<ColumnCharacteristicType> o) {
         return 0;
     }
 
     @Override
     public String toString() {
-        return value;
+        return key + "=" + value;
     }
 }

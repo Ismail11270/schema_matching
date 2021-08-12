@@ -1,19 +1,19 @@
 package pl.polsl.iat.matching.schema.model.impl;
 
-import pl.polsl.iat.matching.schema.model.Characteristic;
+import pl.polsl.iat.matching.schema.model.BaseCharacteristic;
 import pl.polsl.iat.matching.schema.model.CharacteristicType;
 
 
 /**
  * Characteristic implementation for both key and value types as String
  */
-public class BasicCharacteristic implements Characteristic<String> {
+public class StringCharacteristic implements BaseCharacteristic<String> {
 
     private final CharacteristicType type;
     private final String key;
     private final String value;
 
-    public BasicCharacteristic(String charName, String val, CharacteristicType type){
+    public StringCharacteristic(String charName, String val, CharacteristicType type){
         this.key = charName;
         this.value = val;
         this.type = type;
@@ -36,12 +36,14 @@ public class BasicCharacteristic implements Characteristic<String> {
 
     //TODO IMPLEMENT COMPARETO
     @Override
-    public int compareTo(Characteristic<String> o) {
+    public int compareTo(BaseCharacteristic<String> o) {
         return 1;
     }
 
     @Override
     public String toString() {
-        return value;
+        return key + "=" + value;
     }
+
+
 }

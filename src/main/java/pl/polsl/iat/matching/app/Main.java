@@ -1,6 +1,5 @@
 package pl.polsl.iat.matching.app;
 
-import pl.polsl.iat.matching.exception.DatabaseException;
 import pl.polsl.iat.matching.exception.SchemaExtractorException;
 import pl.polsl.iat.matching.matchers.MatcherType;
 import pl.polsl.iat.matching.matchers.SchemaMatcher;
@@ -10,17 +9,17 @@ import pl.polsl.iat.matching.sql.ConnectionProperties;
 import pl.polsl.iat.matching.util.MatcherSettings;
 import pl.polsl.iat.matching.util.ParametersResolver;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws DatabaseException, SchemaExtractorException {
+    public static void main(String[] args) throws SchemaExtractorException, SQLException {
         ParametersResolver parametersResolver = new ParametersResolver(args);
         List<Schema> schemas = new ArrayList<>();
         long start = System.currentTimeMillis();
-        for(ConnectionProperties p : List.of(parametersResolver.getConnectionProperties().get(0))){
+        for(ConnectionProperties p : parametersResolver.getConnectionProperties()){
             schemas.add(new SchemaExtractor(p).load(MatcherSettings.loaderMode));
         }
         System.out.println("Time taken = " + (System.currentTimeMillis() - start));

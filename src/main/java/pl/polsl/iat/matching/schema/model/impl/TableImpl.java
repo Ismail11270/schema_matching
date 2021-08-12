@@ -4,7 +4,10 @@ import pl.polsl.iat.matching.exception.SchemaExtractorException;
 import pl.polsl.iat.matching.schema.model.*;
 import pl.polsl.iat.matching.util.Const;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,11 +16,14 @@ class TableImpl implements Table {
     private int columnN;
     private Stream<Column> columnsStream;
     private List<Column> columnsList;
-    private BasicCharacteristic tableName;
+    private StringCharacteristic tableName;
+
+    private Set<Characteristic<?,?>> characteristics = new HashSet<>();
+
     private boolean loaded;
 
     @Override
-    public Stream<Characteristic<?>> getCharacteristics() {
+    public Stream<BaseCharacteristic<?>> getCharacteristics() {
         return Stream.of(tableName);
     }
 
@@ -44,6 +50,10 @@ class TableImpl implements Table {
         return columnN;
     }
 
+    @Override
+    public String toString(){
+        return "TableName=" + tableName.getValue();
+    }
 
     public static class Builder{
         private final TableImpl table = new TableImpl();
@@ -55,7 +65,18 @@ class TableImpl implements Table {
         }
 
         public Builder setName(String name){
-            table.tableName = new BasicCharacteristic(Const.CharName.TABLE_NAME, name, CharacteristicType.Name);
+            table.tableName = new StringCharacteristic(Const.CharName.TABLE_NAME, name, CharacteristicType.TableName);
+            table.characteristics.add(table.tableName);
+            return this;
+        }
+
+        public Builder addCharacteristics(List<Characteristic<?,?>> chList){
+            table.characteristics.addAll(chList);
+            return this;
+        }
+
+        public Builder addCharacteristic(Characteristic<?,?> ch){
+            table.characteristics.add(ch);
             return this;
         }
 

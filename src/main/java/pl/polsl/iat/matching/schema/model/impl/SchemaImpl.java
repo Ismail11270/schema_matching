@@ -12,14 +12,14 @@ import java.util.stream.Stream;
 class SchemaImpl implements Schema {
     private Stream<Table> tablesStream;
     private List<Table> tablesList;
-    private BasicCharacteristic schemaName;
+    private StringCharacteristic schemaName;
     private boolean loaded;
 
     private SchemaImpl(){
     }
 
     @Override
-    public Stream<Characteristic<?>> getCharacteristics() {
+    public Stream<BaseCharacteristic<?>> getCharacteristics() {
         return Stream.of(schemaName);
     }
 
@@ -52,7 +52,7 @@ class SchemaImpl implements Schema {
         }
 
         public Builder setName(String schemaName){
-            schema.schemaName = new BasicCharacteristic(Const.CharName.SCHEMA_NAME, schemaName, CharacteristicType.Name);
+            schema.schemaName = new StringCharacteristic(Const.CharName.SCHEMA_NAME, schemaName, CharacteristicType.TableName);
             return this;
         }
 

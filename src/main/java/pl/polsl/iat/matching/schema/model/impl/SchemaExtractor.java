@@ -20,7 +20,7 @@ public class SchemaExtractor {
         LAZY, EAGER;
     }
 
-    private DatabaseMetaData metaData;
+    public  DatabaseMetaData metaData;
     private String schemaName;
     private ConnectionProperties properties;
 
