@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class ConnectionProperties {
 
-    public static final String PROPERTIES_SEPARATOR = ":";
+    public static final String PROPERTIES_DELIMITER = "=";
 
     private String url = null;
 

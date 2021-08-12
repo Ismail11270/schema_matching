@@ -67,7 +67,7 @@ public class ParametersResolver {
         ConnectionProperties properties = new ConnectionProperties();
         properties.setId(id);
         for (int i = 0; i < lines.size(); i++) {
-            String[] property = lines.get(i).split(ConnectionProperties.PROPERTIES_SEPARATOR);
+            String[] property = lines.get(i).split(ConnectionProperties.PROPERTIES_DELIMITER);
             if (property.length > 2)
                 throw new InvalidParameterException("Invalid property at line " + i);
             properties.putProperty(property[0].trim(), property[1].trim());
