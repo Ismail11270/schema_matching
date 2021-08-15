@@ -59,7 +59,7 @@ public class ResultTest {
             JAXBContext context = JAXBContext.newInstance(MatchingResult.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.marshal(matchingResult, new File("result/test-sample.xml"));
+            marshaller.marshal(matchingResult, new File("..\\result\\test-sample.xml"));
         } catch(Throwable t){
             Assertions.fail("Exception during output generation. " + t.getMessage());
         }
