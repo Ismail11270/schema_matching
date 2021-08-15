@@ -7,6 +7,7 @@
 package pl.polsl.iat.matching.result;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,8 @@ public class MatchingComponent {
     @XmlElement(required = true)
     protected List<Component> component;
     @XmlAttribute(name = "type", required = true)
-    protected String type;
+    @XmlJavaTypeAdapter(ResultComponentType.XmlTypeAdapter.class)
+    protected ResultComponentType type;
     @XmlAttribute(name = "name", required = true)
     protected String name;
     @XmlAttribute(name = "match", required = true)
@@ -85,7 +87,7 @@ public class MatchingComponent {
      *     {@link String }
      *     
      */
-    public String getType() {
+    public ResultComponentType getType() {
         return type;
     }
 
@@ -97,7 +99,7 @@ public class MatchingComponent {
      *     {@link String }
      *     
      */
-    public void setType(String value) {
+    public void setType(ResultComponentType value) {
         this.type = value;
     }
 

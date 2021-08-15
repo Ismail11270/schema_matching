@@ -6,7 +6,6 @@
     <xs:complexType name="matching-result">
         <xs:sequence>
             <xs:element name="component" type="component" maxOccurs="1" minOccurs="1"/>
-			<xs:element name="matching-component" type="matching-component" maxOccurs="1" minOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 

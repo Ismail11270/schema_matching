@@ -5,12 +5,15 @@
 //
 package pl.polsl.iat.matching.result;//
 
+import pl.polsl.iat.matching.schema.model.Column;
 import pl.polsl.iat.matching.schema.model.Schema;
+import pl.polsl.iat.matching.schema.model.Table;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,7 +33,7 @@ import java.util.Arrays;
  * 
  */
 @XmlRegistry
-public class ObjectFactory {
+public class ResultFactory {
 
     private final static QName _MatchingResult_QNAME = new QName("", "matching-result");
 
@@ -38,14 +41,53 @@ public class ObjectFactory {
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated
      * 
      */
-    public ObjectFactory() {
+    public ResultFactory() {
     }
 
 
-    public MatchingResult createMatchingResult(Schema... schema) {
+    public MatchingResult createMatchingResult(Schema... schemas) {
         var result = new MatchingResult();
-        //todo implement initialization of matching result based on the schemas
-        // potentially for N schemas but first for 2 only
+        var factory = new ResultFactory();
+        Component schema = factory.createComponent();
+        schema.type = ResultComponentType.SCHEMA;
+        schema.name = schemas[0].getName();
+        for (int ii = 1; ii < schemas.length; ii++) {
+            var schemaMatch = factory.createComponentMatch();
+            schemaMatch.type = ResultComponentType.SCHEMA;
+            schemaMatch.name = schemas[ii].getName();
+            for (int i = 0; i < schemas[0].getComponents().size(); i++) {
+                var table = factory.createComponent();
+                Table t0 = schemas[0].getComponents().get(i);
+                table.name = t0.getName();
+                table.type = ResultComponentType.TABLE;
+                for (int j = 0; j < schemas[ii].getComponents().size(); j++) {
+                    Table t1 = schemas[ii].getComponents().get(j);
+                    var matchTable = factory.createComponentMatch();
+                    matchTable.name = t1.getName();
+                    matchTable.type = ResultComponentType.TABLE;
+                    matchTable.match = BigDecimal.valueOf(0);
+                    for (int k = 0; k < t0.getComponents().size(); k++) {
+                        Column c0 = t0.getComponents().get(k);
+                        var column = factory.createComponent();
+                        column.name = c0.getName();
+                        column.type = ResultComponentType.COLUMN;
+                        for (int l = 0; l < t1.getComponents().size(); l++) {
+                            Column c1 = t1.getComponents().get(l);
+                            var columnMatch = factory.createComponentMatch();
+                            columnMatch.name = c1.getName();
+                            columnMatch.type = ResultComponentType.COLUMN;
+                            columnMatch.match = BigDecimal.valueOf(0);
+                            column.matchingComponent.add(columnMatch);
+                        }
+                        matchTable.component.add(column);
+                    }
+                    table.matchingComponent.add(matchTable);
+                }
+                schemaMatch.component.add(table);
+            }
+            schema.matchingComponent.add(schemaMatch);
+        }
+        result.component = schema;
         return result;
     }
 

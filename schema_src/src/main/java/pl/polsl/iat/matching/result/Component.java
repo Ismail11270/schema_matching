@@ -7,6 +7,8 @@
 package pl.polsl.iat.matching.result;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,8 @@ public class Component {
     @XmlElement(name = "matching-component")
     protected List<MatchingComponent> matchingComponent;
     @XmlAttribute(name = "type", required = true)
-    protected String type;
+    @XmlJavaTypeAdapter(ResultComponentType.XmlTypeAdapter.class)
+    protected ResultComponentType type;
     @XmlAttribute(name = "name", required = true)
     protected String name;
 
@@ -81,7 +84,7 @@ public class Component {
      *     {@link String }
      *     
      */
-    public String getType() {
+    public ResultComponentType getType() {
         return type;
     }
 
@@ -93,7 +96,7 @@ public class Component {
      *     {@link String }
      *     
      */
-    public void setType(String value) {
+    public void setType(ResultComponentType value) {
         this.type = value;
     }
 

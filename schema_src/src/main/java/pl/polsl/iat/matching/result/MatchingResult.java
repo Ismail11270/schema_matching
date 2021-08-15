@@ -6,7 +6,13 @@
 //
 package pl.polsl.iat.matching.result;
 
+import pl.polsl.iat.matching.matchers.exception.MatchingException;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
+import java.io.File;
 
 /**
  * <p>Java class for matching-result complex type.
@@ -30,16 +36,13 @@ import javax.xml.bind.annotation.*;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "matching-result", propOrder = {
-    "component",
-    "matchingComponent"
+    "component"
 })
 @XmlRootElement
 public class MatchingResult {
 
     @XmlElement(required = true)
     protected Component component;
-    @XmlElement(name = "matching-component", required = true)
-    protected MatchingComponent matchingComponent;
 
     /**
      * Gets the value of the component property.
@@ -73,9 +76,9 @@ public class MatchingResult {
      *     {@link MatchingComponent }
      *     
      */
-    public MatchingComponent getMatchingComponent() {
-        return matchingComponent;
-    }
+//    public MatchingComponent getMatchingComponent() {
+//        return matchingComponent;
+//    }
 
     /**
      * Sets the value of the matchingComponent property.
@@ -85,8 +88,18 @@ public class MatchingResult {
      *     {@link MatchingComponent }
      *     
      */
-    public void setMatchingComponent(MatchingComponent value) {
-        this.matchingComponent = value;
-    }
+//    public void setMatchingComponent(MatchingComponent value) {
+//        this.matchingComponent = value;
+//    }
 
+    public void save(String filePath) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(MatchingResult.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.marshal(this, new File(filePath));
+        } catch (JAXBException e) {
+            throw new MatchingException("Failed to write result file to " + filePath, e);
+        }
+    }
 }

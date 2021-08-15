@@ -3,6 +3,8 @@ package pl.polsl.iat.matching.app;
 import pl.polsl.iat.matching.exception.SchemaExtractorException;
 import pl.polsl.iat.matching.matchers.MatcherType;
 import pl.polsl.iat.matching.matchers.SchemaMatcher;
+import pl.polsl.iat.matching.result.MatchingResult;
+import pl.polsl.iat.matching.result.ResultFactory;
 import pl.polsl.iat.matching.schema.model.Schema;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 import pl.polsl.iat.matching.sql.ConnectionProperties;
@@ -28,6 +30,9 @@ public class Main {
 
         SchemaMatcher schemaMatcher = new SchemaMatcher();
 
+        MatchingResult matchingResult = new ResultFactory().createMatchingResult(schemas.toArray(new Schema[0]));
+
+        matchingResult.save("..\\result\\actual-result.xml");
 
         // TODO
         // for each schema pair run schema matcher

@@ -27,9 +27,6 @@ public class ConnectionProperties {
         }
     }
 
-    public ConnectionProperties() {
-    }
-
     public void setId(int id) {
         propertiesMap.put(PropertyName.ID, id);
     }

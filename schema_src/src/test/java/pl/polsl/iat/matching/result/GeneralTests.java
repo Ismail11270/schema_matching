@@ -26,6 +26,11 @@ public class GeneralTests {
         }, x -> getInt(x)).filter(Objects::nonNull);
     }
 
+
+    @Test
+    public void test2() {
+    }
+
     private Random rand = new Random();
 
     private int getInt(int x){

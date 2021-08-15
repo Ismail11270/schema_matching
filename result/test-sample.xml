@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <matchingResult>
-    <component type="Schema" name="Schema_1">
-        <matching-component type="Schema" name="Schema_2">
-            <component type="Table" name="Schema_1.Table_0"/>
-            <component type="Table" name="Schema_1.Table_1">
-                <matching-component type="Table" name="Schema_2.Table_0" match="0.4000000059604645">
-                    <component type="Column" name="Schema_1.Table_1.Column_0">
-                        <matching-component type="Column" name="Schema_2.Table_0.Column_0" match="0.699999988079071"/>
-                    </component>
-                    <component type="Column" name="Schema_1.Table_1.Column_1"/>
-                    <component type="Column" name="Schema_1.Table_1.Column_2"/>
+    <component type="schema" name="Schema_1">
+        <matching-component type="schema" name="Schema_2">
+            <component type="table" name="Schema_1.Table_0">
+                <matching-component type="table" name="Schema_2.Table_0" match="0.9000000357627869">
+                    <component type="column" name="Schema_1.Table_0.Column_0"/>
+                    <component type="column" name="Schema_1.Table_0.Column_1"/>
                 </matching-component>
-                <matching-component type="Table" name="Schema_2.Table_1" match="0.699999988079071">
-                    <component type="Column" name="Schema_1.Table_1.Column_0"/>
-                    <component type="Column" name="Schema_1.Table_1.Column_1"/>
+                <matching-component type="table" name="Schema_2.Table_1" match="0.30000001192092896">
+                    <component type="column" name="Schema_1.Table_0.Column_0">
+                        <matching-component type="column" name="Schema_2.Table_1.Column_0" match="0.699999988079071"/>
+                    </component>
+                    <component type="column" name="Schema_1.Table_0.Column_1">
+                        <matching-component type="column" name="Schema_2.Table_1.Column_0" match="0.0"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="Schema_2.Table_2" match="0.10000000149011612"/>
+                <matching-component type="table" name="Schema_2.Table_3" match="0.699999988079071"/>
+            </component>
+            <component type="table" name="Schema_1.Table_1">
+                <matching-component type="table" name="Schema_2.Table_0" match="0.0">
+                    <component type="column" name="Schema_1.Table_1.Column_0">
+                        <matching-component type="column" name="Schema_2.Table_0.Column_0" match="0.699999988079071"/>
+                    </component>
+                    <component type="column" name="Schema_1.Table_1.Column_1">
+                        <matching-component type="column" name="Schema_2.Table_0.Column_0" match="0.30000001192092896"/>
+                    </component>
                 </matching-component>
             </component>
         </matching-component>
     </component>
-    <matching-component type="Schema" name="Schema_2">
-        <component type="Table" name="Schema_1.Table_0"/>
-        <component type="Table" name="Schema_1.Table_1">
-            <matching-component type="Table" name="Schema_2.Table_0" match="0.4000000059604645">
-                <component type="Column" name="Schema_1.Table_1.Column_0">
-                    <matching-component type="Column" name="Schema_2.Table_0.Column_0" match="0.699999988079071"/>
-                </component>
-                <component type="Column" name="Schema_1.Table_1.Column_1"/>
-                <component type="Column" name="Schema_1.Table_1.Column_2"/>
-            </matching-component>
-            <matching-component type="Table" name="Schema_2.Table_1" match="0.699999988079071">
-                <component type="Column" name="Schema_1.Table_1.Column_0"/>
-                <component type="Column" name="Schema_1.Table_1.Column_1"/>
-            </matching-component>
-        </component>
-    </matching-component>
 </matchingResult>

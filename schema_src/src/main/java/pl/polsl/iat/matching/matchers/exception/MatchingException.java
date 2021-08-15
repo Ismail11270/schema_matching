@@ -1,6 +1,6 @@
 package pl.polsl.iat.matching.matchers.exception;
 
-public class MatchingException extends Exception {
+public class MatchingException extends RuntimeException {
     public MatchingException(String msg){
         super(msg);
     }
