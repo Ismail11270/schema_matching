@@ -1,39 +1,34 @@
 package pl.polsl.iat.matching.result;
 
 import org.junit.jupiter.api.Test;
+import pl.polsl.iat.matching.matchers.MatcherType;
+import pl.polsl.iat.matching.matchers.SchemaMatcher;
+import pl.polsl.iat.matching.schema.model.Schema;
+import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
+import pl.polsl.iat.matching.sql.ConnectionProperties;
+import pl.polsl.iat.matching.util.MatcherSettings;
+import pl.polsl.iat.matching.util.ParametersResolver;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class GeneralTests {
     @Test
-    public void test(){
-        Supplier<Stream<Integer>> supplier = () -> Stream.of(1,2,3);
-        var str_ = supplier.get();
-        var str1 = supplier.get();
-        Integer integer = str1.filter(x -> x.equals(2)).findFirst().get();
-        System.out.println(integer);
-        str_.forEach(System.out::println);
-    }
+    public void loadSchemasAndGenerateResultXmlTest() {
+        String[] sampleArgs = new String[]{"-s1", "-f", "..\\resources\\schema1.properties", "-s2", "-f", "..\\resources\\schema2.properties"};
+        ParametersResolver parametersResolver = new ParametersResolver(sampleArgs);
 
-    @Test
-    public void test1(){
-        Stream.iterate(1, i -> {
-            return i < 10;
-        }, x -> getInt(x)).filter(Objects::nonNull);
-    }
-
-
-    @Test
-    public void test2() {
-    }
-
-    private Random rand = new Random();
-
-    private int getInt(int x){
-        return x++;
+        long start = System.currentTimeMillis();
+        new ResultFactory()
+                .createMatchingResult(parametersResolver.getConnectionProperties().stream()
+                .map(p -> new SchemaExtractor(p).load(MatcherSettings.loaderMode))
+                .toArray(Schema[]::new)).save("..\\result\\actual-result.xml");
+        System.out.println("Time taken = " + (System.currentTimeMillis() - start));
     }
 }

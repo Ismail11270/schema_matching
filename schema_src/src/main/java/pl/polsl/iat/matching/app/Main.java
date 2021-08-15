@@ -1,9 +1,6 @@
 package pl.polsl.iat.matching.app;
 
 import pl.polsl.iat.matching.exception.SchemaExtractorException;
-import pl.polsl.iat.matching.matchers.MatcherType;
-import pl.polsl.iat.matching.matchers.SchemaMatcher;
-import pl.polsl.iat.matching.result.MatchingResult;
 import pl.polsl.iat.matching.result.ResultFactory;
 import pl.polsl.iat.matching.schema.model.Schema;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
@@ -11,13 +8,12 @@ import pl.polsl.iat.matching.sql.ConnectionProperties;
 import pl.polsl.iat.matching.util.MatcherSettings;
 import pl.polsl.iat.matching.util.ParametersResolver;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws SchemaExtractorException, SQLException {
+    public static void main(String[] args) throws SchemaExtractorException {
         ParametersResolver parametersResolver = new ParametersResolver(args);
         List<Schema> schemas = new ArrayList<>();
         long start = System.currentTimeMillis();
@@ -26,13 +22,8 @@ public class Main {
         }
         System.out.println("Time taken = " + (System.currentTimeMillis() - start));
 
-        MatcherSettings.hasMatcher(MatcherType.EXACT);
-
-        SchemaMatcher schemaMatcher = new SchemaMatcher();
-
-        MatchingResult matchingResult = new ResultFactory().createMatchingResult(schemas.toArray(new Schema[0]));
-
-        matchingResult.save("..\\result\\actual-result.xml");
+        new ResultFactory().createMatchingResult(schemas.toArray(new Schema[0]))
+                .save("..\\result\\actual-result.xml");
 
         // TODO
         // for each schema pair run schema matcher
