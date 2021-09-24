@@ -147,8 +147,8 @@ public class MatchingComponent {
      *     {@link BigDecimal }
      *     
      */
-    public void setMatch(BigDecimal value) {
-        this.match = value;
+    public void setMatch(float value) {
+        this.match = BigDecimal.valueOf(value);
     }
 
 }

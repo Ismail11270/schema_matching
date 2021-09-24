@@ -28,7 +28,8 @@ public class GeneralTests {
         new ResultFactory()
                 .createMatchingResult(parametersResolver.getConnectionProperties().stream()
                 .map(p -> new SchemaExtractor(p).load(MatcherSettings.loaderMode))
-                .toArray(Schema[]::new)).save("..\\result\\actual-result.xml");
+                .toArray(Schema[]::new))
+                .save("..\\result\\actual-result.xml");
         System.out.println("Time taken = " + (System.currentTimeMillis() - start));
     }
 }
