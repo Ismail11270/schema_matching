@@ -1,5 +1,3 @@
 .svn/
-schema_src/.idea/
 schema_src/target/
-executor/.idea/
 executor/target/
