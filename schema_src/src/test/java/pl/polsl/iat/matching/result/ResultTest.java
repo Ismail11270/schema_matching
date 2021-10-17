@@ -3,10 +3,8 @@ package pl.polsl.iat.matching.result;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ResultTest {
@@ -15,7 +13,7 @@ public class ResultTest {
     public void testXmlGeneration() {
         try {
             MatchingResult matchingResult = new MatchingResult();
-
+            matchingResult.components = new ArrayList<>();
             Random rand = new Random();
             var factory = new ResultFactory();
             Component schema1 = factory.createComponent();
@@ -53,7 +51,7 @@ public class ResultTest {
                 schema2.component.add(table);
             }
             schema1.matchingComponent.add(schema2);
-            matchingResult.component = schema1;
+            matchingResult.components.add(schema1);
 
             matchingResult.save("..\\result\\test-sample.xml");
         } catch(Throwable t){

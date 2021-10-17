@@ -31,11 +31,9 @@ public class MatcherRunner {
             TaskFactory factory = new TaskFactory();
             List<Future<PartialResult<Schema>>> futures = new ArrayList<>();
 
-
-
             for(int i = 0; i < schemas.size(); i++) {
                 for(int j = i+1; j < schemas.size(); j++) {
-                    futures.add(service.submit(factory.getTaskSchema(schemas.get(i), schemas.get(j), matchingResult.getComponent())));
+                    futures.add(service.submit(factory.getTaskSchema(schemas.get(i), schemas.get(j), matchingResult.getComponents().get(i))));
                 }
             }
 

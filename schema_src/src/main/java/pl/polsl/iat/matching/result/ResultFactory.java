@@ -47,50 +47,52 @@ public class ResultFactory {
 
     //TODO
     // make result generation depth e.g. schema, tables, columns
-
     public MatchingResult createMatchingResult(Schema... schemas) {
         var result = new MatchingResult();
         var factory = new ResultFactory();
-        Component schema = factory.createComponent();
-        schema.type = ResultComponentType.SCHEMA;
-        schema.name = schemas[0].getName();
-        for (int ii = 1; ii < schemas.length; ii++) {
-            var schemaMatch = factory.createComponentMatch();
-            schemaMatch.type = ResultComponentType.SCHEMA;
-            schemaMatch.name = schemas[ii].getName();
-            for (int i = 0; i < schemas[0].getComponents().size(); i++) {
-                var table = factory.createComponent();
-                Table t0 = schemas[0].getComponents().get(i);
-                table.name = t0.getName();
-                table.type = ResultComponentType.TABLE;
-                for (int j = 0; j < schemas[ii].getComponents().size(); j++) {
-                    Table t1 = schemas[ii].getComponents().get(j);
-                    var matchTable = factory.createComponentMatch();
-                    matchTable.name = t1.getName();
-                    matchTable.type = ResultComponentType.TABLE;
-                    matchTable.match = BigDecimal.valueOf(0);
-                    for (int k = 0; k < t0.getComponents().size(); k++) {
-                        Column c0 = t0.getComponents().get(k);
-                        var column = factory.createComponent();
-                        column.name = c0.getName();
-                        column.type = ResultComponentType.COLUMN;
-                        for (int l = 0; l < t1.getComponents().size(); l++) {
-                            Column c1 = t1.getComponents().get(l);
-                            var columnMatch = factory.createComponentMatch();
-                            columnMatch.name = c1.getName();
-                            columnMatch.type = ResultComponentType.COLUMN;
-                            columnMatch.match = BigDecimal.valueOf(0);
-                            column.matchingComponent.add(columnMatch);
+        result.components = new ArrayList<>();
+        for(int jj = 0; jj < schemas.length - 1; jj++) {
+            Component schema = factory.createComponent();
+            schema.type = ResultComponentType.SCHEMA;
+            schema.name = schemas[jj].getName();
+            for (int ii = jj+1; ii < schemas.length; ii++) {
+                var schemaMatch = factory.createComponentMatch();
+                schemaMatch.type = ResultComponentType.SCHEMA;
+                schemaMatch.name = schemas[ii].getName();
+                for (int i = 0; i < schemas[0].getComponents().size(); i++) {
+                    var table = factory.createComponent();
+                    Table t0 = schemas[0].getComponents().get(i);
+                    table.name = t0.getName();
+                    table.type = ResultComponentType.TABLE;
+                    for (int j = 0; j < schemas[ii].getComponents().size(); j++) {
+                        Table t1 = schemas[ii].getComponents().get(j);
+                        var matchTable = factory.createComponentMatch();
+                        matchTable.name = t1.getName();
+                        matchTable.type = ResultComponentType.TABLE;
+                        matchTable.match = BigDecimal.valueOf(0);
+                        for (int k = 0; k < t0.getComponents().size(); k++) {
+                            Column c0 = t0.getComponents().get(k);
+                            var column = factory.createComponent();
+                            column.name = c0.getName();
+                            column.type = ResultComponentType.COLUMN;
+                            for (int l = 0; l < t1.getComponents().size(); l++) {
+                                Column c1 = t1.getComponents().get(l);
+                                var columnMatch = factory.createComponentMatch();
+                                columnMatch.name = c1.getName();
+                                columnMatch.type = ResultComponentType.COLUMN;
+                                columnMatch.match = BigDecimal.valueOf(0);
+                                column.matchingComponent.add(columnMatch);
+                            }
+                            matchTable.component.add(column);
                         }
-                        matchTable.component.add(column);
+                        table.matchingComponent.add(matchTable);
                     }
-                    table.matchingComponent.add(matchTable);
+                    schemaMatch.component.add(table);
                 }
-                schemaMatch.component.add(table);
+                schema.matchingComponent.add(schemaMatch);
             }
-            schema.matchingComponent.add(schemaMatch);
+            result.components.add(schema);
         }
-        result.component = schema;
         return result;
     }
 

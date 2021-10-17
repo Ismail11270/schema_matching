@@ -5,7 +5,6 @@ import pl.polsl.iat.matching.schema.model.Table;
 import pl.polsl.iat.matching.util.Const;
 import pl.polsl.iat.matching.util.Status;
 
-import java.io.IOException;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
 import java.io.File;
+import java.util.List;
 
 /**
  * <p>Java class for matching-result complex type.
@@ -36,13 +37,13 @@ import java.io.File;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "matching-result", propOrder = {
-    "component"
+        "components"
 })
 @XmlRootElement
 public class MatchingResult {
 
-    @XmlElement(required = true)
-    protected Component component;
+    @XmlElement(required = true, name = "component")
+    protected List<Component> components;
 
     /**
      * Gets the value of the component property.
@@ -52,8 +53,8 @@ public class MatchingResult {
      *     {@link Component }
      *     
      */
-    public Component getComponent() {
-        return component;
+    public List<Component> getComponents() {
+        return components;
     }
 
     /**
@@ -64,8 +65,8 @@ public class MatchingResult {
      *     {@link Component }
      *     
      */
-    public void setComponent(Component value) {
-        this.component = value;
+    public void setComponents(List<Component> value) {
+        this.components = value;
     }
 
     /**

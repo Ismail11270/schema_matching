@@ -30,4 +30,11 @@ public class StringMatcher {
         return FuzzySearch.ratio(pair.first(), pair.second());
     }
 
+    private int lexicalMatch() {
+
+
+
+        return 0;
+    }
+
 }

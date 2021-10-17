@@ -1,17 +1,12 @@
 package pl.polsl.iat.matching.executor;
 
 import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
-import pl.polsl.iat.matching.executor.impl.TaskFactory;
 import pl.polsl.iat.matching.result.MatchingResult;
 import pl.polsl.iat.matching.result.ResultFactory;
 import pl.polsl.iat.matching.schema.model.Schema;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 import pl.polsl.iat.matching.util.MatcherSettings;
 import pl.polsl.iat.matching.util.ParametersResolver;
-
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -35,7 +30,7 @@ public class Main {
         //run executor
 
         //TODO ADD SUPPORT FOR N NUMBER OF SCHEMAS
-        ExecutorFactory.newSchemaMatchingExecutor(schemas[0],  schemas[1], matchingResult).run();
+        ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).run();
 
 
 
