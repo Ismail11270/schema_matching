@@ -1,6 +1,7 @@
 package pl.polsl.iat.matching.executor;
 
 import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
+import pl.polsl.iat.matching.executor.impl.TaskFactory;
 import pl.polsl.iat.matching.result.MatchingResult;
 import pl.polsl.iat.matching.result.ResultFactory;
 import pl.polsl.iat.matching.schema.model.Schema;
@@ -8,21 +9,34 @@ import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 import pl.polsl.iat.matching.util.MatcherSettings;
 import pl.polsl.iat.matching.util.ParametersResolver;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
     public static void main(String[] args) {
         ParametersResolver parametersResolver = new ParametersResolver(args);
-        List<Schema> schemas = parametersResolver.getConnectionProperties().stream()
+
+        Schema[] schemas = parametersResolver.getConnectionProperties()
+                .stream()
                 .map(p -> new SchemaExtractor(p).load(MatcherSettings.loaderMode))
-                .collect(Collectors.toList());
+                .toArray(Schema[]::new);
 
-        MatchingResult matchingResult = new ResultFactory().createMatchingResult(schemas.toArray(new Schema[0]));
+        MatchingResult matchingResult =
+                new ResultFactory().createMatchingResult(schemas);
 
+
+//        ThreadPoolExecutor executor =  new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(),
+//                Runtime.getRuntime().availableProcessors(),
+//                0L, TimeUnit.MILLISECONDS,
+//                new LinkedBlockingQueue<Runnable>());
+//        TaskFactory tasks = new TaskFactory(matchingResult);
         //run executor
-        ExecutorFactory.newMatchingExecutor(null,  null, null).run();
+
+        //TODO ADD SUPPORT FOR N NUMBER OF SCHEMAS
+        ExecutorFactory.newSchemaMatchingExecutor(schemas[0],  schemas[1], matchingResult).run();
+
 
 
         matchingResult.save("..\\result\\actual-result.xml");

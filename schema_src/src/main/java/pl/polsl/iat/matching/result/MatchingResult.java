@@ -83,7 +83,7 @@ public class MatchingResult {
     /**
      * Sets the value of the matchingComponent property.
      * 
-     * @param value
+     * @param  value
      *     allowed object is
      *     {@link MatchingComponent }
      *     

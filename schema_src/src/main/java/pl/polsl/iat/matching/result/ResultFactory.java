@@ -45,6 +45,9 @@ public class ResultFactory {
     }
 
 
+    //TODO
+    // make result generation depth e.g. schema, tables, columns
+
     public MatchingResult createMatchingResult(Schema... schemas) {
         var result = new MatchingResult();
         var factory = new ResultFactory();

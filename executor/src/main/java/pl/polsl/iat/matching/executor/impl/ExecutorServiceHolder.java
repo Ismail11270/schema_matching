@@ -14,7 +14,7 @@ public class ExecutorServiceHolder{
     }
 
     public static ExecutorServiceHolder getInstance() {
-        return instance == null ? instance : (instance = new ExecutorServiceHolder());
+        return instance != null ? instance : (instance = new ExecutorServiceHolder());
     }
 
     private void initExecutor() {

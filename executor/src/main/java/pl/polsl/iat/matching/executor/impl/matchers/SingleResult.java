@@ -7,10 +7,10 @@ public class SingleResult {
 
     private ResultComponentType type;
 
-    private StringTuple componentNames;
+    private StringPair componentNames;
 
     public SingleResult(ResultComponentType type, String firstName, String secondName) {
         this.type = type;
-        this.componentNames = new StringTuple(firstName, secondName);
+        this.componentNames = new StringPair(firstName, secondName);
     }
 }

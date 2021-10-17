@@ -28,30 +28,30 @@ public class TablesGenerator implements Supplier<Table>, Predicate<Table> {
             throw new SchemaExtractorException("Error generating table objects for schema '" + schemaName + "' Detailed msg: " + e);
         }
     }
-
-    private Runtime runtime;
-    enum OS {
-        WINDOWS, LINUX
-    }
-    private OS os;
-    enum Volume {
-        UP(175, "%+"), DOWN(175, "%-")
-        private int a;
-        private String b;
-        Volume(int windowsKey, String linuxKey){
-            a = windowsKey;
-            b = linuxKey;
-        }
-    }
-
-    private void volume(Volume upOrDown) throws IOException {
-        runtime.exec(
-                os == OS.WINDOWS ?
-                new String[]{"powershell.exe", String.format("(new-object -com wscript.shell).SendKeys([char]%d)",
-                        upOrDown == Volume.UP ? 175 : 174)} :
-                new String[] {String.format("amixer -q sset Master 3%s",
-                        upOrDown == Volume.UP ? "%+" : "%-")});
-    }
+//
+//    private Runtime runtime;
+//    enum OS {
+//        WINDOWS, LINUX
+//    }
+//    private OS os;
+//    enum Volume {
+//        UP(175, "%+"), DOWN(175, "%-")
+//        private int a;
+//        private String b;
+//        Volume(int windowsKey, String linuxKey){
+//            a = windowsKey;
+//            b = linuxKey;
+//        }
+//    }
+//
+//    private void volume(Volume upOrDown) throws IOException {
+//        runtime.exec(
+//                os == OS.WINDOWS ?
+//                new String[]{"powershell.exe", String.format("(new-object -com wscript.shell).SendKeys([char]%d)",
+//                        upOrDown == Volume.UP ? 175 : 174)} :
+//                new String[] {String.format("amixer -q sset Master 3%s",
+//                        upOrDown == Volume.UP ? "%+" : "%-")});
+//    }
 
     @Override
     public Table get() {
