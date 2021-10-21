@@ -1,22 +1,10 @@
 package pl.polsl.iat.matching.result;
 
 import org.junit.jupiter.api.Test;
-import pl.polsl.iat.matching.matchers.MatcherType;
-import pl.polsl.iat.matching.matchers.SchemaMatcher;
 import pl.polsl.iat.matching.schema.model.Schema;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
-import pl.polsl.iat.matching.sql.ConnectionProperties;
 import pl.polsl.iat.matching.util.MatcherSettings;
 import pl.polsl.iat.matching.util.ParametersResolver;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public class GeneralTests {
     @Test

@@ -16,6 +16,7 @@ import javax.xml.namespace.QName;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 
 /**
@@ -50,7 +51,7 @@ public class ResultFactory {
     public MatchingResult createMatchingResult(Schema... schemas) {
         var result = new MatchingResult();
         var factory = new ResultFactory();
-        result.components = new ArrayList<>();
+        result.components = Collections.synchronizedList(new ArrayList<>());
         for(int jj = 0; jj < schemas.length - 1; jj++) {
             Component schema = factory.createComponent();
             schema.type = ResultComponentType.SCHEMA;
@@ -59,9 +60,10 @@ public class ResultFactory {
                 var schemaMatch = factory.createComponentMatch();
                 schemaMatch.type = ResultComponentType.SCHEMA;
                 schemaMatch.name = schemas[ii].getName();
-                for (int i = 0; i < schemas[0].getComponents().size(); i++) {
+                schemaMatch.match = BigDecimal.valueOf(0);
+                for (int i = 0; i < schemas[jj].getComponents().size(); i++) {
                     var table = factory.createComponent();
-                    Table t0 = schemas[0].getComponents().get(i);
+                    Table t0 = schemas[jj].getComponents().get(i);
                     table.name = t0.getName();
                     table.type = ResultComponentType.TABLE;
                     for (int j = 0; j < schemas[ii].getComponents().size(); j++) {
@@ -110,7 +112,7 @@ public class ResultFactory {
      */
     public Component createComponent(MatchingComponent... componentsMatches) {
         var component = new Component();
-        component.matchingComponent = new ArrayList<>(Arrays.asList(componentsMatches));
+        component.matchingComponent = Collections.synchronizedList(new ArrayList<>(Arrays.asList(componentsMatches)));
         return component;
     }
 
@@ -120,7 +122,7 @@ public class ResultFactory {
      */
     public MatchingComponent createComponentMatch(Component... childComponents) {
         var compMatch = new MatchingComponent();
-        compMatch.component = new ArrayList<>((Arrays.asList(childComponents)));
+        compMatch.component = Collections.synchronizedList(new ArrayList<>((Arrays.asList(childComponents))));
         return compMatch;
     }
 

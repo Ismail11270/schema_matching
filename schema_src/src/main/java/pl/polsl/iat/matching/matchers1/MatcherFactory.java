@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.matchers;
+package pl.polsl.iat.matching.matchers1;
 
 public class MatcherFactory {
 

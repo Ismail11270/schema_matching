@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.executor.impl.matchers;
+package pl.polsl.iat.matching.processing;
 
 public record StringPair(String first, String second) {
 

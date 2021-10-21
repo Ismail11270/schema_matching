@@ -6,7 +6,7 @@
 //
 package pl.polsl.iat.matching.result;
 
-import pl.polsl.iat.matching.matchers.exception.MatchingException;
+import pl.polsl.iat.matching.matchers1.exception.MatchingException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

@@ -1,5 +1,6 @@
-package pl.polsl.iat.matching.executor.impl.matchers;
+package pl.polsl.iat.matching.processing.impl;
 
+import pl.polsl.iat.matching.processing.StringPair;
 import pl.polsl.iat.matching.result.ResultComponentType;
 
 public class SingleResult {

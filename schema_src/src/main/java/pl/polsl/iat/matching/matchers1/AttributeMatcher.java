@@ -1,6 +1,6 @@
-package pl.polsl.iat.matching.matchers;
+package pl.polsl.iat.matching.matchers1;
 
-import pl.polsl.iat.matching.matchers.exception.MatchingException;
+import pl.polsl.iat.matching.matchers1.exception.MatchingException;
 import pl.polsl.iat.matching.schema.model.CharacteristicProvider;
 
 public class AttributeMatcher {

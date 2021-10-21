@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.matchers;
+package pl.polsl.iat.matching.matchers1;
 
 public enum MatcherType {
     EXACT(0), FUZZY(1), DICTIONARY(2);

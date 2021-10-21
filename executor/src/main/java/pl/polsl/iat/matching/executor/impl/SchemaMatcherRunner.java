@@ -1,0 +1,46 @@
+package pl.polsl.iat.matching.executor.impl;
+
+import pl.polsl.iat.matching.result.MatchingResult;
+import pl.polsl.iat.matching.schema.model.Schema;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+
+public class SchemaMatcherRunner {
+
+    private List<Schema> schemas;
+
+    private ComponentMatchingExecutor service;
+
+    private MatchingResult matchingResult;
+
+    private List<Future<Float>> results = new ArrayList<>();
+
+    SchemaMatcherRunner(List<Schema> schemas, MatchingResult matchingResult) {
+        this.schemas = schemas;
+        this.matchingResult = matchingResult;
+        this.service = ExecutorServiceHolder.getInstance().getAvailableExecutor();
+    }
+
+    public void run() {
+        try {
+            TaskFactory factory = new TaskFactory();
+            List<Future<Boolean>> futures = new ArrayList<>();
+
+            for (int i = 0; i < schemas.size(); i++) {
+                for (int j = i + 1, k = 0; j < schemas.size(); j++, k++) {
+                    System.out.println(i + " i - j " + j);
+                    futures.addAll(service.invokeAll(
+                            factory.getTaskSchema(schemas.get(i), schemas.get(j),
+                                    matchingResult.getComponents().get(i).getMatchingComponent().get(k))));
+                }
+            }
+            
+        } catch (Throwable t) {
+            System.out.println(t.getMessage());
+        } finally {
+            service.shutdown();
+        }
+    }
+}

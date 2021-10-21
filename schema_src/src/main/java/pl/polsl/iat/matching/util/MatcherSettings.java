@@ -4,9 +4,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import pl.polsl.iat.matching.matchers.ComponentMatcher;
-import pl.polsl.iat.matching.matchers.MatcherFactory;
-import pl.polsl.iat.matching.matchers.MatcherType;
+import pl.polsl.iat.matching.matchers1.ComponentMatcher;
+import pl.polsl.iat.matching.matchers1.MatcherFactory;
+import pl.polsl.iat.matching.matchers1.MatcherType;
+import pl.polsl.iat.matching.processing.StringProcessor;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,6 +24,10 @@ public class MatcherSettings {
 
     public static List<ComponentMatcher<?>> getAvailableMatchers(){
         return Collections.unmodifiableList(new ArrayList<>(availableMatchers.values()));
+    }
+
+    public static List<StringProcessor> getAvailableStringProcessors() {
+        return Collections.emptyList();
     }
 
     public static ComponentMatcher<?> getMatcher(MatcherType type){
