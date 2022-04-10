@@ -47,7 +47,7 @@ public class ParametersResolver {
                         throw new InvalidInputArgumentException("Unsupported input parameter.", inputType);
                     //TODO implement some other type of connection settings ......
                 } catch (Exception e) {
-                    throw new InvalidInputArgumentException(e.getMessage(), argSwitch);
+//                    throw new InvalidInputArgumentException(e.getMessage(), argSwitch);
                 }
             } else {
                 throw new InvalidInputArgumentException("Wrong input parameters.");

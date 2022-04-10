@@ -12,8 +12,18 @@ class LexicalDictionaryImpl implements LexicalDictionary {
     }
 
     @Override
+    public int getNumberOfSynonyms(String word) {
+        return wordnet.getRelatedWords(word).size();
+    }
+
+    @Override
+    public int getNumberOfAntonyms(String word) {
+        return 0;
+    }
+
+    @Override
     public float compare(String first, String second) {
-        wordnet.getSynonym(first).forEach(System.out::println);
+        wordnet.getRelatedWords(first).forEach(System.out::println);
 //        return new MatchResult();
         return 0f;
     }

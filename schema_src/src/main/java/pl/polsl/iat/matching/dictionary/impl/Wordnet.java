@@ -13,7 +13,8 @@ public interface Wordnet {
      * @param word - word to find synonyms for
      * @return list of synonyms
      */
-    List<String> getSynonym(String word);
+    List<String> getRelatedWords(String word);
 
+    List<String> getAntonyms(String word);
 
 }

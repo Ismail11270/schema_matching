@@ -8,6 +8,7 @@ public class ComponentMatchingExecutor extends ThreadPoolExecutor {
 
     public ComponentMatchingExecutor(int poolSize) {
         super(poolSize, poolSize, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+        System.out.println(poolSize);
     }
 
     public MatchingResult getResult() {

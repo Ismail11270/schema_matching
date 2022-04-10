@@ -1,6 +1,6 @@
 package pl.polsl.iat.matching.dictionary.exception;
 
-public class DictionaryException extends Exception {
+public class DictionaryException extends RuntimeException {
     public DictionaryException(Throwable t){
         super(t);
     }

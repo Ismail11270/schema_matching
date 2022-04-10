@@ -32,7 +32,8 @@ import java.util.List;
  * &lt;/complexType&gt;
  * </pre>
  * 
- * 
+
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "matching-component", propOrder = {
@@ -49,6 +50,8 @@ public class MatchingComponent {
     protected String name;
     @XmlAttribute(name = "match", required = true)
     protected BigDecimal match;
+    @XmlAttribute(name = "combinedScore", required = false)
+    protected BigDecimal combinedScore;
 
     /**
      * Gets the value of the component property.
@@ -151,4 +154,11 @@ public class MatchingComponent {
         this.match = BigDecimal.valueOf(value);
     }
 
+    public BigDecimal getCombinedScore() {
+        return this.combinedScore;
+    }
+
+    public void setCombinedScore(float value) {
+        this.combinedScore = BigDecimal.valueOf(value);
+    }
 }

@@ -1,28 +1,43 @@
 package pl.polsl.iat.matching.processing.impl;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
+import pl.polsl.iat.matching.dictionary.LexicalDictionary;
+import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
+import pl.polsl.iat.matching.dictionary.impl.DictionaryFactory;
 import pl.polsl.iat.matching.processing.StringPair;
 
 //TODO apply only matchers enabled in settings
 public class StringMatcher {
 
-    //TODO INIT PROCESSOR
     private StringProcessingUnit SPU = new StringProcessingUnit();
+    private LexicalDictionary dictionary;
 
+    public StringMatcher() throws DictionaryException {
+        dictionary = new DictionaryFactory().getLexicalDictionary(null, false);
+    }
 
     public int compare(StringPair pair) {
         if (exactMatch(pair)) {
-            return 100;
+            return MatchCoefficients.EXACT_MATCH;
         }
         if (exactMatch(SPU.process(pair.first()), SPU.process(pair.second()))) {
-            return 90;
+            return MatchCoefficients.EXACT_MATCH_PROCESSED;
         }
         int fuzzyMatch = fuzzyMatch(pair);
+        int lexicalMatch = lexicalMatch(pair);
 
         return 0;
     }
 
-    private boolean exactMatch(ProcessedString process, ProcessedString process1) {
+    private boolean exactMatch(ProcessedString first, ProcessedString second) {
+        if(first.getPieces().getPieces().length != second.getPieces().getPieces().length)
+            return false;
+        for (String piece : first.getPieces().getPieces()) {
+            for(String piece_ : second.getPieces().getPieces()) {
+                if(!piece.equals(piece_))
+                    return false;
+            }
+        }
         return true;
     }
 
@@ -35,8 +50,8 @@ public class StringMatcher {
         return FuzzySearch.ratio(pair.first(), pair.second());
     }
 
-    private int lexicalMatch() {
-
+    private int lexicalMatch(StringPair pair) {
+//        dictionary.compare()
 
 
         return 0;

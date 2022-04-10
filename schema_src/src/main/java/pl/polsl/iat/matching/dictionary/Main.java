@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) throws DictionaryException {
         LexicalDictionary dict = new DictionaryFactory().getLexicalDictionary(null, false);
 
-        dict.compare("Pet", "Pet");
-
+        dict.getNumberOfSynonyms("good");
     }
 }

@@ -28,6 +28,7 @@ public class SchemaMatcherRunner {
             TaskFactory factory = new TaskFactory();
             List<Future<Boolean>> futures = new ArrayList<>();
 
+            long startTime = System.currentTimeMillis();
             for (int i = 0; i < schemas.size(); i++) {
                 for (int j = i + 1, k = 0; j < schemas.size(); j++, k++) {
                     System.out.println(i + " i - j " + j);
@@ -36,7 +37,11 @@ public class SchemaMatcherRunner {
                                     matchingResult.getComponents().get(i).getMatchingComponent().get(k))));
                 }
             }
-            
+            System.out.println(System.currentTimeMillis() - startTime);
+            matchingResult.getComponents().get(0).getMatchingComponent().get(0).setCombinedScore(50);
+
+
+            //TODO detect best matches
         } catch (Throwable t) {
             System.out.println(t.getMessage());
         } finally {

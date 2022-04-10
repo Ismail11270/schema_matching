@@ -12,7 +12,7 @@
 
    <matcher>
 	<type>dictionary</type>
-	<active>true</active>
+	<active>false</active>
    </matcher>
    
    <mode>EAGER</mode>

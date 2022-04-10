@@ -1,11 +1,11 @@
 package pl.polsl.iat.matching.matchers1;
 
 import pl.polsl.iat.matching.matchers1.exception.MatchingException;
-import pl.polsl.iat.matching.schema.model.CharacteristicProvider;
+import pl.polsl.iat.matching.schema.model.Component;
 
 public class AttributeMatcher {
-    private CharacteristicProvider A, B;
-    public AttributeMatcher(CharacteristicProvider A, CharacteristicProvider B) throws MatchingException {
+    private Component A, B;
+    public AttributeMatcher(Component A, Component B) throws MatchingException {
         this.A = A;
         this.B = B;
         if(!A.getClass().equals(B.getClass())) {
