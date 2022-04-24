@@ -9,11 +9,11 @@ import java.util.concurrent.Future;
 
 public class SchemaMatcherRunner {
 
-    private List<Schema> schemas;
+    private final List<Schema> schemas;
 
-    private ComponentMatchingExecutor service;
+    private final ComponentMatchingExecutor service;
 
-    private MatchingResult matchingResult;
+    private final MatchingResult matchingResult;
 
     private List<Future<Float>> results = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class SchemaMatcherRunner {
 
     public void run() {
         try {
-            TaskFactory factory = new TaskFactory();
+            MatchTaskManager taskManager = MatchTaskManager.getInstance();
             List<Future<Boolean>> futures = new ArrayList<>();
 
             long startTime = System.currentTimeMillis();
@@ -33,7 +33,7 @@ public class SchemaMatcherRunner {
                 for (int j = i + 1, k = 0; j < schemas.size(); j++, k++) {
                     System.out.println(i + " i - j " + j);
                     futures.addAll(service.invokeAll(
-                            factory.getTaskSchema(schemas.get(i), schemas.get(j),
+                            taskManager.getTasksForSchemaPair(schemas.get(i), schemas.get(j),
                                     matchingResult.getComponents().get(i).getMatchingComponent().get(k))));
                 }
             }

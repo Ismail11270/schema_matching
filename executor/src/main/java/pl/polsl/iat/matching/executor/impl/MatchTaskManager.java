@@ -1,23 +1,48 @@
 package pl.polsl.iat.matching.executor.impl;
 
+import pl.polsl.iat.matching.concurrency.TableMatcherSupplier;
+import pl.polsl.iat.matching.matchers.SchemaMatcher;
+import pl.polsl.iat.matching.matchers.TableMatcher;
+import pl.polsl.iat.matching.matchers.impl.SchemaMatcherImpl;
+import pl.polsl.iat.matching.matchers.impl.TableMatcherImpl;
 import pl.polsl.iat.matching.result.MatchingComponent;
 import pl.polsl.iat.matching.schema.model.Column;
+import pl.polsl.iat.matching.schema.model.Matchable;
 import pl.polsl.iat.matching.schema.model.Schema;
 import pl.polsl.iat.matching.schema.model.Table;
+import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class TaskFactory {
 
-    Random r = new Random();
+/**
+ *
+ */
+public class MatchTaskManager {
 
-    public TaskFactory() {
+    private static final MatchTaskManager managerInstance = new MatchTaskManager();
+    private final SchemaMatcher schemaMatcher;
+    private final TableMatcherSupplier matcherSupplier;
+
+    private MatchTaskManager() {
+        schemaMatcher = new SchemaMatcherImpl();
+        List<TableMatcher> matchers =
+                IntStream.range(0, MatcherSettings.getSettings().getNumberOfThreads())
+                        .mapToObj(i -> new TableMatcherImpl())
+                        .collect(Collectors.toList());
+        matcherSupplier = TableMatcherSupplier.initialize(matchers);
     }
 
-    public List<Callable<Boolean>> getTaskSchema(Schema first, Schema second, MatchingComponent rMatchingComponent) {
+    public static MatchTaskManager getInstance() {
+        return managerInstance;
+    }
+
+    public List<Callable<Boolean>> getTasksForSchemaPair(Schema first, Schema second, MatchingComponent rMatchingComponent) {
         int nFirst = first.getComponents().size();
         int nSecond = second.getComponents().size();
         List<Callable<Boolean>> subTasks = new ArrayList<>();

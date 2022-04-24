@@ -1,22 +1,32 @@
 package pl.polsl.iat.matching.executor;
 
 import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
+import pl.polsl.iat.matching.impl.ColumnMatcher;
 import pl.polsl.iat.matching.result.MatchingResult;
 import pl.polsl.iat.matching.result.ResultFactory;
+import pl.polsl.iat.matching.schema.model.Column;
 import pl.polsl.iat.matching.schema.model.Schema;
+import pl.polsl.iat.matching.schema.model.Table;
 import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 import pl.polsl.iat.matching.util.MatcherSettings;
 import pl.polsl.iat.matching.util.ParametersResolver;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Main {
 
     public static void main(String[] args) {
         ParametersResolver parametersResolver = new ParametersResolver(args);
 
+        long startTime = System.currentTimeMillis();
         Schema[] schemas = parametersResolver.getConnectionProperties()
-                .stream()
-                .map(p -> new SchemaExtractor(p).load(MatcherSettings.loaderMode))
+                .parallelStream()
+                .map(p -> new SchemaExtractor(p).load(MatcherSettings.getSettings().getLoaderMode()))
                 .toArray(Schema[]::new);
+
+        System.out.println("Schema loading time - " + (System.currentTimeMillis() - startTime));
 
         MatchingResult matchingResult =
                 new ResultFactory().createMatchingResult(schemas);
@@ -30,10 +40,40 @@ public class Main {
         //run executor
 
         //TODO ADD SUPPORT FOR N NUMBER OF SCHEMAS
-        ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).run();
+
+//        ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).run();
 
 
+        Schema schema1 = schemas[0];
+        Schema schema2 = schemas[1];
+
+        Table table1 = schemas[0].getComponents().get(0);
+        Table table2 = schemas[0].getComponents().get(1);
+
+        Column column1 = schemas[0].getComponents().get(0).getComponents().get(0);
+        Column column2 = schemas[0].getComponents().get(0).getComponents().get(1);
+
+//        ColumnMatcher
+
+
+
+        System.out.println("Matching time - " + (System.currentTimeMillis() - startTime));
 
         matchingResult.save("..\\result\\actual-result.xml");
+
+        System.out.println("Total time - " + (System.currentTimeMillis() - startTime));
+
+    }
+
+    static class Matcher {
+        private String text;
+
+        public Matcher(String textToPrint) {
+            text = textToPrint;
+        }
+
+        public void doMatch(String s) {
+            System.out.println(text);
+        }
     }
 }

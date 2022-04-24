@@ -22,7 +22,7 @@ public class KeyCharacteristic implements Characteristic<TableKey, List<BaseChar
     }
 
     @Override
-    public CharacteristicType getType() {
+    public CharacteristicType getCharacteristicType() {
         return key.getGeneralType();
     }
 

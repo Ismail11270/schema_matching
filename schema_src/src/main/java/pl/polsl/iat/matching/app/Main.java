@@ -11,6 +11,7 @@ import pl.polsl.iat.matching.util.ParametersResolver;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("removal")
 public class Main {
 
     public static void main(String[] args) throws SchemaExtractorException {
@@ -18,7 +19,7 @@ public class Main {
         List<Schema> schemas = new ArrayList<>();
         long start = System.currentTimeMillis();
         for(ConnectionProperties p : parametersResolver.getConnectionProperties()){
-            schemas.add(new SchemaExtractor(p).load(MatcherSettings.loaderMode));
+            schemas.add(new SchemaExtractor(p).load(MatcherSettings.getSettings().getLoaderMode()));
         }
         System.out.println("Time taken = " + (System.currentTimeMillis() - start));
 

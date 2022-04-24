@@ -6,6 +6,7 @@ import pl.polsl.iat.matching.schema.model.ColumnCharacteristicType;
 
 public class ColumnCharacteristic implements BaseCharacteristic<ColumnCharacteristicType> {
 
+
     private ColumnCharacteristicType key;
     private String value;
     private CharacteristicType type;
@@ -26,7 +27,7 @@ public class ColumnCharacteristic implements BaseCharacteristic<ColumnCharacteri
     }
 
     @Override
-    public CharacteristicType getType() {
+    public CharacteristicType getCharacteristicType() {
         return null;
     }
 
