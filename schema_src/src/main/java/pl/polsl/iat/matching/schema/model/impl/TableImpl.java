@@ -4,7 +4,6 @@ import pl.polsl.iat.matching.exception.SchemaExtractorException;
 import pl.polsl.iat.matching.schema.model.*;
 import pl.polsl.iat.matching.util.Const;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class TableImpl implements Table {
-
+    private static final ComponentType type = ComponentType.TABLE;
     private int columnN;
     private Stream<Column> columnsStream;
     private List<Column> columnsList;
@@ -53,6 +52,11 @@ class TableImpl implements Table {
     @Override
     public String toString(){
         return "TableName=" + tableName.getValue();
+    }
+
+    @Override
+    public ComponentType getComponentType() {
+        return type;
     }
 
     public static class Builder{

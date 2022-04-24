@@ -8,6 +8,6 @@ package pl.polsl.iat.matching.schema.model;
 public interface BaseCharacteristic<U> extends Characteristic<U,String>{
     String getValue();
     U getKey();
-    CharacteristicType getType();
+    CharacteristicType getCharacteristicType();
 
 }

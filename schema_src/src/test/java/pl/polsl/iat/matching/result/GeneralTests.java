@@ -6,6 +6,7 @@ import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
 import pl.polsl.iat.matching.util.MatcherSettings;
 import pl.polsl.iat.matching.util.ParametersResolver;
 
+@SuppressWarnings("ALL")
 public class GeneralTests {
     @Test
     public void loadSchemasAndGenerateResultXmlTest() {
@@ -15,7 +16,7 @@ public class GeneralTests {
         long start = System.currentTimeMillis();
         new ResultFactory()
                 .createMatchingResult(parametersResolver.getConnectionProperties().stream()
-                .map(p -> new SchemaExtractor(p).load(MatcherSettings.loaderMode))
+                .map(p -> new SchemaExtractor(p).load(MatcherSettings.getSettings().getLoaderMode()))
                 .toArray(Schema[]::new))
                 .save("..\\result\\actual-result.xml");
         System.out.println("Time taken = " + (System.currentTimeMillis() - start));

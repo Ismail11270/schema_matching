@@ -2,15 +2,18 @@ package pl.polsl.iat.matching.schema.model.impl;
 
 import pl.polsl.iat.matching.schema.model.*;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class ColumnImpl implements Column {
 
+    private static final ComponentType type = ComponentType.COLUMN;
+
     private String name;
     private Stream<ColumnCharacteristic> characteristics;
-
+    private List<ColumnCharacteristic> chrs;
     ColumnImpl(){
 
     }
@@ -35,6 +38,11 @@ class ColumnImpl implements Column {
         return getName();
     }
 
+    @Override
+    public ComponentType getComponentType() {
+        return type;
+    }
+
     static class Builder{
         private final ColumnImpl col = new ColumnImpl();
 
@@ -45,6 +53,7 @@ class ColumnImpl implements Column {
 
         Builder setCharacteristics(Stream<ColumnCharacteristic> characteristics){
             col.characteristics = characteristics;
+            col.chrs = characteristics.collect(Collectors.toList());
             return this;
         }
 

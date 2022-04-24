@@ -15,27 +15,52 @@ import java.io.File;
 import java.util.*;
 
 public class MatcherSettings {
-    private static Map<MatcherType,ComponentMatcher<?>> availableMatchers;
-    public static SchemaExtractor.Mode loaderMode;
 
-    public static boolean hasMatcher(MatcherType type){
+    private static final MatcherSettings settingsInstance;
+
+    public static MatcherSettings getSettings() {
+        return settingsInstance;
+    }
+
+    private MatcherSettings() { }
+
+    private final Map<MatcherType,ComponentMatcher<?>> availableMatchers = new Hashtable<>();
+
+    private Integer numberOfThreads = 8;
+
+    /**
+     * Considering to drop the idea of lazy loading
+     * @return
+     */
+    @Deprecated(forRemoval = true)
+    public SchemaExtractor.Mode getLoaderMode() {
+        return loaderMode;
+    }
+
+    private SchemaExtractor.Mode loaderMode;
+
+    public boolean hasMatcher(MatcherType type){
         return availableMatchers.containsKey(type);
     }
 
-    public static List<ComponentMatcher<?>> getAvailableMatchers(){
-        return Collections.unmodifiableList(new ArrayList<>(availableMatchers.values()));
+    public List<ComponentMatcher<?>> getAvailableMatchers(){
+        return List.copyOf(availableMatchers.values());
     }
 
-    public static List<StringProcessor> getAvailableStringProcessors() {
+    public List<StringProcessor> getAvailableStringProcessors() {
         return Collections.emptyList();
     }
 
-    public static ComponentMatcher<?> getMatcher(MatcherType type){
+    public ComponentMatcher<?> getMatcher(MatcherType type){
         return availableMatchers.get(type);
     }
 
+    public Integer getNumberOfThreads() {
+        return numberOfThreads;
+    }
+
     static {
-        availableMatchers = new Hashtable<>();
+        settingsInstance = new MatcherSettings();
         try {
             File inputFile = new File(System.getenv(Const.SettingsXml.MATCHER_SETTINGS_VAR));
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
@@ -50,14 +75,19 @@ public class MatcherSettings {
                             eElement.getElementsByTagName(Const.SettingsXml.TYPE_TAG).item(0).getTextContent().toUpperCase());
                     boolean enabled = Boolean.parseBoolean(
                             eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
-                    if(enabled) {
-                        availableMatchers.put(matcherType, MatcherFactory.getMatcherOfType(matcherType));
+                    if (enabled) {
+                        settingsInstance.availableMatchers.put(matcherType, MatcherFactory.getMatcherOfType(matcherType));
                     }
                 }
             }
             NodeList modeTag = doc.getElementsByTagName(Const.SettingsXml.MODE);
-            loaderMode = SchemaExtractor.Mode.valueOf(modeTag.item(0).getTextContent().toUpperCase());
-        } catch (Exception e) {
+            settingsInstance.loaderMode = SchemaExtractor.Mode.valueOf(modeTag.item(0).getTextContent().toUpperCase());
+            NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS);
+            settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
+        } catch(NumberFormatException e) {
+            System.out.println("[ERROR] Invalid thread number configuration! Using default value of 8");
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

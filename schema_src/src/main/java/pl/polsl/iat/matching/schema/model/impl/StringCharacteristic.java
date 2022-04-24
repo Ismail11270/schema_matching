@@ -30,7 +30,7 @@ public class StringCharacteristic implements BaseCharacteristic<String> {
     }
 
     @Override
-    public CharacteristicType getType() {
+    public CharacteristicType getCharacteristicType() {
         return type;
     }
 

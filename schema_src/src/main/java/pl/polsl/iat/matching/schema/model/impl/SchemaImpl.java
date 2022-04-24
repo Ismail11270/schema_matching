@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class SchemaImpl implements Schema {
+    private static final ComponentType type = ComponentType.SCHEMA;
     private Stream<Table> tablesStream;
     private List<Table> tablesList;
     private StringCharacteristic schemaName;
@@ -41,6 +42,11 @@ class SchemaImpl implements Schema {
     @Override
     public String getName() {
         return schemaName.getValue();
+    }
+
+    @Override
+    public ComponentType getComponentType() {
+        return type;
     }
 
     static class Builder{

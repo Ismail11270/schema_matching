@@ -7,7 +7,7 @@ import java.util.List;
 
 public class StringProcessingUnit {
 
-    private final List<StringProcessor> processors = MatcherSettings.getAvailableStringProcessors();
+    private final List<StringProcessor> processors = MatcherSettings.getSettings().getAvailableStringProcessors();
 
     public ProcessedString process(String value) {
         Pieces processed = new Pieces(value);
