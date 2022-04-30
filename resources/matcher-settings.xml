@@ -1,20 +1,23 @@
 <?xml version = "1.0"?>
 <settings>
-   <matcher>
-	<type>exact</type>
-	<active>true</active>
-   </matcher>
-  
-   <matcher>
-	<type>fuzzy</type>
-	<active>true</active>
-   </matcher>
 
-   <matcher>
-	<type>dictionary</type>
-	<active>false</active>
-   </matcher>
-   
-   <mode>EAGER</mode>
+	<threads>8</threads>
+
+	<matcher>
+		<type>exact</type>
+		<active>true</active>
+	</matcher>
+
+	<matcher>
+		<type>fuzzy</type>
+		<active>true</active>
+	</matcher>
+
+	<matcher>
+		<type>dictionary</type>
+		<active>false</active>
+	</matcher>
+
+	<mode>EAGER</mode>
    
 </settings>

@@ -1,6 +1,6 @@
 package pl.polsl.iat.matching.executor.result;
 
-import pl.polsl.iat.matching.schema.model.Component;
+import pl.polsl.iat.matching.core.schema.model.Component;
 
 public class PartialResult<T extends Component> {
 

@@ -1,10 +1,11 @@
 package pl.polsl.iat.matching.result;
 
 import org.junit.jupiter.api.Test;
-import pl.polsl.iat.matching.schema.model.Schema;
-import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
-import pl.polsl.iat.matching.util.MatcherSettings;
-import pl.polsl.iat.matching.util.ParametersResolver;
+import pl.polsl.iat.matching.core.result.ResultFactory;
+import pl.polsl.iat.matching.core.schema.model.Schema;
+import pl.polsl.iat.matching.core.schema.model.impl.SchemaExtractor;
+import pl.polsl.iat.matching.core.util.MatcherSettings;
+import pl.polsl.iat.matching.core.util.ParametersResolver;
 
 @SuppressWarnings("ALL")
 public class GeneralTests {

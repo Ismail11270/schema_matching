@@ -1,6 +1,6 @@
 package pl.polsl.iat.matching.executor.impl;
 
-import pl.polsl.iat.matching.result.MatchingResult;
+import pl.polsl.iat.matching.core.result.MatchingResult;
 
 import java.util.concurrent.*;
 

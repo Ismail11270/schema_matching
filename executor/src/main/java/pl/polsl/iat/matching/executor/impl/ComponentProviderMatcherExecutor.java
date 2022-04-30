@@ -1,9 +1,9 @@
 package pl.polsl.iat.matching.executor.impl;
 
 import pl.polsl.iat.matching.executor.MatchingExecutor;
-import pl.polsl.iat.matching.result.MatchingComponent;
-import pl.polsl.iat.matching.schema.model.Component;
-import pl.polsl.iat.matching.schema.model.ComponentsProvider;
+import pl.polsl.iat.matching.core.result.MatchingComponent;
+import pl.polsl.iat.matching.core.schema.model.Component;
+import pl.polsl.iat.matching.core.schema.model.ComponentsProvider;
 
 public class ComponentProviderMatcherExecutor<T extends Component> implements MatchingExecutor {
 

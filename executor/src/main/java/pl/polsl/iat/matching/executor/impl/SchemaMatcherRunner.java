@@ -1,7 +1,7 @@
 package pl.polsl.iat.matching.executor.impl;
 
-import pl.polsl.iat.matching.result.MatchingResult;
-import pl.polsl.iat.matching.schema.model.Schema;
+import pl.polsl.iat.matching.core.result.MatchingResult;
+import pl.polsl.iat.matching.core.schema.model.Schema;
 
 import java.util.ArrayList;
 import java.util.List;

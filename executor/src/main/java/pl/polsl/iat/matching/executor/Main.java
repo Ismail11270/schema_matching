@@ -1,19 +1,13 @@
 package pl.polsl.iat.matching.executor;
 
-import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
-import pl.polsl.iat.matching.impl.ColumnMatcher;
-import pl.polsl.iat.matching.result.MatchingResult;
-import pl.polsl.iat.matching.result.ResultFactory;
-import pl.polsl.iat.matching.schema.model.Column;
-import pl.polsl.iat.matching.schema.model.Schema;
-import pl.polsl.iat.matching.schema.model.Table;
-import pl.polsl.iat.matching.schema.model.impl.SchemaExtractor;
-import pl.polsl.iat.matching.util.MatcherSettings;
-import pl.polsl.iat.matching.util.ParametersResolver;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import pl.polsl.iat.matching.core.result.MatchingResult;
+import pl.polsl.iat.matching.core.result.ResultFactory;
+import pl.polsl.iat.matching.core.schema.model.Column;
+import pl.polsl.iat.matching.core.schema.model.Schema;
+import pl.polsl.iat.matching.core.schema.model.Table;
+import pl.polsl.iat.matching.core.schema.model.impl.SchemaExtractor;
+import pl.polsl.iat.matching.core.util.MatcherSettings;
+import pl.polsl.iat.matching.core.util.ParametersResolver;
 
 public class Main {
 
