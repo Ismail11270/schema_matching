@@ -6,17 +6,6 @@ import pl.polsl.iat.matching.core.exception.SchemaExtractorException;
 public class Main {
 
     public static void main(String[] args) throws SchemaExtractorException {
-//        ParametersResolver parametersResolver = new ParametersResolver(args);
-//        List<Schema> schemas = new ArrayList<>();
-//        long start = System.currentTimeMillis();
-//        for(ConnectionProperties p : parametersResolver.getConnectionProperties()){
-//            schemas.add(new SchemaExtractor(p).load(MatcherSettings.getSettings().getLoaderMode()));
-//        }
-//        System.out.println("Time taken = " + (System.currentTimeMillis() - start));
-//
-//        new ResultFactory().createMatchingResult(schemas.toArray(new Schema[0]))
-//                .save("..\\result\\actual-result.xml");
-
         // TODO
         // for each schema pair run schema matcher
             // schema matcher

@@ -5,9 +5,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
-import pl.polsl.iat.matching.core.matchers1.ComponentMatcher;
-import pl.polsl.iat.matching.core.matchers1.MatcherFactory;
-import pl.polsl.iat.matching.core.matchers1.MatcherType;
 import pl.polsl.iat.matching.core.util.Const;
 import pl.polsl.iat.matching.matchers.processing.StringProcessor;
 
@@ -25,7 +22,7 @@ public class MatcherSettings {
 
     private MatcherSettings() { }
 
-    private final Map<MatcherType,ComponentMatcher<?>> availableMatchers = new Hashtable<>();
+    private final Map<WordMatcher.Type,WordMatcher> availableWordMatchers = new Hashtable<>();
 
     private Integer numberOfThreads = 8;
 
@@ -40,20 +37,20 @@ public class MatcherSettings {
 
     private SchemaExtractor.Mode loaderMode;
 
-    public boolean hasMatcher(MatcherType type){
-        return availableMatchers.containsKey(type);
+    public boolean hasMatcher(WordMatcher.Type type){
+        return availableWordMatchers.containsKey(type);
     }
 
-    public List<ComponentMatcher<?>> getAvailableMatchers(){
-        return List.copyOf(availableMatchers.values());
+    public List<WordMatcher> getAvailableWordMatchers(){
+        return Collections.unmodifiableList(new ArrayList<>(availableWordMatchers.values()));
     }
 
     public List<StringProcessor> getAvailableStringProcessors() {
         return Collections.emptyList();
     }
 
-    public ComponentMatcher<?> getMatcher(MatcherType type){
-        return availableMatchers.get(type);
+    public WordMatcher getMatcher(WordMatcher.Type type){
+        return availableWordMatchers.get(type);
     }
 
     public Integer getNumberOfThreads() {
@@ -72,12 +69,12 @@ public class MatcherSettings {
                 Node nNode = nList.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    MatcherType matcherType = MatcherType.valueOf(
+                    WordMatcher.Type matcherType = WordMatcher.Type.valueOf(
                             eElement.getElementsByTagName(Const.SettingsXml.TYPE_TAG).item(0).getTextContent().toUpperCase());
                     boolean enabled = Boolean.parseBoolean(
                             eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
                     if (enabled) {
-                        settingsInstance.availableMatchers.put(matcherType, MatcherFactory.getMatcherOfType(matcherType));
+                        settingsInstance.availableWordMatchers.put(matcherType, WordMatcher.getMatherOfType(matcherType));
                     }
                 }
             }
@@ -86,7 +83,7 @@ public class MatcherSettings {
             NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS);
             settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
         } catch(NumberFormatException e) {
-            System.out.println("[ERROR] Invalid thread number configuration! Using default value of 8");
+            System.err.println("[ERROR] Invalid thread number configuration! Using default value of 8");
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.core.matchers1.exception;
+package pl.polsl.iat.matching.core.exception;
 
 public class MatchingException extends RuntimeException {
     public MatchingException(String msg){

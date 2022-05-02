@@ -10,23 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class TableExtractor {
+class TableExtractor {
 
     private DatabaseMetaData metaData;
     private String schema;
     private SchemaExtractor.Mode loaderMode = SchemaExtractor.Mode.EAGER;
 
-    public TableExtractor(DatabaseMetaData metadata, String schema) {
+    TableExtractor(DatabaseMetaData metadata, String schema) {
         this.metaData = metadata;
         this.schema = schema;
     }
 
-    public TableExtractor(DatabaseMetaData metaData, String schema, SchemaExtractor.Mode loaderMode) {
+    TableExtractor(DatabaseMetaData metaData, String schema, SchemaExtractor.Mode loaderMode) {
         this(metaData, schema);
         this.loaderMode = loaderMode;
     }
 
-    public Table load(String tableName) throws DatabaseException {
+    Table load(String tableName) throws DatabaseException {
         TableImpl.Builder builder = new TableImpl.Builder(loaderMode);
         try {
             builder.setName(tableName);

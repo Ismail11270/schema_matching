@@ -13,13 +13,13 @@ import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class ColumnsGenerator implements Supplier<Column>, Predicate<Column> {
+class ColumnsGenerator implements Supplier<Column>, Predicate<Column> {
 
     private ResultSet columnsRs;
 
     private Status status = Status.CONTINUE;
 
-    public ColumnsGenerator(DatabaseMetaData metaData, String schemaName, String tableName) {
+    ColumnsGenerator(DatabaseMetaData metaData, String schemaName, String tableName) {
         try {
             this.columnsRs = metaData.getColumns(schemaName, null, tableName, null);
         } catch (SQLException e) {
