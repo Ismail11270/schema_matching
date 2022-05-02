@@ -1,7 +1,7 @@
-package pl.polsl.iat.matching.matchers.processing.impl;
+package pl.polsl.iat.matching.processing.impl;
 
-import pl.polsl.iat.matching.matchers.processing.StringProcessor;
-import pl.polsl.iat.matching.matchers.MatcherSettings;
+import pl.polsl.iat.matching.processing.StringProcessor;
+import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.List;
 

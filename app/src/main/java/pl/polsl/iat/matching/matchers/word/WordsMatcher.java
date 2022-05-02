@@ -1,8 +1,10 @@
-package pl.polsl.iat.matching.matchers;
+package pl.polsl.iat.matching.matchers.word;
 
 import pl.polsl.iat.matching.executor.result.PartialResult;
+import pl.polsl.iat.matching.matchers.Matcher;
+import pl.polsl.iat.matching.processing.Words;
 
-public class WordsMatcher implements Matcher<Words>{
+public class WordsMatcher implements Matcher<Words> {
 
     private WordMatcher stringMatcher;
 

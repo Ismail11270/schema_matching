@@ -7,7 +7,7 @@ import pl.polsl.iat.matching.core.model.schema.Schema;
 import pl.polsl.iat.matching.core.model.schema.Table;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.ParametersResolver;
-import pl.polsl.iat.matching.matchers.MatcherSettings;
+import pl.polsl.iat.matching.util.MatcherSettings;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.matchers.processing.impl;
+package pl.polsl.iat.matching.processing.impl;
 
 public class Pieces {
     private String[] pieces;

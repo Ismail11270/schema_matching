@@ -3,12 +3,12 @@ package pl.polsl.iat.matching.executor.impl;
 import pl.polsl.iat.matching.concurrency.TableMatcherSupplier;
 import pl.polsl.iat.matching.core.model.schema.*;
 import pl.polsl.iat.matching.matchers.Matcher;
-import pl.polsl.iat.matching.matchers.TableMatcher;
+import pl.polsl.iat.matching.matchers.component.TableMatcher;
 import pl.polsl.iat.matching.matchers.impl.ColumnMatcherImpl;
 import pl.polsl.iat.matching.matchers.impl.SchemaMatcherImpl;
 import pl.polsl.iat.matching.matchers.impl.TableMatcherImpl;
 import pl.polsl.iat.matching.core.model.result.MatchingComponent;
-import pl.polsl.iat.matching.matchers.MatcherSettings;
+import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.ArrayList;
 import java.util.List;

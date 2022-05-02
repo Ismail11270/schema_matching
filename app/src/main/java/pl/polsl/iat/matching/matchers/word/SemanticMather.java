@@ -1,6 +1,7 @@
-package pl.polsl.iat.matching.matchers;
+package pl.polsl.iat.matching.matchers.word;
 
 import pl.polsl.iat.matching.executor.result.PartialResult;
+import pl.polsl.iat.matching.processing.Word;
 
 public class SemanticMather extends WordMatcher {
 

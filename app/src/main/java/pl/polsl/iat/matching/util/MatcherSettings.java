@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.matchers;
+package pl.polsl.iat.matching.util;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -6,7 +6,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.Const;
-import pl.polsl.iat.matching.matchers.processing.StringProcessor;
+import pl.polsl.iat.matching.matchers.word.WordMatcher;
+import pl.polsl.iat.matching.processing.StringProcessor;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;

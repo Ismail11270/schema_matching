@@ -1,6 +1,6 @@
 package pl.polsl.iat.matching.concurrency;
 
-import pl.polsl.iat.matching.matchers.TableMatcher;
+import pl.polsl.iat.matching.matchers.component.TableMatcher;
 
 import java.util.Collection;
 import java.util.Stack;

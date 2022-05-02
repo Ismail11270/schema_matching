@@ -3,8 +3,8 @@ package pl.polsl.iat.matching.matchers.impl;
 import pl.polsl.iat.matching.core.model.schema.Component;
 import pl.polsl.iat.matching.core.model.schema.ComponentType;
 import pl.polsl.iat.matching.matchers.Matcher;
-import pl.polsl.iat.matching.matchers.Word;
-import pl.polsl.iat.matching.matchers.WordMatcher;
+import pl.polsl.iat.matching.processing.Word;
+import pl.polsl.iat.matching.matchers.word.WordMatcher;
 
 import java.util.Map;
 
