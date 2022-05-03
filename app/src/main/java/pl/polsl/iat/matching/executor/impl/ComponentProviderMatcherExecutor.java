@@ -25,6 +25,6 @@ public class ComponentProviderMatcherExecutor<T extends Component> implements Ma
 
     @Override
     public void run() {
-        cpm.setMatch(1);
+        cpm.setMatchScore(1);
     }
 }

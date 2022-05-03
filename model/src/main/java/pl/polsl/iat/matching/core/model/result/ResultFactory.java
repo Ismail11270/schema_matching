@@ -60,7 +60,7 @@ public class ResultFactory {
                 var schemaMatch = factory.createComponentMatch();
                 schemaMatch.type = ResultComponentType.SCHEMA;
                 schemaMatch.name = schemas[ii].getName();
-                schemaMatch.match = BigDecimal.valueOf(0);
+                schemaMatch.matchScore = BigDecimal.valueOf(0);
                 for (int i = 0; i < schemas[jj].getComponents().size(); i++) {
                     var table = factory.createComponent();
                     Table t0 = schemas[jj].getComponents().get(i);
@@ -71,7 +71,7 @@ public class ResultFactory {
                         var matchTable = factory.createComponentMatch();
                         matchTable.name = t1.getName();
                         matchTable.type = ResultComponentType.TABLE;
-                        matchTable.match = BigDecimal.valueOf(0);
+                        matchTable.matchScore = BigDecimal.valueOf(0);
                         for (int k = 0; k < t0.getComponents().size(); k++) {
                             Column c0 = t0.getComponents().get(k);
                             var column = factory.createComponent();
@@ -82,7 +82,7 @@ public class ResultFactory {
                                 var columnMatch = factory.createComponentMatch();
                                 columnMatch.name = c1.getName();
                                 columnMatch.type = ResultComponentType.COLUMN;
-                                columnMatch.match = BigDecimal.valueOf(0);
+                                columnMatch.matchScore = BigDecimal.valueOf(0);
                                 column.matchingComponent.add(columnMatch);
                             }
                             matchTable.component.add(column);

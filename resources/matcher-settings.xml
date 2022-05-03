@@ -1,23 +1,32 @@
 <?xml version = "1.0"?>
 <settings>
 
-	<threads>8</threads>
-
-	<matcher>
-		<type>exact</type>
-		<active>true</active>
-	</matcher>
-
-	<matcher>
-		<type>fuzzy</type>
-		<active>true</active>
-	</matcher>
-
-	<matcher>
-		<type>dictionary</type>
-		<active>false</active>
-	</matcher>
-
+	<threads>8</threads>	
+	
 	<mode>EAGER</mode>
-   
+
+	<word-matchers>
+		<matcher>
+			<type>exact</type>
+			<active>TRUE</active>
+		</matcher>
+
+		<matcher>
+			<type>fuzzy</type>
+			<active>true</active>
+		</matcher>
+
+		<matcher>
+			<type>semantic</type>
+			<active>true</active>
+		</matcher>
+	</word-matchers>
+
+	<extra-matching>
+		<component>include_children</component>
+		<component>metadata</component>
+		<component>metadatass</component>
+		<component>combined</component>
+	</extra-matching>
+
 </settings>

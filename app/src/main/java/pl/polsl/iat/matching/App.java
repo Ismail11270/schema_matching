@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.executor;
+package pl.polsl.iat.matching;
 
 import pl.polsl.iat.matching.core.model.result.MatchingResult;
 import pl.polsl.iat.matching.core.model.result.ResultFactory;
@@ -7,9 +7,10 @@ import pl.polsl.iat.matching.core.model.schema.Schema;
 import pl.polsl.iat.matching.core.model.schema.Table;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.ParametersResolver;
+import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
-public class Main {
+public class App {
 
     public static void main(String[] args) {
         ParametersResolver parametersResolver = new ParametersResolver(args);
@@ -35,17 +36,18 @@ public class Main {
 
         //TODO ADD SUPPORT FOR N NUMBER OF SCHEMAS
 
-//        ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).run();
+        ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).run();
 
-
-        Schema schema1 = schemas[0];
-        Schema schema2 = schemas[1];
-
-        Table table1 = schemas[0].getComponents().get(0);
-        Table table2 = schemas[0].getComponents().get(1);
-
-        Column column1 = schemas[0].getComponents().get(0).getComponents().get(0);
-        Column column2 = schemas[0].getComponents().get(0).getComponents().get(1);
+//
+//        Schema schema1 = schemas[0];
+//        Schema schema2 = schemas[1];
+//
+//
+//        Table table1 = schemas[0].getComponents().get(0);
+//        Table table2 = schemas[0].getComponents().get(1);
+//
+//        Column column1 = schemas[0].getComponents().get(0).getComponents().get(0);
+//        Column column2 = schemas[0].getComponents().get(0).getComponents().get(1);
 
 //        ColumnMatcher
 

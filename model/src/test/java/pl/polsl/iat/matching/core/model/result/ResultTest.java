@@ -2,7 +2,6 @@ package pl.polsl.iat.matching.core.model.result;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pl.polsl.iat.matching.core.model.result.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class ResultTest {
                     var matchTable = factory.createComponentMatch();
                     matchTable.name = "Schema_2" + ".Table_" + j;
                     matchTable.type = ResultComponentType.TABLE;
-                    matchTable.match = BigDecimal.valueOf(0.1f * rand.nextInt(10));
+                    matchTable.matchScore = BigDecimal.valueOf(0.1f * rand.nextInt(10));
                     for (int k = 0; k < rand.nextInt(5); k++) {
                         var column = factory.createComponent();
                         column.name = "Schema_1.Table_" + i + ".Column_" + k;
@@ -42,7 +41,7 @@ public class ResultTest {
                             var columnMatch = factory.createComponentMatch();
                             columnMatch.name = "Schema_2" + ".Table_" + j + ".Column_" + l;
                             columnMatch.type = ResultComponentType.COLUMN;
-                            columnMatch.match = BigDecimal.valueOf(0.1f * rand.nextInt(10));
+                            columnMatch.matchScore = BigDecimal.valueOf(0.1f * rand.nextInt(10));
                             column.matchingComponent.add(columnMatch);
                         }
                         matchTable.component.add(column);

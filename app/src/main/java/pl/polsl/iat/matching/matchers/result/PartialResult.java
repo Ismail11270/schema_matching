@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.executor.result;
+package pl.polsl.iat.matching.matchers.result;
 
 import pl.polsl.iat.matching.core.model.schema.Matchable;
 

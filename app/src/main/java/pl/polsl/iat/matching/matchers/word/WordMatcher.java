@@ -1,30 +1,38 @@
 package pl.polsl.iat.matching.matchers.word;
 
-import pl.polsl.iat.matching.executor.result.PartialResult;
 import pl.polsl.iat.matching.matchers.Matcher;
 import pl.polsl.iat.matching.processing.Word;
 
 public abstract class WordMatcher implements Matcher<Word> {
     public enum Type {
-        EXACT(0), FUZZY(1), DICTIONARY(2);
+        EXACT(0) {
+            @Override
+            WordMatcher getMatcher() {
+                return new ExactMatcher();
+            }
+        }, FUZZY(1) {
+            @Override
+            WordMatcher getMatcher() {
+                return new FuzzyMatcher();
+            }
+        }, SEMANTIC(2) {
+            @Override
+            WordMatcher getMatcher() {
+                return new SemanticMather();
+            }
+        };
+
         private final int id;
 
-        Type(int id){
+        Type(int id) {
             this.id = id;
         }
 
-        public String getName(){
+        abstract WordMatcher getMatcher();
+
+        public String getName() {
             return this.getName().toLowerCase();
         }
-    }
-
-    public static WordMatcher getMatherOfType(Type type) {
-        return new WordMatcher() {
-            @Override
-            public PartialResult<Word> doMatch(Word left, Word right) {
-                return null;
-            }
-        };
     }
 
 }

@@ -7,6 +7,7 @@ import org.w3c.dom.NodeList;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.Const;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
+import pl.polsl.iat.matching.matchers.word.WordMatcherFactory;
 import pl.polsl.iat.matching.processing.StringProcessor;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,20 +16,28 @@ import java.util.*;
 
 public class MatcherSettings {
 
+    public enum MatchingOptions {
+        INCLUDE_CHILDREN,
+        METADATA,
+        COMBINED
+    }
+
     private static final MatcherSettings settingsInstance;
 
     public static MatcherSettings getSettings() {
         return settingsInstance;
     }
 
-    private MatcherSettings() { }
+    private MatcherSettings() {
+    }
 
-    private final Map<WordMatcher.Type,WordMatcher> availableWordMatchers = new Hashtable<>();
+    private final Map<WordMatcher.Type, WordMatcher> availableWordMatchers = new Hashtable<>();
 
     private Integer numberOfThreads = 8;
 
     /**
      * Considering to drop the idea of lazy loading
+     *
      * @return
      */
     @Deprecated(forRemoval = true)
@@ -38,19 +47,19 @@ public class MatcherSettings {
 
     private SchemaExtractor.Mode loaderMode;
 
-    public boolean hasMatcher(WordMatcher.Type type){
+    public boolean hasMatcher(WordMatcher.Type type) {
         return availableWordMatchers.containsKey(type);
     }
 
-    public List<WordMatcher> getAvailableWordMatchers(){
-        return Collections.unmodifiableList(new ArrayList<>(availableWordMatchers.values()));
+    public Map<WordMatcher.Type, WordMatcher> getAvailableWordMatchers() {
+        return availableWordMatchers;
     }
 
     public List<StringProcessor> getAvailableStringProcessors() {
         return Collections.emptyList();
     }
 
-    public WordMatcher getMatcher(WordMatcher.Type type){
+    public WordMatcher getMatcher(WordMatcher.Type type) {
         return availableWordMatchers.get(type);
     }
 
@@ -58,36 +67,59 @@ public class MatcherSettings {
         return numberOfThreads;
     }
 
+    private final List<MatchingOptions> availableMatchingOptions = new ArrayList<>();
+
     static {
         settingsInstance = new MatcherSettings();
         try {
             File inputFile = new File(System.getenv(Const.SettingsXml.MATCHER_SETTINGS_VAR));
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
             doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName(Const.SettingsXml.MATCHER_TAG);
-
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    WordMatcher.Type matcherType = WordMatcher.Type.valueOf(
-                            eElement.getElementsByTagName(Const.SettingsXml.TYPE_TAG).item(0).getTextContent().toUpperCase());
-                    boolean enabled = Boolean.parseBoolean(
-                            eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
-                    if (enabled) {
-                        settingsInstance.availableWordMatchers.put(matcherType, WordMatcher.getMatherOfType(matcherType));
+            NodeList nList = doc.getElementsByTagName(Const.SettingsXml.EXTRA_MATCHING);
+            if (nList.getLength() > 0) {
+                Element extraMatching = (Element) nList.item(0);
+                NodeList components = extraMatching.getElementsByTagName(Const.SettingsXml.MATCHING_COMPONENT);
+                for (int i = 0; i < components.getLength(); i++) {
+                    try {
+                        MatchingOptions matchingOption = MatchingOptions.valueOf(components.item(i).getTextContent().toUpperCase());
+                        settingsInstance.availableMatchingOptions.add(matchingOption);
+                    } catch (IllegalArgumentException iae) {
+                        System.err.println("Failed to read matching options configuration: \n" + iae.getMessage());
                     }
+                }
+            }
+
+            nList = doc.getElementsByTagName(Const.SettingsXml.WORD_MATCHERS);
+            if (nList.getLength() > 0) {
+                nList = ((Element) nList.item(0)).getElementsByTagName(Const.SettingsXml.MATCHER_TAG);
+            }
+
+            for (int i = 0; i < nList.getLength(); i++) {
+                try {
+                    Node nNode = nList.item(i);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eElement = (Element) nNode;
+                        WordMatcher.Type matcherType = WordMatcher.Type.valueOf(
+                                eElement.getElementsByTagName(Const.SettingsXml.TYPE_TAG).item(0).getTextContent().toUpperCase());
+                        boolean enabled = Boolean.parseBoolean(
+                                eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
+                        if (enabled) {
+                            settingsInstance.availableWordMatchers.put(matcherType, WordMatcherFactory.getMatherOfType(matcherType));
+                        }
+                    }
+                } catch (IllegalArgumentException iae) {
+                    System.err.println("Failed to read matcher configuration: \n" + iae.getMessage());
                 }
             }
             NodeList modeTag = doc.getElementsByTagName(Const.SettingsXml.MODE);
             settingsInstance.loaderMode = SchemaExtractor.Mode.valueOf(modeTag.item(0).getTextContent().toUpperCase());
             NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS);
             settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.err.println("[ERROR] Invalid thread number configuration! Using default value of 8");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("FINISH STATIC");
     }
 }

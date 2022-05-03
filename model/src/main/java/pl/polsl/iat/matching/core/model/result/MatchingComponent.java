@@ -48,8 +48,12 @@ public class MatchingComponent {
     protected ResultComponentType type;
     @XmlAttribute(name = "name", required = true)
     protected String name;
-    @XmlAttribute(name = "match", required = true)
-    protected BigDecimal match;
+    @XmlAttribute(name = "matchScore", required = true)
+    protected BigDecimal matchScore;
+    @XmlAttribute(name = "childScore", required = false)
+    protected BigDecimal childScore;
+    @XmlAttribute(name = "metadataScore", required = false)
+    protected BigDecimal metadataScore;
     @XmlAttribute(name = "combinedScore", required = false)
     protected BigDecimal combinedScore;
 
@@ -138,8 +142,8 @@ public class MatchingComponent {
      *     {@link BigDecimal }
      *     
      */
-    public BigDecimal getMatch() {
-        return match;
+    public BigDecimal getMatchScore() {
+        return matchScore;
     }
 
     /**
@@ -150,8 +154,8 @@ public class MatchingComponent {
      *     {@link BigDecimal }
      *     
      */
-    public void setMatch(float value) {
-        this.match = BigDecimal.valueOf(value);
+    public void setMatchScore(float value) {
+        this.matchScore = BigDecimal.valueOf(value);
     }
 
     public BigDecimal getCombinedScore() {
@@ -160,5 +164,25 @@ public class MatchingComponent {
 
     public void setCombinedScore(float value) {
         this.combinedScore = BigDecimal.valueOf(value);
+    }
+
+    public void setMatchScore(BigDecimal matchScore) {
+        this.matchScore = matchScore;
+    }
+
+    public BigDecimal getChildScore() {
+        return childScore;
+    }
+
+    public void setChildScore(BigDecimal childScore) {
+        this.childScore = childScore;
+    }
+
+    public BigDecimal getMetadataScore() {
+        return metadataScore;
+    }
+
+    public void setMetadataScore(BigDecimal metadataScore) {
+        this.metadataScore = metadataScore;
     }
 }

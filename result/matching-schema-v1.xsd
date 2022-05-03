@@ -23,7 +23,9 @@
        </xs:sequence>
 	   <xs:attribute name="type" type="xs:string" use="required"/>
        <xs:attribute name="name" type="xs:string" use="required"/>
-	   <xs:attribute name="match" type="xs:decimal" use="required"/>
+	   <xs:attribute name="matchScore" type="xs:decimal" use="required"/>
+	   <xs:attribute name="childScore" type="xs:decimal" use="optional"/>
+	   <xs:attribute name="metadataScore" type="xs:decimal" use="optional"/>
 	   <xs:attribute name="combinedScore" type="xs:decimal" use="optional"/>
     </xs:complexType>
 </xs:schema>
