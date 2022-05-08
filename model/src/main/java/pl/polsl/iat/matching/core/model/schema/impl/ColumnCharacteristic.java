@@ -32,11 +32,6 @@ public class ColumnCharacteristic implements BaseCharacteristic<ColumnCharacteri
     }
 
     @Override
-    public int compareTo(BaseCharacteristic<ColumnCharacteristicType> o) {
-        return 0;
-    }
-
-    @Override
     public String toString() {
         return key + "=" + value;
     }

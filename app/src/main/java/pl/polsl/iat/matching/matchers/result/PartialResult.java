@@ -1,8 +1,7 @@
 package pl.polsl.iat.matching.matchers.result;
 
-import pl.polsl.iat.matching.core.model.schema.Matchable;
 
-public class PartialResult<T extends Matchable> {
+public class PartialResult {
 
     private final Float result;
 

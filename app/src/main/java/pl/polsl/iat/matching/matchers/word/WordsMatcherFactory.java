@@ -1,18 +1,18 @@
 package pl.polsl.iat.matching.matchers.word;
 
-import pl.polsl.iat.matching.matchers.result.PartialResult;
-import pl.polsl.iat.matching.processing.Word;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class WordMatcherFactory {
+public class WordsMatcherFactory {
 
     private static Map<WordMatcher.Type,WordMatcher> wordMatchersCache;
 
-    public static Map<WordMatcher.Type,WordMatcher> getWordMatchers() {
+    private static final WordsMatcher wordsMatcher = new WordsMatcher(getWordMatchers());
+
+    public synchronized static Map<WordMatcher.Type,WordMatcher> getWordMatchers() {
         initWordMatchers();
         return wordMatchersCache;
     }
@@ -29,4 +29,7 @@ public class WordMatcherFactory {
         return type.getMatcher();
     }
 
+    public static WordsMatcher getWordsMatcher() {
+        return wordsMatcher;
+    }
 }

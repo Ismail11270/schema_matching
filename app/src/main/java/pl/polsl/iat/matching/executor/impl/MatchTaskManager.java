@@ -2,12 +2,10 @@ package pl.polsl.iat.matching.executor.impl;
 
 import pl.polsl.iat.matching.core.model.result.MatchingComponent;
 import pl.polsl.iat.matching.core.model.schema.*;
-import pl.polsl.iat.matching.matchers.Matcher;
-import pl.polsl.iat.matching.matchers.component.impl.ComponentMatcherFactory;
+import pl.polsl.iat.matching.matchers.ComponentMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 
@@ -17,16 +15,10 @@ import java.util.concurrent.Callable;
 public class MatchTaskManager {
 
     private static final MatchTaskManager managerInstance = new MatchTaskManager();
-//    private final TableMatcherSupplier matcherSupplier;
-    private final Map<ComponentType, Matcher<? extends Component>> componentMatchers;
+    private final ComponentMatcher componentMatcher;
 
     private MatchTaskManager() {
-//        List<TableMatcher> matchers =
-//                IntStream.range(0, MatcherSettings.getSettings().getNumberOfThreads())
-//                        .mapToObj(i -> ComponentMatcherFactory.getTableMatcher())
-//                        .collect(Collectors.toList());
-//        matcherSupplier = TableMatcherSupplier.initialize(matchers);
-        componentMatchers = ComponentMatcherFactory.getComponentMatchers();
+        componentMatcher = ComponentMatcher.getInstance();
     }
 
     public static MatchTaskManager getInstance() {

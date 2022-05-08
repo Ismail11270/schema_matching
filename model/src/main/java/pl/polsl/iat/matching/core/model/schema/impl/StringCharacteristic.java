@@ -34,12 +34,6 @@ public class StringCharacteristic implements BaseCharacteristic<String> {
         return type;
     }
 
-    //TODO IMPLEMENT COMPARETO
-    @Override
-    public int compareTo(BaseCharacteristic<String> o) {
-        return 1;
-    }
-
     @Override
     public String toString() {
         return key + "=" + value;

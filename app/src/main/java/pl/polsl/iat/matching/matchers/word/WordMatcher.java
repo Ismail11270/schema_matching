@@ -4,6 +4,7 @@ import pl.polsl.iat.matching.matchers.Matcher;
 import pl.polsl.iat.matching.processing.Word;
 
 public abstract class WordMatcher implements Matcher<Word> {
+
     public enum Type {
         EXACT(0) {
             @Override

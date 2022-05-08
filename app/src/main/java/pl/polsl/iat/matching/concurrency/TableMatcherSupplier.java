@@ -1,26 +1,22 @@
 package pl.polsl.iat.matching.concurrency;
 
-import pl.polsl.iat.matching.matchers.component.TableMatcher;
-
-import java.util.Collection;
-import java.util.Stack;
-
+@Deprecated
 public class TableMatcherSupplier {
-
+/*
     private static TableMatcherSupplier instance;
-    public static TableMatcherSupplier initialize(Collection<TableMatcher> initialMatchers) {
+    public static TableMatcherSupplier initialize(Collection<ComponentMatcher<Table>> initialMatchers) {
         return instance != null ? instance : (instance = new TableMatcherSupplier(initialMatchers));
     }
 
-    private final Stack<TableMatcher> availableMatchers = new Stack<>();
+    private final Stack<ComponentMatcher<Table>> availableMatchers = new Stack<>();
     private boolean isAvailable;
 
-    private TableMatcherSupplier(Collection<TableMatcher> initialMatchers) {
+    private TableMatcherSupplier(Collection<ComponentMatcher<Table>> initialMatchers) {
         this.availableMatchers.addAll(initialMatchers);
         isAvailable = true;
     }
 
-    public synchronized TableMatcher getTableMatcherWhenAvailable() {
+    public synchronized ComponentMatcher<Table> getTableMatcherWhenAvailable() {
         if (availableMatchers.isEmpty()) {
             isAvailable = false;
         }
@@ -36,10 +32,10 @@ public class TableMatcherSupplier {
         return availableMatchers.pop();
     }
 
-    public synchronized void releaseMatcher(TableMatcher matcher) {
+    public synchronized void releaseMatcher(ComponentMatcher<Table> matcher) {
         availableMatchers.push(matcher);
         isAvailable = true;
         notify();
-    }
+    }*/
 
 }

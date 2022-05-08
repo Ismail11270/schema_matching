@@ -26,12 +26,6 @@ public class KeyCharacteristic implements Characteristic<TableKey, List<BaseChar
         return key.getGeneralType();
     }
 
-    //TODO Implement
-    @Override
-    public int compareTo(BaseCharacteristic<TableKey> o) {
-        return 0;
-    }
-
     @Override
     public String toString() {
         return key.name() + "=List<BaseCharacteristic<String>>(" + childCharacteristics.size() + ")";

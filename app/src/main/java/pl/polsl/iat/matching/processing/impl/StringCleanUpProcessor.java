@@ -1,10 +1,10 @@
 package pl.polsl.iat.matching.processing.impl;
 
-import pl.polsl.iat.matching.processing.StringProcessor;
+import pl.polsl.iat.matching.processing.StringProcessor_;
 
 import java.util.Arrays;
 
-public class StringCleanUpProcessor implements StringProcessor {
+public class StringCleanUpProcessor implements StringProcessor_ {
 
     @Override
     public Pieces process(Pieces pieces) {

@@ -39,8 +39,8 @@ public class App {
         ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).run();
 
 //
-//        Schema schema1 = schemas[0];
-//        Schema schema2 = schemas[1];
+        Schema schema1 = schemas[0];
+        Schema schema2 = schemas[1];
 //
 //
 //        Table table1 = schemas[0].getComponents().get(0);

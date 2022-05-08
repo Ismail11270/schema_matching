@@ -7,8 +7,8 @@ import org.w3c.dom.NodeList;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.Const;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
-import pl.polsl.iat.matching.matchers.word.WordMatcherFactory;
-import pl.polsl.iat.matching.processing.StringProcessor;
+import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
+import pl.polsl.iat.matching.processing.StringProcessor_;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -37,8 +37,6 @@ public class MatcherSettings {
 
     /**
      * Considering to drop the idea of lazy loading
-     *
-     * @return
      */
     @Deprecated(forRemoval = true)
     public SchemaExtractor.Mode getLoaderMode() {
@@ -52,10 +50,10 @@ public class MatcherSettings {
     }
 
     public Map<WordMatcher.Type, WordMatcher> getAvailableWordMatchers() {
-        return availableWordMatchers;
+        return Map.copyOf(availableWordMatchers);
     }
 
-    public List<StringProcessor> getAvailableStringProcessors() {
+    public List<StringProcessor_> getAvailableStringProcessors() {
         return Collections.emptyList();
     }
 
@@ -104,7 +102,7 @@ public class MatcherSettings {
                         boolean enabled = Boolean.parseBoolean(
                                 eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
                         if (enabled) {
-                            settingsInstance.availableWordMatchers.put(matcherType, WordMatcherFactory.getMatherOfType(matcherType));
+                            settingsInstance.availableWordMatchers.put(matcherType, WordsMatcherFactory.getMatherOfType(matcherType));
                         }
                     }
                 } catch (IllegalArgumentException iae) {
@@ -120,6 +118,5 @@ public class MatcherSettings {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("FINISH STATIC");
     }
 }
