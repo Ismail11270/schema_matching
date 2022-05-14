@@ -1,6 +1,4 @@
-package pl.polsl.iat.matching.processing.impl;
-
-import pl.polsl.iat.matching.processing.StringProcessor_;
+package pl.polsl.iat.matching.processing.impl_;
 
 public class StemmingProcessor implements StringProcessor_ {
     @Override

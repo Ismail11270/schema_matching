@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.processing.impl;
+package pl.polsl.iat.matching.processing.impl_;
 
 public final class MatchCoefficients {
     private MatchCoefficients(){}

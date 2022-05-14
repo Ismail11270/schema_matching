@@ -25,7 +25,6 @@
 	<extra-matching>
 		<component>include_children</component>
 		<component>metadata</component>
-		<component>metadatass</component>
 		<component>combined</component>
 	</extra-matching>
 

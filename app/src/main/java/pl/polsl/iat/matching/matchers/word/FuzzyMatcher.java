@@ -5,7 +5,7 @@ import pl.polsl.iat.matching.processing.Word;
 
 class FuzzyMatcher extends WordMatcher {
     @Override
-    public PartialResult<Word> doMatch(Word left, Word right) {
+    public PartialResult doMatch(Word left, Word right) {
         return null;
     }
 }

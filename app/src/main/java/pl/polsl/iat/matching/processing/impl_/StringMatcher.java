@@ -1,10 +1,9 @@
-package pl.polsl.iat.matching.processing.impl;
+package pl.polsl.iat.matching.processing.impl_;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import pl.polsl.iat.matching.core.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.core.dictionary.exception.DictionaryException;
 import pl.polsl.iat.matching.core.dictionary.impl.DictionaryFactory;
-import pl.polsl.iat.matching.processing.StringPair;
 
 //TODO apply only matchers enabled in settings
 public class StringMatcher {

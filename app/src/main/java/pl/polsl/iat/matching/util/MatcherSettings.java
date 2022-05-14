@@ -8,7 +8,7 @@ import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.Const;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
-import pl.polsl.iat.matching.processing.StringProcessor_;
+import pl.polsl.iat.matching.processing.impl_.StringProcessor_;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
