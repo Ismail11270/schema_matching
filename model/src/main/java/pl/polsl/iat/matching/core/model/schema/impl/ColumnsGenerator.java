@@ -31,9 +31,6 @@ class ColumnsGenerator implements Supplier<Column>, Predicate<Column> {
     public Column get() {
         try {
             if (columnsRs.next()) {
-//                if (columnsRs.isLast()) {
-//                    this.status = Status.LAST;
-//                }
                 var columnBuilder = new ColumnImpl.Builder();
                 var charStream = Arrays.stream(ColumnCharacteristicType.values()).map(column -> {
                     try {
@@ -58,10 +55,7 @@ class ColumnsGenerator implements Supplier<Column>, Predicate<Column> {
 
     @Override
     public boolean test(Column column) {
-        if (status == Status.LAST) {
-            status = Status.FINISH;
-            return true;
-        } else return status != Status.FINISH;
+       return status != Status.FINISH;
     }
 
 }

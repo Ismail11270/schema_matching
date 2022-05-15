@@ -7,5 +7,5 @@ package pl.polsl.iat.matching.core.util;
  * FINISH - stop generation
  */
 public enum Status {
-    CONTINUE, LAST, FINISH
+    CONTINUE, FINISH
 }

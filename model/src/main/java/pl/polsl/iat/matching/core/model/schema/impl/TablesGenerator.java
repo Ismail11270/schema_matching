@@ -32,11 +32,6 @@ class TablesGenerator implements Supplier<Table>, Predicate<Table> {
     public Table get() {
         try {
             if (tablesRs.next()) {
-//                if (tablesRs.last()) {
-//                    tablesRs.last()
-//                    tablesRs.getFetchSize()
-//                    this.status = Status.LAST;
-//                }
                 String tableName = tablesRs.getString(Const.ColumnName.GET_TABLES_TABLE_NAME);
                 return tableExtractor.load(tableName);
             } else {
@@ -50,9 +45,6 @@ class TablesGenerator implements Supplier<Table>, Predicate<Table> {
 
     @Override
     public boolean test(Table table) {
-        if (status == Status.LAST) {
-            status = Status.FINISH;
-            return true;
-        } else return status != Status.FINISH;
+        return status != Status.FINISH;
     }
 }

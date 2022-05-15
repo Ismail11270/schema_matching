@@ -12,7 +12,8 @@ import pl.polsl.iat.matching.util.MatcherSettings;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        Thread.sleep(5000);
         ParametersResolver parametersResolver = new ParametersResolver(args);
 
         long startTime = System.currentTimeMillis();

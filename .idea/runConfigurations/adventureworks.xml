@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="matching_app" type="Application" factoryName="Application">
+  <configuration default="false" name="adventureworks" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="16" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <envs>
@@ -7,7 +7,7 @@
     </envs>
     <option name="MAIN_CLASS_NAME" value="pl.polsl.iat.matching.App" />
     <module name="app" />
-    <option name="PROGRAM_PARAMETERS" value="-s1 -f resources\schema1.properties -s2 -f resources\schema2.properties" />
+    <option name="PROGRAM_PARAMETERS" value="-s1 -f resources\sqlserver1.properties -s2 -f resources\sqlserver2.properties" />
     <option name="VM_PARAMETERS" value="-Xmx5G" />
     <method v="2">
       <option name="Make" enabled="true" />
