@@ -54,7 +54,7 @@ class ColumnImpl implements Column {
 
         Builder setCharacteristics(Stream<ColumnCharacteristic> characteristics){
             col.characteristics = characteristics;
-            col.chrs = characteristics.collect(Collectors.toList());
+//            col.chrs = characteristics.collect(Collectors.toList());
             return this;
         }
 

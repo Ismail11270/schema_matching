@@ -10,6 +10,8 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
+import java.util.stream.Stream;
 
 public class ParametersResolver {
 
@@ -57,22 +59,18 @@ public class ParametersResolver {
 
     private void prepareSchemaConnectionFromPropertiesFile(int id, String path) {
         try {
-            connectionProperties.add(createConnectionFromProperties(id, Files.readAllLines(Paths.get(new File(path).toURI()))));
+            connectionProperties.add(createConnectionFromProperties(id, path));
         } catch (IOException e) {
             throw new InvalidParameterException("Failed to access the provided properties file - " + path + " does not exist or cannot be opened.");
         }
     }
 
-    private ConnectionProperties createConnectionFromProperties(int id, List<String> lines) {
-        ConnectionProperties properties = new ConnectionProperties();
-        properties.setId(id);
-        for (int i = 0; i < lines.size(); i++) {
-            String[] property = lines.get(i).split(ConnectionProperties.PROPERTIES_DELIMITER);
-            if (property.length > 2)
-                throw new InvalidParameterException("Invalid property at line " + i);
-            properties.putProperty(property[0].trim(), property[1].trim());
-        }
-        return properties.confirm(true);
+
+    private ConnectionProperties createConnectionFromProperties(int id, String path) throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(path));
+        ConnectionProperties conProps = new ConnectionProperties(id, properties);
+        return conProps.confirm(true);
     }
 
     public List<ConnectionProperties> getConnectionProperties(){

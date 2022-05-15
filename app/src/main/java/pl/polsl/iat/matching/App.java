@@ -49,9 +49,6 @@ public class App {
 //        Column column1 = schemas[0].getComponents().get(0).getComponents().get(0);
 //        Column column2 = schemas[0].getComponents().get(0).getComponents().get(1);
 
-//        ColumnMatcher
-
-
 
         System.out.println("Matching time - " + (System.currentTimeMillis() - startTime));
 

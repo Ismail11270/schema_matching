@@ -1,16 +1,11 @@
 package pl.polsl.iat.matching.core.sql;
 
-import java.security.InvalidParameterException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class ConnectionProperties {
 
     public static final String PROPERTIES_DELIMITER = "=";
-
+    private Properties properties;
     private String url = null;
 
     public enum PropertyName {
@@ -18,77 +13,57 @@ public class ConnectionProperties {
         DATABASE_TYPE,
         HOST,
         PORT,
-        USERNAME,
+        USER,
         PASSWORD,
         SCHEMA;
 
         public static PropertyName getPropertyName(String name) {
             return valueOf(name.toUpperCase());
         }
+
+        public String getName() {
+            return name().toLowerCase(Locale.ROOT);
+        }
     }
 
-    public void setId(int id) {
-        propertiesMap.put(PropertyName.ID, id);
+    public ConnectionProperties(int id, Properties loadedProperties) {
+        properties = loadedProperties;
+        properties.put(PropertyName.ID.getName(), id);
     }
 
-    private Map<PropertyName, Object> propertiesMap = Stream.of(PropertyName.values()).collect(HashMap::new, (m, p) -> m.put(p, null), HashMap::putAll);
+    public ConnectionProperties() { }
 
-    public Object getProperty(PropertyName propertyName){
-        return propertiesMap.get(propertyName);
+    public String getProperty(Object propName) {
+        return properties.getProperty(propName.toString());
     }
 
     public String getHost() {
-        return (String) propertiesMap.get(PropertyName.HOST);
+        return properties.getProperty(PropertyName.HOST.getName());
     }
 
     public Integer getPort() {
-        return propertiesMap.get(PropertyName.PORT) instanceof Integer ? (Integer) propertiesMap.get(PropertyName.PORT) : Integer.parseInt(propertiesMap.get(PropertyName.PORT).toString());
+        return properties.get(PropertyName.PORT) instanceof Integer ? (Integer) properties.get(PropertyName.PORT) : Integer.parseInt(properties.get(PropertyName.PORT).toString());
     }
 
-    public String getUsername() {
-        return (String) propertiesMap.get(PropertyName.USERNAME);
+    public String getUser() {
+        return properties.getProperty(PropertyName.USER.getName());
     }
 
     public String getPassword() {
-        return (String) propertiesMap.get(PropertyName.PASSWORD);
+        return properties.getProperty(PropertyName.PASSWORD.getName());
     }
 
     public String getSchemaName() {
-        return (String) propertiesMap.get(PropertyName.SCHEMA);
+        return properties.getProperty(PropertyName.SCHEMA.getName());
     }
 
     public DatabaseType getDatabaseType() {
-        return (DatabaseType) propertiesMap.get(PropertyName.DATABASE_TYPE);
-    }
-
-    public void putProperty(String propName, String propValue) {
-        PropertyName pa = PropertyName.valueOf(propName.toUpperCase(Locale.ROOT));
-        if (!propertiesMap.containsKey(pa)) {
-            throw new InvalidParameterException("Invalid property in properties file - " + propName + ".");
-        }
-        if (pa == PropertyName.PORT) {
-            try {
-                propertiesMap.put(pa, Integer.parseInt(propValue));
-            } catch (NumberFormatException e) {
-                throw new InvalidParameterException("Wrong value for PORT property in properties file.");
-            }
-        } else if (pa == PropertyName.DATABASE_TYPE) {
-            try {
-                propertiesMap.put(pa, DatabaseType.getType(propValue));
-            } catch (IllegalArgumentException iae) {
-                throw new InvalidParameterException("Database type specified in properties file is not supported - " + propValue + ".");
-            }
-        } else {
-            propertiesMap.put(pa, propValue);
-        }
+        return DatabaseType.getType(properties.getProperty(PropertyName.DATABASE_TYPE.getName()));
     }
 
     public ConnectionProperties confirm(boolean print) {
-        if (propertiesMap.containsValue(null))
-            throw new InvalidParameterException("Error parsing connection properties. Please make sure the provided properties are correct.");
         if(!print) return this;
-        System.out.println("Properties verified:");
-        propertiesMap.forEach((key, value) -> System.out.println(key + ": " + value));
+        properties.forEach((key, value) -> System.out.println(key + ": " + value));
         return this;
     }
 
@@ -96,8 +71,17 @@ public class ConnectionProperties {
         this.url = url;
     }
 
-    public Optional<String> getUrl(){
-        return Optional.of(url);
+    public String getUrl(){
+        if(url == null) {
+            String host = properties.getProperty(PropertyName.HOST.getName());
+            String port = properties.getProperty(PropertyName.PORT.getName());
+            return port != null && !port.isBlank() ? host + ":" + port : host;
+        }
+        return url;
+    }
+
+    public Properties getProperties() {
+        return properties;
     }
 }
 

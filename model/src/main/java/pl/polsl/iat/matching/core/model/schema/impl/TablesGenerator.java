@@ -32,12 +32,15 @@ class TablesGenerator implements Supplier<Table>, Predicate<Table> {
     public Table get() {
         try {
             if (tablesRs.next()) {
-                if (tablesRs.isLast()) {
-                    this.status = Status.LAST;
-                }
+//                if (tablesRs.last()) {
+//                    tablesRs.last()
+//                    tablesRs.getFetchSize()
+//                    this.status = Status.LAST;
+//                }
                 String tableName = tablesRs.getString(Const.ColumnName.GET_TABLES_TABLE_NAME);
                 return tableExtractor.load(tableName);
             } else {
+                this.status = Status.FINISH;
                 return null;
             }
         } catch (Exception e) {

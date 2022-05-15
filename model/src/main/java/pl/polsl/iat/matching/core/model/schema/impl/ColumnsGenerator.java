@@ -31,9 +31,9 @@ class ColumnsGenerator implements Supplier<Column>, Predicate<Column> {
     public Column get() {
         try {
             if (columnsRs.next()) {
-                if (columnsRs.isLast()) {
-                    this.status = Status.LAST;
-                }
+//                if (columnsRs.isLast()) {
+//                    this.status = Status.LAST;
+//                }
                 var columnBuilder = new ColumnImpl.Builder();
                 var charStream = Arrays.stream(ColumnCharacteristicType.values()).map(column -> {
                     try {
@@ -48,6 +48,7 @@ class ColumnsGenerator implements Supplier<Column>, Predicate<Column> {
                 columnBuilder.setName(columnsRs.getString(ColumnCharacteristicType.COLUMN_NAME.name()));
                 return columnBuilder.build();
             } else {
+                this.status = Status.FINISH;
                 return null;
             }
         } catch (Exception e) {

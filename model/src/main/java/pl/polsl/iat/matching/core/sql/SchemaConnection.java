@@ -12,10 +12,17 @@ public class SchemaConnection {
 
     public SchemaConnection(ConnectionProperties properties) throws DatabaseException {
         try {
+            try {
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             this.properties = properties;
             this.properties.setUrl(SqlUtil.buildConnectionAddress(properties));
-            String url = properties.getUrl().orElseThrow(() -> new DatabaseException("JDBC Url generated is null for " + properties.getHost() + ":" + properties.getPort()));
-            connection = DriverManager.getConnection((url), properties.getUsername(), properties.getPassword());
+            String url = properties.getUrl();
+//            connection = DriverManager.getConnection((url), properties.getUsername(), properties.getPassword());
+            System.out.println(url);
+            connection = DriverManager.getConnection(url, properties.getProperties());
         } catch (SQLException e) {
             throw new DatabaseException("Error creating a database connection. ", e);
         }
