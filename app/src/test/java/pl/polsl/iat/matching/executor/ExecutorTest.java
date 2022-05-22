@@ -1,4 +1,4 @@
-package pl.polsl.iat.matcher.executor;
+package pl.polsl.iat.matching.executor;
 
 import org.junit.jupiter.api.Test;
 import pl.polsl.iat.matching.core.model.result.ResultFactory;

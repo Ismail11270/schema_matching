@@ -22,6 +22,8 @@ public class MatcherSettings {
         COMBINED
     }
 
+    public final static String STOP_WORDS_FILE = "resources\\stopwords.txt";
+
     private static final MatcherSettings settingsInstance;
 
     public static MatcherSettings getSettings() {
