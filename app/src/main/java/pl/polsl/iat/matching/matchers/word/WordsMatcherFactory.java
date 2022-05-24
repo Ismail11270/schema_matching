@@ -10,7 +10,7 @@ public class WordsMatcherFactory {
 
     private static Map<WordMatcher.Type,WordMatcher> wordMatchersCache;
 
-    private static final WordsMatcher wordsMatcher = new WordsMatcher(getWordMatchers());
+    private static WordsMatcher wordsMatcher;
 
     public synchronized static Map<WordMatcher.Type,WordMatcher> getWordMatchers() {
         initWordMatchers();
@@ -30,6 +30,6 @@ public class WordsMatcherFactory {
     }
 
     public static WordsMatcher getWordsMatcher() {
-        return wordsMatcher;
+        return wordsMatcher != null ? wordsMatcher : (wordsMatcher = new WordsMatcher(getWordMatchers()));
     }
 }

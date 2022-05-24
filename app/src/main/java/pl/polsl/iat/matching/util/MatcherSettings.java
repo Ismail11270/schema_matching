@@ -26,14 +26,14 @@ public class MatcherSettings {
 
     private static final MatcherSettings settingsInstance;
 
-    public static MatcherSettings getSettings() {
+    public static synchronized MatcherSettings getSettings() {
         return settingsInstance;
     }
 
     private MatcherSettings() {
     }
 
-    private final Map<WordMatcher.Type, WordMatcher> availableWordMatchers = new Hashtable<>();
+    private final Map<WordMatcher.Type, WordMatcher> availableWordMatchers = new HashMap<>();
 
     private Integer numberOfThreads = 8;
 
