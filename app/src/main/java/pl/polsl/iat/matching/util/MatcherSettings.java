@@ -8,6 +8,9 @@ import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.Const;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
+import pl.polsl.iat.matching.processing.ProcessorType;
+import pl.polsl.iat.matching.processing.TextProcessor;
+import pl.polsl.iat.matching.processing.Words;
 import pl.polsl.iat.matching.processing.impl_.StringProcessor_;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,6 +37,8 @@ public class MatcherSettings {
     }
 
     private final Map<WordMatcher.Type, WordMatcher> availableWordMatchers = new HashMap<>();
+
+    private final Map<ProcessorType, TextProcessor<Words>> availablePreprocessors = new HashMap<>();
 
     private Integer numberOfThreads = 8;
 
@@ -75,50 +80,86 @@ public class MatcherSettings {
             File inputFile = new File(System.getenv(Const.SettingsXml.MATCHER_SETTINGS_VAR));
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
             doc.getDocumentElement().normalize();
-            NodeList nList = doc.getElementsByTagName(Const.SettingsXml.EXTRA_MATCHING);
-            if (nList.getLength() > 0) {
-                Element extraMatching = (Element) nList.item(0);
-                NodeList components = extraMatching.getElementsByTagName(Const.SettingsXml.MATCHING_COMPONENT);
-                for (int i = 0; i < components.getLength(); i++) {
-                    try {
-                        MatchingOptions matchingOption = MatchingOptions.valueOf(components.item(i).getTextContent().toUpperCase());
-                        settingsInstance.availableMatchingOptions.add(matchingOption);
-                    } catch (IllegalArgumentException iae) {
-                        System.err.println("Failed to read matching options configuration: \n" + iae.getMessage());
-                    }
-                }
-            }
 
-            nList = doc.getElementsByTagName(Const.SettingsXml.WORD_MATCHERS);
-            if (nList.getLength() > 0) {
-                nList = ((Element) nList.item(0)).getElementsByTagName(Const.SettingsXml.MATCHER_TAG);
-            }
+            initExtraMatching(doc);
+            initWordMatchers(doc);
+            initPreprocessors(doc);
 
-            for (int i = 0; i < nList.getLength(); i++) {
-                try {
-                    Node nNode = nList.item(i);
-                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                        Element eElement = (Element) nNode;
-                        WordMatcher.Type matcherType = WordMatcher.Type.valueOf(
-                                eElement.getElementsByTagName(Const.SettingsXml.TYPE_TAG).item(0).getTextContent().toUpperCase());
-                        boolean enabled = Boolean.parseBoolean(
-                                eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
-                        if (enabled) {
-                            settingsInstance.availableWordMatchers.put(matcherType, WordsMatcherFactory.getMatherOfType(matcherType));
-                        }
-                    }
-                } catch (IllegalArgumentException iae) {
-                    System.err.println("Failed to read matcher configuration: \n" + iae.getMessage());
-                }
-            }
-            NodeList modeTag = doc.getElementsByTagName(Const.SettingsXml.MODE);
+            NodeList modeTag = doc.getElementsByTagName(Const.SettingsXml.MODE_TAG);
             settingsInstance.loaderMode = SchemaExtractor.Mode.valueOf(modeTag.item(0).getTextContent().toUpperCase());
-            NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS);
+            NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS_TAG);
             settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
         } catch (NumberFormatException e) {
             System.err.println("[ERROR] Invalid thread number configuration! Using default value of 8");
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void initExtraMatching(Document doc) {
+        NodeList nList = doc.getElementsByTagName(Const.SettingsXml.EXTRA_MATCHING_TAG);
+        if (nList.getLength() > 0) {
+            Element extraMatching = (Element) nList.item(0);
+            NodeList components = extraMatching.getElementsByTagName(Const.SettingsXml.MATCHING_COMPONENT_TAG);
+            for (int i = 0; i < components.getLength(); i++) {
+                try {
+                    MatchingOptions matchingOption = MatchingOptions.valueOf(components.item(i).getTextContent().toUpperCase());
+                    settingsInstance.availableMatchingOptions.add(matchingOption);
+                } catch (IllegalArgumentException iae) {
+                    System.err.println("Failed to read matching options configuration: \n" + iae.getMessage());
+                }
+            }
+        }
+    }
+
+    private static void initWordMatchers(Document doc) {
+        NodeList nList = doc.getElementsByTagName(Const.SettingsXml.WORD_MATCHERS_TAG);
+        if (nList.getLength() > 0) {
+            nList = ((Element) nList.item(0)).getElementsByTagName(Const.SettingsXml.MATCHER_TAG);
+        }
+
+        for (int i = 0; i < nList.getLength(); i++) {
+            try {
+                Node nNode = nList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    WordMatcher.Type matcherType = WordMatcher.Type.valueOf(
+                            eElement.getElementsByTagName(Const.SettingsXml.TYPE_TAG).item(0).getTextContent().toUpperCase());
+                    boolean enabled = Boolean.parseBoolean(
+                            eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
+                    if (enabled) {
+                        settingsInstance.availableWordMatchers.put(matcherType, WordsMatcherFactory.getMatherOfType(matcherType));
+                    }
+                }
+            } catch (IllegalArgumentException iae) {
+                System.err.println("Failed to read matcher configuration: \n" + iae.getMessage());
+            }
+        }
+    }
+
+
+    private static void initPreprocessors(Document doc) {
+        NodeList nList = doc.getElementsByTagName(Const.SettingsXml.PRE_PROCESSING_TAG);
+        if (nList.getLength() > 0) {
+            nList = ((Element) nList.item(0)).getElementsByTagName(Const.SettingsXml.PROCESSOR_TAG);
+        }
+
+        for (int i = 0; i < nList.getLength(); i++) {
+            try {
+                Node nNode = nList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    ProcessorType type = ProcessorType.getFromXmlName(
+                            eElement.getElementsByTagName(Const.SettingsXml.TYPE_TAG).item(0).getTextContent().toLowerCase()).orElseThrow(IllegalArgumentException::new);
+                    boolean enabled = Boolean.parseBoolean(
+                            eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
+                    if (enabled) {
+                        settingsInstance.availablePreprocessors.put(type, type.getProcessor());
+                    }
+                }
+            } catch (IllegalArgumentException iae) {
+                System.err.println("Failed to read matcher configuration: \n" + iae.getMessage());
+            }
         }
     }
 }

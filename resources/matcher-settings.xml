@@ -1,9 +1,15 @@
 <?xml version = "1.0"?>
 <settings>
 
-	<threads>8</threads>	
+	<threads>100</threads>
 	
 	<mode>EAGER</mode>
+
+	<extra-matching>
+		<component>include_children</component>
+		<component>metadata</component>
+		<component>combined</component>
+	</extra-matching>
 
 	<word-matchers>
 		<matcher>
@@ -22,10 +28,30 @@
 		</matcher>
 	</word-matchers>
 
-	<extra-matching>
-		<component>include_children</component>
-		<component>metadata</component>
-		<component>combined</component>
-	</extra-matching>
+	<pre-processing>
+		<processor>
+			<type>clean_stop_words</type>
+			<active>TRUE</active>
+		</processor>
 
+		<processor>
+			<type>clean_non_alphabetic</type>
+			<active>TRUE</active>
+		</processor>
+
+		<processor>
+			<type>lemmatization</type>
+			<active>TRUE</active>
+		</processor>
+
+		<processor>
+			<type>stemming</type>
+			<active>TRUE</active>
+		</processor>
+
+		<processor>
+			<type>clean_prefixes</type>
+			<active>TRUE</active>
+		</processor>
+	</pre-processing>
 </settings>
