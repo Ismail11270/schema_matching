@@ -4,17 +4,20 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum ProcessorType {
-    STOP_WORDS_CLEANER("clean_stop_words", StopWordsRemover.getInstance()),
-    NON_ALPHABETIC_CLEANER("clean_non_alphabetic", null),
-    LEMMATIZER("lemmatization", null),
-    STEMMER("stemming", null),
-    PREFIX_CLEANER("clean_prefixes", null);
+    NON_ALPHABETIC_CLEANER(1, "clean_non_alphabetic", null),
+    STOP_WORDS_CLEANER(2, "clean_stop_words", StopWordsRemover.getInstance()),
+    LEMMATIZER(3, "lemmatization", null),
+    STEMMER(4, "stemming", null),
+    PREFIX_CLEANER(5, "clean_prefixes", null);
 
     private final String xmlName;
     private final TextProcessor<Words> processor;
-    ProcessorType(String xmlName, TextProcessor<Words> processor) {
+    private int priority;
+
+    ProcessorType(int priority, String xmlName, TextProcessor<Words> processor) {
         this.xmlName = xmlName;
         this.processor = processor;
+        this.priority = priority;
     }
 
     public static Optional<ProcessorType> getFromXmlName(String xmlName) {
@@ -23,5 +26,21 @@ public enum ProcessorType {
 
     public TextProcessor<Words> getProcessor() {
         return processor;
+    }
+
+    public ProcessorType newPriority(int priority) {
+        this.priority = priority;
+        return this;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%d] -- %s -- Processor %s", priority, name(),
+                processor == null ? "unavailable." : "available.");
+
     }
 }

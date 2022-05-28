@@ -4,9 +4,10 @@ import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 public class StringProcessingUnit {
 
-    private final List<StringProcessor_> processors = MatcherSettings.getSettings().getAvailableStringProcessors();
+    private final List<StringProcessor_> processors = null; //MatcherSettings.getSettings().getAvailableStringProcessors();
 
     public ProcessedString process(String value) {
         Pieces processed = new Pieces(value);

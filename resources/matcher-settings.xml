@@ -32,26 +32,31 @@
 		<processor>
 			<type>clean_stop_words</type>
 			<active>TRUE</active>
+			<priority>default</priority>
 		</processor>
 
 		<processor>
 			<type>clean_non_alphabetic</type>
 			<active>TRUE</active>
+			<priority>default</priority>
 		</processor>
 
 		<processor>
 			<type>lemmatization</type>
 			<active>TRUE</active>
+			<priority>default</priority>
 		</processor>
 
 		<processor>
 			<type>stemming</type>
 			<active>TRUE</active>
+			<priority>default</priority>
 		</processor>
 
 		<processor>
 			<type>clean_prefixes</type>
 			<active>TRUE</active>
+			<priority>default</priority>
 		</processor>
 	</pre-processing>
 </settings>

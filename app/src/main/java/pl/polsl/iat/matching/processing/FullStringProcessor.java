@@ -1,5 +1,9 @@
 package pl.polsl.iat.matching.processing;
 
+import pl.polsl.iat.matching.util.MatcherSettings;
+
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class FullStringProcessor implements TextProcessor<String> {
@@ -8,9 +12,12 @@ public class FullStringProcessor implements TextProcessor<String> {
     private final static Pattern tokenizationPattern = Pattern.compile("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])|(_)");
     private final static Pattern nonAlphabeticPattern = Pattern.compile("\\W|\\d");
 
+    private final List<ProcessorType> allProcessors = MatcherSettings.getSettings().getAvailablePreProcessors();
+
     public static FullStringProcessor get() {
         return processor;
     }
+
     private FullStringProcessor() {
     }
 
@@ -32,6 +39,7 @@ public class FullStringProcessor implements TextProcessor<String> {
         Words words = new Words(tokenizationPattern.split(input));
         words.toLowerCase();
         words.remove(nonAlphabeticPattern);
+
 
         return words;
     }

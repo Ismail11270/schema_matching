@@ -20,17 +20,18 @@ public class StopWordsRemover implements TextProcessor<Words> {
 
     private static TextProcessor<Words> init() {
         try {
-            return (instance = new StopWordsRemover());
+            instance = new StopWordsRemover();
+            return instance;
         } catch (IOException e) {
             return null;
         }
     }
 
     private StopWordsRemover() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(MatcherSettings.STOP_WORDS_FILE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(MatcherSettings.STOP_WORDS_PATH))) {
             stopWords = reader.lines().collect(Collectors.toList());
         } catch (FileNotFoundException e) {
-            Logger.warn("Stop words file not found at location - ", MatcherSettings.STOP_WORDS_FILE);
+            Logger.warn("Stop words file not found at location - ", MatcherSettings.STOP_WORDS_PATH);
             throw e;
         } catch (IOException e) {
             Logger.warn("Error reading stop words file.. Details:\n\t", e.getMessage());

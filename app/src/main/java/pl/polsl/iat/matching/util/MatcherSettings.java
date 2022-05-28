@@ -5,13 +5,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
-import pl.polsl.iat.matching.core.util.Const;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
 import pl.polsl.iat.matching.processing.ProcessorType;
 import pl.polsl.iat.matching.processing.TextProcessor;
 import pl.polsl.iat.matching.processing.Words;
-import pl.polsl.iat.matching.processing.impl_.StringProcessor_;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -25,7 +23,9 @@ public class MatcherSettings {
         COMBINED
     }
 
-    public final static String STOP_WORDS_FILE = "resources\\stopwords.txt";
+    public final static String STOP_WORDS_FILE = "stopwords.txt";
+
+    public static String STOP_WORDS_PATH;
 
     private static final MatcherSettings settingsInstance;
 
@@ -38,7 +38,7 @@ public class MatcherSettings {
 
     private final Map<WordMatcher.Type, WordMatcher> availableWordMatchers = new HashMap<>();
 
-    private final Map<ProcessorType, TextProcessor<Words>> availablePreprocessors = new HashMap<>();
+    private final List<ProcessorType> availablePreprocessors = new ArrayList<>();
 
     private Integer numberOfThreads = 8;
 
@@ -60,8 +60,8 @@ public class MatcherSettings {
         return Map.copyOf(availableWordMatchers);
     }
 
-    public List<StringProcessor_> getAvailableStringProcessors() {
-        return Collections.emptyList();
+    public List<ProcessorType> getAvailablePreProcessors() {
+        return List.copyOf(availablePreprocessors);
     }
 
     public WordMatcher getMatcher(WordMatcher.Type type) {
@@ -78,6 +78,7 @@ public class MatcherSettings {
         settingsInstance = new MatcherSettings();
         try {
             File inputFile = new File(System.getenv(Const.SettingsXml.MATCHER_SETTINGS_VAR));
+            STOP_WORDS_PATH = inputFile.getParent() + "\\" + STOP_WORDS_FILE;
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
             doc.getDocumentElement().normalize();
 
@@ -90,7 +91,7 @@ public class MatcherSettings {
             NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS_TAG);
             settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
         } catch (NumberFormatException e) {
-            System.err.println("[ERROR] Invalid thread number configuration! Using default value of 8");
+            Logger.error("Invalid thread number configuration! Using default value of 8");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,7 +155,11 @@ public class MatcherSettings {
                     boolean enabled = Boolean.parseBoolean(
                             eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
                     if (enabled) {
-                        settingsInstance.availablePreprocessors.put(type, type.getProcessor());
+                        String priorityText = eElement.getElementsByTagName(Const.SettingsXml.PREPROCESSOR_PRIORITY_TAG).item(0).getTextContent();
+                        if(!priorityText.equals(Const.SettingsXml.PRIORITY_DEFAULT)) {
+                            type.newPriority(Integer.parseInt(priorityText));
+                        }
+                        settingsInstance.availablePreprocessors.add(type);
                     }
                 }
             } catch (IllegalArgumentException iae) {

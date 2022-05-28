@@ -14,4 +14,7 @@ public class Logger {
         System.err.printf("[WARN]\t%s%n", String.format(s, args));
     }
 
+    public static void test(Object o) {
+        System.out.printf("[TEST]\t%s%n", o);
+    }
 }
