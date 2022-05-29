@@ -1,7 +1,7 @@
-package pl.polsl.iat.matching.core.dictionary;
+package pl.polsl.iat.matching.dictionary;
 
-import pl.polsl.iat.matching.core.dictionary.impl.DictionaryFactory;
-import pl.polsl.iat.matching.core.dictionary.exception.DictionaryException;
+import pl.polsl.iat.matching.dictionary.impl.DictionaryFactory;
+import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
 
 public class Main {
     public static void main(String[] args) throws DictionaryException {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum ProcessorType {
-    NON_ALPHABETIC_CLEANER(1, "clean_non_alphabetic", null),
+    NON_ALPHABETIC_CLEANER(1, "clean_non_alphabetic", new NonAlphabeticCleaner()),
     STOP_WORDS_CLEANER(2, "clean_stop_words", StopWordsRemover.getInstance()),
     LEMMATIZER(3, "lemmatization", null),
     STEMMER(4, "stemming", null),
@@ -24,8 +24,8 @@ public enum ProcessorType {
         return Arrays.stream(values()).filter(t -> t.xmlName.equals(xmlName)).findFirst();
     }
 
-    public TextProcessor<Words> getProcessor() {
-        return processor;
+    public Optional<TextProcessor<Words>> getProcessor() {
+        return Optional.ofNullable(processor);
     }
 
     public ProcessorType newPriority(int priority) {
@@ -33,7 +33,7 @@ public enum ProcessorType {
         return this;
     }
 
-    public int getPriority() {
+    public Integer getPriority() {
         return priority;
     }
 

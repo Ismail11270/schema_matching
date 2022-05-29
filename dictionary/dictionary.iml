@@ -11,5 +11,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Maven: edu.mit:jwi:2.4.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/edu.mit.jwi_2.4.0_jdk.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: me.xdrop:fuzzywuzzy:1.4.0" level="project" />
   </component>
 </module>

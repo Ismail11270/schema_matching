@@ -1,0 +1,62 @@
+<?xml version = "1.0"?>
+<settings>
+
+	<threads>100</threads>
+	
+	<mode>EAGER</mode>
+
+	<extra-matching>
+		<component>include_children</component>
+		<component>metadata</component>
+		<component>combined</component>
+	</extra-matching>
+
+	<word-matchers>
+		<matcher>
+			<type>exact</type>
+			<active>TRUE</active>
+		</matcher>
+
+		<matcher>
+			<type>fuzzy</type>
+			<active>true</active>
+		</matcher>
+
+		<matcher>
+			<type>semantic</type>
+			<active>true</active>
+		</matcher>
+	</word-matchers>
+
+	<pre-processing>
+		<processor>
+			<type>clean_stop_words</type>
+			<active>TRUE</active>
+			<priority>default</priority>
+		</processor>
+
+		<processor>
+			<type>clean_non_alphabetic</type>
+			<active>TRUE</active>
+			<priority>100</priority>
+		</processor>
+
+		<processor>
+			<type>lemmatization</type>
+			<active>TRUE</active>
+			<priority>default</priority>
+		</processor>
+
+		<processor>
+			<type>stemming</type>
+			<active>TRUE</active>
+			<priority>default</priority>
+		</processor>
+
+		<processor>
+			<type>clean_prefixes</type>
+			<active>TRUE</active>
+			<priority>default</priority>
+		</processor>
+	</pre-processing>
+</settings>

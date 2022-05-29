@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class StopWordsRemover implements TextProcessor<Words> {
+class StopWordsRemover implements TextProcessor<Words> {
 
     private List<String> stopWords;
 
     private static TextProcessor<Words> instance;
-    public static TextProcessor<Words> getInstance() {
+    static TextProcessor<Words> getInstance() {
         return Optional.ofNullable(instance).orElseGet(StopWordsRemover::init);
     }
 

@@ -2,6 +2,7 @@ package pl.polsl.iat.matching.processing;
 
 import pl.polsl.iat.matching.util.MatcherSettings;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -10,7 +11,7 @@ public class FullStringProcessor implements TextProcessor<String> {
     private final static FullStringProcessor processor = new FullStringProcessor();
 
     private final static Pattern tokenizationPattern = Pattern.compile("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])|(_)");
-    private final static Pattern nonAlphabeticPattern = Pattern.compile("\\W|\\d");
+
 
     private final List<ProcessorType> allProcessors = MatcherSettings.getSettings().getAvailablePreProcessors();
 
@@ -35,10 +36,12 @@ public class FullStringProcessor implements TextProcessor<String> {
         *  7. prefix detection
         * */
 
-//        Pattern tokenizationPattern = Pattern.compile("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])|(_)");
-        Words words = new Words(tokenizationPattern.split(input));
-        words.toLowerCase();
-        words.remove(nonAlphabeticPattern);
+        //Always tokenize and adjust to lowercase
+        Words words = new Words(tokenizationPattern.split(input)).toLowerCase();
+        //Apply all processors
+        allProcessors.forEach(
+                type -> type.getProcessor().ifPresent(
+                    proc -> proc.process(words)));
 
 
         return words;

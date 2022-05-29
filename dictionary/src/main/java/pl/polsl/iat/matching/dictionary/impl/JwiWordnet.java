@@ -1,10 +1,10 @@
-package pl.polsl.iat.matching.core.dictionary.impl;
+package pl.polsl.iat.matching.dictionary.impl;
 
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;
 import edu.mit.jwi.item.*;
 import edu.mit.jwi.morph.WordnetStemmer;
-import pl.polsl.iat.matching.core.dictionary.exception.DictionaryException;
+import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
 
 import java.io.IOException;
 import java.net.URL;

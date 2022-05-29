@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.core.dictionary.exception;
+package pl.polsl.iat.matching.dictionary.exception;
 
 public class DictionaryException extends RuntimeException {
     public DictionaryException(Throwable t){

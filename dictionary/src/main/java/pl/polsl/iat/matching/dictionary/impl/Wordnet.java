@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.core.dictionary.impl;
+package pl.polsl.iat.matching.dictionary.impl;
 
 import java.util.List;
 

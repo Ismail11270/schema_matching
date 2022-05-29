@@ -18,16 +18,6 @@
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.3" level="project" />
     <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.sun.activation:jakarta.activation:1.2.2" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: edu.mit:jwi:2.4.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../model/../lib/edu.mit.jwi_2.4.0_jdk.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="Maven: me.xdrop:fuzzywuzzy:1.4.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter:5.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
@@ -36,5 +26,16 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-params:5.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.2" level="project" />
+    <orderEntry type="module" module-name="dictionary" />
+    <orderEntry type="module-library">
+      <library name="Maven: edu.mit:jwi:2.4.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../dictionary/../lib/edu.mit.jwi_2.4.0_jdk.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Maven: me.xdrop:fuzzywuzzy:1.4.0" level="project" />
   </component>
 </module>

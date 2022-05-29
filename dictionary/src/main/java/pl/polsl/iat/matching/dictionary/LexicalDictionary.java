@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.core.dictionary;
+package pl.polsl.iat.matching.dictionary;
 
 public interface LexicalDictionary {
     int getNumberOfSynonyms(String word);

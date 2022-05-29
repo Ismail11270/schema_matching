@@ -1,7 +1,7 @@
-package pl.polsl.iat.matching.core.dictionary.impl;
+package pl.polsl.iat.matching.dictionary.impl;
 
-import pl.polsl.iat.matching.core.dictionary.LexicalDictionary;
-import pl.polsl.iat.matching.core.dictionary.exception.DictionaryException;
+import pl.polsl.iat.matching.dictionary.LexicalDictionary;
+import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
 
 class LexicalDictionaryImpl implements LexicalDictionary {
 

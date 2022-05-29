@@ -1,8 +1,18 @@
 package pl.polsl.iat.matching.processing;
 
-public class NonAlphabeticCleaner implements TextProcessor<Words>{
+import java.util.regex.Pattern;
+
+class NonAlphabeticCleaner implements TextProcessor<Words>{
+
+    private final static Pattern nonAlphabeticPattern = Pattern.compile("\\W|\\d");
+
+    NonAlphabeticCleaner() {
+
+    }
+
     @Override
-    public Words process(Words input) {
-        return null;
+    public Words process(Words words) {
+        words.remove(nonAlphabeticPattern);
+        return words;
     }
 }
