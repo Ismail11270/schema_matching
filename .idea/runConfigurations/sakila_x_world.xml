@@ -9,6 +9,7 @@
     <module name="app" />
     <option name="PROGRAM_PARAMETERS" value="-s1 -f resources\schema1.properties -s2 -f resources\schema2.properties" />
     <option name="VM_PARAMETERS" value="-Xmx5G" />
+    <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
