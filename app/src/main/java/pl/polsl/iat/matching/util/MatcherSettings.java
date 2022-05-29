@@ -27,6 +27,8 @@ public class MatcherSettings {
 
     public static String STOP_WORDS_PATH;
 
+    public static String RESOURCES_DIR;
+
     private static final MatcherSettings settingsInstance;
 
     public static synchronized MatcherSettings getSettings() {
@@ -74,11 +76,13 @@ public class MatcherSettings {
 
     private final List<MatchingOptions> availableMatchingOptions = new ArrayList<>();
 
+
     static {
         settingsInstance = new MatcherSettings();
         try {
             File inputFile = new File(System.getenv(Const.SettingsXml.MATCHER_SETTINGS_VAR));
-            STOP_WORDS_PATH = inputFile.getParent() + "\\" + STOP_WORDS_FILE;
+            RESOURCES_DIR = inputFile.getParent();
+            STOP_WORDS_PATH = RESOURCES_DIR + "\\nlp\\" + STOP_WORDS_FILE;
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
             doc.getDocumentElement().normalize();
 
