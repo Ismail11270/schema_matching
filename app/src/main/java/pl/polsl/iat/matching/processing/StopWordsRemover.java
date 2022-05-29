@@ -43,6 +43,6 @@ class StopWordsRemover implements TextProcessor<Words> {
     public Words process(Words words) {
         return stopWords == null || stopWords.isEmpty()
                 ? words
-                : words.filter(word -> stopWords.contains(word.toString()));
+                : words.filter(word -> !stopWords.contains(word.toString()));
     }
 }

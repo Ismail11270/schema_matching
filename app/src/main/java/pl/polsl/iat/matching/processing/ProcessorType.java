@@ -8,7 +8,9 @@ public enum ProcessorType {
     STOP_WORDS_CLEANER(2, "clean_stop_words", StopWordsRemover.getInstance()),
     LEMMATIZER(3, "lemmatization", null),
     STEMMER(4, "stemming", null),
-    PREFIX_CLEANER(5, "clean_prefixes", null);
+    PREFIX_CLEANER(5, "clean_prefixes", null),
+    PART_OF_SPEECH_TAGGER(Integer.MAX_VALUE, "", new PartOfSpeechTagger());
+
 
     private final String xmlName;
     private final TextProcessor<Words> processor;

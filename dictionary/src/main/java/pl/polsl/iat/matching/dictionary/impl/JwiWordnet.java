@@ -16,7 +16,7 @@ public class JwiWordnet implements Wordnet {
     private final String wordnetLocation;
     private final IDictionary dictionary;
     private final WordnetStemmer stemmer;
-    private final String DEFAULT_LOCATION = "c:\\Program Files (x86)\\WordNet\\2.1\\dict\\";
+    private final String DEFAULT_LOCATION = "..\\resources\\nlp\\dict";
 
     //TODO IMPLEMENT LOADING TO RAM
     public JwiWordnet(String wordnetLocation, boolean loadToRam) throws DictionaryException {
@@ -26,6 +26,7 @@ public class JwiWordnet implements Wordnet {
             dictionary = new Dictionary(new URL("file", null, this.wordnetLocation));
             dictionary.open();
             stemmer = new WordnetStemmer(dictionary);
+
         } catch (IOException e) {
             throw new DictionaryException(e);
         }

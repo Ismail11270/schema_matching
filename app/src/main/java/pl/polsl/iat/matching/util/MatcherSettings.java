@@ -170,6 +170,7 @@ public class MatcherSettings {
                 System.err.println("Failed to read matcher configuration: \n" + iae.getMessage());
             }
         }
+        settingsInstance.availablePreprocessors.add(ProcessorType.PART_OF_SPEECH_TAGGER);
         settingsInstance.availablePreprocessors.sort(Comparator.comparingInt(ProcessorType::getPriority).reversed());
     }
 }

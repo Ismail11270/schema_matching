@@ -1,12 +1,15 @@
 package pl.polsl.iat.matching.processing;
 
 import pl.polsl.iat.matching.core.model.schema.Matchable;
+import pl.polsl.iat.matching.dictionary.nlp.POSTag;
 
 import java.util.regex.Pattern;
 
 public class Word implements Matchable {
 
     private String word;
+
+    private POSTag pos;
 
     public Word(String word) {
         this.word = word;
@@ -25,5 +28,13 @@ public class Word implements Matchable {
     public Word remove(Pattern pattern) {
         this.word = pattern.matcher(this.word).replaceAll("");
         return this;
+    }
+
+    public void setPos(POSTag pos) {
+        this.pos = pos;
+    }
+
+    public POSTag getPos() {
+        return pos;
     }
 }

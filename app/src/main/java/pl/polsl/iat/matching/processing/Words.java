@@ -1,10 +1,10 @@
 package pl.polsl.iat.matching.processing;
 
 import pl.polsl.iat.matching.core.model.schema.Matchable;
+import pl.polsl.iat.matching.dictionary.nlp.POSTag;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -20,6 +20,9 @@ public class Words implements Matchable {
         return words;
     }
 
+    public Word get(int i) {
+        return words.get(i);
+    }
 
     public int size() {
         return words.size();
@@ -28,6 +31,14 @@ public class Words implements Matchable {
     @Override
     public String toString() {
         return words.stream().map(Word::toString).collect(Collectors.joining(", "));
+    }
+
+    public String[] wordsAsStrings() {
+        return words.stream().map(Word::toString).toArray(String[]::new);
+    }
+
+    public POSTag[] posTags() {
+        return words.stream().map(Word::getPos).toArray(POSTag[]::new);
     }
 
     public Words toLowerCase() {

@@ -1,10 +1,9 @@
 package pl.polsl.iat.matching.processing;
 
+import org.w3c.dom.Text;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class FullStringProcessor implements TextProcessor<String> {
@@ -38,7 +37,10 @@ public class FullStringProcessor implements TextProcessor<String> {
 
         //Always tokenize and adjust to lowercase
         Words words = new Words(tokenizationPattern.split(input)).toLowerCase();
+        TextProcessor<Words> POSProcessor = ProcessorType.PART_OF_SPEECH_TAGGER.getProcessor().get();
         //Apply all processors
+//        allProcessors.add(0, POSProcessor);
+
         allProcessors.forEach(
                 type -> type.getProcessor().ifPresent(
                     proc -> proc.process(words)));
