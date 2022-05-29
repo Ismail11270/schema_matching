@@ -3,7 +3,7 @@
     <module name="app" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="pl.polsl.iat.matching.util.*" />
+        <option name="PATTERN" value="pl.polsl.iat.matcher.settings.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

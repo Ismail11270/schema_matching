@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
       <module fileurl="file://$PROJECT_DIR$/resources/resources.iml" filepath="$PROJECT_DIR$/resources/resources.iml" />
       <module fileurl="file://$PROJECT_DIR$/result/result.iml" filepath="$PROJECT_DIR$/result/result.iml" />
-      <module fileurl="file://$PROJECT_DIR$/settings/settings.iml" filepath="$PROJECT_DIR$/settings/settings.iml" />
     </modules>
   </component>
 </project>

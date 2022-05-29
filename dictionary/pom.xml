@@ -44,11 +44,6 @@
             <artifactId>opennlp-maxent</artifactId>
             <version>3.0.3</version>
         </dependency>
-        <dependency>
-            <groupId>pl.polsl.iat.matching</groupId>
-            <artifactId>settings</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
 </project>
