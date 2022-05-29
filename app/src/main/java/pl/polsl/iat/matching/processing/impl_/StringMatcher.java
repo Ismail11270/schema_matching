@@ -3,7 +3,6 @@ package pl.polsl.iat.matching.processing.impl_;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import pl.polsl.iat.matching.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
-import pl.polsl.iat.matching.dictionary.wordnet.DictionaryProvider;
 
 //TODO apply only matchers enabled in settings
 public class StringMatcher {

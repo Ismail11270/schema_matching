@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.dictionary.wordnet;
+package pl.polsl.iat.matching.dictionary.nlp;
 
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;
@@ -16,13 +16,10 @@ public class JwiWordnet implements Wordnet {
     private final String wordnetLocation;
     private final IDictionary dictionary;
     private final WordnetStemmer stemmer;
-    private final String DEFAULT_LOCATION = "..\\resources\\nlp\\dict";
 
-    //TODO IMPLEMENT LOADING TO RAM
-    public JwiWordnet(String wordnetLocation, boolean loadToRam) throws DictionaryException {
+    JwiWordnet(String wordnetLocation) throws DictionaryException {
         try {
-            this.wordnetLocation = wordnetLocation == null || wordnetLocation.isBlank() ?
-                    DEFAULT_LOCATION : wordnetLocation;
+            this.wordnetLocation = wordnetLocation;
             dictionary = new Dictionary(new URL("file", null, this.wordnetLocation));
             dictionary.open();
             stemmer = new WordnetStemmer(dictionary);
@@ -71,5 +68,10 @@ public class JwiWordnet implements Wordnet {
     @Override
     public List<String> getAntonyms(String word) {
         return null;
+    }
+
+    @Override
+    public WordnetStemmer getStemmer() {
+        return stemmer;
     }
 }

@@ -1,4 +1,6 @@
-package pl.polsl.iat.matching.dictionary.wordnet;
+package pl.polsl.iat.matching.dictionary.nlp;
+
+import edu.mit.jwi.morph.WordnetStemmer;
 
 import java.util.List;
 
@@ -16,5 +18,7 @@ public interface Wordnet {
     List<String> getRelatedWords(String word);
 
     List<String> getAntonyms(String word);
+
+    WordnetStemmer getStemmer();
 
 }

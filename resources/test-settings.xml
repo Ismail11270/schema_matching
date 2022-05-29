@@ -5,6 +5,8 @@
 	
 	<mode>EAGER</mode>
 
+	<load-wordnet-to-ram>false</load-wordnet-to-ram>
+
 	<extra-matching>
 		<component>include_children</component>
 		<component>metadata</component>

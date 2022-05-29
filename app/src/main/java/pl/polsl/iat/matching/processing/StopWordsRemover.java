@@ -1,17 +1,11 @@
 package pl.polsl.iat.matching.processing;
 
-import pl.polsl.iat.matching.util.Logger;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-class StopWordsRemover implements TextProcessor<Words> {
-
-    private List<String> stopWords;
+class StopWordsRemover extends AbstractWordsRemover {
 
     private static TextProcessor<Words> instance;
     static TextProcessor<Words> getInstance() {
@@ -28,21 +22,13 @@ class StopWordsRemover implements TextProcessor<Words> {
     }
 
     private StopWordsRemover() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(MatcherSettings.STOP_WORDS_PATH))) {
-            stopWords = reader.lines().collect(Collectors.toList());
-        } catch (FileNotFoundException e) {
-            Logger.warn("Stop words file not found at location - ", MatcherSettings.STOP_WORDS_PATH);
-            throw e;
-        } catch (IOException e) {
-            Logger.warn("Error reading stop words file.. Details:\n\t", e.getMessage());
-            throw e;
-        }
+        super(MatcherSettings.STOP_WORDS_FILE_PATH);
     }
 
     @Override
     public Words process(Words words) {
-        return stopWords == null || stopWords.isEmpty()
+        return getWordsToRemove() == null || getWordsToRemove().isEmpty()
                 ? words
-                : words.filter(word -> !stopWords.contains(word.toString()));
+                : words.filter(word -> !getWordsToRemove().contains(word.toString()));
     }
 }

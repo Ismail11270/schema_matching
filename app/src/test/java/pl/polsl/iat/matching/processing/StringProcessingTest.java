@@ -1,6 +1,9 @@
 package pl.polsl.iat.matching.processing;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
+import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -10,11 +13,15 @@ public class StringProcessingTest {
 
     private final TextProcessor<String> mainProc = FullStringProcessor.get();
 
+    @BeforeAll
+    public static void before() {
+        NLPTools.init(false);
+    }
 
     @Test
     public void testFullStringProcessing() {
         Map<String, Words> processingMap = Map.of(
-                "FirstName", new Words("first", "name"),
+                "Sexy", new Words("first", "name"),
                 "testing_result", new Words(""),
                 "test_outcome", new Words(""),
                 "trial_result", new Words(""),
@@ -24,6 +31,7 @@ public class StringProcessingTest {
         );
 
         processingMap.keySet().stream().map(mainProc::process).forEach(System.out::println);
+
     }
 
 

@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.dictionary.wordnet;
+package pl.polsl.iat.matching.dictionary.nlp;
 
 import pl.polsl.iat.matching.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.dictionary.exception.DictionaryException;

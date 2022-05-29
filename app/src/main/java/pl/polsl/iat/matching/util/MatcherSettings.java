@@ -8,8 +8,6 @@ import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
 import pl.polsl.iat.matching.processing.ProcessorType;
-import pl.polsl.iat.matching.processing.TextProcessor;
-import pl.polsl.iat.matching.processing.Words;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -23,10 +21,18 @@ public class MatcherSettings {
         COMBINED
     }
 
-    public final static String STOP_WORDS_FILE = "stopwords.txt";
 
-    public static String STOP_WORDS_PATH;
+    public static final String STOP_WORDS_FILE_VAR = "STOP_WORDS_FILE";
+    public static final String PREFIXES_FILE_VAR = "PREFIXES_FILE";
 
+    public final static String DEFAULT_STOP_WORDS_FILE_NAME = "stopwords.txt";
+    public static final String DEFAULT_PREFIXES_FILE_NAME = "prefixes.txt";
+
+    public final static String STOP_WORDS_FILE_NAME = Optional.ofNullable(System.getenv(STOP_WORDS_FILE_VAR)).orElse(DEFAULT_STOP_WORDS_FILE_NAME);
+    public static final String PREFIXES_FILE_NAME = Optional.ofNullable(System.getenv(PREFIXES_FILE_VAR)).orElse(DEFAULT_PREFIXES_FILE_NAME);
+
+    public static String STOP_WORDS_FILE_PATH;
+    public static String PREFIXES_FILE_PATH;
     public static String RESOURCES_DIR;
 
     private static final MatcherSettings settingsInstance;
@@ -76,6 +82,10 @@ public class MatcherSettings {
         return numberOfThreads;
     }
 
+    public boolean isLoadToRam() {
+        return loadToRam;
+    }
+
     private final List<MatchingOptions> availableMatchingOptions = new ArrayList<>();
 
 
@@ -84,7 +94,8 @@ public class MatcherSettings {
         try {
             File inputFile = new File(System.getenv(Const.SettingsXml.MATCHER_SETTINGS_VAR));
             RESOURCES_DIR = inputFile.getParent();
-            STOP_WORDS_PATH = RESOURCES_DIR + "\\nlp\\" + STOP_WORDS_FILE;
+            STOP_WORDS_FILE_PATH = RESOURCES_DIR + "\\nlp\\" + STOP_WORDS_FILE_NAME;
+            PREFIXES_FILE_PATH = RESOURCES_DIR + "\\nlp\\" + PREFIXES_FILE_NAME;
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
             doc.getDocumentElement().normalize();
 
@@ -97,7 +108,7 @@ public class MatcherSettings {
             NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS_TAG);
             settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
             NodeList loadToRamTag = doc.getElementsByTagName(Const.SettingsXml.LOAD_TO_RAM_TAG);
-            settingsInstance.loadToRam = Boolean.parseBoolean(threadsTag.item(0).getTextContent());
+            settingsInstance.loadToRam = Boolean.parseBoolean(loadToRamTag.item(0).getTextContent());
         } catch (NumberFormatException e) {
             Logger.error("Invalid thread number configuration! Using default value of 8");
         } catch (Exception e) {

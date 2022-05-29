@@ -14,6 +14,7 @@
     <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
     <envs>
       <env name="MATCHER_SETTINGS_FILE" value="resources\test-settings.xml" />
+      <env name="WORDNET_TO_RAM" value="false" />
     </envs>
     <method v="2">
       <option name="Make" enabled="true" />

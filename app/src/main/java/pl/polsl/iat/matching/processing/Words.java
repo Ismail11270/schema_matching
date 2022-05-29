@@ -28,6 +28,10 @@ public class Words implements Matchable {
         return words.size();
     }
 
+    public void remove(int index) {
+        words.remove(index);
+    }
+
     @Override
     public String toString() {
         return words.stream().map(Word::toString).collect(Collectors.joining(", "));

@@ -2,71 +2,61 @@ package pl.polsl.iat.matching;
 
 import pl.polsl.iat.matching.core.model.result.MatchingResult;
 import pl.polsl.iat.matching.core.model.result.ResultFactory;
-import pl.polsl.iat.matching.core.model.schema.Column;
 import pl.polsl.iat.matching.core.model.schema.Schema;
-import pl.polsl.iat.matching.core.model.schema.Table;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.ParametersResolver;
+import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
 import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
 import pl.polsl.iat.matching.util.MatcherSettings;
+
+import java.util.Optional;
 
 public class App {
 
     public static void main(String[] args) {
+        //Init data and instruments
         ParametersResolver parametersResolver = new ParametersResolver(args);
 
+        NLPTools.init(isLoadToRamSet());
+        MatcherSettings settings = MatcherSettings.getSettings();
+
+        //Schema loading start
         long startTime = System.currentTimeMillis();
         Schema[] schemas = parametersResolver.getConnectionProperties()
                 .parallelStream()
-                .map(p -> new SchemaExtractor(p).load(MatcherSettings.getSettings().getLoaderMode()))
+                .map(p -> new SchemaExtractor(p).load(settings.getLoaderMode()))
                 .toArray(Schema[]::new);
-
-        System.out.println("Schema loading time - " + (System.currentTimeMillis() - startTime));
-
         MatchingResult matchingResult =
                 new ResultFactory().createMatchingResult(schemas);
+        long schemaLoadingTime = System.currentTimeMillis() - startTime;
+        //Schema loading end
 
-
-//        ThreadPoolExecutor executor =  new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(),
-//                Runtime.getRuntime().availableProcessors(),
-//                0L, TimeUnit.MILLISECONDS,
-//                new LinkedBlockingQueue<Runnable>());
-//        TaskFactory tasks = new TaskFactory(matchingResult);
-        //run executor
-
-        //TODO ADD SUPPORT FOR N NUMBER OF SCHEMAS
+        //Matching start
+        startTime = System.currentTimeMillis();
 
         ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).run();
 
-//
-        Schema schema1 = schemas[0];
-        Schema schema2 = schemas[1];
-//
-//
-//        Table table1 = schemas[0].getComponents().get(0);
-//        Table table2 = schemas[0].getComponents().get(1);
-//
-//        Column column1 = schemas[0].getComponents().get(0).getComponents().get(0);
-//        Column column2 = schemas[0].getComponents().get(0).getComponents().get(1);
+        long matchingTime = System.currentTimeMillis() - startTime;
+        //Matching done
 
-
-        System.out.println("Matching time - " + (System.currentTimeMillis() - startTime));
-
+        //Saving result
+        startTime = System.currentTimeMillis();
         matchingResult.save("result\\actual-result.xml");
+        long resultProcessingTime = System.currentTimeMillis() - startTime;
+        //Saving result done
 
-        System.out.println("Total time - " + (System.currentTimeMillis() - startTime));
+        System.out.println("Schema loading time - " + schemaLoadingTime);
+        System.out.println("Matching time - " + matchingTime);
+        System.out.println("Result processing time - " + resultProcessingTime);
+        System.out.println("Total time - " + (schemaLoadingTime + matchingTime + resultProcessingTime) );
 
     }
 
-    static class Matcher {
-        private String text;
-
-        public Matcher(String textToPrint) {
-            text = textToPrint;
-        }
-
-        public void doMatch(String s) {
-            System.out.println(text);
+    private static boolean isLoadToRamSet() {
+        try {
+            return Boolean.parseBoolean(Optional.ofNullable(System.getenv("WORDNET_TO_RAM")).orElse("false"));
+        } catch(Exception e) {
+            return false;
         }
     }
 }

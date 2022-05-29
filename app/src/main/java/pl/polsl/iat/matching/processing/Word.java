@@ -3,6 +3,7 @@ package pl.polsl.iat.matching.processing;
 import pl.polsl.iat.matching.core.model.schema.Matchable;
 import pl.polsl.iat.matching.dictionary.nlp.POSTag;
 
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 public class Word implements Matchable {
@@ -36,5 +37,13 @@ public class Word implements Matchable {
 
     public POSTag getPos() {
         return pos;
+    }
+
+    public void updateWord(String newWord) {
+        this.word = newWord;
+    }
+
+    public void updateWord(Function<String,String> newWordFunction) {
+        word = newWordFunction.apply(word);
     }
 }

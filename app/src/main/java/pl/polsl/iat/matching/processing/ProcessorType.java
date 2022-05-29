@@ -6,9 +6,9 @@ import java.util.Optional;
 public enum ProcessorType {
     NON_ALPHABETIC_CLEANER(1, "clean_non_alphabetic", new NonAlphabeticCleaner()),
     STOP_WORDS_CLEANER(2, "clean_stop_words", StopWordsRemover.getInstance()),
-    LEMMATIZER(3, "lemmatization", null),
-    STEMMER(4, "stemming", null),
-    PREFIX_CLEANER(5, "clean_prefixes", null),
+    LEMMATIZER(3, "lemmatization", new Lemmatizer()),
+    STEMMER(4, "stemming", new Stemmer()),
+    PREFIX_CLEANER(5, "clean_prefixes", CommonPrefixRemover.getInstance()),
     PART_OF_SPEECH_TAGGER(Integer.MAX_VALUE, "", new PartOfSpeechTagger());
 
 
