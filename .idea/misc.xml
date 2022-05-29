@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/app/pom.xml" />
         <option value="$PROJECT_DIR$/model/pom.xml" />
+        <option value="$PROJECT_DIR$/dictionary/pom.xml" />
       </list>
     </option>
   </component>

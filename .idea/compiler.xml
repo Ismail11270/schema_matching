@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="app" />
         <module name="model" />
+        <module name="dictionary" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="app" target="16" />
+      <module name="dictionary" target="16" />
       <module name="model" target="16" />
     </bytecodeTargetLevel>
   </component>
