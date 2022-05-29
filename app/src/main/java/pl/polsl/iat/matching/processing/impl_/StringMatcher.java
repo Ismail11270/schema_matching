@@ -3,7 +3,7 @@ package pl.polsl.iat.matching.processing.impl_;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import pl.polsl.iat.matching.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
-import pl.polsl.iat.matching.dictionary.impl.DictionaryFactory;
+import pl.polsl.iat.matching.dictionary.wordnet.DictionaryProvider;
 
 //TODO apply only matchers enabled in settings
 public class StringMatcher {
@@ -12,7 +12,7 @@ public class StringMatcher {
     private LexicalDictionary dictionary;
 
     public StringMatcher() throws DictionaryException {
-        dictionary = new DictionaryFactory().getLexicalDictionary(null, false);
+        dictionary = null;//new DictionaryProvider().getLexicalDictionary(null, false);
     }
 
     public int compare(StringPair pair) {

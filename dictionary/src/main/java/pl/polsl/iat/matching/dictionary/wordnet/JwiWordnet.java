@@ -1,4 +1,4 @@
-package pl.polsl.iat.matching.dictionary.impl;
+package pl.polsl.iat.matching.dictionary.wordnet;
 
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;

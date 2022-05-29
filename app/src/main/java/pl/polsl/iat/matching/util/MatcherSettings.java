@@ -44,6 +44,8 @@ public class MatcherSettings {
 
     private Integer numberOfThreads = 8;
 
+    private boolean loadToRam;
+
     /**
      * Considering to drop the idea of lazy loading
      */
@@ -94,6 +96,8 @@ public class MatcherSettings {
             settingsInstance.loaderMode = SchemaExtractor.Mode.valueOf(modeTag.item(0).getTextContent().toUpperCase());
             NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS_TAG);
             settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
+            NodeList loadToRamTag = doc.getElementsByTagName(Const.SettingsXml.LOAD_TO_RAM_TAG);
+            settingsInstance.loadToRam = Boolean.parseBoolean(threadsTag.item(0).getTextContent());
         } catch (NumberFormatException e) {
             Logger.error("Invalid thread number configuration! Using default value of 8");
         } catch (Exception e) {

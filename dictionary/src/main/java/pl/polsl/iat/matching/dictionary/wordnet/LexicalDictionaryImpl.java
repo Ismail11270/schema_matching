@@ -1,14 +1,14 @@
-package pl.polsl.iat.matching.dictionary.impl;
+package pl.polsl.iat.matching.dictionary.wordnet;
 
 import pl.polsl.iat.matching.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
 
 class LexicalDictionaryImpl implements LexicalDictionary {
 
-    private Wordnet wordnet;
+    private final Wordnet wordnet;
 
-    LexicalDictionaryImpl(String dictionaryLocation, boolean loadToRam) throws DictionaryException {
-        wordnet = new JwiWordnet(dictionaryLocation, loadToRam);
+    LexicalDictionaryImpl(Wordnet wordnet) throws DictionaryException {
+        this.wordnet = wordnet;
     }
 
     @Override
