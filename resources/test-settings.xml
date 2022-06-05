@@ -45,13 +45,13 @@
 
 		<processor>
 			<type>lemmatization</type>
-			<active>TRUE</active>
+			<active>FALSE</active>
 			<priority>default</priority>
 		</processor>
 
 		<processor>
 			<type>stemming</type>
-			<active>TRUE</active>
+			<active>FALSE</active>
 			<priority>default</priority>
 		</processor>
 

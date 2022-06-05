@@ -5,6 +5,7 @@ import pl.polsl.iat.matching.core.model.result.ResultFactory;
 import pl.polsl.iat.matching.core.model.schema.Schema;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.core.util.ParametersResolver;
+import pl.polsl.iat.matching.dictionary.exception.NlpMildException;
 import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
 import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
 import pl.polsl.iat.matching.util.MatcherSettings;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NlpMildException {
         //Init data and instruments
         ParametersResolver parametersResolver = new ParametersResolver(args);
 

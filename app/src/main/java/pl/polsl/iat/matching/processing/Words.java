@@ -2,12 +2,15 @@ package pl.polsl.iat.matching.processing;
 
 import pl.polsl.iat.matching.core.model.schema.Matchable;
 import pl.polsl.iat.matching.dictionary.nlp.POSTag;
+import pl.polsl.iat.matching.util.Logger;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Words implements Matchable {
     private List<Word> words;
@@ -42,7 +45,8 @@ public class Words implements Matchable {
     }
 
     public POSTag[] posTags() {
-        return words.stream().map(Word::getPos).toArray(POSTag[]::new);
+
+        return words.stream().map(Word::getPos).filter(Objects::nonNull).toArray(POSTag[]::new);
     }
 
     public Words toLowerCase() {
@@ -62,4 +66,11 @@ public class Words implements Matchable {
         return this;
     }
 
+    public void update(String[] words) {
+        if(words.length != this.words.size()) {
+            Logger.warn("Words were not update from '%s' to '%s'", this.toString(), Arrays.toString(words));
+            return;
+        }
+        IntStream.range(0, words.length).forEach(i -> this.words.get(i).updateWord(words[i]));
+    }
 }

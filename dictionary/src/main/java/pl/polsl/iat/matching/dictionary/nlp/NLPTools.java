@@ -2,6 +2,7 @@ package pl.polsl.iat.matching.dictionary.nlp;
 
 import pl.polsl.iat.matching.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
+import pl.polsl.iat.matching.dictionary.exception.NlpMildException;
 
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public class NLPTools {
     private LexicalDictionary dictionary;
     private NLPStemmer stemmer;
     private NLPLemmatizer lemmatizer;
-
+    private POSTagger posTagger;
     /**
      * Needs to be initialzied
      * @see NLPTools::init
@@ -28,7 +29,7 @@ public class NLPTools {
     private NLPTools() {
     }
 
-    public static NLPTools init(boolean loadToRam) {
+    public static NLPTools init(boolean loadToRam) throws NlpMildException {
         if (instance.initialized) {
             return instance;
         }
@@ -39,6 +40,7 @@ public class NLPTools {
         instance.dictionary = new LexicalDictionaryImpl(instance.wordnet);
         instance.stemmer = new NLPStemmer(instance.wordnet.getStemmer());
         instance.lemmatizer = new NLPLemmatizer();
+        instance.posTagger = new POSTagger();
         instance.initialized = true;
         return instance;
     }
@@ -71,4 +73,12 @@ public class NLPTools {
         }
         throw new DictionaryException("NLP tools were not initialized! Use NLPTools::init to initialize.");
     }
+
+    public static POSTagger getPOSTagger() {
+        if (instance.initialized) {
+            return instance.posTagger;
+        }
+        throw new DictionaryException("NLP tools were not initialized! Use NLPTools::init to initialize.");
+    }
+
 }

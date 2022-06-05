@@ -2,6 +2,7 @@ package pl.polsl.iat.matching.processing;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pl.polsl.iat.matching.dictionary.exception.NlpMildException;
 import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
@@ -14,7 +15,7 @@ public class StringProcessingTest {
     private final TextProcessor<String> mainProc = FullStringProcessor.get();
 
     @BeforeAll
-    public static void before() {
+    public static void before() throws NlpMildException {
         NLPTools.init(false);
     }
 
@@ -22,20 +23,27 @@ public class StringProcessingTest {
     public void testFullStringProcessing() {
         Map<String, Words> processingMap = Map.of(
                 "Sexy", new Words("first", "name"),
-                "testing_result", new Words(""),
-                "test_outcome", new Words(""),
-                "trial_result", new Words(""),
-                "trailOutcome", new Words(""),
-                "1test_result", new Words(""),
-                "qq_test__result", new Words("")
+//                "testing_result", new Words(""),
+//                "test_outcome", new Words(""),
+//                "trial_result", new Words(""),
+//                "trailOutcome", new Words(""),
+//                "1test_result", new Words(""),
+                "qq_testing__result1_in", new Words("")
         );
 
         processingMap.keySet().stream().map(mainProc::process).forEach(System.out::println);
+    }
 
+//    @Test
+    public void testLemmatizer() {
+        String testString = "perfectly";
+        Words words = ProcessorType.PART_OF_SPEECH_TAGGER.getProcessor().get().process(new Words(testString));
+        words = ProcessorType.LEMMATIZER.getProcessor().get().process(words);
+        System.out.println(words);
     }
 
 
-    @Test
+//    @Test
     public void testRegex() {
         Pattern tokenizationPattern = Pattern.compile("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])|(_)");
         Pattern nonAlphabeticPattern = Pattern.compile("\\W|\\d");
