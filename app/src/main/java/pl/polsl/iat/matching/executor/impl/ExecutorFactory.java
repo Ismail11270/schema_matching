@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ExecutorFactory {
     public static SchemaMatcherRunner newSchemaMatchingExecutor(MatchingResult mainResult, Schema... schemas) {
-        return new SchemaMatcherRunner(List.of(schemas), mainResult);
+        return new SchemaMatcherRunner(schemas[0], schemas[1], mainResult);
     }
 
 
