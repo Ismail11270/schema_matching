@@ -16,6 +16,7 @@ public class Const {
         public static final String THREADS_TAG = "threads";
         public static final String PREPROCESSOR_PRIORITY_TAG = "priority";
         public static final String LOAD_TO_RAM_TAG = "load-wordnet-to-ram";
+        public static final String LOG_LEVEL_TAG = "log-level";
         public static final String PRIORITY_DEFAULT = "default";
     }
 

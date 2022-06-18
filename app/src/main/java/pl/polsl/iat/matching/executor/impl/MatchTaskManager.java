@@ -29,7 +29,7 @@ public class MatchTaskManager {
     }
 
     public List<Callable<Boolean>> getTasksForSchemaPair(Schema first, Schema second, MatchingComponent rMatchingComponent) {
-        Logger.info("[SCHEMA] Started matching schemas [%s] and [%s]", first.getName(), second.getName());
+        Logger.schema("Started matching schemas [%s] and [%s]", first.getName(), second.getName());
         int nFirst = first.getComponents().size();
         int nSecond = second.getComponents().size();
         List<Callable<Boolean>> subTasks = new ArrayList<>();
@@ -41,13 +41,13 @@ public class MatchTaskManager {
         }
         rMatchingComponent.setMetadataScore(Utils.parseResult(metadataMatcher.doMatch(first,second)));
         rMatchingComponent.setMatchScore(1);
-        Logger.info("[SCHEMA] Finished matching schemas [%s] and [%s]", first.getName(), second.getName());
+        Logger.schema("Finished matching schemas [%s] and [%s]", first.getName(), second.getName());
         return subTasks;
     }
 
     private Callable<Boolean> getTaskTable(Table first, Table second, MatchingComponent rMatchingComponent) {
         return () -> {
-            Logger.info("\t[TABLE] %s Started matching tables [%s] and [%s]", Thread.currentThread().getName(), first.getName(), second.getName());
+            Logger.table("Started matching tables [%s] and [%s]", first.getName(), second.getName());
             List<Boolean> columnMatchResults = new ArrayList<>();
             int nFirst = first.getComponents().size();
             int nSecond = second.getComponents().size();
@@ -61,19 +61,19 @@ public class MatchTaskManager {
             rMatchingComponent.setMatchScore(1);
 //            rMatchingComponent.setMatch(new TableMatcher(first,second,rMatchingComponent).doMatch());
 //            rMatchingComponent.setMatch(first.getName().equals(second.getName()) ? 100 : 0);
-            Logger.info("\t[TABLE] %s Finished matching tables [%s] and [%s]", Thread.currentThread().getName(), first.getName(), second.getName());
+            Logger.table("%s Finished matching tables [%s] and [%s]", Thread.currentThread().getName(), first.getName(), second.getName());
             return true;
         };
     }
 
     private Callable<Boolean> getTaskColumn(Column first, Column second, MatchingComponent rMatchingComponent) {
         return () -> {
-            Logger.info("\t\t[COLUMN] Started matching columns [%s] and [%s]", first.getName(), second.getName());
+            Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
             rMatchingComponent.setMatchScore(1);
             rMatchingComponent.setMetadataScore(Utils.parseResult(metadataMatcher.doMatch(first,second)));
 ////            rMatchingComponent.setMatch(first.getName().equals(second.getName()) ? 100 : 0);
 ////            rMatchingComponent.setMatch(new ColumnMatcher(first, second, rMatchingComponent).doMatch());
-            Logger.info("\t\t[COLUMN] Finished matching columns [%s] and [%s]", first.getName(), second.getName());
+            Logger.column("Finished matching columns [%s] and [%s]", first.getName(), second.getName());
             return true;
         };
     }

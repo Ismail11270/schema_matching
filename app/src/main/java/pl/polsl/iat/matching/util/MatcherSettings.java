@@ -50,6 +50,8 @@ public class MatcherSettings {
 
     private Integer numberOfThreads = 8;
 
+    private Logger.LogLevel logLevel = Logger.LogLevel.TABLE;
+
     private boolean loadToRam;
 
     /**
@@ -82,6 +84,10 @@ public class MatcherSettings {
         return numberOfThreads;
     }
 
+    public Logger.LogLevel getLogLevel() {
+        return logLevel;
+    }
+
     public boolean isLoadToRam() {
         return loadToRam;
     }
@@ -109,6 +115,8 @@ public class MatcherSettings {
             settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
             NodeList loadToRamTag = doc.getElementsByTagName(Const.SettingsXml.LOAD_TO_RAM_TAG);
             settingsInstance.loadToRam = Boolean.parseBoolean(loadToRamTag.item(0).getTextContent());
+            NodeList logLevelTag = doc.getElementsByTagName(Const.SettingsXml.LOG_LEVEL_TAG);
+            settingsInstance.logLevel = Logger.LogLevel.valueOf((logLevelTag.item(0).getTextContent()).toUpperCase());
         } catch (NumberFormatException e) {
             Logger.error("Invalid thread number configuration! Using default value of 8");
         } catch (Exception e) {
