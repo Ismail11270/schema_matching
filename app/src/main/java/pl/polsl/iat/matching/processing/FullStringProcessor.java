@@ -40,10 +40,12 @@ public class FullStringProcessor implements TextProcessor<String> {
         TextProcessor<Words> POSProcessor = ProcessorType.PART_OF_SPEECH_TAGGER.getProcessor().get();
         //Apply all processors
 //        allProcessors.add(0, POSProcessor);
-
-        allProcessors.forEach(
-                type -> type.getProcessor().ifPresent(
-                    proc -> proc.process(words)));
+        for (ProcessorType processor : allProcessors) {
+            processor.getProcessor().get().process(words);
+        }
+//        allProcessors.forEach(
+//                type -> type.getProcessor().ifPresent(
+//                    proc -> proc.process(words)));
 
 
         return words;

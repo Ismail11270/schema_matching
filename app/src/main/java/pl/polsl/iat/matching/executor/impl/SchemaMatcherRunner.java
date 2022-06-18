@@ -6,6 +6,7 @@ import pl.polsl.iat.matching.core.model.schema.Schema;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class SchemaMatcherRunner {
 
@@ -29,13 +30,15 @@ public class SchemaMatcherRunner {
             MatchTaskManager taskManager = MatchTaskManager.getInstance();
             List<Future<Boolean>> futures = new ArrayList<>(service.invokeAll(
                     taskManager.getTasksForSchemaPair(schemaLeft, schemaRight,
-                            matchingResult.getComponents().get(0).getMatchingComponent().get(1))));
+                            matchingResult.getComponents().get(0).getMatchingComponent().get(0))));
 
+//            service.awaitTermination(20, TimeUnit.SECONDS);
             //TODO detect best matches
+            service.shutdown();
         } catch (Throwable t) {
             System.out.println(t.getMessage());
         } finally {
-            service.shutdown();
+            service.shutdownNow();
         }
     }
 }

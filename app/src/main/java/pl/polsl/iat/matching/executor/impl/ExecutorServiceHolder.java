@@ -1,5 +1,8 @@
 package pl.polsl.iat.matching.executor.impl;
 
+import pl.polsl.iat.matching.util.MatcherSettings;
+
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class ExecutorServiceHolder{
@@ -19,7 +22,10 @@ public class ExecutorServiceHolder{
 
     private void initExecutor() {
         if(availableExecutor == null || availableExecutor.isShutdown() || availableExecutor.isTerminated()) {
-            availableExecutor = new ComponentMatchingExecutor(Runtime.getRuntime().availableProcessors());
+            availableExecutor = new ComponentMatchingExecutor(
+                    Objects.requireNonNullElse(
+                            MatcherSettings.getSettings().getNumberOfThreads(),
+                            Runtime.getRuntime().availableProcessors()));
         }
     }
 

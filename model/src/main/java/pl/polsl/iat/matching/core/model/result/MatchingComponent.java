@@ -182,7 +182,8 @@ public class MatchingComponent {
         return metadataScore;
     }
 
-    public void setMetadataScore(BigDecimal metadataScore) {
+    public boolean setMetadataScore(BigDecimal metadataScore) {
         this.metadataScore = metadataScore;
+        return true;
     }
 }

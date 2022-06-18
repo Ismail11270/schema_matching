@@ -73,4 +73,15 @@ public class Words implements Matchable {
         }
         IntStream.range(0, words.length).forEach(i -> this.words.get(i).updateWord(words[i]));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if(other == null) {
+            return false;
+        }
+        if(other instanceof Words) {
+            return this.words.equals(((Words) other).words);
+        }
+        return false;
+    }
 }

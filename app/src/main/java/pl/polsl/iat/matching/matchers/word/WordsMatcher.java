@@ -18,6 +18,6 @@ public class WordsMatcher implements Matcher<Words> {
     public PartialResult doMatch(Words left, Words right) {
 //        words
         //TODO Apply all word matchers
-        return null;
+        return new PartialResult(left.equals(right) ? 100f : 0f);
     }
 }

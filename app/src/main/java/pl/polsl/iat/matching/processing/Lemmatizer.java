@@ -16,7 +16,7 @@ class Lemmatizer implements TextProcessor<Words> {
 
     @Override
     public Words process(Words words) {
-        System.out.println(Arrays.toString(words.posTags()));
+//        System.out.println(Arrays.toString(words.posTags()));
         if(words.posTags().length == 0) {
             Logger.warn("Part of speech tagging is required prior to lemmatization.");
             return words;

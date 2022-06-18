@@ -9,7 +9,7 @@ public enum ProcessorType {
     LEMMATIZER(3, "lemmatization", new Lemmatizer()),
     STEMMER(4, "stemming", new Stemmer()),
     PREFIX_CLEANER(5, "clean_prefixes", CommonPrefixRemover.getInstance()),
-    PART_OF_SPEECH_TAGGER(Integer.MAX_VALUE, "", new PartOfSpeechTagger());
+    PART_OF_SPEECH_TAGGER(Integer.MAX_VALUE, "part_of_speech", new PartOfSpeechTagger());
 
 
     private final String xmlName;

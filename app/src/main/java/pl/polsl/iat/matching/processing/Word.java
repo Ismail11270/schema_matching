@@ -3,6 +3,7 @@ package pl.polsl.iat.matching.processing;
 import pl.polsl.iat.matching.core.model.schema.Matchable;
 import pl.polsl.iat.matching.dictionary.nlp.POSTag;
 
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
@@ -45,5 +46,17 @@ public class Word implements Matchable {
 
     public void updateWord(Function<String,String> newWordFunction) {
         word = newWordFunction.apply(word);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o != null && o instanceof Word)
+            return word.equals(((Word) o).word);
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(word);
     }
 }

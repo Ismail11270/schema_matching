@@ -12,4 +12,11 @@ public class PartialResult {
     public Float getResult() {
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "PartialResult{" +
+                "result=" + result +
+                '}';
+    }
 }

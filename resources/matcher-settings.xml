@@ -1,7 +1,7 @@
 <?xml version = "1.0"?>
 <settings>
 
-	<threads>100</threads>
+	<threads>9</threads>
 	
 	<mode>EAGER</mode>
 
@@ -45,7 +45,7 @@
 
 		<processor>
 			<type>lemmatization</type>
-			<active>TRUE</active>
+			<active>FALSE</active>
 			<priority>default</priority>
 		</processor>
 
@@ -57,6 +57,12 @@
 
 		<processor>
 			<type>clean_prefixes</type>
+			<active>TRUE</active>
+			<priority>default</priority>
+		</processor>
+
+		<processor>
+			<type>part_of_speech</type>
 			<active>TRUE</active>
 			<priority>default</priority>
 		</processor>
