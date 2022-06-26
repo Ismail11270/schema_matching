@@ -1,11 +1,12 @@
 package pl.polsl.iat.matching.matchers.result;
 
 
-public class PartialResult {
+public class NameMatchingResult extends AbstractResult {
 
     private final Float result;
 
-    public PartialResult(Float f){
+
+    public NameMatchingResult(Float f){
         result = f;
     }
 
@@ -15,8 +16,13 @@ public class PartialResult {
 
     @Override
     public String toString() {
-        return "PartialResult{" +
+        return "NameMatchingResult{" +
                 "result=" + result +
                 '}';
+    }
+
+    @Override
+    public float getWeight() {
+        return 0;
     }
 }

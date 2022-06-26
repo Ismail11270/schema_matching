@@ -1,6 +1,6 @@
 package pl.polsl.iat.matching.matchers.word;
 
-import pl.polsl.iat.matching.matchers.result.PartialResult;
+import pl.polsl.iat.matching.matchers.result.NameMatchingResult;
 import pl.polsl.iat.matching.matchers.Matcher;
 import pl.polsl.iat.matching.processing.Words;
 
@@ -15,9 +15,9 @@ public class WordsMatcher implements Matcher<Words> {
     }
 
     @Override
-    public PartialResult doMatch(Words left, Words right) {
+    public NameMatchingResult doMatch(Words left, Words right) {
 //        words
         //TODO Apply all word matchers
-        return new PartialResult(left.equals(right) ? 100f : 0f);
+        return new NameMatchingResult(left.equals(right) ? 100f : 0f);
     }
 }

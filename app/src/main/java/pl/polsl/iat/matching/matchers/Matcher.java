@@ -1,8 +1,8 @@
 package pl.polsl.iat.matching.matchers;
 
 import pl.polsl.iat.matching.core.model.schema.Matchable;
-import pl.polsl.iat.matching.matchers.result.PartialResult;
+import pl.polsl.iat.matching.matchers.result.NameMatchingResult;
 
 public interface Matcher<T extends Matchable> {
-    PartialResult doMatch(T left, T right);
+    NameMatchingResult doMatch(T left, T right);
 }
