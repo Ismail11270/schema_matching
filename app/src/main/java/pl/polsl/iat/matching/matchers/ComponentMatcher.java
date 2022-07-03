@@ -1,7 +1,9 @@
 package pl.polsl.iat.matching.matchers;
 
 import pl.polsl.iat.matching.core.model.schema.Component;
-import pl.polsl.iat.matching.matchers.result.NameMatchingResult;
+import pl.polsl.iat.matching.core.model.schema.ComponentType;
+import pl.polsl.iat.matching.matchers.result.WordMatchingResult;
+import pl.polsl.iat.matching.matchers.result.Results;
 import pl.polsl.iat.matching.matchers.word.WordsMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
 import pl.polsl.iat.matching.processing.FullStringProcessor;
@@ -11,13 +13,13 @@ import pl.polsl.iat.matching.processing.Words;
  * ComponentMatcher only does name matching so far
  * TODO add metadata matching
  */
-public class ComponentMatcher implements Matcher<Component> {
+public class ComponentMatcher implements Matcher<Component, Results> {
 
     private static final ComponentMatcher instance = new ComponentMatcher();
 
     private ComponentMatcher() { }
 
-    public static ComponentMatcher getInstance() {
+    public static ComponentMatcher getInstance(ComponentType column) {
         return instance;
     }
 
@@ -25,7 +27,7 @@ public class ComponentMatcher implements Matcher<Component> {
     private final WordsMatcher wordsMatcher = WordsMatcherFactory.getWordsMatcher();
 
     @Override
-    public NameMatchingResult doMatch(Component left, Component  right) {
+    public Results doMatch(Component left, Component  right) {
 
         /*TODO
          * 1. Match type
@@ -35,8 +37,8 @@ public class ComponentMatcher implements Matcher<Component> {
 
         Words leftWords = strProc.process(left.getName());
         Words rightWords = strProc.process(right.getName());
-        NameMatchingResult nameMatchingResult = wordsMatcher.doMatch(leftWords, rightWords);
-        return nameMatchingResult;
+        WordMatchingResult nameMatchingResult = wordsMatcher.doMatch(leftWords, rightWords);
+        return new Results().add(nameMatchingResult);
 //        PartialResult partialResult = wordsMatcher.doMatch(new Words(left.getName()), new Words(right.getName()));
 //        return partialResult;
     }

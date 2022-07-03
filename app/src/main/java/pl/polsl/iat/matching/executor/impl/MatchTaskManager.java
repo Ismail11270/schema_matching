@@ -7,9 +7,10 @@ import pl.polsl.iat.matching.util.Logger;
 import pl.polsl.iat.matching.util.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
 
 
 /**
@@ -18,10 +19,12 @@ import java.util.stream.Collectors;
 public class MatchTaskManager {
 
     private static final MatchTaskManager managerInstance = new MatchTaskManager();
-    private final ComponentMatcher metadataMatcher;
+    private final Map<ComponentType, ComponentMatcher> metaMatchers = new HashMap<>();
 
     private MatchTaskManager() {
-        metadataMatcher = ComponentMatcher.getInstance();
+        metaMatchers.put(ComponentType.SCHEMA, ComponentMatcher.getInstance(ComponentType.SCHEMA));
+        metaMatchers.put(ComponentType.TABLE,  ComponentMatcher.getInstance(ComponentType.TABLE));
+        metaMatchers.put(ComponentType.COLUMN, ComponentMatcher.getInstance(ComponentType.COLUMN));
     }
 
     public static MatchTaskManager getInstance() {
@@ -39,7 +42,7 @@ public class MatchTaskManager {
                         rMatchingComponent.getComponent().get(i).getMatchingComponent().get(j)));
             }
         }
-        rMatchingComponent.setMetadataScore(Utils.parseResult(metadataMatcher.doMatch(first,second)));
+        rMatchingComponent.setMetadataScore(Utils.parseResult(metaMatchers.get(ComponentType.SCHEMA).doMatch(first,second)));
         rMatchingComponent.setMatchScore(1);
         Logger.schema("Finished matching schemas [%s] and [%s]", first.getName(), second.getName());
         return subTasks;
@@ -57,7 +60,7 @@ public class MatchTaskManager {
                             rMatchingComponent.getComponent().get(i).getMatchingComponent().get(j)).call());
                 }
             }
-             rMatchingComponent.setMetadataScore(Utils.parseResult(metadataMatcher.doMatch(first,second)));
+             rMatchingComponent.setMetadataScore(Utils.parseResult(metaMatchers.get(ComponentType.TABLE).doMatch(first,second)));
             rMatchingComponent.setMatchScore(1);
 //            rMatchingComponent.setMatch(new TableMatcher(first,second,rMatchingComponent).doMatch());
 //            rMatchingComponent.setMatch(first.getName().equals(second.getName()) ? 100 : 0);
@@ -70,7 +73,7 @@ public class MatchTaskManager {
         return () -> {
             Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
             rMatchingComponent.setMatchScore(1);
-            rMatchingComponent.setMetadataScore(Utils.parseResult(metadataMatcher.doMatch(first,second)));
+            rMatchingComponent.setMetadataScore(Utils.parseResult(metaMatchers.get(ComponentType.COLUMN).doMatch(first,second)));
 ////            rMatchingComponent.setMatch(first.getName().equals(second.getName()) ? 100 : 0);
 ////            rMatchingComponent.setMatch(new ColumnMatcher(first, second, rMatchingComponent).doMatch());
             Logger.column("Finished matching columns [%s] and [%s]", first.getName(), second.getName());

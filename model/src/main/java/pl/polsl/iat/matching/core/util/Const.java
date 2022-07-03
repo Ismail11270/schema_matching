@@ -4,6 +4,7 @@ public class Const {
     public static class CharName {
         public static final String SCHEMA_NAME = "SchemaName";
         public static final String TABLE_NAME = "TableName";
+        public static final String TABLE_SCHEMA = "TableSchema";
         public static final String COLUMN_NAME = "ColumnName";
         public static final String COLUMN_TYPE = "ColumnType";
         public static final String COLUMN_PRIMARY_KEY = "PrimaryKey";

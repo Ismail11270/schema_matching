@@ -24,7 +24,7 @@ public class App {
         //Schema loading start
         long startTime = System.currentTimeMillis();
         Schema[] schemas = parametersResolver.getConnectionProperties()
-                .parallelStream()
+                .stream()
                 .map(p -> new SchemaExtractor(p).load(settings.getLoaderMode()))
                 .toArray(Schema[]::new);
         MatchingResult matchingResult =

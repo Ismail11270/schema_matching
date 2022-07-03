@@ -1,9 +1,10 @@
 package pl.polsl.iat.matching.matchers.word;
 
 import pl.polsl.iat.matching.matchers.Matcher;
+import pl.polsl.iat.matching.matchers.result.WordMatchingResult;
 import pl.polsl.iat.matching.processing.Word;
 
-public abstract class WordMatcher implements Matcher<Word> {
+public abstract class WordMatcher implements Matcher<Word, WordMatchingResult> {
 
     public enum Type {
         EXACT(0) {

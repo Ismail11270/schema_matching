@@ -5,14 +5,18 @@ import java.util.List;
 
 public class Results {
 
-    private List<NameMatchingResult> results = new ArrayList<>();
+    private List<AbstractResult> results = new ArrayList<>();
 
     public Results() {
 
     }
 
-    public void add(NameMatchingResult result) {
+    public Results add(AbstractResult result) {
+        results.add(result);
+        return this;
+    }
 
-
+    public Float calculateResult() {
+        return 0f;
     }
 }

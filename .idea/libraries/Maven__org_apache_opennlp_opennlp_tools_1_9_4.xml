@@ -8,8 +8,6 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.m2/repository/org/apache/opennlp/opennlp-tools/1.9.4/opennlp-tools-1.9.4-sources.jar!/" />
-      <root url="file://$USER_HOME$/.m2/repository/org/apache/opennlp/opennlp-docs" />
-      <root url="file://$USER_HOME$/.m2/repository/org/apache/opennlp/opennlp-docs/1.9.4" />
     </SOURCES>
   </library>
 </component>

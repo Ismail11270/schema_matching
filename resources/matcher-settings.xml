@@ -2,7 +2,7 @@
 <settings>
 
 	<threads>9</threads>
-	<log-level>column</log-level>
+	<log-level>schema</log-level>
 	<mode>EAGER</mode>
 
 	<load-wordnet-to-ram>false</load-wordnet-to-ram>

@@ -1,12 +1,12 @@
 package pl.polsl.iat.matching.matchers.result;
 
 
-public class NameMatchingResult extends AbstractResult {
+public class WordMatchingResult extends AbstractResult {
 
     private final Float result;
 
 
-    public NameMatchingResult(Float f){
+    public WordMatchingResult(Float f){
         result = f;
     }
 
