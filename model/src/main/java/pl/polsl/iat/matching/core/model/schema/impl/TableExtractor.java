@@ -26,13 +26,14 @@ class TableExtractor {
         this.loaderMode = loaderMode;
     }
 
-    Table load(String tableName) throws DatabaseException {
+    Table load(String tableName, String tableSchemaName) throws DatabaseException {
         TableImpl.Builder builder = new TableImpl.Builder(loaderMode);
         try {
             builder.setName(tableName);
+            builder.setTableSchema(tableSchemaName);
             ColumnsGenerator generator = new ColumnsGenerator(metaData, schema, tableName);
-            builder.addCharacteristics(loadKeyInfo(TableKey.PK, metaData, schema, tableName));
-            builder.addCharacteristics(loadKeyInfo(TableKey.FK, metaData, schema, tableName));
+            builder.addCharacteristics(loadKeyInfo(TableKey.PK, metaData, schema, tableName, tableSchemaName));
+            builder.addCharacteristics(loadKeyInfo(TableKey.FK, metaData, schema, tableName, tableSchemaName));
             builder.setColumns(Stream.generate(generator).takeWhile(generator));
         } catch (Exception e) {
             throw new DatabaseException("Failed to acquire columns metadata", e);
@@ -40,8 +41,8 @@ class TableExtractor {
         return builder.build();
     }
 
-    private List<Characteristic<?, ?>> loadKeyInfo(TableKey key, DatabaseMetaData metaData, String schema, String tableName) throws SQLException {
-        ResultSet rs = getRsForKeyType(key, metaData, schema, tableName);
+    private List<Characteristic<?, ?>> loadKeyInfo(TableKey key, DatabaseMetaData metaData, String schema, String tableName, String tableSchemaName) throws SQLException {
+        ResultSet rs = getRsForKeyType(key, metaData, schema, tableName, tableSchemaName);
         List<Characteristic<?,?>> chList = new ArrayList<>();
         while (rs.next()){
             chList.add(buildKeyChar(rs, key));
@@ -78,11 +79,11 @@ class TableExtractor {
         return new KeyCharacteristic(key, chs);
     }
 
-    private ResultSet getRsForKeyType(TableKey key, DatabaseMetaData metaData, String schema, String table) throws SQLException {
+    private ResultSet getRsForKeyType(TableKey key, DatabaseMetaData metaData, String schema, String table, String tableSchemaName) throws SQLException {
         if(key == TableKey.FK) {
-            return metaData.getImportedKeys(schema, null, table);
+            return metaData.getImportedKeys(schema, tableSchemaName, table);
         } else {
-            return metaData.getPrimaryKeys(schema, null, table);
+            return metaData.getPrimaryKeys(schema, tableSchemaName, table);
         }
     }
 }

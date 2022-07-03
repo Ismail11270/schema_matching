@@ -2,6 +2,7 @@ package pl.polsl.iat.matching.core.model.schema.impl;
 
 import pl.polsl.iat.matching.core.exception.SchemaExtractorException;
 import pl.polsl.iat.matching.core.model.schema.Table;
+import pl.polsl.iat.matching.core.sql.SqlUtil;
 import pl.polsl.iat.matching.core.util.Const;
 import pl.polsl.iat.matching.core.util.Status;
 
@@ -32,8 +33,12 @@ class TablesGenerator implements Supplier<Table>, Predicate<Table> {
     public Table get() {
         try {
             if (tablesRs.next()) {
+                SqlUtil.printResultSet(tablesRs, System.out);
                 String tableName = tablesRs.getString(Const.ColumnName.GET_TABLES_TABLE_NAME);
-                return tableExtractor.load(tableName);
+                String tableSchemaName = tablesRs.getString(Const.ColumnName.GET_TABLE_SCHEMA_NAME);
+
+//                tablesRs.getString(0);
+                return tableExtractor.load(tableName, tableSchemaName);
             } else {
                 this.status = Status.FINISH;
                 return null;

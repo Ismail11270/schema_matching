@@ -15,7 +15,7 @@ class TableImpl implements Table {
     private int columnN;
     private Stream<Column> columnsStream;
     private List<Column> columnsList;
-    private StringCharacteristic tableName;
+    private StringCharacteristic tableName, schemaName;
 
     private Set<Characteristic<?,?>> characteristics = new HashSet<>();
 
@@ -71,6 +71,12 @@ class TableImpl implements Table {
         public Builder setName(String name){
             table.tableName = new StringCharacteristic(Const.CharName.TABLE_NAME, name, CharacteristicType.TableName);
             table.characteristics.add(table.tableName);
+            return this;
+        }
+
+        public Builder setTableSchema(String schema) {
+            table.schemaName = new StringCharacteristic(Const.CharName.TABLE_SCHEMA, schema, CharacteristicType.TableSchemaName);
+            table.characteristics.add(table.schemaName);
             return this;
         }
 

@@ -2,7 +2,7 @@ package pl.polsl.iat.matching.core.model.schema;
 
 public enum CharacteristicType {
     SchemaName(0.1f),
-    TableName(0.8f), ColumnName(0.2f),
+    TableName(0.8f), TableSchemaName(0.1f), ColumnName(0.2f),
     Type(0.05f), AutoIncrement(0.1f),
     Date(0.01f), PrimaryKey(0.5f),
     ForeignKey(0.1f), Default(0.3f),
