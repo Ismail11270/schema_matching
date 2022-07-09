@@ -1,5 +1,7 @@
 package pl.polsl.iat.matching.core.model.schema;
 
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -9,6 +11,6 @@ import java.util.stream.Stream;
  */
 public interface Component extends Matchable {
     String getName();
-    Stream<? extends BaseCharacteristic> getCharacteristics();
+    Map<? extends Object, ? extends BaseCharacteristic<?>> getCharacteristics();
     ComponentType getComponentType();
 }

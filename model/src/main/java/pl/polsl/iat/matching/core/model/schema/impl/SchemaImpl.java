@@ -5,6 +5,7 @@ import pl.polsl.iat.matching.core.model.schema.*;
 import pl.polsl.iat.matching.core.util.Const;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,8 +21,8 @@ class SchemaImpl implements Schema {
     }
 
     @Override
-    public Stream<BaseCharacteristic<?>> getCharacteristics() {
-        return Stream.of(schemaName);
+    public Map<String, BaseCharacteristic<?>> getCharacteristics() {
+        return Map.of(schemaName.getKey(), schemaName);
     }
 
     @Override

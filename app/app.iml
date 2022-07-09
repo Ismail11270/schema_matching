@@ -39,5 +39,6 @@
     <orderEntry type="library" name="Maven: me.xdrop:fuzzywuzzy:1.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.opennlp:opennlp-tools:1.9.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.opennlp:opennlp-maxent:3.0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:23.0.0" level="project" />
   </component>
 </module>

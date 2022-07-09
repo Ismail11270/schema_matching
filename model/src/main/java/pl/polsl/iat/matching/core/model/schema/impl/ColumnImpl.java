@@ -1,9 +1,11 @@
 package pl.polsl.iat.matching.core.model.schema.impl;
 
 import pl.polsl.iat.matching.core.model.schema.Column;
+import pl.polsl.iat.matching.core.model.schema.ColumnCharacteristicType;
 import pl.polsl.iat.matching.core.model.schema.ComponentType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,20 +15,14 @@ class ColumnImpl implements Column {
     private static final ComponentType type = ComponentType.COLUMN;
 
     private String name;
-    private Stream<ColumnCharacteristic> characteristics;
-    private List<ColumnCharacteristic> chrs;
+    private Map<ColumnCharacteristicType, ColumnCharacteristic> characteristicsMap;
     ColumnImpl(){
 
     }
 
-    ColumnImpl(Column col, Stream<ColumnCharacteristic> characteristics){
-        this.name = Objects.requireNonNull(col.getName(), "Column name cannot be null.");
-        this.characteristics = Objects.requireNonNull(characteristics);
-    }
-
     @Override
-    public Stream<ColumnCharacteristic> getCharacteristics() {
-        return characteristics;
+    public Map<ColumnCharacteristicType, ColumnCharacteristic> getCharacteristics() {
+        return characteristicsMap;
     }
 
     @Override
@@ -53,8 +49,7 @@ class ColumnImpl implements Column {
         }
 
         Builder setCharacteristics(Stream<ColumnCharacteristic> characteristics){
-            col.characteristics = characteristics;
-            col.chrs = characteristics.collect(Collectors.toList());
+            col.characteristicsMap = characteristics.collect(Collectors.toMap(ColumnCharacteristic::getKey, x->x));
             return this;
         }
 

@@ -6,6 +6,7 @@ import pl.polsl.iat.matching.core.util.Const;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,8 +23,8 @@ class TableImpl implements Table {
     private boolean loaded;
 
     @Override
-    public Stream<BaseCharacteristic<?>> getCharacteristics() {
-        return Stream.of(tableName);
+    public Map<String, BaseCharacteristic<?>> getCharacteristics() {
+        return Map.of(tableName.getKey(), tableName);
     }
 
     private void loadComponents() {
