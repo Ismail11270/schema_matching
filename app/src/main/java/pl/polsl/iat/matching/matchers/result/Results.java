@@ -2,6 +2,7 @@ package pl.polsl.iat.matching.matchers.result;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Results {
 
@@ -16,7 +17,9 @@ public class Results {
         return this;
     }
 
+    private Random random = new Random();
+
     public Float calculateResult() {
-        return 0f;
+        return random.nextFloat();
     }
 }
