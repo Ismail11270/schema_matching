@@ -26,7 +26,6 @@ psql <<- SHELL
 SHELL
 
 cd /data/db_scripts
-ls
 for s in *.sql; do
 	psql -d db$((counter++)) < $s
 done

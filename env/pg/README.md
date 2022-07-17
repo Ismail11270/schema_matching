@@ -1,5 +1,5 @@
-If a container already exists or running stop and delete it
+To apply changes in the environment configuration use 
 
-docker stop CONTAINER_ID 
-docker rf CONTAINER_ID
-docker-compose up --force-recreate
+docker-compose up --force-recreate --build --renew-anon-volumes
+
+
