@@ -2,7 +2,6 @@ package pl.polsl.iat.matching.core.sql;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import com.mysql.cj.jdbc.Driver;
-
 import java.io.PrintStream;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,6 +19,9 @@ public class SqlUtil {
         } else if (properties.getDatabaseType() == DatabaseType.SQLSERVER) {
             DriverManager.registerDriver(new SQLServerDriver());
             return urlBuilder.append(";instanceName=").append(properties.getProperty("instance_name")).append(";encrypt=false;").toString();
+        } else if(properties.getDatabaseType() == DatabaseType.POSTGRES) {
+            DriverManager.registerDriver(new org.postgresql.Driver());
+            return urlBuilder.append("/").append(properties.getSchemaName()).toString();
         }
         return null;
     }
