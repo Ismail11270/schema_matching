@@ -7,7 +7,7 @@ package pl.polsl.iat.matching.core.sql;
 public enum DatabaseType {
 
 
-    MYSQL("mysql"), ORACLE, POSTGRES, SQLSERVER("sqlserver");
+    MYSQL("mysql"), ORACLE, POSTGRES("postgresql"), SQLSERVER("sqlserver");
 
     String prefix;
 

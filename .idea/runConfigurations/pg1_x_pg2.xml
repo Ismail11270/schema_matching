@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="pg1_x_pg2" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="16" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="MATCHER_SETTINGS_FILE" value="resources\matcher-settings.xml" />
+      <env name="WORDNET_TO_RAM" value="false" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="pl.polsl.iat.matching.App" />
+    <module name="app" />
+    <option name="PROGRAM_PARAMETERS" value="-s1 -f resources\pg1.properties -s2 -f resources\pg2.properties" />
+    <option name="VM_PARAMETERS" value="-Xmx5G" />
+    <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
