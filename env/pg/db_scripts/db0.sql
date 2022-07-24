@@ -85,7 +85,7 @@ CREATE SCHEMA Person
     Title varchar(8) NULL,
     FirstName "Name" NOT NULL,
     MiddleName "Name" NULL,
-    LastName "Name" NOT NULL,
+    Surname "Name" NOT NULL,
     Suffix varchar(10) NULL,
     EmailPromotion INT NOT NULL CONSTRAINT "DF_Person_EmailPromotion" DEFAULT (0),
     AdditionalContactInfo XML NULL, -- XML("AdditionalContactInfoSchemaCollection"),
