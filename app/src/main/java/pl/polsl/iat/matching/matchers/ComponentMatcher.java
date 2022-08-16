@@ -3,7 +3,7 @@ package pl.polsl.iat.matching.matchers;
 import pl.polsl.iat.matching.core.model.schema.BaseCharacteristic;
 import pl.polsl.iat.matching.core.model.schema.Component;
 import pl.polsl.iat.matching.core.model.schema.ComponentType;
-import pl.polsl.iat.matching.matchers.result.WordMatchingResult;
+import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
 import pl.polsl.iat.matching.matchers.result.Results;
 import pl.polsl.iat.matching.matchers.word.WordsMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
@@ -53,7 +53,7 @@ public abstract class ComponentMatcher implements Matcher<Component, Results> {
     protected void matchNames(Map<?, ? extends BaseCharacteristic<?>> left, Map<?, ? extends BaseCharacteristic<?>> right, Results results) {
         Words leftWords = strProc.process(left.get(getNameCharacteristicsKey()).getValue());
         Words rightWords = strProc.process(right.get(getNameCharacteristicsKey()).getValue());
-        WordMatchingResult nameMatchingResult = wordsMatcher.doMatch(leftWords, rightWords);
+        WordsMatchingResult nameMatchingResult = wordsMatcher.doMatch(leftWords, rightWords);
         results.add(nameMatchingResult);
     }
 

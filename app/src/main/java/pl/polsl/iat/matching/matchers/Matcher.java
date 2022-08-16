@@ -4,4 +4,7 @@ import pl.polsl.iat.matching.core.model.schema.Matchable;
 
 public interface Matcher<T extends Matchable, R> {
     R doMatch(T left, T right);
+    default float getWeight() {
+        return 0;
+    }
 }

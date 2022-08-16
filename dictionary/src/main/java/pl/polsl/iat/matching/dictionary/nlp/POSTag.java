@@ -53,7 +53,15 @@ public enum POSTag {
 
     }
 
+    private static POSTag valueOfSafe(String tag) {
+        try {
+            return POSTag.valueOf(tag);
+        } catch(Exception e) {
+            return POSTag.OTHER;
+        }
+    }
+
     public static List<POSTag> valueOf(String[] tags) {
-        return Arrays.stream(tags).map(POSTag::valueOf).collect(Collectors.toList());
+        return Arrays.stream(tags).map(POSTag::valueOfSafe).collect(Collectors.toList());
     }
 }

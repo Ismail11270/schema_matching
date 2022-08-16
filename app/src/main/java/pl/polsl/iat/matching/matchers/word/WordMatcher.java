@@ -1,27 +1,21 @@
 package pl.polsl.iat.matching.matchers.word;
 
 import pl.polsl.iat.matching.matchers.Matcher;
-import pl.polsl.iat.matching.matchers.result.WordMatchingResult;
+import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
 import pl.polsl.iat.matching.processing.Word;
 
-public abstract class WordMatcher implements Matcher<Word, WordMatchingResult> {
+public abstract class WordMatcher implements Matcher<Word, WordsMatchingResult> {
 
     public enum Type {
         EXACT(0) {
             @Override
-            WordMatcher getMatcher() {
-                return new ExactMatcher();
-            }
+            WordMatcher getMatcher() { return ExactMatcher.getInstance(); }
         }, FUZZY(1) {
             @Override
-            WordMatcher getMatcher() {
-                return new FuzzyMatcher();
-            }
+            WordMatcher getMatcher() { return FuzzyMatcher.getInstance(); }
         }, SEMANTIC(2) {
             @Override
-            WordMatcher getMatcher() {
-                return new SemanticMather();
-            }
+            WordMatcher getMatcher() { return SemanticMather.getInstance(); }
         };
 
         private final int id;
