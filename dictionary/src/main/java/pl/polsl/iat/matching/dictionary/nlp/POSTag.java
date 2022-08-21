@@ -1,5 +1,7 @@
 package pl.polsl.iat.matching.dictionary.nlp;
 
+import edu.mit.jwi.item.POS;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,47 +13,50 @@ import java.util.stream.Collectors;
  * @author Ismoil Atajanov
  */
 public enum POSTag {
-    CC	("Coordinating conjunction"),
-    CD	("Cardinal number"),
-    DT	("Determiner"),
-    EX	("Existential there"),
-    FW	("Foreign word"),
-    IN	("Preposition or subordinating conjunction"),
-    JJ	("Adjective"),
-    JJR	("Adjective, comparative"),
-    JJS	("Adjective, superlative"),
-    LS	("List item marker"),
-    MD	("Modal"),
-    NN	("Noun, singular or mass"),
-    NNS	("Noun, plural"),
-    NNP	("Proper noun, singular"),
-    NNPS("Proper noun, plural"),
-    PDT	("Predeterminer"),
-    POS	("Possessive ending"),
-    PRP	("Personal pronoun"),
-    PRP$("Possessive pronoun"),
-    RB	("Adverb"),
-    RBR	("Adverb, comparative"),
-    RBS	("Adverb, superlative"),
-    RP	("Particle"),
-    SYM	("Symbol"),
-    TO	("to"),
-    UH	("Interjection"),
-    VB	("Verb, base form"),
-    VBD	("Verb, past tense"),
-    VBG	("Verb, gerund or present participle"),
-    VBN	("Verb, past participle"),
-    VBP	("Verb, non-3rd person singular present"),
-    VBZ	("Verb, 3rd person singular present"),
-    WDT	("Wh-determiner"),
-    WP	("Wh-pronoun"),
-    WP$	("Possessive wh-pronoun"),
-    WRB	("Wh-adverb"),
-    OTHER ("unknow tag");
+    CC	("Coordinating conjunction", null),
+    CD	("Cardinal number", null),
+    DT	("Determiner", null),
+    EX	("Existential there", null),
+    FW	("Foreign word", null),
+    IN	("Preposition or subordinating conjunction", null),
+    JJ	("Adjective", edu.mit.jwi.item.POS.ADJECTIVE),
+    JJR	("Adjective, comparative", edu.mit.jwi.item.POS.ADJECTIVE),
+    JJS	("Adjective, superlative", edu.mit.jwi.item.POS.ADJECTIVE),
+    LS	("List item marker", null),
+    MD	("Modal", null),
+    NN	("Noun, singular or mass", edu.mit.jwi.item.POS.NOUN),
+    NNS	("Noun, plural", edu.mit.jwi.item.POS.NOUN),
+    NNP	("Proper noun, singular", edu.mit.jwi.item.POS.NOUN),
+    NNPS("Proper noun, plural", edu.mit.jwi.item.POS.NOUN),
+    PDT	("Predeterminer", null),
+    POS	("Possessive ending", null),
+    PRP	("Personal pronoun", null),
+    PRP$("Possessive pronoun", null),
+    RB	("Adverb", edu.mit.jwi.item.POS.ADVERB),
+    RBR	("Adverb, comparative", edu.mit.jwi.item.POS.ADVERB),
+    RBS	("Adverb, superlative", edu.mit.jwi.item.POS.ADVERB),
+    RP	("Particle", null),
+    SYM	("Symbol", null),
+    TO	("to", null),
+    UH	("Interjection", null),
+    VB	("Verb, base form", edu.mit.jwi.item.POS.VERB),
+    VBD	("Verb, past tense", edu.mit.jwi.item.POS.VERB),
+    VBG	("Verb, gerund or present participle", edu.mit.jwi.item.POS.VERB),
+    VBN	("Verb, past participle", edu.mit.jwi.item.POS.VERB),
+    VBP	("Verb, non-3rd person singular present", edu.mit.jwi.item.POS.VERB),
+    VBZ	("Verb, 3rd person singular present", edu.mit.jwi.item.POS.VERB),
+    WDT	("Wh-determiner", null),
+    WP	("Wh-pronoun", null),
+    WP$	("Possessive wh-pronoun", null),
+    WRB	("Wh-adverb", null),
+    OTHER ("unknow tag", null);
 
-    POSTag(String description){
+    private edu.mit.jwi.item.POS pos;
 
+    POSTag(String description, edu.mit.jwi.item.POS pos) {
+        this.pos = pos;
     }
+
 
     private static POSTag valueOfSafe(String tag) {
         try {
@@ -59,6 +64,10 @@ public enum POSTag {
         } catch(Exception e) {
             return POSTag.OTHER;
         }
+    }
+
+    public edu.mit.jwi.item.POS getPos() {
+        return pos != null ? pos : edu.mit.jwi.item.POS.NOUN;
     }
 
     public static List<POSTag> valueOf(String[] tags) {
