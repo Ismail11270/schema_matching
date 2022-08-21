@@ -8,6 +8,7 @@ import pl.polsl.iat.matching.core.util.ParametersResolver;
 import pl.polsl.iat.matching.dictionary.exception.NlpMildException;
 import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
 import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
+import pl.polsl.iat.matching.processing.ProcessorType;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.Optional;
@@ -31,7 +32,11 @@ public class App {
                 new ResultFactory().createMatchingResult(schemas);
         long schemaLoadingTime = System.currentTimeMillis() - startTime;
         //Schema loading end
-
+        System.out.println("==========================================================================================");
+        System.out.println("Preprocessing applied - " + settings.getAvailablePreProcessors().stream().map(ProcessorType::name).reduce((a, b) -> a + ", " + b).get());
+        System.out.println("==========================================================================================");
+        System.out.println("Word matchers applied - " + settings.getAvailableWordMatchers().keySet());
+        System.out.println("==========================================================================================");
         //Matching start
         startTime = System.currentTimeMillis();
 

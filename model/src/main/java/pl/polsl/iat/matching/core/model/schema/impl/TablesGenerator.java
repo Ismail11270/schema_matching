@@ -33,7 +33,7 @@ class TablesGenerator implements Supplier<Table>, Predicate<Table> {
     public Table get() {
         try {
             if (tablesRs.next()) {
-                SqlUtil.printResultSet(tablesRs, System.out);
+//                SqlUtil.printResultSet(tablesRs, System.out);
                 String tableName = tablesRs.getString(Const.ColumnName.GET_TABLES_TABLE_NAME);
                 String tableSchemaName = tablesRs.getString(Const.ColumnName.GET_TABLE_SCHEMA_NAME);
 

@@ -44,7 +44,7 @@ public class MatcherSettings {
     private MatcherSettings() {
     }
 
-    private final Map<WordMatcher.Type, WordMatcher> availableWordMatchers = new HashMap<>();
+    private final TreeMap<WordMatcher.Type, WordMatcher> availableWordMatchers = new TreeMap<>(Comparator.comparingInt(WordMatcher.Type::getPriority));
 
     private final List<ProcessorType> availablePreprocessors = new ArrayList<>();
 
@@ -69,7 +69,7 @@ public class MatcherSettings {
     }
 
     public Map<WordMatcher.Type, WordMatcher> getAvailableWordMatchers() {
-        return Map.copyOf(availableWordMatchers);
+        return availableWordMatchers;
     }
 
     public List<ProcessorType> getAvailablePreProcessors() {
