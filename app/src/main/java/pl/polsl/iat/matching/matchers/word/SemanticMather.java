@@ -19,7 +19,7 @@ class SemanticMather extends WordMatcher {
     }
 
     @Override
-    public WordsMatchingResult doMatch(Word left, Word right) {
-        return null;
+    public Integer doMatch(Word left, Word right) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -1,5 +1,6 @@
 package pl.polsl.iat.matching.matchers.word;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
 import pl.polsl.iat.matching.processing.Word;
 
@@ -19,7 +20,7 @@ class FuzzyMatcher extends WordMatcher {
     }
 
     @Override
-    public WordsMatchingResult doMatch(Word left, Word right) {
-        return null;
+    public Integer doMatch(Word left, Word right) {
+        return FuzzySearch.ratio(left.toString(), right.toString());
     }
 }

@@ -4,7 +4,7 @@ import pl.polsl.iat.matching.matchers.Matcher;
 import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
 import pl.polsl.iat.matching.processing.Word;
 
-public abstract class WordMatcher implements Matcher<Word, WordsMatchingResult> {
+public abstract class WordMatcher implements Matcher<Word, Integer> {
 
     public enum Type {
         EXACT(0) {
@@ -27,7 +27,11 @@ public abstract class WordMatcher implements Matcher<Word, WordsMatchingResult> 
         abstract WordMatcher getMatcher();
 
         public String getName() {
-            return this.getName().toLowerCase();
+            return name().toLowerCase();
+        }
+
+        public int getPriority() {
+            return id;
         }
     }
 

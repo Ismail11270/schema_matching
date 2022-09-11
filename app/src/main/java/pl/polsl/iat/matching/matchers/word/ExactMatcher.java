@@ -19,8 +19,7 @@ class ExactMatcher extends WordMatcher {
     }
 
     @Override
-    public WordsMatchingResult doMatch(Word left, Word right) {
-
-        return null;
+    public Integer doMatch(Word left, Word right) {
+        return left.equals(right) ? 100 : 0;
     }
 }
