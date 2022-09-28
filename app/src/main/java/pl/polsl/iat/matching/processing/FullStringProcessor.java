@@ -35,7 +35,7 @@ public class FullStringProcessor implements TextProcessor<String> {
         * */
 
         //Always tokenize and adjust to lowercase
-        Words words = new Words(tokenizationPattern.split(input)).toLowerCase();
+        Words words = new Words(new Word(input), tokenizationPattern.split(input)).toLowerCase();
         TextProcessor<Words> POSProcessor = ProcessorType.PART_OF_SPEECH_TAGGER.getProcessor().get();
         //Apply all processors
         for (ProcessorType processor : allProcessors) {

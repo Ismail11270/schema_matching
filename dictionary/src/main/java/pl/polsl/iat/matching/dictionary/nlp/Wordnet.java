@@ -1,5 +1,6 @@
 package pl.polsl.iat.matching.dictionary.nlp;
 
+import edu.mit.jwi.item.POS;
 import edu.mit.jwi.morph.WordnetStemmer;
 
 import java.util.List;
@@ -15,9 +16,9 @@ public interface Wordnet {
      * @param word - word to find synonyms for
      * @return list of synonyms
      */
-    List<String> getRelatedWords(String word);
+    List<String> getRelatedWords(String word, POS pos);
 
-    List<String> getAntonyms(String word);
+    List<String> getAntonyms(String word, POS pos);
 
     WordnetStemmer getStemmer();
 

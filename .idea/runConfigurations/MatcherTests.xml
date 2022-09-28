@@ -1,0 +1,23 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MatcherTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="app" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="pl.polsl.iat.matching.matchers.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="pl.polsl.iat.matching.matchers" />
+    <option name="MAIN_CLASS_NAME" value="pl.polsl.iat.matching.matchers.MatcherTests" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
+    <envs>
+      <env name="MATCHER_SETTINGS_FILE" value="resources\test-settings.xml" />
+      <env name="WORDNET_TO_RAM" value="false" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

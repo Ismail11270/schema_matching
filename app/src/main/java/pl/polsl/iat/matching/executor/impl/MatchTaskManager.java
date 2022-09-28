@@ -71,7 +71,7 @@ public class MatchTaskManager {
 
     private Callable<Boolean> getTaskColumn(Column first, Column second, MatchingComponent rMatchingComponent) {
         return () -> {
-            Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
+              Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
             rMatchingComponent.setMatchScore(1);
             rMatchingComponent.setMetadataScore(Utils.parseResult(metaMatchers.get(ComponentType.COLUMN).doMatch(first,second)));
 ////            rMatchingComponent.setMatch(first.getName().equals(second.getName()) ? 100 : 0);

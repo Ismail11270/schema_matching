@@ -26,7 +26,7 @@ public class POSTagger {
         }
     }
 
-    public List<POSTag> tag(String[] words) {
+    public List<POSTag> tag(String... words) {
         return POSTag.valueOf(tagger.tag(words));
     }
 }

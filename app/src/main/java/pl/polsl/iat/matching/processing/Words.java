@@ -14,9 +14,11 @@ import java.util.stream.IntStream;
 
 public class Words implements Matchable {
     private List<Word> words;
+    private Word rawWord;
 
-    public Words(String... words) {
+    public Words(Word rawWord, String... words) {
         this.words = Arrays.stream(words).filter(w -> !w.isBlank()).map(String::toLowerCase).map(Word::new).collect(Collectors.toList());
+        this.rawWord = rawWord;
     }
 
     public List<Word> get() {
@@ -47,6 +49,10 @@ public class Words implements Matchable {
     public POSTag[] posTags() {
 
         return words.stream().map(Word::getPos).filter(Objects::nonNull).toArray(POSTag[]::new);
+    }
+
+    public Word getRawWord() {
+        return rawWord;
     }
 
     public Words toLowerCase() {

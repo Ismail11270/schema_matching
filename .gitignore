@@ -2,3 +2,4 @@
 app/target/
 model/target/
 env/pg/test.sh
+dictionary/target

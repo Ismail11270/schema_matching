@@ -1,7 +1,10 @@
 package pl.polsl.iat.matching.dictionary.nlp;
 
+import edu.mit.jwi.item.POS;
 import pl.polsl.iat.matching.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
+
+import java.util.List;
 
 class LexicalDictionaryImpl implements LexicalDictionary {
 
@@ -12,18 +15,23 @@ class LexicalDictionaryImpl implements LexicalDictionary {
     }
 
     @Override
-    public int getNumberOfSynonyms(String word) {
-        return wordnet.getRelatedWords(word).size();
+    public int getNumberOfSynonyms(String word, POS pos) {
+        return wordnet.getRelatedWords(word, pos).size();
     }
 
     @Override
-    public int getNumberOfAntonyms(String word) {
+    public List<String> getRelatedSynsetIds(String word, POS pos) {
+        return wordnet.getRelatedWords(word, pos);
+    }
+
+    @Override
+    public int getNumberOfAntonyms(String word, POS pos) {
         return 0;
     }
 
     @Override
-    public float compare(String first, String second) {
-        wordnet.getRelatedWords(first).forEach(System.out::println);
+    public float compare(String first, String second, POS pos) {
+        wordnet.getRelatedWords(first, pos).forEach(System.out::println);
 //        return new MatchResult();
         return 0f;
     }

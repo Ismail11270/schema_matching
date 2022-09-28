@@ -8,9 +8,9 @@ import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class JwiWordnet implements Wordnet {
     private final String wordnetLocation;
@@ -30,21 +30,40 @@ public class JwiWordnet implements Wordnet {
     }
 
     @Override
-    public List<String> getRelatedWords(String inputWord) {
-        inputWord = "date";
-        IIndexWord idxWord = dictionary.getIndexWord(inputWord, POS.NOUN);
-        for (IWordID wordID : idxWord.getWordIDs()) {
-            IWord word = dictionary.getWord(wordID);
+    public List<String> getRelatedWords(String inputWord, POS pos) {
+        IIndexWord idxWord = dictionary.getIndexWord(inputWord, pos);
+        List<String> synsets = new ArrayList<>();
+        idxWord.getWordIDs().forEach(wordId -> {
+            IWord word = dictionary.getWord(wordId);
+            ISynset synset = word.getSynset();
+            synsets.add(synset.toString());
+            synset.getWords().forEach(w -> System.out.println(w.getLemma()));
+            System.out.println("=======" + word.getLemma());
+        });
+        System.out.println(idxWord.getWordIDs().stream().map(x -> dictionary.getWord(x).getSynset().getGloss()).collect(Collectors.toList()));
+
+//        List<String> collect = idxWord.getWordIDs().stream().map(x -> dictionary.getWord(x).getSynset().getRelatedSynsets(Pointer.ANTONYM)).flatMap(Collection::stream).map(ISynsetID::toString).toList();
+        return synsets;
+
+//        for (IWordID wordID : idxWord.getWordIDs()) {
+//            IWord word = dictionary.getWord(wordID);
 //        List<IWordID> iWordIDS = word.getRelatedMap().get(Pointer.ANTONYM);
 //        for (IWordID antId : iWordIDS) {
 ////            System.out.println(dictionary.getWord(antId).getLemma());
 //        }
-            word.getSynset().getRelatedSynsets().forEach(x -> dictionary.getSynset(x).getWords()
-                    .forEach(xx -> System.out.println(xx.getLemma())));
-            Map<IPointer, List<ISynsetID>> relatedMap = word.getSynset().getRelatedMap();
-            System.out.println("===");
+//            word.getRelatedWords().forEach(x -> System.out.println(x.getLemma()));
+//            word.getSynset().getRelatedSynsets(Pointer.HYPONYM).forEach(x -> dictionary.getSynset(x).getWords()
+//                    .forEach(xx -> System.out.println(xx.getLemma())));
+//            Map<IPointer, List<ISynsetID>> relatedMap = word.getSynset().getRelatedMap();
+//            List<ISynsetID> allRelatedSynsets = relatedMap.values().stream().flatMap(List::stream).collect(Collectors.toList());
+//            System.out.println(allRelatedSynsets);
+//            for (IPointer pointer : relatedMap.keySet()) {
+//                System.out.println(pointer);
+//                System.out.println(relatedMap.get(pointer));
+//            }
+//            System.out.println("===");
 //            word.getRelatedWords().forEach(x -> System.out.println(dictionary.getWord(x).getLemma()));
-        }
+//        }
 //        ISynset synset = word.getSynset();
 //        synset.getWords().forEach(x -> System.out.println(x.getLemma()));
 //        idxWord.getWordIDs().forEach(x -> {
@@ -53,7 +72,6 @@ public class JwiWordnet implements Wordnet {
 //            System.out.println(" Lemma = " + word.getLemma());
 //            System.out.println(" Gloss = " + word.getSynset().getGloss()) ;
 //        });
-        return Collections.emptyList();
 //        // look up first sense of the word "dog "'
 //        List<String> stems = stemmer.findStems(inputWord, POS.NOUN);
 //        stems.forEach(System.out::println);
@@ -66,7 +84,7 @@ public class JwiWordnet implements Wordnet {
     }
 
     @Override
-    public List<String> getAntonyms(String word) {
+    public List<String> getAntonyms(String word, POS pos) {
         return null;
     }
 

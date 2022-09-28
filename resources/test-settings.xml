@@ -1,8 +1,8 @@
 <?xml version = "1.0"?>
 <settings>
 
-	<threads>100</threads>
-	
+	<threads>9</threads>
+	<log-level>schema</log-level>
 	<mode>EAGER</mode>
 
 	<load-wordnet-to-ram>false</load-wordnet-to-ram>
@@ -16,7 +16,7 @@
 	<word-matchers>
 		<matcher>
 			<type>exact</type>
-			<active>TRUE</active>
+			<active>false</active>
 		</matcher>
 
 		<matcher>
@@ -40,7 +40,7 @@
 		<processor>
 			<type>clean_non_alphabetic</type>
 			<active>TRUE</active>
-			<priority>100</priority>
+			<priority>default</priority>
 		</processor>
 
 		<processor>
@@ -51,12 +51,18 @@
 
 		<processor>
 			<type>stemming</type>
-			<active>FALSE</active>
+			<active>TRUE</active>
 			<priority>default</priority>
 		</processor>
 
 		<processor>
 			<type>clean_prefixes</type>
+			<active>TRUE</active>
+			<priority>default</priority>
+		</processor>
+
+		<processor>
+			<type>part_of_speech</type>
 			<active>TRUE</active>
 			<priority>default</priority>
 		</processor>

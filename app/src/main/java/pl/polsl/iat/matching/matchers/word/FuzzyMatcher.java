@@ -21,6 +21,6 @@ class FuzzyMatcher extends WordMatcher {
 
     @Override
     public Integer doMatch(Word left, Word right) {
-        return FuzzySearch.ratio(left.toString(), right.toString());
+        return FuzzySearch.tokenSetRatio(left.toString(), right.toString());
     }
 }

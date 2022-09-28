@@ -1,0 +1,5 @@
+id
+code
+uuid
+guid
+key

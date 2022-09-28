@@ -22,13 +22,13 @@ public class StringProcessingTest {
     @Test
     public void testFullStringProcessing() {
         Map<String, Words> processingMap = Map.of(
-                "Sexy", new Words("first", "name"),
+                "Sexy", new Words(new Word("first_name"),"first", "name"),
 //                "testing_result", new Words(""),
 //                "test_outcome", new Words(""),
 //                "trial_result", new Words(""),
 //                "trailOutcome", new Words(""),
 //                "1test_result", new Words(""),
-                "qq_testing__result1_in", new Words("")
+                "qq_testing__result1_in", new Words(new Word(""), "")
         );
 
         processingMap.keySet().stream().map(mainProc::process).forEach(System.out::println);
@@ -37,7 +37,7 @@ public class StringProcessingTest {
 //    @Test
     public void testLemmatizer() {
         String testString = "perfectly";
-        Words words = ProcessorType.PART_OF_SPEECH_TAGGER.getProcessor().get().process(new Words(testString));
+        Words words = ProcessorType.PART_OF_SPEECH_TAGGER.getProcessor().get().process(new Words(new Word(testString),testString));
         words = ProcessorType.LEMMATIZER.getProcessor().get().process(words);
         System.out.println(words);
     }

@@ -28,8 +28,11 @@ public class WordsMatcher implements Matcher<Words, WordsMatchingResult> {
         WordsMatchingResult result = new WordsMatchingResult();
         for (WordMatcher.Type typeMatcher : availableWordMatchers.entrySet().stream().map(e -> e.getKey()).collect(Collectors.toList())) {
             try {
-                float matcherResult = matchWithMatcher(typeMatcher.getMatcher(), left, right);
+                int matcherResult = matchWithMatcher(typeMatcher.getMatcher(), left, right);
                 result.addResult(typeMatcher, matcherResult);
+                if(matcherResult == 100) {
+                    break;
+                }
             } catch (Exception e) {
                 Logger.warn("Error trying to match '%s' and '%s' using [%s] matcher.\tDetails:\t%s",left.toString(), right.toString(), typeMatcher.getName(), e.getClass().getName());
             }
@@ -37,7 +40,12 @@ public class WordsMatcher implements Matcher<Words, WordsMatchingResult> {
         return result;
     }
 
-    private float matchWithMatcher(WordMatcher matcher, Words A, Words B) {
+    private int matchWithMatcher(WordMatcher matcher, Words A, Words B) {
+        int rawMatch = matcher.doMatch(A.getRawWord(), B.getRawWord());
+        System.out.println(rawMatch);
+        if(rawMatch == 100) {
+            return 100;
+        }
         Words smaller = A.size() < B.size() ? A : B;
         Words bigger = A.size() < B.size() ? B : A;
         int nSmaller = smaller.size(), nBigger = bigger.size();
