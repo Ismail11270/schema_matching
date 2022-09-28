@@ -227,10 +227,10 @@ COMMENT ON COLUMN human_resources.employee.organizationnode IS 'Where the employ
 
 
 --
--- Name: employeedepartmenthistory; Type: TABLE; Schema: human_resources; Owner: postgres
+-- Name: employee_department_history; Type: TABLE; Schema: human_resources; Owner: postgres
 --
 
-CREATE TABLE human_resources.employeedepartmenthistory (
+CREATE TABLE human_resources.employee_department_history (
     businessentityid integer NOT NULL,
     departmentid smallint NOT NULL,
     shiftid smallint NOT NULL,
@@ -241,55 +241,55 @@ CREATE TABLE human_resources.employeedepartmenthistory (
 );
 
 
-ALTER TABLE human_resources.employeedepartmenthistory OWNER TO postgres;
+ALTER TABLE human_resources.employee_department_history OWNER TO postgres;
 
 --
--- Name: TABLE employeedepartmenthistory; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: TABLE employee_department_history; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON TABLE human_resources.employeedepartmenthistory IS 'Employee department transfers.';
-
-
---
--- Name: COLUMN employeedepartmenthistory.businessentityid; Type: COMMENT; Schema: human_resources; Owner: postgres
---
-
-COMMENT ON COLUMN human_resources.employeedepartmenthistory.businessentityid IS 'Employee identification number. Foreign key to Employee.BusinessEntityID.';
+COMMENT ON TABLE human_resources.employee_department_history IS 'Employee department transfers.';
 
 
 --
--- Name: COLUMN employeedepartmenthistory.departmentid; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: COLUMN employee_department_history.businessentityid; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON COLUMN human_resources.employeedepartmenthistory.departmentid IS 'Department in which the employee worked including currently. Foreign key to Department.DepartmentID.';
-
-
---
--- Name: COLUMN employeedepartmenthistory.shiftid; Type: COMMENT; Schema: human_resources; Owner: postgres
---
-
-COMMENT ON COLUMN human_resources.employeedepartmenthistory.shiftid IS 'Identifies which 8-hour shift the employee works. Foreign key to Shift.Shift.ID.';
+COMMENT ON COLUMN human_resources.employee_department_history.businessentityid IS 'Employee identification number. Foreign key to Employee.BusinessEntityID.';
 
 
 --
--- Name: COLUMN employeedepartmenthistory.startdate; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: COLUMN employee_department_history.departmentid; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON COLUMN human_resources.employeedepartmenthistory.startdate IS 'Date the employee started work in the department.';
-
-
---
--- Name: COLUMN employeedepartmenthistory.enddate; Type: COMMENT; Schema: human_resources; Owner: postgres
---
-
-COMMENT ON COLUMN human_resources.employeedepartmenthistory.enddate IS 'Date the employee left the department. NULL = Current department.';
+COMMENT ON COLUMN human_resources.employee_department_history.departmentid IS 'Department in which the employee worked including currently. Foreign key to Department.DepartmentID.';
 
 
 --
--- Name: employeepayhistory; Type: TABLE; Schema: human_resources; Owner: postgres
+-- Name: COLUMN employee_department_history.shiftid; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-CREATE TABLE human_resources.employeepayhistory (
+COMMENT ON COLUMN human_resources.employee_department_history.shiftid IS 'Identifies which 8-hour shift the employee works. Foreign key to Shift.Shift.ID.';
+
+
+--
+-- Name: COLUMN employee_department_history.startdate; Type: COMMENT; Schema: human_resources; Owner: postgres
+--
+
+COMMENT ON COLUMN human_resources.employee_department_history.startdate IS 'Date the employee started work in the department.';
+
+
+--
+-- Name: COLUMN employee_department_history.enddate; Type: COMMENT; Schema: human_resources; Owner: postgres
+--
+
+COMMENT ON COLUMN human_resources.employee_department_history.enddate IS 'Date the employee left the department. NULL = Current department.';
+
+
+--
+-- Name: employee_pay_history; Type: TABLE; Schema: human_resources; Owner: postgres
+--
+
+CREATE TABLE human_resources.employee_pay_history (
     businessentityid integer NOT NULL,
     ratechangedate timestamp without time zone NOT NULL,
     rate numeric NOT NULL,
@@ -300,48 +300,48 @@ CREATE TABLE human_resources.employeepayhistory (
 );
 
 
-ALTER TABLE human_resources.employeepayhistory OWNER TO postgres;
+ALTER TABLE human_resources.employee_pay_history OWNER TO postgres;
 
 --
--- Name: TABLE employeepayhistory; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: TABLE employee_pay_history; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON TABLE human_resources.employeepayhistory IS 'Employee pay history.';
-
-
---
--- Name: COLUMN employeepayhistory.businessentityid; Type: COMMENT; Schema: human_resources; Owner: postgres
---
-
-COMMENT ON COLUMN human_resources.employeepayhistory.businessentityid IS 'Employee identification number. Foreign key to Employee.BusinessEntityID.';
+COMMENT ON TABLE human_resources.employee_pay_history IS 'Employee pay history.';
 
 
 --
--- Name: COLUMN employeepayhistory.ratechangedate; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: COLUMN employee_pay_history.businessentityid; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON COLUMN human_resources.employeepayhistory.ratechangedate IS 'Date the change in pay is effective';
-
-
---
--- Name: COLUMN employeepayhistory.rate; Type: COMMENT; Schema: human_resources; Owner: postgres
---
-
-COMMENT ON COLUMN human_resources.employeepayhistory.rate IS 'Salary hourly rate.';
+COMMENT ON COLUMN human_resources.employee_pay_history.businessentityid IS 'Employee identification number. Foreign key to Employee.BusinessEntityID.';
 
 
 --
--- Name: COLUMN employeepayhistory.payfrequency; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: COLUMN employee_pay_history.ratechangedate; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON COLUMN human_resources.employeepayhistory.payfrequency IS '1 = Salary received monthly, 2 = Salary received biweekly';
+COMMENT ON COLUMN human_resources.employee_pay_history.ratechangedate IS 'Date the change in pay is effective';
 
 
 --
--- Name: jobcandidate; Type: TABLE; Schema: human_resources; Owner: postgres
+-- Name: COLUMN employee_pay_history.rate; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-CREATE TABLE human_resources.jobcandidate (
+COMMENT ON COLUMN human_resources.employee_pay_history.rate IS 'Salary hourly rate.';
+
+
+--
+-- Name: COLUMN employee_pay_history.payfrequency; Type: COMMENT; Schema: human_resources; Owner: postgres
+--
+
+COMMENT ON COLUMN human_resources.employee_pay_history.payfrequency IS '1 = Salary received monthly, 2 = Salary received biweekly';
+
+
+--
+-- Name: job_candidate; Type: TABLE; Schema: human_resources; Owner: postgres
+--
+
+CREATE TABLE human_resources.job_candidate (
     jobcandidateid integer NOT NULL,
     businessentityid integer,
     resume xml,
@@ -349,34 +349,34 @@ CREATE TABLE human_resources.jobcandidate (
 );
 
 
-ALTER TABLE human_resources.jobcandidate OWNER TO postgres;
+ALTER TABLE human_resources.job_candidate OWNER TO postgres;
 
 --
--- Name: TABLE jobcandidate; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: TABLE job_candidate; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON TABLE human_resources.jobcandidate IS 'RÃ©sumÃ©s submitted to Human Resources by job applicants.';
-
-
---
--- Name: COLUMN jobcandidate.jobcandidateid; Type: COMMENT; Schema: human_resources; Owner: postgres
---
-
-COMMENT ON COLUMN human_resources.jobcandidate.jobcandidateid IS 'Primary key for JobCandidate records.';
+COMMENT ON TABLE human_resources.job_candidate IS 'RÃ©sumÃ©s submitted to Human Resources by job applicants.';
 
 
 --
--- Name: COLUMN jobcandidate.businessentityid; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: COLUMN job_candidate.jobcandidateid; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON COLUMN human_resources.jobcandidate.businessentityid IS 'Employee identification number if applicant was hired. Foreign key to Employee.BusinessEntityID.';
+COMMENT ON COLUMN human_resources.job_candidate.jobcandidateid IS 'Primary key for JobCandidate records.';
 
 
 --
--- Name: COLUMN jobcandidate.resume; Type: COMMENT; Schema: human_resources; Owner: postgres
+-- Name: COLUMN job_candidate.businessentityid; Type: COMMENT; Schema: human_resources; Owner: postgres
 --
 
-COMMENT ON COLUMN human_resources.jobcandidate.resume IS 'RÃ©sumÃ© in XML format.';
+COMMENT ON COLUMN human_resources.job_candidate.businessentityid IS 'Employee identification number if applicant was hired. Foreign key to Employee.BusinessEntityID.';
+
+
+--
+-- Name: COLUMN job_candidate.resume; Type: COMMENT; Schema: human_resources; Owner: postgres
+--
+
+COMMENT ON COLUMN human_resources.job_candidate.resume IS 'RÃ©sumÃ© in XML format.';
 
 
 --
@@ -398,7 +398,7 @@ ALTER TABLE human_resources.jobcandidate_jobcandidateid_seq OWNER TO postgres;
 -- Name: jobcandidate_jobcandidateid_seq; Type: SEQUENCE OWNED BY; Schema: human_resources; Owner: postgres
 --
 
-ALTER SEQUENCE human_resources.jobcandidate_jobcandidateid_seq OWNED BY human_resources.jobcandidate.jobcandidateid;
+ALTER SEQUENCE human_resources.jobcandidate_jobcandidateid_seq OWNED BY human_resources.job_candidate.jobcandidateid;
 
 
 --
@@ -470,23 +470,23 @@ ALTER SEQUENCE human_resources.shift_shiftid_seq OWNED BY human_resources.shift.
 --
 
 CREATE VIEW human_resources.vjobcandidate AS
- SELECT jobcandidate.jobcandidateid,
-    jobcandidate.businessentityid,
-    ((xpath('/n:Resume/n:Name/n:Name.Prefix/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.Prefix",
-    ((xpath('/n:Resume/n:Name/n:Name.First/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.First",
-    ((xpath('/n:Resume/n:Name/n:Name.Middle/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.Middle",
-    ((xpath('/n:Resume/n:Name/n:Name.Last/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.Last",
-    ((xpath('/n:Resume/n:Name/n:Name.Suffix/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.Suffix",
-    ((xpath('/n:Resume/n:Skills/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying AS "Skills",
-    ((xpath('n:Address/n:Addr.Type/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Addr.Type",
-    ((xpath('n:Address/n:Addr.Location/n:Location/n:Loc.CountryRegion/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(100) AS "Addr.Loc.CountryRegion",
-    ((xpath('n:Address/n:Addr.Location/n:Location/n:Loc.State/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(100) AS "Addr.Loc.State",
-    ((xpath('n:Address/n:Addr.Location/n:Location/n:Loc.City/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(100) AS "Addr.Loc.City",
-    ((xpath('n:Address/n:Addr.PostalCode/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(20) AS "Addr.PostalCode",
-    ((xpath('/n:Resume/n:EMail/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying AS "EMail",
-    ((xpath('/n:Resume/n:WebSite/text()'::text, jobcandidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying AS "WebSite",
-    jobcandidate.modifieddate
-   FROM human_resources.jobcandidate;
+ SELECT job_candidate.jobcandidateid,
+    job_candidate.businessentityid,
+    ((xpath('/n:Resume/n:Name/n:Name.Prefix/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.Prefix",
+    ((xpath('/n:Resume/n:Name/n:Name.First/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.First",
+    ((xpath('/n:Resume/n:Name/n:Name.Middle/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.Middle",
+    ((xpath('/n:Resume/n:Name/n:Name.Last/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.Last",
+    ((xpath('/n:Resume/n:Name/n:Name.Suffix/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Name.Suffix",
+    ((xpath('/n:Resume/n:Skills/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying AS "Skills",
+    ((xpath('n:Address/n:Addr.Type/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(30) AS "Addr.Type",
+    ((xpath('n:Address/n:Addr.Location/n:Location/n:Loc.CountryRegion/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(100) AS "Addr.Loc.CountryRegion",
+    ((xpath('n:Address/n:Addr.Location/n:Location/n:Loc.State/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(100) AS "Addr.Loc.State",
+    ((xpath('n:Address/n:Addr.Location/n:Location/n:Loc.City/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(100) AS "Addr.Loc.City",
+    ((xpath('n:Address/n:Addr.PostalCode/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying(20) AS "Addr.PostalCode",
+    ((xpath('/n:Resume/n:EMail/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying AS "EMail",
+    ((xpath('/n:Resume/n:WebSite/text()'::text, job_candidate.resume, '{{n,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[]))[1])::character varying AS "WebSite",
+    job_candidate.modifieddate
+   FROM human_resources.job_candidate;
 
 
 ALTER TABLE human_resources.vjobcandidate OWNER TO postgres;
@@ -511,9 +511,9 @@ CREATE VIEW human_resources.vjobcandidateeducation AS
     ((xpath('/root/ns:Education/ns:Edu.Location/ns:Location/ns:Loc.City/text()'::text, jc.doc, '{{ns,http://adventureworks.com}}'::text[]))[1])::character varying(100) AS "Edu.Loc.City"
    FROM ( SELECT unnesting.jobcandidateid,
             ((('<root xmlns:ns="http://adventureworks.com">'::text || ((unnesting.education)::character varying)::text) || '</root>'::text))::xml AS doc
-           FROM ( SELECT jobcandidate.jobcandidateid,
-                    unnest(xpath('/ns:Resume/ns:Education'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])) AS education
-                   FROM human_resources.jobcandidate) unnesting) jc;
+           FROM ( SELECT job_candidate.jobcandidateid,
+                    unnest(xpath('/ns:Resume/ns:Education'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])) AS education
+                   FROM human_resources.job_candidate) unnesting) jc;
 
 
 ALTER TABLE human_resources.vjobcandidateeducation OWNER TO postgres;
@@ -523,18 +523,18 @@ ALTER TABLE human_resources.vjobcandidateeducation OWNER TO postgres;
 --
 
 CREATE VIEW human_resources.vjobcandidateemployment AS
- SELECT jobcandidate.jobcandidateid,
-    ((unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.StartDate/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying(20))::date AS "Emp.StartDate",
-    ((unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.EndDate/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying(20))::date AS "Emp.EndDate",
-    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.OrgName/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying(100) AS "Emp.OrgName",
-    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.JobTitle/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying(100) AS "Emp.JobTitle",
-    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.Responsibility/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.Responsibility",
-    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.FunctionCategory/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.FunctionCategory",
-    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.IndustryCategory/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.IndustryCategory",
-    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.Location/ns:Location/ns:Loc.CountryRegion/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.Loc.CountryRegion",
-    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.Location/ns:Location/ns:Loc.State/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.Loc.State",
-    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.Location/ns:Location/ns:Loc.City/text()'::text, jobcandidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.Loc.City"
-   FROM human_resources.jobcandidate;
+ SELECT job_candidate.jobcandidateid,
+    ((unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.StartDate/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying(20))::date AS "Emp.StartDate",
+    ((unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.EndDate/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying(20))::date AS "Emp.EndDate",
+    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.OrgName/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying(100) AS "Emp.OrgName",
+    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.JobTitle/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying(100) AS "Emp.JobTitle",
+    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.Responsibility/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.Responsibility",
+    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.FunctionCategory/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.FunctionCategory",
+    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.IndustryCategory/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.IndustryCategory",
+    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.Location/ns:Location/ns:Loc.CountryRegion/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.Loc.CountryRegion",
+    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.Location/ns:Location/ns:Loc.State/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.Loc.State",
+    (unnest(xpath('/ns:Resume/ns:Employment/ns:Emp.Location/ns:Location/ns:Loc.City/text()'::text, job_candidate.resume, '{{ns,http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume}}'::text[])))::character varying AS "Emp.Loc.City"
+   FROM human_resources.job_candidate;
 
 
 ALTER TABLE human_resources.vjobcandidateemployment OWNER TO postgres;
@@ -630,30 +630,30 @@ ALTER SEQUENCE person.address_addressid_seq OWNED BY person.address.addressid;
 
 
 --
--- Name: addresstype; Type: TABLE; Schema: person; Owner: postgres
+-- Name: address_type; Type: TABLE; Schema: person; Owner: postgres
 --
 
-CREATE TABLE person.addresstype (
+CREATE TABLE person.address_type (
     addresstypeid integer NOT NULL,
     rowguid uuid NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE person.addresstype OWNER TO postgres;
+ALTER TABLE person.address_type OWNER TO postgres;
 
 --
--- Name: TABLE addresstype; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: TABLE address_type; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON TABLE person.addresstype IS 'Types of addresses stored in the Address table.';
+COMMENT ON TABLE person.address_type IS 'Types of addresses stored in the Address table.';
 
 
 --
--- Name: COLUMN addresstype.addresstypeid; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN address_type.addresstypeid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.addresstype.addresstypeid IS 'Primary key for AddressType records.';
+COMMENT ON COLUMN person.address_type.addresstypeid IS 'Primary key for AddressType records.';
 
 
 --
@@ -675,34 +675,120 @@ ALTER TABLE person.addresstype_addresstypeid_seq OWNER TO postgres;
 -- Name: addresstype_addresstypeid_seq; Type: SEQUENCE OWNED BY; Schema: person; Owner: postgres
 --
 
-ALTER SEQUENCE person.addresstype_addresstypeid_seq OWNED BY person.addresstype.addresstypeid;
+ALTER SEQUENCE person.addresstype_addresstypeid_seq OWNED BY person.address_type.addresstypeid;
 
 
 --
--- Name: businessentity; Type: TABLE; Schema: person; Owner: postgres
+-- Name: business_entity; Type: TABLE; Schema: person; Owner: postgres
 --
 
-CREATE TABLE person.businessentity (
+CREATE TABLE person.business_entity (
     businessentityid integer NOT NULL,
     rowguid uuid NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE person.businessentity OWNER TO postgres;
+ALTER TABLE person.business_entity OWNER TO postgres;
 
 --
--- Name: TABLE businessentity; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: TABLE business_entity; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON TABLE person.businessentity IS 'Source of the ID that connects vendors, customers, and employees with address and contact information.';
+COMMENT ON TABLE person.business_entity IS 'Source of the ID that connects vendors, customers, and employees with address and contact information.';
 
 
 --
--- Name: COLUMN businessentity.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN business_entity.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.businessentity.businessentityid IS 'Primary key for all customers, vendors, and employees.';
+COMMENT ON COLUMN person.business_entity.businessentityid IS 'Primary key for all customers, vendors, and employees.';
+
+
+--
+-- Name: business_entity_address; Type: TABLE; Schema: person; Owner: postgres
+--
+
+CREATE TABLE person.business_entity_address (
+    businessentityid integer NOT NULL,
+    addressid integer NOT NULL,
+    addresstypeid integer NOT NULL,
+    rowguid uuid NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE person.business_entity_address OWNER TO postgres;
+
+--
+-- Name: TABLE business_entity_address; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON TABLE person.business_entity_address IS 'Cross-reference table mapping customers, vendors, and employees to their addresses.';
+
+
+--
+-- Name: COLUMN business_entity_address.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.business_entity_address.businessentityid IS 'Primary key. Foreign key to BusinessEntity.BusinessEntityID.';
+
+
+--
+-- Name: COLUMN business_entity_address.addressid; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.business_entity_address.addressid IS 'Primary key. Foreign key to Address.AddressID.';
+
+
+--
+-- Name: COLUMN business_entity_address.addresstypeid; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.business_entity_address.addresstypeid IS 'Primary key. Foreign key to AddressType.AddressTypeID.';
+
+
+--
+-- Name: business_entity_contact; Type: TABLE; Schema: person; Owner: postgres
+--
+
+CREATE TABLE person.business_entity_contact (
+    businessentityid integer NOT NULL,
+    personid integer NOT NULL,
+    contacttypeid integer NOT NULL,
+    rowguid uuid NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE person.business_entity_contact OWNER TO postgres;
+
+--
+-- Name: TABLE business_entity_contact; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON TABLE person.business_entity_contact IS 'Cross-reference table mapping stores, vendors, and employees to people';
+
+
+--
+-- Name: COLUMN business_entity_contact.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.business_entity_contact.businessentityid IS 'Primary key. Foreign key to BusinessEntity.BusinessEntityID.';
+
+
+--
+-- Name: COLUMN business_entity_contact.personid; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.business_entity_contact.personid IS 'Primary key. Foreign key to Person.BusinessEntityID.';
+
+
+--
+-- Name: COLUMN business_entity_contact.contacttypeid; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.business_entity_contact.contacttypeid IS 'Primary key.  Foreign key to ContactType.ContactTypeID.';
 
 
 --
@@ -724,119 +810,33 @@ ALTER TABLE person.businessentity_businessentityid_seq OWNER TO postgres;
 -- Name: businessentity_businessentityid_seq; Type: SEQUENCE OWNED BY; Schema: person; Owner: postgres
 --
 
-ALTER SEQUENCE person.businessentity_businessentityid_seq OWNED BY person.businessentity.businessentityid;
+ALTER SEQUENCE person.businessentity_businessentityid_seq OWNED BY person.business_entity.businessentityid;
 
 
 --
--- Name: businessentityaddress; Type: TABLE; Schema: person; Owner: postgres
+-- Name: contact_type; Type: TABLE; Schema: person; Owner: postgres
 --
 
-CREATE TABLE person.businessentityaddress (
-    businessentityid integer NOT NULL,
-    addressid integer NOT NULL,
-    addresstypeid integer NOT NULL,
-    rowguid uuid NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE person.businessentityaddress OWNER TO postgres;
-
---
--- Name: TABLE businessentityaddress; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON TABLE person.businessentityaddress IS 'Cross-reference table mapping customers, vendors, and employees to their addresses.';
-
-
---
--- Name: COLUMN businessentityaddress.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.businessentityaddress.businessentityid IS 'Primary key. Foreign key to BusinessEntity.BusinessEntityID.';
-
-
---
--- Name: COLUMN businessentityaddress.addressid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.businessentityaddress.addressid IS 'Primary key. Foreign key to Address.AddressID.';
-
-
---
--- Name: COLUMN businessentityaddress.addresstypeid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.businessentityaddress.addresstypeid IS 'Primary key. Foreign key to AddressType.AddressTypeID.';
-
-
---
--- Name: businessentitycontact; Type: TABLE; Schema: person; Owner: postgres
---
-
-CREATE TABLE person.businessentitycontact (
-    businessentityid integer NOT NULL,
-    personid integer NOT NULL,
-    contacttypeid integer NOT NULL,
-    rowguid uuid NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE person.businessentitycontact OWNER TO postgres;
-
---
--- Name: TABLE businessentitycontact; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON TABLE person.businessentitycontact IS 'Cross-reference table mapping stores, vendors, and employees to people';
-
-
---
--- Name: COLUMN businessentitycontact.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.businessentitycontact.businessentityid IS 'Primary key. Foreign key to BusinessEntity.BusinessEntityID.';
-
-
---
--- Name: COLUMN businessentitycontact.personid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.businessentitycontact.personid IS 'Primary key. Foreign key to Person.BusinessEntityID.';
-
-
---
--- Name: COLUMN businessentitycontact.contacttypeid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.businessentitycontact.contacttypeid IS 'Primary key.  Foreign key to ContactType.ContactTypeID.';
-
-
---
--- Name: contacttype; Type: TABLE; Schema: person; Owner: postgres
---
-
-CREATE TABLE person.contacttype (
+CREATE TABLE person.contact_type (
     contacttypeid integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE person.contacttype OWNER TO postgres;
+ALTER TABLE person.contact_type OWNER TO postgres;
 
 --
--- Name: TABLE contacttype; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: TABLE contact_type; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON TABLE person.contacttype IS 'Lookup table containing the types of business entity contacts.';
+COMMENT ON TABLE person.contact_type IS 'Lookup table containing the types of business entity contacts.';
 
 
 --
--- Name: COLUMN contacttype.contacttypeid; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN contact_type.contacttypeid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.contacttype.contacttypeid IS 'Primary key for ContactType records.';
+COMMENT ON COLUMN person.contact_type.contacttypeid IS 'Primary key for ContactType records.';
 
 
 --
@@ -858,40 +858,40 @@ ALTER TABLE person.contacttype_contacttypeid_seq OWNER TO postgres;
 -- Name: contacttype_contacttypeid_seq; Type: SEQUENCE OWNED BY; Schema: person; Owner: postgres
 --
 
-ALTER SEQUENCE person.contacttype_contacttypeid_seq OWNED BY person.contacttype.contacttypeid;
+ALTER SEQUENCE person.contacttype_contacttypeid_seq OWNED BY person.contact_type.contacttypeid;
 
 
 --
--- Name: countryregion; Type: TABLE; Schema: person; Owner: postgres
+-- Name: country_region; Type: TABLE; Schema: person; Owner: postgres
 --
 
-CREATE TABLE person.countryregion (
+CREATE TABLE person.country_region (
     countryregioncode character varying(3) NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE person.countryregion OWNER TO postgres;
+ALTER TABLE person.country_region OWNER TO postgres;
 
 --
--- Name: TABLE countryregion; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: TABLE country_region; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON TABLE person.countryregion IS 'Lookup table containing the ISO standard codes for countries and regions.';
-
-
---
--- Name: COLUMN countryregion.countryregioncode; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.countryregion.countryregioncode IS 'ISO standard code for countries and regions.';
+COMMENT ON TABLE person.country_region IS 'Lookup table containing the ISO standard codes for countries and regions.';
 
 
 --
--- Name: emailaddress; Type: TABLE; Schema: person; Owner: postgres
+-- Name: COLUMN country_region.countryregioncode; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-CREATE TABLE person.emailaddress (
+COMMENT ON COLUMN person.country_region.countryregioncode IS 'ISO standard code for countries and regions.';
+
+
+--
+-- Name: email_address; Type: TABLE; Schema: person; Owner: postgres
+--
+
+CREATE TABLE person.email_address (
     businessentityid integer NOT NULL,
     emailaddressid integer NOT NULL,
     emailaddress character varying(50),
@@ -900,34 +900,34 @@ CREATE TABLE person.emailaddress (
 );
 
 
-ALTER TABLE person.emailaddress OWNER TO postgres;
+ALTER TABLE person.email_address OWNER TO postgres;
 
 --
--- Name: TABLE emailaddress; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: TABLE email_address; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON TABLE person.emailaddress IS 'Where to send a person email.';
-
-
---
--- Name: COLUMN emailaddress.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.emailaddress.businessentityid IS 'Primary key. Person associated with this email address.  Foreign key to Person.BusinessEntityID';
+COMMENT ON TABLE person.email_address IS 'Where to send a person email.';
 
 
 --
--- Name: COLUMN emailaddress.emailaddressid; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN email_address.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.emailaddress.emailaddressid IS 'Primary key. ID of this email address.';
+COMMENT ON COLUMN person.email_address.businessentityid IS 'Primary key. Person associated with this email address.  Foreign key to Person.BusinessEntityID';
 
 
 --
--- Name: COLUMN emailaddress.emailaddress; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN email_address.emailaddressid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.emailaddress.emailaddress IS 'E-mail address for the person.';
+COMMENT ON COLUMN person.email_address.emailaddressid IS 'Primary key. ID of this email address.';
+
+
+--
+-- Name: COLUMN email_address.emailaddress; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.email_address.emailaddress IS 'E-mail address for the person.';
 
 
 --
@@ -949,7 +949,7 @@ ALTER TABLE person.emailaddress_emailaddressid_seq OWNER TO postgres;
 -- Name: emailaddress_emailaddressid_seq; Type: SEQUENCE OWNED BY; Schema: person; Owner: postgres
 --
 
-ALTER SEQUENCE person.emailaddress_emailaddressid_seq OWNED BY person.emailaddress.emailaddressid;
+ALTER SEQUENCE person.emailaddress_emailaddressid_seq OWNED BY person.email_address.emailaddressid;
 
 
 --
@@ -1066,63 +1066,63 @@ COMMENT ON COLUMN person.person.demographics IS 'Personal information such as ho
 
 
 --
--- Name: personphone; Type: TABLE; Schema: person; Owner: postgres
+-- Name: person_phone; Type: TABLE; Schema: person; Owner: postgres
 --
 
-CREATE TABLE person.personphone (
+CREATE TABLE person.person_phone (
     businessentityid integer NOT NULL,
     phonenumbertypeid integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE person.personphone OWNER TO postgres;
+ALTER TABLE person.person_phone OWNER TO postgres;
 
 --
--- Name: TABLE personphone; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: TABLE person_phone; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON TABLE person.personphone IS 'Telephone number and type of a person.';
-
-
---
--- Name: COLUMN personphone.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.personphone.businessentityid IS 'Business entity identification number. Foreign key to Person.BusinessEntityID.';
+COMMENT ON TABLE person.person_phone IS 'Telephone number and type of a person.';
 
 
 --
--- Name: COLUMN personphone.phonenumbertypeid; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN person_phone.businessentityid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.personphone.phonenumbertypeid IS 'Kind of phone number. Foreign key to PhoneNumberType.PhoneNumberTypeID.';
+COMMENT ON COLUMN person.person_phone.businessentityid IS 'Business entity identification number. Foreign key to Person.BusinessEntityID.';
 
 
 --
--- Name: phonenumbertype; Type: TABLE; Schema: person; Owner: postgres
+-- Name: COLUMN person_phone.phonenumbertypeid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-CREATE TABLE person.phonenumbertype (
+COMMENT ON COLUMN person.person_phone.phonenumbertypeid IS 'Kind of phone number. Foreign key to PhoneNumberType.PhoneNumberTypeID.';
+
+
+--
+-- Name: phone_number_type; Type: TABLE; Schema: person; Owner: postgres
+--
+
+CREATE TABLE person.phone_number_type (
     phonenumbertypeid integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE person.phonenumbertype OWNER TO postgres;
+ALTER TABLE person.phone_number_type OWNER TO postgres;
 
 --
--- Name: TABLE phonenumbertype; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: TABLE phone_number_type; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON TABLE person.phonenumbertype IS 'Type of phone number of a person.';
+COMMENT ON TABLE person.phone_number_type IS 'Type of phone number of a person.';
 
 
 --
--- Name: COLUMN phonenumbertype.phonenumbertypeid; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN phone_number_type.phonenumbertypeid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.phonenumbertype.phonenumbertypeid IS 'Primary key for telephone number type records.';
+COMMENT ON COLUMN person.phone_number_type.phonenumbertypeid IS 'Primary key for telephone number type records.';
 
 
 --
@@ -1144,14 +1144,14 @@ ALTER TABLE person.phonenumbertype_phonenumbertypeid_seq OWNER TO postgres;
 -- Name: phonenumbertype_phonenumbertypeid_seq; Type: SEQUENCE OWNED BY; Schema: person; Owner: postgres
 --
 
-ALTER SEQUENCE person.phonenumbertype_phonenumbertypeid_seq OWNED BY person.phonenumbertype.phonenumbertypeid;
+ALTER SEQUENCE person.phonenumbertype_phonenumbertypeid_seq OWNED BY person.phone_number_type.phonenumbertypeid;
 
 
 --
--- Name: stateprovince; Type: TABLE; Schema: person; Owner: postgres
+-- Name: state_province; Type: TABLE; Schema: person; Owner: postgres
 --
 
-CREATE TABLE person.stateprovince (
+CREATE TABLE person.state_province (
     stateprovinceid integer NOT NULL,
     stateprovincecode character(3) NOT NULL,
     countryregioncode character varying(3) NOT NULL,
@@ -1161,41 +1161,41 @@ CREATE TABLE person.stateprovince (
 );
 
 
-ALTER TABLE person.stateprovince OWNER TO postgres;
+ALTER TABLE person.state_province OWNER TO postgres;
 
 --
--- Name: TABLE stateprovince; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: TABLE state_province; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON TABLE person.stateprovince IS 'State and province lookup table.';
-
-
---
--- Name: COLUMN stateprovince.stateprovinceid; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.stateprovince.stateprovinceid IS 'Primary key for StateProvince records.';
+COMMENT ON TABLE person.state_province IS 'State and province lookup table.';
 
 
 --
--- Name: COLUMN stateprovince.stateprovincecode; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN state_province.stateprovinceid; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.stateprovince.stateprovincecode IS 'ISO standard state or province code.';
-
-
---
--- Name: COLUMN stateprovince.countryregioncode; Type: COMMENT; Schema: person; Owner: postgres
---
-
-COMMENT ON COLUMN person.stateprovince.countryregioncode IS 'ISO standard country or region code. Foreign key to CountryRegion.CountryRegionCode.';
+COMMENT ON COLUMN person.state_province.stateprovinceid IS 'Primary key for StateProvince records.';
 
 
 --
--- Name: COLUMN stateprovince.territoryid; Type: COMMENT; Schema: person; Owner: postgres
+-- Name: COLUMN state_province.stateprovincecode; Type: COMMENT; Schema: person; Owner: postgres
 --
 
-COMMENT ON COLUMN person.stateprovince.territoryid IS 'ID of the territory in which the state or province is located. Foreign key to SalesTerritory.SalesTerritoryID.';
+COMMENT ON COLUMN person.state_province.stateprovincecode IS 'ISO standard state or province code.';
+
+
+--
+-- Name: COLUMN state_province.countryregioncode; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.state_province.countryregioncode IS 'ISO standard country or region code. Foreign key to CountryRegion.CountryRegionCode.';
+
+
+--
+-- Name: COLUMN state_province.territoryid; Type: COMMENT; Schema: person; Owner: postgres
+--
+
+COMMENT ON COLUMN person.state_province.territoryid IS 'ID of the territory in which the state or province is located. Foreign key to SalesTerritory.SalesTerritoryID.';
 
 
 --
@@ -1217,14 +1217,14 @@ ALTER TABLE person.stateprovince_stateprovinceid_seq OWNER TO postgres;
 -- Name: stateprovince_stateprovinceid_seq; Type: SEQUENCE OWNED BY; Schema: person; Owner: postgres
 --
 
-ALTER SEQUENCE person.stateprovince_stateprovinceid_seq OWNED BY person.stateprovince.stateprovinceid;
+ALTER SEQUENCE person.stateprovince_stateprovinceid_seq OWNED BY person.state_province.stateprovinceid;
 
 
 --
--- Name: billofmaterials; Type: TABLE; Schema: production; Owner: postgres
+-- Name: bill_of_materials; Type: TABLE; Schema: production; Owner: postgres
 --
 
-CREATE TABLE production.billofmaterials (
+CREATE TABLE production.bill_of_materials (
     billofmaterialsid integer NOT NULL,
     productassemblyid integer,
     componentid integer NOT NULL,
@@ -1241,69 +1241,62 @@ CREATE TABLE production.billofmaterials (
 );
 
 
-ALTER TABLE production.billofmaterials OWNER TO postgres;
+ALTER TABLE production.bill_of_materials OWNER TO postgres;
 
 --
--- Name: TABLE billofmaterials; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN bill_of_materials.billofmaterialsid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON TABLE production.billofmaterials IS 'Items required to make bicycles and bicycle subassemblies. It identifies the heirarchical relationship between a parent product and its components.';
-
-
---
--- Name: COLUMN billofmaterials.billofmaterialsid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.billofmaterials.billofmaterialsid IS 'Primary key for BillOfMaterials records.';
+COMMENT ON COLUMN production.bill_of_materials.billofmaterialsid IS 'Primary key for BillOfMaterials records.';
 
 
 --
--- Name: COLUMN billofmaterials.productassemblyid; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN bill_of_materials.productassemblyid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.billofmaterials.productassemblyid IS 'Parent product identification number. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN billofmaterials.componentid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.billofmaterials.componentid IS 'Component identification number. Foreign key to Product.ProductID.';
+COMMENT ON COLUMN production.bill_of_materials.productassemblyid IS 'Parent product identification number. Foreign key to Product.ProductID.';
 
 
 --
--- Name: COLUMN billofmaterials.startdate; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN bill_of_materials.componentid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.billofmaterials.startdate IS 'Date the component started being used in the assembly item.';
-
-
---
--- Name: COLUMN billofmaterials.enddate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.billofmaterials.enddate IS 'Date the component stopped being used in the assembly item.';
+COMMENT ON COLUMN production.bill_of_materials.componentid IS 'Component identification number. Foreign key to Product.ProductID.';
 
 
 --
--- Name: COLUMN billofmaterials.unitmeasurecode; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN bill_of_materials.startdate; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.billofmaterials.unitmeasurecode IS 'Standard code identifying the unit of measure for the quantity.';
-
-
---
--- Name: COLUMN billofmaterials.bomlevel; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.billofmaterials.bomlevel IS 'Indicates the depth the component is from its parent (AssemblyID).';
+COMMENT ON COLUMN production.bill_of_materials.startdate IS 'Date the component started being used in the assembly item.';
 
 
 --
--- Name: COLUMN billofmaterials.perassemblyqty; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN bill_of_materials.enddate; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.billofmaterials.perassemblyqty IS 'Quantity of the component needed to create the assembly.';
+COMMENT ON COLUMN production.bill_of_materials.enddate IS 'Date the component stopped being used in the assembly item.';
+
+
+--
+-- Name: COLUMN bill_of_materials.unitmeasurecode; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.bill_of_materials.unitmeasurecode IS 'Standard code identifying the unit of measure for the quantity.';
+
+
+--
+-- Name: COLUMN bill_of_materials.bomlevel; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.bill_of_materials.bomlevel IS 'Indicates the depth the component is from its parent (AssemblyID).';
+
+
+--
+-- Name: COLUMN bill_of_materials.perassemblyqty; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.bill_of_materials.perassemblyqty IS 'Quantity of the component needed to create the assembly.';
 
 
 --
@@ -1325,7 +1318,7 @@ ALTER TABLE production.billofmaterials_billofmaterialsid_seq OWNER TO postgres;
 -- Name: billofmaterials_billofmaterialsid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.billofmaterials_billofmaterialsid_seq OWNED BY production.billofmaterials.billofmaterialsid;
+ALTER SEQUENCE production.billofmaterials_billofmaterialsid_seq OWNED BY production.bill_of_materials.billofmaterialsid;
 
 
 --
@@ -1773,6 +1766,477 @@ COMMENT ON COLUMN production.product.discontinueddate IS 'Date the product was d
 
 
 --
+-- Name: product_category; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_category (
+    productcategoryid integer NOT NULL,
+    rowguid uuid NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE production.product_category OWNER TO postgres;
+
+--
+-- Name: TABLE product_category; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_category IS 'High-level product categorization.';
+
+
+--
+-- Name: COLUMN product_category.productcategoryid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_category.productcategoryid IS 'Primary key for ProductCategory records.';
+
+
+--
+-- Name: product_cost_history; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_cost_history (
+    productid integer NOT NULL,
+    startdate timestamp without time zone NOT NULL,
+    enddate timestamp without time zone,
+    standardcost numeric NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_ProductCostHistory_EndDate" CHECK (((enddate >= startdate) OR (enddate IS NULL))),
+    CONSTRAINT "CK_ProductCostHistory_StandardCost" CHECK ((standardcost >= 0.00))
+);
+
+
+ALTER TABLE production.product_cost_history OWNER TO postgres;
+
+--
+-- Name: TABLE product_cost_history; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_cost_history IS 'Changes in the cost of a product over time.';
+
+
+--
+-- Name: COLUMN product_cost_history.productid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_cost_history.productid IS 'Product identification number. Foreign key to Product.ProductID';
+
+
+--
+-- Name: COLUMN product_cost_history.startdate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_cost_history.startdate IS 'Product cost start date.';
+
+
+--
+-- Name: COLUMN product_cost_history.enddate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_cost_history.enddate IS 'Product cost end date.';
+
+
+--
+-- Name: COLUMN product_cost_history.standardcost; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_cost_history.standardcost IS 'Standard cost of the product.';
+
+
+--
+-- Name: product_description; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_description (
+    productdescriptionid integer NOT NULL,
+    description character varying(400) NOT NULL,
+    rowguid uuid NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE production.product_description OWNER TO postgres;
+
+--
+-- Name: TABLE product_description; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_description IS 'Product descriptions in several languages.';
+
+
+--
+-- Name: COLUMN product_description.productdescriptionid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_description.productdescriptionid IS 'Primary key for ProductDescription records.';
+
+
+--
+-- Name: COLUMN product_description.description; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_description.description IS 'Description of the product.';
+
+
+--
+-- Name: product_document; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_document (
+    productid integer NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
+    documentnode character varying DEFAULT '/'::character varying NOT NULL
+);
+
+
+ALTER TABLE production.product_document OWNER TO postgres;
+
+--
+-- Name: TABLE product_document; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_document IS 'Cross-reference table mapping products to related product documents.';
+
+
+--
+-- Name: COLUMN product_document.productid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_document.productid IS 'Product identification number. Foreign key to Product.ProductID.';
+
+
+--
+-- Name: COLUMN product_document.documentnode; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_document.documentnode IS 'Document identification number. Foreign key to Document.DocumentNode.';
+
+
+--
+-- Name: product_inventory; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_inventory (
+    productid integer NOT NULL,
+    locationid smallint NOT NULL,
+    shelf character varying(10) NOT NULL,
+    bin smallint NOT NULL,
+    quantity smallint DEFAULT 0 NOT NULL,
+    rowguid uuid NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_ProductInventory_Bin" CHECK (((bin >= 0) AND (bin <= 100)))
+);
+
+
+ALTER TABLE production.product_inventory OWNER TO postgres;
+
+--
+-- Name: TABLE product_inventory; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_inventory IS 'Product inventory information.';
+
+
+--
+-- Name: COLUMN product_inventory.productid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_inventory.productid IS 'Product identification number. Foreign key to Product.ProductID.';
+
+
+--
+-- Name: COLUMN product_inventory.locationid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_inventory.locationid IS 'Inventory location identification number. Foreign key to Location.LocationID.';
+
+
+--
+-- Name: COLUMN product_inventory.shelf; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_inventory.shelf IS 'Storage compartment within an inventory location.';
+
+
+--
+-- Name: COLUMN product_inventory.bin; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_inventory.bin IS 'Storage container on a shelf in an inventory location.';
+
+
+--
+-- Name: COLUMN product_inventory.quantity; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_inventory.quantity IS 'Quantity of products in the inventory location.';
+
+
+--
+-- Name: product_list_price_history; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_list_price_history (
+    productid integer NOT NULL,
+    startdate timestamp without time zone NOT NULL,
+    enddate timestamp without time zone,
+    listprice numeric NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_ProductListPriceHistory_EndDate" CHECK (((enddate >= startdate) OR (enddate IS NULL))),
+    CONSTRAINT "CK_ProductListPriceHistory_ListPrice" CHECK ((listprice > 0.00))
+);
+
+
+ALTER TABLE production.product_list_price_history OWNER TO postgres;
+
+--
+-- Name: TABLE product_list_price_history; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_list_price_history IS 'Changes in the list price of a product over time.';
+
+
+--
+-- Name: COLUMN product_list_price_history.productid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_list_price_history.productid IS 'Product identification number. Foreign key to Product.ProductID';
+
+
+--
+-- Name: COLUMN product_list_price_history.startdate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_list_price_history.startdate IS 'List price start date.';
+
+
+--
+-- Name: COLUMN product_list_price_history.enddate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_list_price_history.enddate IS 'List price end date';
+
+
+--
+-- Name: COLUMN product_list_price_history.listprice; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_list_price_history.listprice IS 'Product list price.';
+
+
+--
+-- Name: product_model; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_model (
+    productmodelid integer NOT NULL,
+    catalogdescription xml,
+    instructions xml,
+    rowguid uuid NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE production.product_model OWNER TO postgres;
+
+--
+-- Name: TABLE product_model; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_model IS 'Product model classification.';
+
+
+--
+-- Name: COLUMN product_model.productmodelid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_model.productmodelid IS 'Primary key for ProductModel records.';
+
+
+--
+-- Name: COLUMN product_model.catalogdescription; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_model.catalogdescription IS 'Detailed product catalog information in xml format.';
+
+
+--
+-- Name: COLUMN product_model.instructions; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_model.instructions IS 'Manufacturing instructions in xml format.';
+
+
+--
+-- Name: product_model_illustration; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_model_illustration (
+    productmodelid integer NOT NULL,
+    illustrationid integer NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE production.product_model_illustration OWNER TO postgres;
+
+--
+-- Name: TABLE product_model_illustration; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_model_illustration IS 'Cross-reference table mapping product models and illustrations.';
+
+
+--
+-- Name: COLUMN product_model_illustration.productmodelid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_model_illustration.productmodelid IS 'Primary key. Foreign key to ProductModel.ProductModelID.';
+
+
+--
+-- Name: COLUMN product_model_illustration.illustrationid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_model_illustration.illustrationid IS 'Primary key. Foreign key to Illustration.IllustrationID.';
+
+
+--
+-- Name: product_model_product_description_culture; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_model_product_description_culture (
+    productmodelid integer NOT NULL,
+    productdescriptionid integer NOT NULL,
+    cultureid character(6) NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE production.product_model_product_description_culture OWNER TO postgres;
+
+--
+-- Name: TABLE product_model_product_description_culture; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_model_product_description_culture IS 'Cross-reference table mapping product descriptions and the language the description is written in.';
+
+
+--
+-- Name: COLUMN product_model_product_description_culture.productmodelid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_model_product_description_culture.productmodelid IS 'Primary key. Foreign key to ProductModel.ProductModelID.';
+
+
+--
+-- Name: COLUMN product_model_product_description_culture.productdescriptionid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_model_product_description_culture.productdescriptionid IS 'Primary key. Foreign key to ProductDescription.ProductDescriptionID.';
+
+
+--
+-- Name: COLUMN product_model_product_description_culture.cultureid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_model_product_description_culture.cultureid IS 'Culture identification number. Foreign key to Culture.CultureID.';
+
+
+--
+-- Name: product_photo; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_photo (
+    productphotoid integer NOT NULL,
+    thumbnailphoto bytea,
+    thumbnailphotofilename character varying(50),
+    largephoto bytea,
+    largephotofilename character varying(50),
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE production.product_photo OWNER TO postgres;
+
+--
+-- Name: TABLE product_photo; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_photo IS 'Product images.';
+
+
+--
+-- Name: COLUMN product_photo.productphotoid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_photo.productphotoid IS 'Primary key for ProductPhoto records.';
+
+
+--
+-- Name: COLUMN product_photo.thumbnailphoto; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_photo.thumbnailphoto IS 'Small image of the product.';
+
+
+--
+-- Name: COLUMN product_photo.thumbnailphotofilename; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_photo.thumbnailphotofilename IS 'Small image file name.';
+
+
+--
+-- Name: COLUMN product_photo.largephoto; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_photo.largephoto IS 'Large image of the product.';
+
+
+--
+-- Name: COLUMN product_photo.largephotofilename; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_photo.largephotofilename IS 'Large image file name.';
+
+
+--
+-- Name: product_product_photo; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_product_photo (
+    productid integer NOT NULL,
+    productphotoid integer NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE production.product_product_photo OWNER TO postgres;
+
+--
+-- Name: TABLE product_product_photo; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_product_photo IS 'Cross-reference table mapping products and product photos.';
+
+
+--
+-- Name: COLUMN product_product_photo.productid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_product_photo.productid IS 'Product identification number. Foreign key to Product.ProductID.';
+
+
+--
+-- Name: COLUMN product_product_photo.productphotoid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_product_photo.productphotoid IS 'Product photo identification number. Foreign key to ProductPhoto.ProductPhotoID.';
+
+
+--
 -- Name: product_productid_seq; Type: SEQUENCE; Schema: production; Owner: postgres
 --
 
@@ -1795,30 +2259,105 @@ ALTER SEQUENCE production.product_productid_seq OWNED BY production.product.prod
 
 
 --
--- Name: productcategory; Type: TABLE; Schema: production; Owner: postgres
+-- Name: product_review; Type: TABLE; Schema: production; Owner: postgres
 --
 
-CREATE TABLE production.productcategory (
+CREATE TABLE production.product_review (
+    productreviewid integer NOT NULL,
+    productid integer NOT NULL,
+    reviewdate timestamp without time zone DEFAULT now() NOT NULL,
+    emailaddress character varying(50) NOT NULL,
+    rating integer NOT NULL,
+    comments character varying(3850),
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_ProductReview_Rating" CHECK (((rating >= 1) AND (rating <= 5)))
+);
+
+
+ALTER TABLE production.product_review OWNER TO postgres;
+
+--
+-- Name: TABLE product_review; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.product_review IS 'Customer reviews of products they have purchased.';
+
+
+--
+-- Name: COLUMN product_review.productreviewid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_review.productreviewid IS 'Primary key for ProductReview records.';
+
+
+--
+-- Name: COLUMN product_review.productid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_review.productid IS 'Product identification number. Foreign key to Product.ProductID.';
+
+
+--
+-- Name: COLUMN product_review.reviewdate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_review.reviewdate IS 'Date review was submitted.';
+
+
+--
+-- Name: COLUMN product_review.emailaddress; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_review.emailaddress IS 'Reviewer''s e-mail address.';
+
+
+--
+-- Name: COLUMN product_review.rating; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_review.rating IS 'Product rating given by the reviewer. Scale is 1 to 5 with 5 as the highest rating.';
+
+
+--
+-- Name: COLUMN product_review.comments; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_review.comments IS 'Reviewer''s comments';
+
+
+--
+-- Name: product_subcategory; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.product_subcategory (
+    productsubcategoryid integer NOT NULL,
     productcategoryid integer NOT NULL,
     rowguid uuid NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE production.productcategory OWNER TO postgres;
+ALTER TABLE production.product_subcategory OWNER TO postgres;
 
 --
--- Name: TABLE productcategory; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: TABLE product_subcategory; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON TABLE production.productcategory IS 'High-level product categorization.';
+COMMENT ON TABLE production.product_subcategory IS 'Product subcategories. See ProductCategory table.';
 
 
 --
--- Name: COLUMN productcategory.productcategoryid; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN product_subcategory.productsubcategoryid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.productcategory.productcategoryid IS 'Primary key for ProductCategory records.';
+COMMENT ON COLUMN production.product_subcategory.productsubcategoryid IS 'Primary key for ProductSubcategory records.';
+
+
+--
+-- Name: COLUMN product_subcategory.productcategoryid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.product_subcategory.productcategoryid IS 'Product category identification number. Foreign key to ProductCategory.ProductCategoryID.';
 
 
 --
@@ -1840,94 +2379,7 @@ ALTER TABLE production.productcategory_productcategoryid_seq OWNER TO postgres;
 -- Name: productcategory_productcategoryid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.productcategory_productcategoryid_seq OWNED BY production.productcategory.productcategoryid;
-
-
---
--- Name: productcosthistory; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productcosthistory (
-    productid integer NOT NULL,
-    startdate timestamp without time zone NOT NULL,
-    enddate timestamp without time zone,
-    standardcost numeric NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ProductCostHistory_EndDate" CHECK (((enddate >= startdate) OR (enddate IS NULL))),
-    CONSTRAINT "CK_ProductCostHistory_StandardCost" CHECK ((standardcost >= 0.00))
-);
-
-
-ALTER TABLE production.productcosthistory OWNER TO postgres;
-
---
--- Name: TABLE productcosthistory; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productcosthistory IS 'Changes in the cost of a product over time.';
-
-
---
--- Name: COLUMN productcosthistory.productid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productcosthistory.productid IS 'Product identification number. Foreign key to Product.ProductID';
-
-
---
--- Name: COLUMN productcosthistory.startdate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productcosthistory.startdate IS 'Product cost start date.';
-
-
---
--- Name: COLUMN productcosthistory.enddate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productcosthistory.enddate IS 'Product cost end date.';
-
-
---
--- Name: COLUMN productcosthistory.standardcost; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productcosthistory.standardcost IS 'Standard cost of the product.';
-
-
---
--- Name: productdescription; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productdescription (
-    productdescriptionid integer NOT NULL,
-    description character varying(400) NOT NULL,
-    rowguid uuid NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE production.productdescription OWNER TO postgres;
-
---
--- Name: TABLE productdescription; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productdescription IS 'Product descriptions in several languages.';
-
-
---
--- Name: COLUMN productdescription.productdescriptionid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productdescription.productdescriptionid IS 'Primary key for ProductDescription records.';
-
-
---
--- Name: COLUMN productdescription.description; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productdescription.description IS 'Description of the product.';
+ALTER SEQUENCE production.productcategory_productcategoryid_seq OWNED BY production.product_category.productcategoryid;
 
 
 --
@@ -1949,196 +2401,7 @@ ALTER TABLE production.productdescription_productdescriptionid_seq OWNER TO post
 -- Name: productdescription_productdescriptionid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.productdescription_productdescriptionid_seq OWNED BY production.productdescription.productdescriptionid;
-
-
---
--- Name: productdocument; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productdocument (
-    productid integer NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
-    documentnode character varying DEFAULT '/'::character varying NOT NULL
-);
-
-
-ALTER TABLE production.productdocument OWNER TO postgres;
-
---
--- Name: TABLE productdocument; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productdocument IS 'Cross-reference table mapping products to related product documents.';
-
-
---
--- Name: COLUMN productdocument.productid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productdocument.productid IS 'Product identification number. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN productdocument.documentnode; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productdocument.documentnode IS 'Document identification number. Foreign key to Document.DocumentNode.';
-
-
---
--- Name: productinventory; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productinventory (
-    productid integer NOT NULL,
-    locationid smallint NOT NULL,
-    shelf character varying(10) NOT NULL,
-    bin smallint NOT NULL,
-    quantity smallint DEFAULT 0 NOT NULL,
-    rowguid uuid NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ProductInventory_Bin" CHECK (((bin >= 0) AND (bin <= 100)))
-);
-
-
-ALTER TABLE production.productinventory OWNER TO postgres;
-
---
--- Name: TABLE productinventory; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productinventory IS 'Product inventory information.';
-
-
---
--- Name: COLUMN productinventory.productid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productinventory.productid IS 'Product identification number. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN productinventory.locationid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productinventory.locationid IS 'Inventory location identification number. Foreign key to Location.LocationID.';
-
-
---
--- Name: COLUMN productinventory.shelf; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productinventory.shelf IS 'Storage compartment within an inventory location.';
-
-
---
--- Name: COLUMN productinventory.bin; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productinventory.bin IS 'Storage container on a shelf in an inventory location.';
-
-
---
--- Name: COLUMN productinventory.quantity; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productinventory.quantity IS 'Quantity of products in the inventory location.';
-
-
---
--- Name: productlistpricehistory; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productlistpricehistory (
-    productid integer NOT NULL,
-    startdate timestamp without time zone NOT NULL,
-    enddate timestamp without time zone,
-    listprice numeric NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ProductListPriceHistory_EndDate" CHECK (((enddate >= startdate) OR (enddate IS NULL))),
-    CONSTRAINT "CK_ProductListPriceHistory_ListPrice" CHECK ((listprice > 0.00))
-);
-
-
-ALTER TABLE production.productlistpricehistory OWNER TO postgres;
-
---
--- Name: TABLE productlistpricehistory; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productlistpricehistory IS 'Changes in the list price of a product over time.';
-
-
---
--- Name: COLUMN productlistpricehistory.productid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productlistpricehistory.productid IS 'Product identification number. Foreign key to Product.ProductID';
-
-
---
--- Name: COLUMN productlistpricehistory.startdate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productlistpricehistory.startdate IS 'List price start date.';
-
-
---
--- Name: COLUMN productlistpricehistory.enddate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productlistpricehistory.enddate IS 'List price end date';
-
-
---
--- Name: COLUMN productlistpricehistory.listprice; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productlistpricehistory.listprice IS 'Product list price.';
-
-
---
--- Name: productmodel; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productmodel (
-    productmodelid integer NOT NULL,
-    catalogdescription xml,
-    instructions xml,
-    rowguid uuid NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE production.productmodel OWNER TO postgres;
-
---
--- Name: TABLE productmodel; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productmodel IS 'Product model classification.';
-
-
---
--- Name: COLUMN productmodel.productmodelid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productmodel.productmodelid IS 'Primary key for ProductModel records.';
-
-
---
--- Name: COLUMN productmodel.catalogdescription; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productmodel.catalogdescription IS 'Detailed product catalog information in xml format.';
-
-
---
--- Name: COLUMN productmodel.instructions; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productmodel.instructions IS 'Manufacturing instructions in xml format.';
+ALTER SEQUENCE production.productdescription_productdescriptionid_seq OWNED BY production.product_description.productdescriptionid;
 
 
 --
@@ -2160,141 +2423,7 @@ ALTER TABLE production.productmodel_productmodelid_seq OWNER TO postgres;
 -- Name: productmodel_productmodelid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.productmodel_productmodelid_seq OWNED BY production.productmodel.productmodelid;
-
-
---
--- Name: productmodelillustration; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productmodelillustration (
-    productmodelid integer NOT NULL,
-    illustrationid integer NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE production.productmodelillustration OWNER TO postgres;
-
---
--- Name: TABLE productmodelillustration; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productmodelillustration IS 'Cross-reference table mapping product models and illustrations.';
-
-
---
--- Name: COLUMN productmodelillustration.productmodelid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productmodelillustration.productmodelid IS 'Primary key. Foreign key to ProductModel.ProductModelID.';
-
-
---
--- Name: COLUMN productmodelillustration.illustrationid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productmodelillustration.illustrationid IS 'Primary key. Foreign key to Illustration.IllustrationID.';
-
-
---
--- Name: productmodelproductdescriptionculture; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productmodelproductdescriptionculture (
-    productmodelid integer NOT NULL,
-    productdescriptionid integer NOT NULL,
-    cultureid character(6) NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE production.productmodelproductdescriptionculture OWNER TO postgres;
-
---
--- Name: TABLE productmodelproductdescriptionculture; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productmodelproductdescriptionculture IS 'Cross-reference table mapping product descriptions and the language the description is written in.';
-
-
---
--- Name: COLUMN productmodelproductdescriptionculture.productmodelid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productmodelproductdescriptionculture.productmodelid IS 'Primary key. Foreign key to ProductModel.ProductModelID.';
-
-
---
--- Name: COLUMN productmodelproductdescriptionculture.productdescriptionid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productmodelproductdescriptionculture.productdescriptionid IS 'Primary key. Foreign key to ProductDescription.ProductDescriptionID.';
-
-
---
--- Name: COLUMN productmodelproductdescriptionculture.cultureid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productmodelproductdescriptionculture.cultureid IS 'Culture identification number. Foreign key to Culture.CultureID.';
-
-
---
--- Name: productphoto; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productphoto (
-    productphotoid integer NOT NULL,
-    thumbnailphoto bytea,
-    thumbnailphotofilename character varying(50),
-    largephoto bytea,
-    largephotofilename character varying(50),
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE production.productphoto OWNER TO postgres;
-
---
--- Name: TABLE productphoto; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productphoto IS 'Product images.';
-
-
---
--- Name: COLUMN productphoto.productphotoid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productphoto.productphotoid IS 'Primary key for ProductPhoto records.';
-
-
---
--- Name: COLUMN productphoto.thumbnailphoto; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productphoto.thumbnailphoto IS 'Small image of the product.';
-
-
---
--- Name: COLUMN productphoto.thumbnailphotofilename; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productphoto.thumbnailphotofilename IS 'Small image file name.';
-
-
---
--- Name: COLUMN productphoto.largephoto; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productphoto.largephoto IS 'Large image of the product.';
-
-
---
--- Name: COLUMN productphoto.largephotofilename; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productphoto.largephotofilename IS 'Large image file name.';
+ALTER SEQUENCE production.productmodel_productmodelid_seq OWNED BY production.product_model.productmodelid;
 
 
 --
@@ -2316,108 +2445,7 @@ ALTER TABLE production.productphoto_productphotoid_seq OWNER TO postgres;
 -- Name: productphoto_productphotoid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.productphoto_productphotoid_seq OWNED BY production.productphoto.productphotoid;
-
-
---
--- Name: productproductphoto; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productproductphoto (
-    productid integer NOT NULL,
-    productphotoid integer NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE production.productproductphoto OWNER TO postgres;
-
---
--- Name: TABLE productproductphoto; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productproductphoto IS 'Cross-reference table mapping products and product photos.';
-
-
---
--- Name: COLUMN productproductphoto.productid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productproductphoto.productid IS 'Product identification number. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN productproductphoto.productphotoid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productproductphoto.productphotoid IS 'Product photo identification number. Foreign key to ProductPhoto.ProductPhotoID.';
-
-
---
--- Name: productreview; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productreview (
-    productreviewid integer NOT NULL,
-    productid integer NOT NULL,
-    reviewdate timestamp without time zone DEFAULT now() NOT NULL,
-    emailaddress character varying(50) NOT NULL,
-    rating integer NOT NULL,
-    comments character varying(3850),
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ProductReview_Rating" CHECK (((rating >= 1) AND (rating <= 5)))
-);
-
-
-ALTER TABLE production.productreview OWNER TO postgres;
-
---
--- Name: TABLE productreview; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productreview IS 'Customer reviews of products they have purchased.';
-
-
---
--- Name: COLUMN productreview.productreviewid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productreview.productreviewid IS 'Primary key for ProductReview records.';
-
-
---
--- Name: COLUMN productreview.productid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productreview.productid IS 'Product identification number. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN productreview.reviewdate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productreview.reviewdate IS 'Date review was submitted.';
-
-
---
--- Name: COLUMN productreview.emailaddress; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productreview.emailaddress IS 'Reviewer''s e-mail address.';
-
-
---
--- Name: COLUMN productreview.rating; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productreview.rating IS 'Product rating given by the reviewer. Scale is 1 to 5 with 5 as the highest rating.';
-
-
---
--- Name: COLUMN productreview.comments; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productreview.comments IS 'Reviewer''s comments';
+ALTER SEQUENCE production.productphoto_productphotoid_seq OWNED BY production.product_photo.productphotoid;
 
 
 --
@@ -2439,42 +2467,7 @@ ALTER TABLE production.productreview_productreviewid_seq OWNER TO postgres;
 -- Name: productreview_productreviewid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.productreview_productreviewid_seq OWNED BY production.productreview.productreviewid;
-
-
---
--- Name: productsubcategory; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.productsubcategory (
-    productsubcategoryid integer NOT NULL,
-    productcategoryid integer NOT NULL,
-    rowguid uuid NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE production.productsubcategory OWNER TO postgres;
-
---
--- Name: TABLE productsubcategory; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.productsubcategory IS 'Product subcategories. See ProductCategory table.';
-
-
---
--- Name: COLUMN productsubcategory.productsubcategoryid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productsubcategory.productsubcategoryid IS 'Primary key for ProductSubcategory records.';
-
-
---
--- Name: COLUMN productsubcategory.productcategoryid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.productsubcategory.productcategoryid IS 'Product category identification number. Foreign key to ProductCategory.ProductCategoryID.';
+ALTER SEQUENCE production.productreview_productreviewid_seq OWNED BY production.product_review.productreviewid;
 
 
 --
@@ -2496,33 +2489,33 @@ ALTER TABLE production.productsubcategory_productsubcategoryid_seq OWNER TO post
 -- Name: productsubcategory_productsubcategoryid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.productsubcategory_productsubcategoryid_seq OWNED BY production.productsubcategory.productsubcategoryid;
+ALTER SEQUENCE production.productsubcategory_productsubcategoryid_seq OWNED BY production.product_subcategory.productsubcategoryid;
 
 
 --
--- Name: scrapreason; Type: TABLE; Schema: production; Owner: postgres
+-- Name: scrap_reason; Type: TABLE; Schema: production; Owner: postgres
 --
 
-CREATE TABLE production.scrapreason (
+CREATE TABLE production.scrap_reason (
     scrapreasonid integer NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE production.scrapreason OWNER TO postgres;
+ALTER TABLE production.scrap_reason OWNER TO postgres;
 
 --
--- Name: TABLE scrapreason; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: TABLE scrap_reason; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON TABLE production.scrapreason IS 'Manufacturing failure reasons lookup table.';
+COMMENT ON TABLE production.scrap_reason IS 'Manufacturing failure reasons lookup table.';
 
 
 --
--- Name: COLUMN scrapreason.scrapreasonid; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN scrap_reason.scrapreasonid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.scrapreason.scrapreasonid IS 'Primary key for ScrapReason records.';
+COMMENT ON COLUMN production.scrap_reason.scrapreasonid IS 'Primary key for ScrapReason records.';
 
 
 --
@@ -2544,14 +2537,14 @@ ALTER TABLE production.scrapreason_scrapreasonid_seq OWNER TO postgres;
 -- Name: scrapreason_scrapreasonid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.scrapreason_scrapreasonid_seq OWNED BY production.scrapreason.scrapreasonid;
+ALTER SEQUENCE production.scrapreason_scrapreasonid_seq OWNED BY production.scrap_reason.scrapreasonid;
 
 
 --
--- Name: transactionhistory; Type: TABLE; Schema: production; Owner: postgres
+-- Name: transaction_history; Type: TABLE; Schema: production; Owner: postgres
 --
 
-CREATE TABLE production.transactionhistory (
+CREATE TABLE production.transaction_history (
     transactionid integer NOT NULL,
     productid integer NOT NULL,
     referenceorderid integer NOT NULL,
@@ -2565,69 +2558,152 @@ CREATE TABLE production.transactionhistory (
 );
 
 
-ALTER TABLE production.transactionhistory OWNER TO postgres;
+ALTER TABLE production.transaction_history OWNER TO postgres;
 
 --
--- Name: TABLE transactionhistory; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: TABLE transaction_history; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON TABLE production.transactionhistory IS 'Record of each purchase order, sales order, or work order transaction year to date.';
-
-
---
--- Name: COLUMN transactionhistory.transactionid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistory.transactionid IS 'Primary key for TransactionHistory records.';
+COMMENT ON TABLE production.transaction_history IS 'Record of each purchase order, sales order, or work order transaction year to date.';
 
 
 --
--- Name: COLUMN transactionhistory.productid; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN transaction_history.transactionid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.transactionhistory.productid IS 'Product identification number. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN transactionhistory.referenceorderid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistory.referenceorderid IS 'Purchase order, sales order, or work order identification number.';
+COMMENT ON COLUMN production.transaction_history.transactionid IS 'Primary key for TransactionHistory records.';
 
 
 --
--- Name: COLUMN transactionhistory.referenceorderlineid; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN transaction_history.productid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.transactionhistory.referenceorderlineid IS 'Line number associated with the purchase order, sales order, or work order.';
-
-
---
--- Name: COLUMN transactionhistory.transactiondate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistory.transactiondate IS 'Date and time of the transaction.';
+COMMENT ON COLUMN production.transaction_history.productid IS 'Product identification number. Foreign key to Product.ProductID.';
 
 
 --
--- Name: COLUMN transactionhistory.transactiontype; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN transaction_history.referenceorderid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.transactionhistory.transactiontype IS 'W = WorkOrder, S = SalesOrder, P = PurchaseOrder';
-
-
---
--- Name: COLUMN transactionhistory.quantity; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistory.quantity IS 'Product quantity.';
+COMMENT ON COLUMN production.transaction_history.referenceorderid IS 'Purchase order, sales order, or work order identification number.';
 
 
 --
--- Name: COLUMN transactionhistory.actualcost; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN transaction_history.referenceorderlineid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.transactionhistory.actualcost IS 'Product cost.';
+COMMENT ON COLUMN production.transaction_history.referenceorderlineid IS 'Line number associated with the purchase order, sales order, or work order.';
+
+
+--
+-- Name: COLUMN transaction_history.transactiondate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history.transactiondate IS 'Date and time of the transaction.';
+
+
+--
+-- Name: COLUMN transaction_history.transactiontype; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history.transactiontype IS 'W = WorkOrder, S = SalesOrder, P = PurchaseOrder';
+
+
+--
+-- Name: COLUMN transaction_history.quantity; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history.quantity IS 'Product quantity.';
+
+
+--
+-- Name: COLUMN transaction_history.actualcost; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history.actualcost IS 'Product cost.';
+
+
+--
+-- Name: transaction_history_archive; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.transaction_history_archive (
+    transactionid integer NOT NULL,
+    productid integer NOT NULL,
+    referenceorderid integer NOT NULL,
+    referenceorderlineid integer DEFAULT 0 NOT NULL,
+    transactiondate timestamp without time zone DEFAULT now() NOT NULL,
+    transactiontype character(1) NOT NULL,
+    quantity integer NOT NULL,
+    actualcost numeric NOT NULL,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_TransactionHistoryArchive_TransactionType" CHECK ((upper((transactiontype)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
+);
+
+
+ALTER TABLE production.transaction_history_archive OWNER TO postgres;
+
+--
+-- Name: TABLE transaction_history_archive; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.transaction_history_archive IS 'Transactions for previous years.';
+
+
+--
+-- Name: COLUMN transaction_history_archive.transactionid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history_archive.transactionid IS 'Primary key for TransactionHistoryArchive records.';
+
+
+--
+-- Name: COLUMN transaction_history_archive.productid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history_archive.productid IS 'Product identification number. Foreign key to Product.ProductID.';
+
+
+--
+-- Name: COLUMN transaction_history_archive.referenceorderid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history_archive.referenceorderid IS 'Purchase order, sales order, or work order identification number.';
+
+
+--
+-- Name: COLUMN transaction_history_archive.referenceorderlineid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history_archive.referenceorderlineid IS 'Line number associated with the purchase order, sales order, or work order.';
+
+
+--
+-- Name: COLUMN transaction_history_archive.transactiondate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history_archive.transactiondate IS 'Date and time of the transaction.';
+
+
+--
+-- Name: COLUMN transaction_history_archive.transactiontype; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history_archive.transactiontype IS 'W = Work Order, S = Sales Order, P = Purchase Order';
+
+
+--
+-- Name: COLUMN transaction_history_archive.quantity; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history_archive.quantity IS 'Product quantity.';
+
+
+--
+-- Name: COLUMN transaction_history_archive.actualcost; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.transaction_history_archive.actualcost IS 'Product cost.';
 
 
 --
@@ -2649,123 +2725,40 @@ ALTER TABLE production.transactionhistory_transactionid_seq OWNER TO postgres;
 -- Name: transactionhistory_transactionid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.transactionhistory_transactionid_seq OWNED BY production.transactionhistory.transactionid;
+ALTER SEQUENCE production.transactionhistory_transactionid_seq OWNED BY production.transaction_history.transactionid;
 
 
 --
--- Name: transactionhistoryarchive; Type: TABLE; Schema: production; Owner: postgres
+-- Name: unit_measure; Type: TABLE; Schema: production; Owner: postgres
 --
 
-CREATE TABLE production.transactionhistoryarchive (
-    transactionid integer NOT NULL,
-    productid integer NOT NULL,
-    referenceorderid integer NOT NULL,
-    referenceorderlineid integer DEFAULT 0 NOT NULL,
-    transactiondate timestamp without time zone DEFAULT now() NOT NULL,
-    transactiontype character(1) NOT NULL,
-    quantity integer NOT NULL,
-    actualcost numeric NOT NULL,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_TransactionHistoryArchive_TransactionType" CHECK ((upper((transactiontype)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
-);
-
-
-ALTER TABLE production.transactionhistoryarchive OWNER TO postgres;
-
---
--- Name: TABLE transactionhistoryarchive; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.transactionhistoryarchive IS 'Transactions for previous years.';
-
-
---
--- Name: COLUMN transactionhistoryarchive.transactionid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistoryarchive.transactionid IS 'Primary key for TransactionHistoryArchive records.';
-
-
---
--- Name: COLUMN transactionhistoryarchive.productid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistoryarchive.productid IS 'Product identification number. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN transactionhistoryarchive.referenceorderid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistoryarchive.referenceorderid IS 'Purchase order, sales order, or work order identification number.';
-
-
---
--- Name: COLUMN transactionhistoryarchive.referenceorderlineid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistoryarchive.referenceorderlineid IS 'Line number associated with the purchase order, sales order, or work order.';
-
-
---
--- Name: COLUMN transactionhistoryarchive.transactiondate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistoryarchive.transactiondate IS 'Date and time of the transaction.';
-
-
---
--- Name: COLUMN transactionhistoryarchive.transactiontype; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistoryarchive.transactiontype IS 'W = Work Order, S = Sales Order, P = Purchase Order';
-
-
---
--- Name: COLUMN transactionhistoryarchive.quantity; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistoryarchive.quantity IS 'Product quantity.';
-
-
---
--- Name: COLUMN transactionhistoryarchive.actualcost; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.transactionhistoryarchive.actualcost IS 'Product cost.';
-
-
---
--- Name: unitmeasure; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.unitmeasure (
+CREATE TABLE production.unit_measure (
     unitmeasurecode character(3) NOT NULL,
     modifieddate timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE production.unitmeasure OWNER TO postgres;
+ALTER TABLE production.unit_measure OWNER TO postgres;
 
 --
--- Name: TABLE unitmeasure; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: TABLE unit_measure; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON TABLE production.unitmeasure IS 'Unit of measure lookup table.';
-
-
---
--- Name: COLUMN unitmeasure.unitmeasurecode; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.unitmeasure.unitmeasurecode IS 'Primary key.';
+COMMENT ON TABLE production.unit_measure IS 'Unit of measure lookup table.';
 
 
 --
--- Name: workorder; Type: TABLE; Schema: production; Owner: postgres
+-- Name: COLUMN unit_measure.unitmeasurecode; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-CREATE TABLE production.workorder (
+COMMENT ON COLUMN production.unit_measure.unitmeasurecode IS 'Primary key.';
+
+
+--
+-- Name: work_order; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.work_order (
     workorderid integer NOT NULL,
     productid integer NOT NULL,
     orderqty integer NOT NULL,
@@ -2781,69 +2774,180 @@ CREATE TABLE production.workorder (
 );
 
 
-ALTER TABLE production.workorder OWNER TO postgres;
+ALTER TABLE production.work_order OWNER TO postgres;
 
 --
--- Name: TABLE workorder; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: TABLE work_order; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON TABLE production.workorder IS 'Manufacturing work orders.';
-
-
---
--- Name: COLUMN workorder.workorderid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorder.workorderid IS 'Primary key for WorkOrder records.';
+COMMENT ON TABLE production.work_order IS 'Manufacturing work orders.';
 
 
 --
--- Name: COLUMN workorder.productid; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN work_order.workorderid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.workorder.productid IS 'Product identification number. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN workorder.orderqty; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorder.orderqty IS 'Product quantity to build.';
+COMMENT ON COLUMN production.work_order.workorderid IS 'Primary key for WorkOrder records.';
 
 
 --
--- Name: COLUMN workorder.scrappedqty; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN work_order.productid; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.workorder.scrappedqty IS 'Quantity that failed inspection.';
-
-
---
--- Name: COLUMN workorder.startdate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorder.startdate IS 'Work order start date.';
+COMMENT ON COLUMN production.work_order.productid IS 'Product identification number. Foreign key to Product.ProductID.';
 
 
 --
--- Name: COLUMN workorder.enddate; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN work_order.orderqty; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.workorder.enddate IS 'Work order end date.';
-
-
---
--- Name: COLUMN workorder.duedate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorder.duedate IS 'Work order due date.';
+COMMENT ON COLUMN production.work_order.orderqty IS 'Product quantity to build.';
 
 
 --
--- Name: COLUMN workorder.scrapreasonid; Type: COMMENT; Schema: production; Owner: postgres
+-- Name: COLUMN work_order.scrappedqty; Type: COMMENT; Schema: production; Owner: postgres
 --
 
-COMMENT ON COLUMN production.workorder.scrapreasonid IS 'Reason for inspection failure.';
+COMMENT ON COLUMN production.work_order.scrappedqty IS 'Quantity that failed inspection.';
+
+
+--
+-- Name: COLUMN work_order.startdate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order.startdate IS 'Work order start date.';
+
+
+--
+-- Name: COLUMN work_order.enddate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order.enddate IS 'Work order end date.';
+
+
+--
+-- Name: COLUMN work_order.duedate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order.duedate IS 'Work order due date.';
+
+
+--
+-- Name: COLUMN work_order.scrapreasonid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order.scrapreasonid IS 'Reason for inspection failure.';
+
+
+--
+-- Name: work_order_routing; Type: TABLE; Schema: production; Owner: postgres
+--
+
+CREATE TABLE production.work_order_routing (
+    workorderid integer NOT NULL,
+    productid integer NOT NULL,
+    operationsequence smallint NOT NULL,
+    locationid smallint NOT NULL,
+    scheduledstartdate timestamp without time zone NOT NULL,
+    scheduledenddate timestamp without time zone NOT NULL,
+    actualstartdate timestamp without time zone,
+    actualenddate timestamp without time zone,
+    actualresourcehrs numeric(9,4),
+    plannedcost numeric NOT NULL,
+    actualcost numeric,
+    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_WorkOrderRouting_ActualCost" CHECK ((actualcost > 0.00)),
+    CONSTRAINT "CK_WorkOrderRouting_ActualEndDate" CHECK (((actualenddate >= actualstartdate) OR (actualenddate IS NULL) OR (actualstartdate IS NULL))),
+    CONSTRAINT "CK_WorkOrderRouting_ActualResourceHrs" CHECK ((actualresourcehrs >= 0.0000)),
+    CONSTRAINT "CK_WorkOrderRouting_PlannedCost" CHECK ((plannedcost > 0.00)),
+    CONSTRAINT "CK_WorkOrderRouting_ScheduledEndDate" CHECK ((scheduledenddate >= scheduledstartdate))
+);
+
+
+ALTER TABLE production.work_order_routing OWNER TO postgres;
+
+--
+-- Name: TABLE work_order_routing; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON TABLE production.work_order_routing IS 'Work order details.';
+
+
+--
+-- Name: COLUMN work_order_routing.workorderid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.workorderid IS 'Primary key. Foreign key to WorkOrder.WorkOrderID.';
+
+
+--
+-- Name: COLUMN work_order_routing.productid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.productid IS 'Primary key. Foreign key to Product.ProductID.';
+
+
+--
+-- Name: COLUMN work_order_routing.operationsequence; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.operationsequence IS 'Primary key. Indicates the manufacturing process sequence.';
+
+
+--
+-- Name: COLUMN work_order_routing.locationid; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.locationid IS 'Manufacturing location where the part is processed. Foreign key to Location.LocationID.';
+
+
+--
+-- Name: COLUMN work_order_routing.scheduledstartdate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.scheduledstartdate IS 'Planned manufacturing start date.';
+
+
+--
+-- Name: COLUMN work_order_routing.scheduledenddate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.scheduledenddate IS 'Planned manufacturing end date.';
+
+
+--
+-- Name: COLUMN work_order_routing.actualstartdate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.actualstartdate IS 'Actual start date.';
+
+
+--
+-- Name: COLUMN work_order_routing.actualenddate; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.actualenddate IS 'Actual end date.';
+
+
+--
+-- Name: COLUMN work_order_routing.actualresourcehrs; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.actualresourcehrs IS 'Number of manufacturing hours used.';
+
+
+--
+-- Name: COLUMN work_order_routing.plannedcost; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.plannedcost IS 'Estimated manufacturing cost.';
+
+
+--
+-- Name: COLUMN work_order_routing.actualcost; Type: COMMENT; Schema: production; Owner: postgres
+--
+
+COMMENT ON COLUMN production.work_order_routing.actualcost IS 'Actual manufacturing cost.';
 
 
 --
@@ -2865,118 +2969,7 @@ ALTER TABLE production.workorder_workorderid_seq OWNER TO postgres;
 -- Name: workorder_workorderid_seq; Type: SEQUENCE OWNED BY; Schema: production; Owner: postgres
 --
 
-ALTER SEQUENCE production.workorder_workorderid_seq OWNED BY production.workorder.workorderid;
-
-
---
--- Name: workorderrouting; Type: TABLE; Schema: production; Owner: postgres
---
-
-CREATE TABLE production.workorderrouting (
-    workorderid integer NOT NULL,
-    productid integer NOT NULL,
-    operationsequence smallint NOT NULL,
-    locationid smallint NOT NULL,
-    scheduledstartdate timestamp without time zone NOT NULL,
-    scheduledenddate timestamp without time zone NOT NULL,
-    actualstartdate timestamp without time zone,
-    actualenddate timestamp without time zone,
-    actualresourcehrs numeric(9,4),
-    plannedcost numeric NOT NULL,
-    actualcost numeric,
-    modifieddate timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_WorkOrderRouting_ActualCost" CHECK ((actualcost > 0.00)),
-    CONSTRAINT "CK_WorkOrderRouting_ActualEndDate" CHECK (((actualenddate >= actualstartdate) OR (actualenddate IS NULL) OR (actualstartdate IS NULL))),
-    CONSTRAINT "CK_WorkOrderRouting_ActualResourceHrs" CHECK ((actualresourcehrs >= 0.0000)),
-    CONSTRAINT "CK_WorkOrderRouting_PlannedCost" CHECK ((plannedcost > 0.00)),
-    CONSTRAINT "CK_WorkOrderRouting_ScheduledEndDate" CHECK ((scheduledenddate >= scheduledstartdate))
-);
-
-
-ALTER TABLE production.workorderrouting OWNER TO postgres;
-
---
--- Name: TABLE workorderrouting; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON TABLE production.workorderrouting IS 'Work order details.';
-
-
---
--- Name: COLUMN workorderrouting.workorderid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.workorderid IS 'Primary key. Foreign key to WorkOrder.WorkOrderID.';
-
-
---
--- Name: COLUMN workorderrouting.productid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.productid IS 'Primary key. Foreign key to Product.ProductID.';
-
-
---
--- Name: COLUMN workorderrouting.operationsequence; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.operationsequence IS 'Primary key. Indicates the manufacturing process sequence.';
-
-
---
--- Name: COLUMN workorderrouting.locationid; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.locationid IS 'Manufacturing location where the part is processed. Foreign key to Location.LocationID.';
-
-
---
--- Name: COLUMN workorderrouting.scheduledstartdate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.scheduledstartdate IS 'Planned manufacturing start date.';
-
-
---
--- Name: COLUMN workorderrouting.scheduledenddate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.scheduledenddate IS 'Planned manufacturing end date.';
-
-
---
--- Name: COLUMN workorderrouting.actualstartdate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.actualstartdate IS 'Actual start date.';
-
-
---
--- Name: COLUMN workorderrouting.actualenddate; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.actualenddate IS 'Actual end date.';
-
-
---
--- Name: COLUMN workorderrouting.actualresourcehrs; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.actualresourcehrs IS 'Number of manufacturing hours used.';
-
-
---
--- Name: COLUMN workorderrouting.plannedcost; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.plannedcost IS 'Estimated manufacturing cost.';
-
-
---
--- Name: COLUMN workorderrouting.actualcost; Type: COMMENT; Schema: production; Owner: postgres
---
-
-COMMENT ON COLUMN production.workorderrouting.actualcost IS 'Actual manufacturing cost.';
+ALTER SEQUENCE production.workorder_workorderid_seq OWNED BY production.work_order.workorderid;
 
 
 --
@@ -4825,10 +4818,10 @@ ALTER TABLE ONLY human_resources.department ALTER COLUMN departmentid SET DEFAUL
 
 
 --
--- Name: jobcandidate jobcandidateid; Type: DEFAULT; Schema: human_resources; Owner: postgres
+-- Name: job_candidate jobcandidateid; Type: DEFAULT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.jobcandidate ALTER COLUMN jobcandidateid SET DEFAULT nextval('human_resources.jobcandidate_jobcandidateid_seq'::regclass);
+ALTER TABLE ONLY human_resources.job_candidate ALTER COLUMN jobcandidateid SET DEFAULT nextval('human_resources.jobcandidate_jobcandidateid_seq'::regclass);
 
 
 --
@@ -4846,52 +4839,52 @@ ALTER TABLE ONLY person.address ALTER COLUMN addressid SET DEFAULT nextval('pers
 
 
 --
--- Name: addresstype addresstypeid; Type: DEFAULT; Schema: person; Owner: postgres
+-- Name: address_type addresstypeid; Type: DEFAULT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.addresstype ALTER COLUMN addresstypeid SET DEFAULT nextval('person.addresstype_addresstypeid_seq'::regclass);
-
-
---
--- Name: businessentity businessentityid; Type: DEFAULT; Schema: person; Owner: postgres
---
-
-ALTER TABLE ONLY person.businessentity ALTER COLUMN businessentityid SET DEFAULT nextval('person.businessentity_businessentityid_seq'::regclass);
+ALTER TABLE ONLY person.address_type ALTER COLUMN addresstypeid SET DEFAULT nextval('person.addresstype_addresstypeid_seq'::regclass);
 
 
 --
--- Name: contacttype contacttypeid; Type: DEFAULT; Schema: person; Owner: postgres
+-- Name: business_entity businessentityid; Type: DEFAULT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.contacttype ALTER COLUMN contacttypeid SET DEFAULT nextval('person.contacttype_contacttypeid_seq'::regclass);
-
-
---
--- Name: emailaddress emailaddressid; Type: DEFAULT; Schema: person; Owner: postgres
---
-
-ALTER TABLE ONLY person.emailaddress ALTER COLUMN emailaddressid SET DEFAULT nextval('person.emailaddress_emailaddressid_seq'::regclass);
+ALTER TABLE ONLY person.business_entity ALTER COLUMN businessentityid SET DEFAULT nextval('person.businessentity_businessentityid_seq'::regclass);
 
 
 --
--- Name: phonenumbertype phonenumbertypeid; Type: DEFAULT; Schema: person; Owner: postgres
+-- Name: contact_type contacttypeid; Type: DEFAULT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.phonenumbertype ALTER COLUMN phonenumbertypeid SET DEFAULT nextval('person.phonenumbertype_phonenumbertypeid_seq'::regclass);
-
-
---
--- Name: stateprovince stateprovinceid; Type: DEFAULT; Schema: person; Owner: postgres
---
-
-ALTER TABLE ONLY person.stateprovince ALTER COLUMN stateprovinceid SET DEFAULT nextval('person.stateprovince_stateprovinceid_seq'::regclass);
+ALTER TABLE ONLY person.contact_type ALTER COLUMN contacttypeid SET DEFAULT nextval('person.contacttype_contacttypeid_seq'::regclass);
 
 
 --
--- Name: billofmaterials billofmaterialsid; Type: DEFAULT; Schema: production; Owner: postgres
+-- Name: email_address emailaddressid; Type: DEFAULT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY production.billofmaterials ALTER COLUMN billofmaterialsid SET DEFAULT nextval('production.billofmaterials_billofmaterialsid_seq'::regclass);
+ALTER TABLE ONLY person.email_address ALTER COLUMN emailaddressid SET DEFAULT nextval('person.emailaddress_emailaddressid_seq'::regclass);
+
+
+--
+-- Name: phone_number_type phonenumbertypeid; Type: DEFAULT; Schema: person; Owner: postgres
+--
+
+ALTER TABLE ONLY person.phone_number_type ALTER COLUMN phonenumbertypeid SET DEFAULT nextval('person.phonenumbertype_phonenumbertypeid_seq'::regclass);
+
+
+--
+-- Name: state_province stateprovinceid; Type: DEFAULT; Schema: person; Owner: postgres
+--
+
+ALTER TABLE ONLY person.state_province ALTER COLUMN stateprovinceid SET DEFAULT nextval('person.stateprovince_stateprovinceid_seq'::regclass);
+
+
+--
+-- Name: bill_of_materials billofmaterialsid; Type: DEFAULT; Schema: production; Owner: postgres
+--
+
+ALTER TABLE ONLY production.bill_of_materials ALTER COLUMN billofmaterialsid SET DEFAULT nextval('production.billofmaterials_billofmaterialsid_seq'::regclass);
 
 
 --
@@ -4916,66 +4909,66 @@ ALTER TABLE ONLY production.product ALTER COLUMN productid SET DEFAULT nextval('
 
 
 --
--- Name: productcategory productcategoryid; Type: DEFAULT; Schema: production; Owner: postgres
+-- Name: product_category productcategoryid; Type: DEFAULT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productcategory ALTER COLUMN productcategoryid SET DEFAULT nextval('production.productcategory_productcategoryid_seq'::regclass);
-
-
---
--- Name: productdescription productdescriptionid; Type: DEFAULT; Schema: production; Owner: postgres
---
-
-ALTER TABLE ONLY production.productdescription ALTER COLUMN productdescriptionid SET DEFAULT nextval('production.productdescription_productdescriptionid_seq'::regclass);
+ALTER TABLE ONLY production.product_category ALTER COLUMN productcategoryid SET DEFAULT nextval('production.productcategory_productcategoryid_seq'::regclass);
 
 
 --
--- Name: productmodel productmodelid; Type: DEFAULT; Schema: production; Owner: postgres
+-- Name: product_description productdescriptionid; Type: DEFAULT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productmodel ALTER COLUMN productmodelid SET DEFAULT nextval('production.productmodel_productmodelid_seq'::regclass);
-
-
---
--- Name: productphoto productphotoid; Type: DEFAULT; Schema: production; Owner: postgres
---
-
-ALTER TABLE ONLY production.productphoto ALTER COLUMN productphotoid SET DEFAULT nextval('production.productphoto_productphotoid_seq'::regclass);
+ALTER TABLE ONLY production.product_description ALTER COLUMN productdescriptionid SET DEFAULT nextval('production.productdescription_productdescriptionid_seq'::regclass);
 
 
 --
--- Name: productreview productreviewid; Type: DEFAULT; Schema: production; Owner: postgres
+-- Name: product_model productmodelid; Type: DEFAULT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productreview ALTER COLUMN productreviewid SET DEFAULT nextval('production.productreview_productreviewid_seq'::regclass);
-
-
---
--- Name: productsubcategory productsubcategoryid; Type: DEFAULT; Schema: production; Owner: postgres
---
-
-ALTER TABLE ONLY production.productsubcategory ALTER COLUMN productsubcategoryid SET DEFAULT nextval('production.productsubcategory_productsubcategoryid_seq'::regclass);
+ALTER TABLE ONLY production.product_model ALTER COLUMN productmodelid SET DEFAULT nextval('production.productmodel_productmodelid_seq'::regclass);
 
 
 --
--- Name: scrapreason scrapreasonid; Type: DEFAULT; Schema: production; Owner: postgres
+-- Name: product_photo productphotoid; Type: DEFAULT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.scrapreason ALTER COLUMN scrapreasonid SET DEFAULT nextval('production.scrapreason_scrapreasonid_seq'::regclass);
-
-
---
--- Name: transactionhistory transactionid; Type: DEFAULT; Schema: production; Owner: postgres
---
-
-ALTER TABLE ONLY production.transactionhistory ALTER COLUMN transactionid SET DEFAULT nextval('production.transactionhistory_transactionid_seq'::regclass);
+ALTER TABLE ONLY production.product_photo ALTER COLUMN productphotoid SET DEFAULT nextval('production.productphoto_productphotoid_seq'::regclass);
 
 
 --
--- Name: workorder workorderid; Type: DEFAULT; Schema: production; Owner: postgres
+-- Name: product_review productreviewid; Type: DEFAULT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.workorder ALTER COLUMN workorderid SET DEFAULT nextval('production.workorder_workorderid_seq'::regclass);
+ALTER TABLE ONLY production.product_review ALTER COLUMN productreviewid SET DEFAULT nextval('production.productreview_productreviewid_seq'::regclass);
+
+
+--
+-- Name: product_subcategory productsubcategoryid; Type: DEFAULT; Schema: production; Owner: postgres
+--
+
+ALTER TABLE ONLY production.product_subcategory ALTER COLUMN productsubcategoryid SET DEFAULT nextval('production.productsubcategory_productsubcategoryid_seq'::regclass);
+
+
+--
+-- Name: scrap_reason scrapreasonid; Type: DEFAULT; Schema: production; Owner: postgres
+--
+
+ALTER TABLE ONLY production.scrap_reason ALTER COLUMN scrapreasonid SET DEFAULT nextval('production.scrapreason_scrapreasonid_seq'::regclass);
+
+
+--
+-- Name: transaction_history transactionid; Type: DEFAULT; Schema: production; Owner: postgres
+--
+
+ALTER TABLE ONLY production.transaction_history ALTER COLUMN transactionid SET DEFAULT nextval('production.transactionhistory_transactionid_seq'::regclass);
+
+
+--
+-- Name: work_order workorderid; Type: DEFAULT; Schema: production; Owner: postgres
+--
+
+ALTER TABLE ONLY production.work_order ALTER COLUMN workorderid SET DEFAULT nextval('production.workorder_workorderid_seq'::regclass);
 
 
 --
@@ -5086,26 +5079,26 @@ COPY human_resources.employee (businessentityid, nationalidnumber, loginid, jobt
 
 
 --
--- Data for Name: employeedepartmenthistory; Type: TABLE DATA; Schema: human_resources; Owner: postgres
+-- Data for Name: employee_department_history; Type: TABLE DATA; Schema: human_resources; Owner: postgres
 --
 
-COPY human_resources.employeedepartmenthistory (businessentityid, departmentid, shiftid, startdate, enddate, modifieddate) FROM stdin;
+COPY human_resources.employee_department_history (businessentityid, departmentid, shiftid, startdate, enddate, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: employeepayhistory; Type: TABLE DATA; Schema: human_resources; Owner: postgres
+-- Data for Name: employee_pay_history; Type: TABLE DATA; Schema: human_resources; Owner: postgres
 --
 
-COPY human_resources.employeepayhistory (businessentityid, ratechangedate, rate, payfrequency, modifieddate) FROM stdin;
+COPY human_resources.employee_pay_history (businessentityid, ratechangedate, rate, payfrequency, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: jobcandidate; Type: TABLE DATA; Schema: human_resources; Owner: postgres
+-- Data for Name: job_candidate; Type: TABLE DATA; Schema: human_resources; Owner: postgres
 --
 
-COPY human_resources.jobcandidate (jobcandidateid, businessentityid, resume, modifieddate) FROM stdin;
+COPY human_resources.job_candidate (jobcandidateid, businessentityid, resume, modifieddate) FROM stdin;
 \.
 
 
@@ -5126,58 +5119,58 @@ COPY person.address (addressid, addressline1, addressline2, city, stateprovincei
 
 
 --
--- Data for Name: addresstype; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: address_type; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.addresstype (addresstypeid, rowguid, modifieddate) FROM stdin;
+COPY person.address_type (addresstypeid, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: businessentity; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: business_entity; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.businessentity (businessentityid, rowguid, modifieddate) FROM stdin;
+COPY person.business_entity (businessentityid, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: businessentityaddress; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: business_entity_address; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.businessentityaddress (businessentityid, addressid, addresstypeid, rowguid, modifieddate) FROM stdin;
+COPY person.business_entity_address (businessentityid, addressid, addresstypeid, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: businessentitycontact; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: business_entity_contact; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.businessentitycontact (businessentityid, personid, contacttypeid, rowguid, modifieddate) FROM stdin;
+COPY person.business_entity_contact (businessentityid, personid, contacttypeid, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: contacttype; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: contact_type; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.contacttype (contacttypeid, modifieddate) FROM stdin;
+COPY person.contact_type (contacttypeid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: countryregion; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: country_region; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.countryregion (countryregioncode, modifieddate) FROM stdin;
+COPY person.country_region (countryregioncode, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: emailaddress; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: email_address; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.emailaddress (businessentityid, emailaddressid, emailaddress, rowguid, modifieddate) FROM stdin;
+COPY person.email_address (businessentityid, emailaddressid, emailaddress, rowguid, modifieddate) FROM stdin;
 \.
 
 
@@ -5198,34 +5191,34 @@ COPY person.person (businessentityid, persontype, title, suffix, emailpromotion,
 
 
 --
--- Data for Name: personphone; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: person_phone; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.personphone (businessentityid, phonenumbertypeid, modifieddate) FROM stdin;
+COPY person.person_phone (businessentityid, phonenumbertypeid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: phonenumbertype; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: phone_number_type; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.phonenumbertype (phonenumbertypeid, modifieddate) FROM stdin;
+COPY person.phone_number_type (phonenumbertypeid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: stateprovince; Type: TABLE DATA; Schema: person; Owner: postgres
+-- Data for Name: state_province; Type: TABLE DATA; Schema: person; Owner: postgres
 --
 
-COPY person.stateprovince (stateprovinceid, stateprovincecode, countryregioncode, territoryid, rowguid, modifieddate) FROM stdin;
+COPY person.state_province (stateprovinceid, stateprovincecode, countryregioncode, territoryid, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: billofmaterials; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: bill_of_materials; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.billofmaterials (billofmaterialsid, productassemblyid, componentid, startdate, enddate, unitmeasurecode, bomlevel, perassemblyqty, modifieddate) FROM stdin;
+COPY production.bill_of_materials (billofmaterialsid, productassemblyid, componentid, startdate, enddate, unitmeasurecode, bomlevel, perassemblyqty, modifieddate) FROM stdin;
 \.
 
 
@@ -5270,98 +5263,98 @@ COPY production.product (productid, productnumber, color, safetystocklevel, reor
 
 
 --
--- Data for Name: productcategory; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_category; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productcategory (productcategoryid, rowguid, modifieddate) FROM stdin;
+COPY production.product_category (productcategoryid, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productcosthistory; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_cost_history; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productcosthistory (productid, startdate, enddate, standardcost, modifieddate) FROM stdin;
+COPY production.product_cost_history (productid, startdate, enddate, standardcost, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productdescription; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_description; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productdescription (productdescriptionid, description, rowguid, modifieddate) FROM stdin;
+COPY production.product_description (productdescriptionid, description, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productdocument; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_document; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productdocument (productid, modifieddate, documentnode) FROM stdin;
+COPY production.product_document (productid, modifieddate, documentnode) FROM stdin;
 \.
 
 
 --
--- Data for Name: productinventory; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_inventory; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productinventory (productid, locationid, shelf, bin, quantity, rowguid, modifieddate) FROM stdin;
+COPY production.product_inventory (productid, locationid, shelf, bin, quantity, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productlistpricehistory; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_list_price_history; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productlistpricehistory (productid, startdate, enddate, listprice, modifieddate) FROM stdin;
+COPY production.product_list_price_history (productid, startdate, enddate, listprice, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productmodel; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_model; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productmodel (productmodelid, catalogdescription, instructions, rowguid, modifieddate) FROM stdin;
+COPY production.product_model (productmodelid, catalogdescription, instructions, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productmodelillustration; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_model_illustration; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productmodelillustration (productmodelid, illustrationid, modifieddate) FROM stdin;
+COPY production.product_model_illustration (productmodelid, illustrationid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productmodelproductdescriptionculture; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_model_product_description_culture; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productmodelproductdescriptionculture (productmodelid, productdescriptionid, cultureid, modifieddate) FROM stdin;
+COPY production.product_model_product_description_culture (productmodelid, productdescriptionid, cultureid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productphoto; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_photo; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productphoto (productphotoid, thumbnailphoto, thumbnailphotofilename, largephoto, largephotofilename, modifieddate) FROM stdin;
+COPY production.product_photo (productphotoid, thumbnailphoto, thumbnailphotofilename, largephoto, largephotofilename, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productproductphoto; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_product_photo; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productproductphoto (productid, productphotoid, modifieddate) FROM stdin;
+COPY production.product_product_photo (productid, productphotoid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: productreview; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_review; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productreview (productreviewid, productid, reviewdate, emailaddress, rating, comments, modifieddate) FROM stdin;
+COPY production.product_review (productreviewid, productid, reviewdate, emailaddress, rating, comments, modifieddate) FROM stdin;
 1	709	2013-09-18 00:00:00	john@fourthcoffee.com	5	I can't believe I'm singing the praises of a pair of socks, but I just came back from a grueling\n3-day ride and these socks really helped make the trip a blast. They're lightweight yet really cushioned my feet all day. \nThe reinforced toe is nearly bullet-proof and I didn't experience any problems with rubbing or blisters like I have with\nother brands. I know it sounds silly, but it's always the little stuff (like comfortable feet) that makes or breaks a long trip.\nI won't go on another trip without them!	2013-09-18 00:00:00
 2	937	2013-11-13 00:00:00	david@graphicdesigninstitute.com	4	A little on the heavy side, but overall the entry/exit is easy in all conditions. I've used these pedals for \nmore than 3 years and I've never had a problem. Cleanup is easy. Mud and sand don't get trapped. I would like \nthem even better if there was a weight reduction. Maybe in the next design. Still, I would recommend them to a friend.	2013-11-13 00:00:00
 3	937	2013-11-15 00:00:00	jill@margiestravel.com	2	Maybe it's just because I'm new to mountain biking, but I had a terrible time getting use\nto these pedals. In my first outing, I wiped out trying to release my foot. Any suggestions on\nways I can adjust the pedals, or is it just a learning curve thing?	2013-11-15 00:00:00
@@ -5370,58 +5363,58 @@ COPY production.productreview (productreviewid, productid, reviewdate, emailaddr
 
 
 --
--- Data for Name: productsubcategory; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: product_subcategory; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.productsubcategory (productsubcategoryid, productcategoryid, rowguid, modifieddate) FROM stdin;
+COPY production.product_subcategory (productsubcategoryid, productcategoryid, rowguid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: scrapreason; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: scrap_reason; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.scrapreason (scrapreasonid, modifieddate) FROM stdin;
+COPY production.scrap_reason (scrapreasonid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: transactionhistory; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: transaction_history; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.transactionhistory (transactionid, productid, referenceorderid, referenceorderlineid, transactiondate, transactiontype, quantity, actualcost, modifieddate) FROM stdin;
+COPY production.transaction_history (transactionid, productid, referenceorderid, referenceorderlineid, transactiondate, transactiontype, quantity, actualcost, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: transactionhistoryarchive; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: transaction_history_archive; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.transactionhistoryarchive (transactionid, productid, referenceorderid, referenceorderlineid, transactiondate, transactiontype, quantity, actualcost, modifieddate) FROM stdin;
+COPY production.transaction_history_archive (transactionid, productid, referenceorderid, referenceorderlineid, transactiondate, transactiontype, quantity, actualcost, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: unitmeasure; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: unit_measure; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.unitmeasure (unitmeasurecode, modifieddate) FROM stdin;
+COPY production.unit_measure (unitmeasurecode, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: workorder; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: work_order; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.workorder (workorderid, productid, orderqty, scrappedqty, startdate, enddate, duedate, scrapreasonid, modifieddate) FROM stdin;
+COPY production.work_order (workorderid, productid, orderqty, scrappedqty, startdate, enddate, duedate, scrapreasonid, modifieddate) FROM stdin;
 \.
 
 
 --
--- Data for Name: workorderrouting; Type: TABLE DATA; Schema: production; Owner: postgres
+-- Data for Name: work_order_routing; Type: TABLE DATA; Schema: production; Owner: postgres
 --
 
-COPY production.workorderrouting (workorderid, productid, operationsequence, locationid, scheduledstartdate, scheduledenddate, actualstartdate, actualenddate, actualresourcehrs, plannedcost, actualcost, modifieddate) FROM stdin;
+COPY production.work_order_routing (workorderid, productid, operationsequence, locationid, scheduledstartdate, scheduledenddate, actualstartdate, actualenddate, actualresourcehrs, plannedcost, actualcost, modifieddate) FROM stdin;
 \.
 
 
@@ -5880,23 +5873,23 @@ ALTER TABLE human_resources.department CLUSTER ON "PK_Department_DepartmentID";
 
 
 --
--- Name: employeedepartmenthistory PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm; Type: CONSTRAINT; Schema: human_resources; Owner: postgres
+-- Name: employee_department_history PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm; Type: CONSTRAINT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.employeedepartmenthistory
+ALTER TABLE ONLY human_resources.employee_department_history
     ADD CONSTRAINT "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm" PRIMARY KEY (businessentityid, startdate, departmentid, shiftid);
 
-ALTER TABLE human_resources.employeedepartmenthistory CLUSTER ON "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm";
+ALTER TABLE human_resources.employee_department_history CLUSTER ON "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm";
 
 
 --
--- Name: employeepayhistory PK_EmployeePayHistory_BusinessEntityID_RateChangeDate; Type: CONSTRAINT; Schema: human_resources; Owner: postgres
+-- Name: employee_pay_history PK_EmployeePayHistory_BusinessEntityID_RateChangeDate; Type: CONSTRAINT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.employeepayhistory
+ALTER TABLE ONLY human_resources.employee_pay_history
     ADD CONSTRAINT "PK_EmployeePayHistory_BusinessEntityID_RateChangeDate" PRIMARY KEY (businessentityid, ratechangedate);
 
-ALTER TABLE human_resources.employeepayhistory CLUSTER ON "PK_EmployeePayHistory_BusinessEntityID_RateChangeDate";
+ALTER TABLE human_resources.employee_pay_history CLUSTER ON "PK_EmployeePayHistory_BusinessEntityID_RateChangeDate";
 
 
 --
@@ -5910,13 +5903,13 @@ ALTER TABLE human_resources.employee CLUSTER ON "PK_Employee_BusinessEntityID";
 
 
 --
--- Name: jobcandidate PK_JobCandidate_JobCandidateID; Type: CONSTRAINT; Schema: human_resources; Owner: postgres
+-- Name: job_candidate PK_JobCandidate_JobCandidateID; Type: CONSTRAINT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.jobcandidate
+ALTER TABLE ONLY human_resources.job_candidate
     ADD CONSTRAINT "PK_JobCandidate_JobCandidateID" PRIMARY KEY (jobcandidateid);
 
-ALTER TABLE human_resources.jobcandidate CLUSTER ON "PK_JobCandidate_JobCandidateID";
+ALTER TABLE human_resources.job_candidate CLUSTER ON "PK_JobCandidate_JobCandidateID";
 
 
 --
@@ -5930,13 +5923,13 @@ ALTER TABLE human_resources.shift CLUSTER ON "PK_Shift_ShiftID";
 
 
 --
--- Name: addresstype PK_AddressType_AddressTypeID; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: address_type PK_AddressType_AddressTypeID; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.addresstype
+ALTER TABLE ONLY person.address_type
     ADD CONSTRAINT "PK_AddressType_AddressTypeID" PRIMARY KEY (addresstypeid);
 
-ALTER TABLE person.addresstype CLUSTER ON "PK_AddressType_AddressTypeID";
+ALTER TABLE person.address_type CLUSTER ON "PK_AddressType_AddressTypeID";
 
 
 --
@@ -5950,63 +5943,63 @@ ALTER TABLE person.address CLUSTER ON "PK_Address_AddressID";
 
 
 --
--- Name: businessentityaddress PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: business_entity_address PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.businessentityaddress
+ALTER TABLE ONLY person.business_entity_address
     ADD CONSTRAINT "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType" PRIMARY KEY (businessentityid, addressid, addresstypeid);
 
-ALTER TABLE person.businessentityaddress CLUSTER ON "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType";
+ALTER TABLE person.business_entity_address CLUSTER ON "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType";
 
 
 --
--- Name: businessentitycontact PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: business_entity_contact PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.businessentitycontact
+ALTER TABLE ONLY person.business_entity_contact
     ADD CONSTRAINT "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI" PRIMARY KEY (businessentityid, personid, contacttypeid);
 
-ALTER TABLE person.businessentitycontact CLUSTER ON "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI";
+ALTER TABLE person.business_entity_contact CLUSTER ON "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI";
 
 
 --
--- Name: businessentity PK_BusinessEntity_BusinessEntityID; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: business_entity PK_BusinessEntity_BusinessEntityID; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.businessentity
+ALTER TABLE ONLY person.business_entity
     ADD CONSTRAINT "PK_BusinessEntity_BusinessEntityID" PRIMARY KEY (businessentityid);
 
-ALTER TABLE person.businessentity CLUSTER ON "PK_BusinessEntity_BusinessEntityID";
+ALTER TABLE person.business_entity CLUSTER ON "PK_BusinessEntity_BusinessEntityID";
 
 
 --
--- Name: contacttype PK_ContactType_ContactTypeID; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: contact_type PK_ContactType_ContactTypeID; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.contacttype
+ALTER TABLE ONLY person.contact_type
     ADD CONSTRAINT "PK_ContactType_ContactTypeID" PRIMARY KEY (contacttypeid);
 
-ALTER TABLE person.contacttype CLUSTER ON "PK_ContactType_ContactTypeID";
+ALTER TABLE person.contact_type CLUSTER ON "PK_ContactType_ContactTypeID";
 
 
 --
--- Name: countryregion PK_CountryRegion_CountryRegionCode; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: country_region PK_CountryRegion_CountryRegionCode; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.countryregion
+ALTER TABLE ONLY person.country_region
     ADD CONSTRAINT "PK_CountryRegion_CountryRegionCode" PRIMARY KEY (countryregioncode);
 
-ALTER TABLE person.countryregion CLUSTER ON "PK_CountryRegion_CountryRegionCode";
+ALTER TABLE person.country_region CLUSTER ON "PK_CountryRegion_CountryRegionCode";
 
 
 --
--- Name: emailaddress PK_EmailAddress_BusinessEntityID_EmailAddressID; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: email_address PK_EmailAddress_BusinessEntityID_EmailAddressID; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.emailaddress
+ALTER TABLE ONLY person.email_address
     ADD CONSTRAINT "PK_EmailAddress_BusinessEntityID_EmailAddressID" PRIMARY KEY (businessentityid, emailaddressid);
 
-ALTER TABLE person.emailaddress CLUSTER ON "PK_EmailAddress_BusinessEntityID_EmailAddressID";
+ALTER TABLE person.email_address CLUSTER ON "PK_EmailAddress_BusinessEntityID_EmailAddressID";
 
 
 --
@@ -6030,30 +6023,30 @@ ALTER TABLE person.person CLUSTER ON "PK_Person_BusinessEntityID";
 
 
 --
--- Name: phonenumbertype PK_PhoneNumberType_PhoneNumberTypeID; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: phone_number_type PK_PhoneNumberType_PhoneNumberTypeID; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.phonenumbertype
+ALTER TABLE ONLY person.phone_number_type
     ADD CONSTRAINT "PK_PhoneNumberType_PhoneNumberTypeID" PRIMARY KEY (phonenumbertypeid);
 
-ALTER TABLE person.phonenumbertype CLUSTER ON "PK_PhoneNumberType_PhoneNumberTypeID";
+ALTER TABLE person.phone_number_type CLUSTER ON "PK_PhoneNumberType_PhoneNumberTypeID";
 
 
 --
--- Name: stateprovince PK_StateProvince_StateProvinceID; Type: CONSTRAINT; Schema: person; Owner: postgres
+-- Name: state_province PK_StateProvince_StateProvinceID; Type: CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.stateprovince
+ALTER TABLE ONLY person.state_province
     ADD CONSTRAINT "PK_StateProvince_StateProvinceID" PRIMARY KEY (stateprovinceid);
 
-ALTER TABLE person.stateprovince CLUSTER ON "PK_StateProvince_StateProvinceID";
+ALTER TABLE person.state_province CLUSTER ON "PK_StateProvince_StateProvinceID";
 
 
 --
--- Name: billofmaterials PK_BillOfMaterials_BillOfMaterialsID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: bill_of_materials PK_BillOfMaterials_BillOfMaterialsID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.billofmaterials
+ALTER TABLE ONLY production.bill_of_materials
     ADD CONSTRAINT "PK_BillOfMaterials_BillOfMaterialsID" PRIMARY KEY (billofmaterialsid);
 
 
@@ -6098,131 +6091,131 @@ ALTER TABLE production.location CLUSTER ON "PK_Location_LocationID";
 
 
 --
--- Name: productcategory PK_ProductCategory_ProductCategoryID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_category PK_ProductCategory_ProductCategoryID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productcategory
+ALTER TABLE ONLY production.product_category
     ADD CONSTRAINT "PK_ProductCategory_ProductCategoryID" PRIMARY KEY (productcategoryid);
 
-ALTER TABLE production.productcategory CLUSTER ON "PK_ProductCategory_ProductCategoryID";
+ALTER TABLE production.product_category CLUSTER ON "PK_ProductCategory_ProductCategoryID";
 
 
 --
--- Name: productcosthistory PK_ProductCostHistory_ProductID_StartDate; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_cost_history PK_ProductCostHistory_ProductID_StartDate; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productcosthistory
+ALTER TABLE ONLY production.product_cost_history
     ADD CONSTRAINT "PK_ProductCostHistory_ProductID_StartDate" PRIMARY KEY (productid, startdate);
 
-ALTER TABLE production.productcosthistory CLUSTER ON "PK_ProductCostHistory_ProductID_StartDate";
+ALTER TABLE production.product_cost_history CLUSTER ON "PK_ProductCostHistory_ProductID_StartDate";
 
 
 --
--- Name: productdescription PK_ProductDescription_ProductDescriptionID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_description PK_ProductDescription_ProductDescriptionID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productdescription
+ALTER TABLE ONLY production.product_description
     ADD CONSTRAINT "PK_ProductDescription_ProductDescriptionID" PRIMARY KEY (productdescriptionid);
 
-ALTER TABLE production.productdescription CLUSTER ON "PK_ProductDescription_ProductDescriptionID";
+ALTER TABLE production.product_description CLUSTER ON "PK_ProductDescription_ProductDescriptionID";
 
 
 --
--- Name: productdocument PK_ProductDocument_ProductID_DocumentNode; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_document PK_ProductDocument_ProductID_DocumentNode; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productdocument
+ALTER TABLE ONLY production.product_document
     ADD CONSTRAINT "PK_ProductDocument_ProductID_DocumentNode" PRIMARY KEY (productid, documentnode);
 
-ALTER TABLE production.productdocument CLUSTER ON "PK_ProductDocument_ProductID_DocumentNode";
+ALTER TABLE production.product_document CLUSTER ON "PK_ProductDocument_ProductID_DocumentNode";
 
 
 --
--- Name: productinventory PK_ProductInventory_ProductID_LocationID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_inventory PK_ProductInventory_ProductID_LocationID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productinventory
+ALTER TABLE ONLY production.product_inventory
     ADD CONSTRAINT "PK_ProductInventory_ProductID_LocationID" PRIMARY KEY (productid, locationid);
 
-ALTER TABLE production.productinventory CLUSTER ON "PK_ProductInventory_ProductID_LocationID";
+ALTER TABLE production.product_inventory CLUSTER ON "PK_ProductInventory_ProductID_LocationID";
 
 
 --
--- Name: productlistpricehistory PK_ProductListPriceHistory_ProductID_StartDate; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_list_price_history PK_ProductListPriceHistory_ProductID_StartDate; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productlistpricehistory
+ALTER TABLE ONLY production.product_list_price_history
     ADD CONSTRAINT "PK_ProductListPriceHistory_ProductID_StartDate" PRIMARY KEY (productid, startdate);
 
-ALTER TABLE production.productlistpricehistory CLUSTER ON "PK_ProductListPriceHistory_ProductID_StartDate";
+ALTER TABLE production.product_list_price_history CLUSTER ON "PK_ProductListPriceHistory_ProductID_StartDate";
 
 
 --
--- Name: productmodelillustration PK_ProductModelIllustration_ProductModelID_IllustrationID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_model_illustration PK_ProductModelIllustration_ProductModelID_IllustrationID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productmodelillustration
+ALTER TABLE ONLY production.product_model_illustration
     ADD CONSTRAINT "PK_ProductModelIllustration_ProductModelID_IllustrationID" PRIMARY KEY (productmodelid, illustrationid);
 
-ALTER TABLE production.productmodelillustration CLUSTER ON "PK_ProductModelIllustration_ProductModelID_IllustrationID";
+ALTER TABLE production.product_model_illustration CLUSTER ON "PK_ProductModelIllustration_ProductModelID_IllustrationID";
 
 
 --
--- Name: productmodelproductdescriptionculture PK_ProductModelProductDescriptionCulture_ProductModelID_Product; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_model_product_description_culture PK_ProductModelProductDescriptionCulture_ProductModelID_Product; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productmodelproductdescriptionculture
+ALTER TABLE ONLY production.product_model_product_description_culture
     ADD CONSTRAINT "PK_ProductModelProductDescriptionCulture_ProductModelID_Product" PRIMARY KEY (productmodelid, productdescriptionid, cultureid);
 
-ALTER TABLE production.productmodelproductdescriptionculture CLUSTER ON "PK_ProductModelProductDescriptionCulture_ProductModelID_Product";
+ALTER TABLE production.product_model_product_description_culture CLUSTER ON "PK_ProductModelProductDescriptionCulture_ProductModelID_Product";
 
 
 --
--- Name: productmodel PK_ProductModel_ProductModelID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_model PK_ProductModel_ProductModelID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productmodel
+ALTER TABLE ONLY production.product_model
     ADD CONSTRAINT "PK_ProductModel_ProductModelID" PRIMARY KEY (productmodelid);
 
-ALTER TABLE production.productmodel CLUSTER ON "PK_ProductModel_ProductModelID";
+ALTER TABLE production.product_model CLUSTER ON "PK_ProductModel_ProductModelID";
 
 
 --
--- Name: productphoto PK_ProductPhoto_ProductPhotoID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_photo PK_ProductPhoto_ProductPhotoID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productphoto
+ALTER TABLE ONLY production.product_photo
     ADD CONSTRAINT "PK_ProductPhoto_ProductPhotoID" PRIMARY KEY (productphotoid);
 
-ALTER TABLE production.productphoto CLUSTER ON "PK_ProductPhoto_ProductPhotoID";
+ALTER TABLE production.product_photo CLUSTER ON "PK_ProductPhoto_ProductPhotoID";
 
 
 --
--- Name: productproductphoto PK_ProductProductPhoto_ProductID_ProductPhotoID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_product_photo PK_ProductProductPhoto_ProductID_ProductPhotoID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productproductphoto
+ALTER TABLE ONLY production.product_product_photo
     ADD CONSTRAINT "PK_ProductProductPhoto_ProductID_ProductPhotoID" PRIMARY KEY (productid, productphotoid);
 
 
 --
--- Name: productreview PK_ProductReview_ProductReviewID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_review PK_ProductReview_ProductReviewID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productreview
+ALTER TABLE ONLY production.product_review
     ADD CONSTRAINT "PK_ProductReview_ProductReviewID" PRIMARY KEY (productreviewid);
 
-ALTER TABLE production.productreview CLUSTER ON "PK_ProductReview_ProductReviewID";
+ALTER TABLE production.product_review CLUSTER ON "PK_ProductReview_ProductReviewID";
 
 
 --
--- Name: productsubcategory PK_ProductSubcategory_ProductSubcategoryID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_subcategory PK_ProductSubcategory_ProductSubcategoryID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productsubcategory
+ALTER TABLE ONLY production.product_subcategory
     ADD CONSTRAINT "PK_ProductSubcategory_ProductSubcategoryID" PRIMARY KEY (productsubcategoryid);
 
-ALTER TABLE production.productsubcategory CLUSTER ON "PK_ProductSubcategory_ProductSubcategoryID";
+ALTER TABLE production.product_subcategory CLUSTER ON "PK_ProductSubcategory_ProductSubcategoryID";
 
 
 --
@@ -6236,63 +6229,63 @@ ALTER TABLE production.product CLUSTER ON "PK_Product_ProductID";
 
 
 --
--- Name: scrapreason PK_ScrapReason_ScrapReasonID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: scrap_reason PK_ScrapReason_ScrapReasonID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.scrapreason
+ALTER TABLE ONLY production.scrap_reason
     ADD CONSTRAINT "PK_ScrapReason_ScrapReasonID" PRIMARY KEY (scrapreasonid);
 
-ALTER TABLE production.scrapreason CLUSTER ON "PK_ScrapReason_ScrapReasonID";
+ALTER TABLE production.scrap_reason CLUSTER ON "PK_ScrapReason_ScrapReasonID";
 
 
 --
--- Name: transactionhistoryarchive PK_TransactionHistoryArchive_TransactionID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: transaction_history_archive PK_TransactionHistoryArchive_TransactionID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.transactionhistoryarchive
+ALTER TABLE ONLY production.transaction_history_archive
     ADD CONSTRAINT "PK_TransactionHistoryArchive_TransactionID" PRIMARY KEY (transactionid);
 
-ALTER TABLE production.transactionhistoryarchive CLUSTER ON "PK_TransactionHistoryArchive_TransactionID";
+ALTER TABLE production.transaction_history_archive CLUSTER ON "PK_TransactionHistoryArchive_TransactionID";
 
 
 --
--- Name: transactionhistory PK_TransactionHistory_TransactionID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: transaction_history PK_TransactionHistory_TransactionID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.transactionhistory
+ALTER TABLE ONLY production.transaction_history
     ADD CONSTRAINT "PK_TransactionHistory_TransactionID" PRIMARY KEY (transactionid);
 
-ALTER TABLE production.transactionhistory CLUSTER ON "PK_TransactionHistory_TransactionID";
+ALTER TABLE production.transaction_history CLUSTER ON "PK_TransactionHistory_TransactionID";
 
 
 --
--- Name: unitmeasure PK_UnitMeasure_UnitMeasureCode; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: unit_measure PK_UnitMeasure_UnitMeasureCode; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.unitmeasure
+ALTER TABLE ONLY production.unit_measure
     ADD CONSTRAINT "PK_UnitMeasure_UnitMeasureCode" PRIMARY KEY (unitmeasurecode);
 
-ALTER TABLE production.unitmeasure CLUSTER ON "PK_UnitMeasure_UnitMeasureCode";
+ALTER TABLE production.unit_measure CLUSTER ON "PK_UnitMeasure_UnitMeasureCode";
 
 
 --
--- Name: workorderrouting PK_WorkOrderRouting_WorkOrderID_ProductID_OperationSequence; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: work_order_routing PK_WorkOrderRouting_WorkOrderID_ProductID_OperationSequence; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.workorderrouting
+ALTER TABLE ONLY production.work_order_routing
     ADD CONSTRAINT "PK_WorkOrderRouting_WorkOrderID_ProductID_OperationSequence" PRIMARY KEY (workorderid, productid, operationsequence);
 
-ALTER TABLE production.workorderrouting CLUSTER ON "PK_WorkOrderRouting_WorkOrderID_ProductID_OperationSequence";
+ALTER TABLE production.work_order_routing CLUSTER ON "PK_WorkOrderRouting_WorkOrderID_ProductID_OperationSequence";
 
 
 --
--- Name: workorder PK_WorkOrder_WorkOrderID; Type: CONSTRAINT; Schema: production; Owner: postgres
+-- Name: work_order PK_WorkOrder_WorkOrderID; Type: CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.workorder
+ALTER TABLE ONLY production.work_order
     ADD CONSTRAINT "PK_WorkOrder_WorkOrderID" PRIMARY KEY (workorderid);
 
-ALTER TABLE production.workorder CLUSTER ON "PK_WorkOrder_WorkOrderID";
+ALTER TABLE production.work_order CLUSTER ON "PK_WorkOrder_WorkOrderID";
 
 
 --
@@ -6544,34 +6537,34 @@ ALTER TABLE sales.store CLUSTER ON "PK_Store_BusinessEntityID";
 
 
 --
--- Name: employeedepartmenthistory FK_EmployeeDepartmentHistory_Department_DepartmentID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
+-- Name: employee_department_history FK_EmployeeDepartmentHistory_Department_DepartmentID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.employeedepartmenthistory
+ALTER TABLE ONLY human_resources.employee_department_history
     ADD CONSTRAINT "FK_EmployeeDepartmentHistory_Department_DepartmentID" FOREIGN KEY (departmentid) REFERENCES human_resources.department(departmentid);
 
 
 --
--- Name: employeedepartmenthistory FK_EmployeeDepartmentHistory_Employee_BusinessEntityID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
+-- Name: employee_department_history FK_EmployeeDepartmentHistory_Employee_BusinessEntityID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.employeedepartmenthistory
+ALTER TABLE ONLY human_resources.employee_department_history
     ADD CONSTRAINT "FK_EmployeeDepartmentHistory_Employee_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES human_resources.employee(businessentityid);
 
 
 --
--- Name: employeedepartmenthistory FK_EmployeeDepartmentHistory_Shift_ShiftID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
+-- Name: employee_department_history FK_EmployeeDepartmentHistory_Shift_ShiftID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.employeedepartmenthistory
+ALTER TABLE ONLY human_resources.employee_department_history
     ADD CONSTRAINT "FK_EmployeeDepartmentHistory_Shift_ShiftID" FOREIGN KEY (shiftid) REFERENCES human_resources.shift(shiftid);
 
 
 --
--- Name: employeepayhistory FK_EmployeePayHistory_Employee_BusinessEntityID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
+-- Name: employee_pay_history FK_EmployeePayHistory_Employee_BusinessEntityID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.employeepayhistory
+ALTER TABLE ONLY human_resources.employee_pay_history
     ADD CONSTRAINT "FK_EmployeePayHistory_Employee_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES human_resources.employee(businessentityid);
 
 
@@ -6584,10 +6577,10 @@ ALTER TABLE ONLY human_resources.employee
 
 
 --
--- Name: jobcandidate FK_JobCandidate_Employee_BusinessEntityID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
+-- Name: job_candidate FK_JobCandidate_Employee_BusinessEntityID; Type: FK CONSTRAINT; Schema: human_resources; Owner: postgres
 --
 
-ALTER TABLE ONLY human_resources.jobcandidate
+ALTER TABLE ONLY human_resources.job_candidate
     ADD CONSTRAINT "FK_JobCandidate_Employee_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES human_resources.employee(businessentityid);
 
 
@@ -6596,62 +6589,62 @@ ALTER TABLE ONLY human_resources.jobcandidate
 --
 
 ALTER TABLE ONLY person.address
-    ADD CONSTRAINT "FK_Address_StateProvince_StateProvinceID" FOREIGN KEY (stateprovinceid) REFERENCES person.stateprovince(stateprovinceid);
+    ADD CONSTRAINT "FK_Address_StateProvince_StateProvinceID" FOREIGN KEY (stateprovinceid) REFERENCES person.state_province(stateprovinceid);
 
 
 --
--- Name: businessentityaddress FK_BusinessEntityAddress_AddressType_AddressTypeID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: business_entity_address FK_BusinessEntityAddress_AddressType_AddressTypeID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.businessentityaddress
-    ADD CONSTRAINT "FK_BusinessEntityAddress_AddressType_AddressTypeID" FOREIGN KEY (addresstypeid) REFERENCES person.addresstype(addresstypeid);
+ALTER TABLE ONLY person.business_entity_address
+    ADD CONSTRAINT "FK_BusinessEntityAddress_AddressType_AddressTypeID" FOREIGN KEY (addresstypeid) REFERENCES person.address_type(addresstypeid);
 
 
 --
--- Name: businessentityaddress FK_BusinessEntityAddress_Address_AddressID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: business_entity_address FK_BusinessEntityAddress_Address_AddressID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.businessentityaddress
+ALTER TABLE ONLY person.business_entity_address
     ADD CONSTRAINT "FK_BusinessEntityAddress_Address_AddressID" FOREIGN KEY (addressid) REFERENCES person.address(addressid);
 
 
 --
--- Name: businessentityaddress FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: business_entity_address FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.businessentityaddress
-    ADD CONSTRAINT "FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.businessentity(businessentityid);
-
-
---
--- Name: businessentitycontact FK_BusinessEntityContact_BusinessEntity_BusinessEntityID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
---
-
-ALTER TABLE ONLY person.businessentitycontact
-    ADD CONSTRAINT "FK_BusinessEntityContact_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.businessentity(businessentityid);
+ALTER TABLE ONLY person.business_entity_address
+    ADD CONSTRAINT "FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.business_entity(businessentityid);
 
 
 --
--- Name: businessentitycontact FK_BusinessEntityContact_ContactType_ContactTypeID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: business_entity_contact FK_BusinessEntityContact_BusinessEntity_BusinessEntityID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.businessentitycontact
-    ADD CONSTRAINT "FK_BusinessEntityContact_ContactType_ContactTypeID" FOREIGN KEY (contacttypeid) REFERENCES person.contacttype(contacttypeid);
+ALTER TABLE ONLY person.business_entity_contact
+    ADD CONSTRAINT "FK_BusinessEntityContact_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.business_entity(businessentityid);
 
 
 --
--- Name: businessentitycontact FK_BusinessEntityContact_Person_PersonID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: business_entity_contact FK_BusinessEntityContact_ContactType_ContactTypeID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.businessentitycontact
+ALTER TABLE ONLY person.business_entity_contact
+    ADD CONSTRAINT "FK_BusinessEntityContact_ContactType_ContactTypeID" FOREIGN KEY (contacttypeid) REFERENCES person.contact_type(contacttypeid);
+
+
+--
+-- Name: business_entity_contact FK_BusinessEntityContact_Person_PersonID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+--
+
+ALTER TABLE ONLY person.business_entity_contact
     ADD CONSTRAINT "FK_BusinessEntityContact_Person_PersonID" FOREIGN KEY (personid) REFERENCES person.person(businessentityid);
 
 
 --
--- Name: emailaddress FK_EmailAddress_Person_BusinessEntityID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: email_address FK_EmailAddress_Person_BusinessEntityID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.emailaddress
+ALTER TABLE ONLY person.email_address
     ADD CONSTRAINT "FK_EmailAddress_Person_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.person(businessentityid);
 
 
@@ -6664,19 +6657,19 @@ ALTER TABLE ONLY person.password
 
 
 --
--- Name: personphone FK_PersonPhone_Person_BusinessEntityID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: person_phone FK_PersonPhone_Person_BusinessEntityID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.personphone
+ALTER TABLE ONLY person.person_phone
     ADD CONSTRAINT "FK_PersonPhone_Person_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.person(businessentityid);
 
 
 --
--- Name: personphone FK_PersonPhone_PhoneNumberType_PhoneNumberTypeID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: person_phone FK_PersonPhone_PhoneNumberType_PhoneNumberTypeID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.personphone
-    ADD CONSTRAINT "FK_PersonPhone_PhoneNumberType_PhoneNumberTypeID" FOREIGN KEY (phonenumbertypeid) REFERENCES person.phonenumbertype(phonenumbertypeid);
+ALTER TABLE ONLY person.person_phone
+    ADD CONSTRAINT "FK_PersonPhone_PhoneNumberType_PhoneNumberTypeID" FOREIGN KEY (phonenumbertypeid) REFERENCES person.phone_number_type(phonenumbertypeid);
 
 
 --
@@ -6684,47 +6677,47 @@ ALTER TABLE ONLY person.personphone
 --
 
 ALTER TABLE ONLY person.person
-    ADD CONSTRAINT "FK_Person_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.businessentity(businessentityid);
+    ADD CONSTRAINT "FK_Person_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.business_entity(businessentityid);
 
 
 --
--- Name: stateprovince FK_StateProvince_CountryRegion_CountryRegionCode; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: state_province FK_StateProvince_CountryRegion_CountryRegionCode; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.stateprovince
-    ADD CONSTRAINT "FK_StateProvince_CountryRegion_CountryRegionCode" FOREIGN KEY (countryregioncode) REFERENCES person.countryregion(countryregioncode);
+ALTER TABLE ONLY person.state_province
+    ADD CONSTRAINT "FK_StateProvince_CountryRegion_CountryRegionCode" FOREIGN KEY (countryregioncode) REFERENCES person.country_region(countryregioncode);
 
 
 --
--- Name: stateprovince FK_StateProvince_SalesTerritory_TerritoryID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
+-- Name: state_province FK_StateProvince_SalesTerritory_TerritoryID; Type: FK CONSTRAINT; Schema: person; Owner: postgres
 --
 
-ALTER TABLE ONLY person.stateprovince
+ALTER TABLE ONLY person.state_province
     ADD CONSTRAINT "FK_StateProvince_SalesTerritory_TerritoryID" FOREIGN KEY (territoryid) REFERENCES sales.salesterritory(territoryid);
 
 
 --
--- Name: billofmaterials FK_BillOfMaterials_Product_ComponentID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: bill_of_materials FK_BillOfMaterials_Product_ComponentID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.billofmaterials
+ALTER TABLE ONLY production.bill_of_materials
     ADD CONSTRAINT "FK_BillOfMaterials_Product_ComponentID" FOREIGN KEY (componentid) REFERENCES production.product(productid);
 
 
 --
--- Name: billofmaterials FK_BillOfMaterials_Product_ProductAssemblyID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: bill_of_materials FK_BillOfMaterials_Product_ProductAssemblyID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.billofmaterials
+ALTER TABLE ONLY production.bill_of_materials
     ADD CONSTRAINT "FK_BillOfMaterials_Product_ProductAssemblyID" FOREIGN KEY (productassemblyid) REFERENCES production.product(productid);
 
 
 --
--- Name: billofmaterials FK_BillOfMaterials_UnitMeasure_UnitMeasureCode; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: bill_of_materials FK_BillOfMaterials_UnitMeasure_UnitMeasureCode; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.billofmaterials
-    ADD CONSTRAINT "FK_BillOfMaterials_UnitMeasure_UnitMeasureCode" FOREIGN KEY (unitmeasurecode) REFERENCES production.unitmeasure(unitmeasurecode);
+ALTER TABLE ONLY production.bill_of_materials
+    ADD CONSTRAINT "FK_BillOfMaterials_UnitMeasure_UnitMeasureCode" FOREIGN KEY (unitmeasurecode) REFERENCES production.unit_measure(unitmeasurecode);
 
 
 --
@@ -6736,115 +6729,115 @@ ALTER TABLE ONLY production.document
 
 
 --
--- Name: productcosthistory FK_ProductCostHistory_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_cost_history FK_ProductCostHistory_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productcosthistory
+ALTER TABLE ONLY production.product_cost_history
     ADD CONSTRAINT "FK_ProductCostHistory_Product_ProductID" FOREIGN KEY (productid) REFERENCES production.product(productid);
 
 
 --
--- Name: productdocument FK_ProductDocument_Document_DocumentNode; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_document FK_ProductDocument_Document_DocumentNode; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productdocument
+ALTER TABLE ONLY production.product_document
     ADD CONSTRAINT "FK_ProductDocument_Document_DocumentNode" FOREIGN KEY (documentnode) REFERENCES production.document(documentnode);
 
 
 --
--- Name: productdocument FK_ProductDocument_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_document FK_ProductDocument_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productdocument
+ALTER TABLE ONLY production.product_document
     ADD CONSTRAINT "FK_ProductDocument_Product_ProductID" FOREIGN KEY (productid) REFERENCES production.product(productid);
 
 
 --
--- Name: productinventory FK_ProductInventory_Location_LocationID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_inventory FK_ProductInventory_Location_LocationID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productinventory
+ALTER TABLE ONLY production.product_inventory
     ADD CONSTRAINT "FK_ProductInventory_Location_LocationID" FOREIGN KEY (locationid) REFERENCES production.location(locationid);
 
 
 --
--- Name: productinventory FK_ProductInventory_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_inventory FK_ProductInventory_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productinventory
+ALTER TABLE ONLY production.product_inventory
     ADD CONSTRAINT "FK_ProductInventory_Product_ProductID" FOREIGN KEY (productid) REFERENCES production.product(productid);
 
 
 --
--- Name: productlistpricehistory FK_ProductListPriceHistory_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_list_price_history FK_ProductListPriceHistory_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productlistpricehistory
+ALTER TABLE ONLY production.product_list_price_history
     ADD CONSTRAINT "FK_ProductListPriceHistory_Product_ProductID" FOREIGN KEY (productid) REFERENCES production.product(productid);
 
 
 --
--- Name: productmodelillustration FK_ProductModelIllustration_Illustration_IllustrationID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_model_illustration FK_ProductModelIllustration_Illustration_IllustrationID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productmodelillustration
+ALTER TABLE ONLY production.product_model_illustration
     ADD CONSTRAINT "FK_ProductModelIllustration_Illustration_IllustrationID" FOREIGN KEY (illustrationid) REFERENCES production.illustration(illustrationid);
 
 
 --
--- Name: productmodelillustration FK_ProductModelIllustration_ProductModel_ProductModelID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_model_illustration FK_ProductModelIllustration_ProductModel_ProductModelID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productmodelillustration
-    ADD CONSTRAINT "FK_ProductModelIllustration_ProductModel_ProductModelID" FOREIGN KEY (productmodelid) REFERENCES production.productmodel(productmodelid);
+ALTER TABLE ONLY production.product_model_illustration
+    ADD CONSTRAINT "FK_ProductModelIllustration_ProductModel_ProductModelID" FOREIGN KEY (productmodelid) REFERENCES production.product_model(productmodelid);
 
 
 --
--- Name: productmodelproductdescriptionculture FK_ProductModelProductDescriptionCulture_Culture_CultureID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_model_product_description_culture FK_ProductModelProductDescriptionCulture_Culture_CultureID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productmodelproductdescriptionculture
+ALTER TABLE ONLY production.product_model_product_description_culture
     ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_Culture_CultureID" FOREIGN KEY (cultureid) REFERENCES production.culture(cultureid);
 
 
 --
--- Name: productmodelproductdescriptionculture FK_ProductModelProductDescriptionCulture_ProductDescription_Pro; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_model_product_description_culture FK_ProductModelProductDescriptionCulture_ProductDescription_Pro; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productmodelproductdescriptionculture
-    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_ProductDescription_Pro" FOREIGN KEY (productdescriptionid) REFERENCES production.productdescription(productdescriptionid);
-
-
---
--- Name: productmodelproductdescriptionculture FK_ProductModelProductDescriptionCulture_ProductModel_ProductMo; Type: FK CONSTRAINT; Schema: production; Owner: postgres
---
-
-ALTER TABLE ONLY production.productmodelproductdescriptionculture
-    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_ProductModel_ProductMo" FOREIGN KEY (productmodelid) REFERENCES production.productmodel(productmodelid);
+ALTER TABLE ONLY production.product_model_product_description_culture
+    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_ProductDescription_Pro" FOREIGN KEY (productdescriptionid) REFERENCES production.product_description(productdescriptionid);
 
 
 --
--- Name: productproductphoto FK_ProductProductPhoto_ProductPhoto_ProductPhotoID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_model_product_description_culture FK_ProductModelProductDescriptionCulture_ProductModel_ProductMo; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productproductphoto
-    ADD CONSTRAINT "FK_ProductProductPhoto_ProductPhoto_ProductPhotoID" FOREIGN KEY (productphotoid) REFERENCES production.productphoto(productphotoid);
+ALTER TABLE ONLY production.product_model_product_description_culture
+    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_ProductModel_ProductMo" FOREIGN KEY (productmodelid) REFERENCES production.product_model(productmodelid);
 
 
 --
--- Name: productproductphoto FK_ProductProductPhoto_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_product_photo FK_ProductProductPhoto_ProductPhoto_ProductPhotoID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productproductphoto
+ALTER TABLE ONLY production.product_product_photo
+    ADD CONSTRAINT "FK_ProductProductPhoto_ProductPhoto_ProductPhotoID" FOREIGN KEY (productphotoid) REFERENCES production.product_photo(productphotoid);
+
+
+--
+-- Name: product_product_photo FK_ProductProductPhoto_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+--
+
+ALTER TABLE ONLY production.product_product_photo
     ADD CONSTRAINT "FK_ProductProductPhoto_Product_ProductID" FOREIGN KEY (productid) REFERENCES production.product(productid);
 
 
 --
--- Name: productsubcategory FK_ProductSubcategory_ProductCategory_ProductCategoryID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: product_subcategory FK_ProductSubcategory_ProductCategory_ProductCategoryID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.productsubcategory
-    ADD CONSTRAINT "FK_ProductSubcategory_ProductCategory_ProductCategoryID" FOREIGN KEY (productcategoryid) REFERENCES production.productcategory(productcategoryid);
+ALTER TABLE ONLY production.product_subcategory
+    ADD CONSTRAINT "FK_ProductSubcategory_ProductCategory_ProductCategoryID" FOREIGN KEY (productcategoryid) REFERENCES production.product_category(productcategoryid);
 
 
 --
@@ -6852,7 +6845,7 @@ ALTER TABLE ONLY production.productsubcategory
 --
 
 ALTER TABLE ONLY production.product
-    ADD CONSTRAINT "FK_Product_ProductModel_ProductModelID" FOREIGN KEY (productmodelid) REFERENCES production.productmodel(productmodelid);
+    ADD CONSTRAINT "FK_Product_ProductModel_ProductModelID" FOREIGN KEY (productmodelid) REFERENCES production.product_model(productmodelid);
 
 
 --
@@ -6860,7 +6853,7 @@ ALTER TABLE ONLY production.product
 --
 
 ALTER TABLE ONLY production.product
-    ADD CONSTRAINT "FK_Product_ProductSubcategory_ProductSubcategoryID" FOREIGN KEY (productsubcategoryid) REFERENCES production.productsubcategory(productsubcategoryid);
+    ADD CONSTRAINT "FK_Product_ProductSubcategory_ProductSubcategoryID" FOREIGN KEY (productsubcategoryid) REFERENCES production.product_subcategory(productsubcategoryid);
 
 
 --
@@ -6868,7 +6861,7 @@ ALTER TABLE ONLY production.product
 --
 
 ALTER TABLE ONLY production.product
-    ADD CONSTRAINT "FK_Product_UnitMeasure_SizeUnitMeasureCode" FOREIGN KEY (sizeunitmeasurecode) REFERENCES production.unitmeasure(unitmeasurecode);
+    ADD CONSTRAINT "FK_Product_UnitMeasure_SizeUnitMeasureCode" FOREIGN KEY (sizeunitmeasurecode) REFERENCES production.unit_measure(unitmeasurecode);
 
 
 --
@@ -6876,47 +6869,47 @@ ALTER TABLE ONLY production.product
 --
 
 ALTER TABLE ONLY production.product
-    ADD CONSTRAINT "FK_Product_UnitMeasure_WeightUnitMeasureCode" FOREIGN KEY (weightunitmeasurecode) REFERENCES production.unitmeasure(unitmeasurecode);
+    ADD CONSTRAINT "FK_Product_UnitMeasure_WeightUnitMeasureCode" FOREIGN KEY (weightunitmeasurecode) REFERENCES production.unit_measure(unitmeasurecode);
 
 
 --
--- Name: transactionhistory FK_TransactionHistory_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: transaction_history FK_TransactionHistory_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.transactionhistory
+ALTER TABLE ONLY production.transaction_history
     ADD CONSTRAINT "FK_TransactionHistory_Product_ProductID" FOREIGN KEY (productid) REFERENCES production.product(productid);
 
 
 --
--- Name: workorderrouting FK_WorkOrderRouting_Location_LocationID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: work_order_routing FK_WorkOrderRouting_Location_LocationID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.workorderrouting
+ALTER TABLE ONLY production.work_order_routing
     ADD CONSTRAINT "FK_WorkOrderRouting_Location_LocationID" FOREIGN KEY (locationid) REFERENCES production.location(locationid);
 
 
 --
--- Name: workorderrouting FK_WorkOrderRouting_WorkOrder_WorkOrderID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: work_order_routing FK_WorkOrderRouting_WorkOrder_WorkOrderID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.workorderrouting
-    ADD CONSTRAINT "FK_WorkOrderRouting_WorkOrder_WorkOrderID" FOREIGN KEY (workorderid) REFERENCES production.workorder(workorderid);
+ALTER TABLE ONLY production.work_order_routing
+    ADD CONSTRAINT "FK_WorkOrderRouting_WorkOrder_WorkOrderID" FOREIGN KEY (workorderid) REFERENCES production.work_order(workorderid);
 
 
 --
--- Name: workorder FK_WorkOrder_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: work_order FK_WorkOrder_Product_ProductID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.workorder
+ALTER TABLE ONLY production.work_order
     ADD CONSTRAINT "FK_WorkOrder_Product_ProductID" FOREIGN KEY (productid) REFERENCES production.product(productid);
 
 
 --
--- Name: workorder FK_WorkOrder_ScrapReason_ScrapReasonID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
+-- Name: work_order FK_WorkOrder_ScrapReason_ScrapReasonID; Type: FK CONSTRAINT; Schema: production; Owner: postgres
 --
 
-ALTER TABLE ONLY production.workorder
-    ADD CONSTRAINT "FK_WorkOrder_ScrapReason_ScrapReasonID" FOREIGN KEY (scrapreasonid) REFERENCES production.scrapreason(scrapreasonid);
+ALTER TABLE ONLY production.work_order
+    ADD CONSTRAINT "FK_WorkOrder_ScrapReason_ScrapReasonID" FOREIGN KEY (scrapreasonid) REFERENCES production.scrap_reason(scrapreasonid);
 
 
 --
@@ -6932,7 +6925,7 @@ ALTER TABLE ONLY purchasing.productvendor
 --
 
 ALTER TABLE ONLY purchasing.productvendor
-    ADD CONSTRAINT "FK_ProductVendor_UnitMeasure_UnitMeasureCode" FOREIGN KEY (unitmeasurecode) REFERENCES production.unitmeasure(unitmeasurecode);
+    ADD CONSTRAINT "FK_ProductVendor_UnitMeasure_UnitMeasureCode" FOREIGN KEY (unitmeasurecode) REFERENCES production.unit_measure(unitmeasurecode);
 
 
 --
@@ -6988,7 +6981,7 @@ ALTER TABLE ONLY purchasing.purchaseorderheader
 --
 
 ALTER TABLE ONLY purchasing.vendor
-    ADD CONSTRAINT "FK_Vendor_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.businessentity(businessentityid);
+    ADD CONSTRAINT "FK_Vendor_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.business_entity(businessentityid);
 
 
 --
@@ -6996,7 +6989,7 @@ ALTER TABLE ONLY purchasing.vendor
 --
 
 ALTER TABLE ONLY sales.countryregioncurrency
-    ADD CONSTRAINT "FK_CountryRegionCurrency_CountryRegion_CountryRegionCode" FOREIGN KEY (countryregioncode) REFERENCES person.countryregion(countryregioncode);
+    ADD CONSTRAINT "FK_CountryRegionCurrency_CountryRegion_CountryRegionCode" FOREIGN KEY (countryregioncode) REFERENCES person.country_region(countryregioncode);
 
 
 --
@@ -7188,7 +7181,7 @@ ALTER TABLE ONLY sales.salesperson
 --
 
 ALTER TABLE ONLY sales.salestaxrate
-    ADD CONSTRAINT "FK_SalesTaxRate_StateProvince_StateProvinceID" FOREIGN KEY (stateprovinceid) REFERENCES person.stateprovince(stateprovinceid);
+    ADD CONSTRAINT "FK_SalesTaxRate_StateProvince_StateProvinceID" FOREIGN KEY (stateprovinceid) REFERENCES person.state_province(stateprovinceid);
 
 
 --
@@ -7212,7 +7205,7 @@ ALTER TABLE ONLY sales.salesterritoryhistory
 --
 
 ALTER TABLE ONLY sales.salesterritory
-    ADD CONSTRAINT "FK_SalesTerritory_CountryRegion_CountryRegionCode" FOREIGN KEY (countryregioncode) REFERENCES person.countryregion(countryregioncode);
+    ADD CONSTRAINT "FK_SalesTerritory_CountryRegion_CountryRegionCode" FOREIGN KEY (countryregioncode) REFERENCES person.country_region(countryregioncode);
 
 
 --
@@ -7244,7 +7237,7 @@ ALTER TABLE ONLY sales.specialofferproduct
 --
 
 ALTER TABLE ONLY sales.store
-    ADD CONSTRAINT "FK_Store_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.businessentity(businessentityid);
+    ADD CONSTRAINT "FK_Store_BusinessEntity_BusinessEntityID" FOREIGN KEY (businessentityid) REFERENCES person.business_entity(businessentityid);
 
 
 --
