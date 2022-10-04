@@ -22,20 +22,20 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 
-CREATE TABLE db.address (
-    address_id integer NOT NULL,
+CREATE TABLE db.addresses (
+    id integer NOT NULL,
     street_name_1 character varying(60) NOT NULL,
     street_name_2 character varying(60),
-    city character varying(30) NOT NULL,
+    cities character varying(30) NOT NULL,
     district_id integer NOT NULL,
-    zipcode character varying(15) NOT NULL,
+    zipcodes character varying(15) NOT NULL,
     geographical_location character varying(44),
     row_guid uuid NOT NULL,
     updated_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.address OWNER TO postgres;
+ALTER TABLE db.addresses OWNER TO postgres;
 
 
 CREATE SEQUENCE db.address_addressid_seq
@@ -50,7 +50,7 @@ CREATE SEQUENCE db.address_addressid_seq
 ALTER TABLE db.address_addressid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.address_addressid_seq OWNED BY db.address.address_id;
+ALTER SEQUENCE db.address_addressid_seq OWNED BY db.addresses.id;
 
 
 
@@ -80,19 +80,19 @@ ALTER SEQUENCE db.addresstype_addresstypeid_seq OWNED BY db.address_type.address
 
 
 
-CREATE TABLE db.applicant_for_job (
-    applicant_for_job_id integer NOT NULL,
+CREATE TABLE db.applicants_for_job (
+    id integer NOT NULL,
     business_entity_id integer,
-    curriculum_vitae xml,
+    curriculum_vitaes xml,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.applicant_for_job OWNER TO postgres;
+ALTER TABLE db.applicants_for_job OWNER TO postgres;
 
 
-CREATE TABLE db.area (
-    location_id integer NOT NULL,
+CREATE TABLE db.areas (
+    id integer NOT NULL,
     cost_rate numeric DEFAULT 0.00 NOT NULL,
     availability numeric(8,2) DEFAULT 0.00 NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE db.area (
 );
 
 
-ALTER TABLE db.area OWNER TO postgres;
+ALTER TABLE db.areas OWNER TO postgres;
 
 
 CREATE TABLE db.materials_bills (
@@ -141,7 +141,7 @@ ALTER SEQUENCE db.billofmaterials_billofmaterialsid_seq OWNED BY db.materials_bi
 
 
 CREATE TABLE db.business_entity (
-    business_entity_id integer NOT NULL,
+    id integer NOT NULL,
     row_guid uuid NOT NULL,
     date_modified timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -150,8 +150,8 @@ CREATE TABLE db.business_entity (
 ALTER TABLE db.business_entity OWNER TO postgres;
 
 
-CREATE TABLE db.business_entity_address (
-    business_entity_id integer NOT NULL,
+CREATE TABLE db.business_entity_addresses (
+    id integer NOT NULL,
     address_id integer NOT NULL,
     address_type_id integer NOT NULL,
     row_guid uuid NOT NULL,
@@ -159,11 +159,11 @@ CREATE TABLE db.business_entity_address (
 );
 
 
-ALTER TABLE db.business_entity_address OWNER TO postgres;
+ALTER TABLE db.business_entity_addresses OWNER TO postgres;
 
 
-CREATE TABLE db.business_entity_contact (
-    business_entity_id integer NOT NULL,
+CREATE TABLE db.business_entity_contacts (
+    id integer NOT NULL,
     person_id integer NOT NULL,
     type_contact_id integer NOT NULL,
     row_guid uuid NOT NULL,
@@ -171,7 +171,7 @@ CREATE TABLE db.business_entity_contact (
 );
 
 
-ALTER TABLE db.business_entity_contact OWNER TO postgres;
+ALTER TABLE db.business_entity_contacts OWNER TO postgres;
 
 
 CREATE SEQUENCE db.businessentity_businessentityid_seq
@@ -186,12 +186,12 @@ CREATE SEQUENCE db.businessentity_businessentityid_seq
 ALTER TABLE db.businessentity_businessentityid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.businessentity_businessentityid_seq OWNED BY db.business_entity.business_entity_id;
+ALTER SEQUENCE db.businessentity_businessentityid_seq OWNED BY db.business_entity.id;
 
 
 
 CREATE TABLE db.buy_details (
-    buy_details_id integer NOT NULL,
+    id integer NOT NULL,
     end_date timestamp without time zone NOT NULL,
     quantity_order smallint NOT NULL,
     product_id integer NOT NULL,
@@ -209,8 +209,8 @@ CREATE TABLE db.buy_details (
 ALTER TABLE db.buy_details OWNER TO postgres;
 
 
-CREATE TABLE db.buyer (
-    business_entity_id integer NOT NULL,
+CREATE TABLE db.buyers (
+    id integer NOT NULL,
     rating_credit smallint NOT NULL,
     website_url character varying(1024),
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
@@ -218,11 +218,11 @@ CREATE TABLE db.buyer (
 );
 
 
-ALTER TABLE db.buyer OWNER TO postgres;
+ALTER TABLE db.buyers OWNER TO postgres;
 
 
 CREATE TABLE db.contact_type (
-    contact_type_id integer NOT NULL,
+    id integer NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -242,7 +242,7 @@ CREATE SEQUENCE db.contacttype_contacttypeid_seq
 ALTER TABLE db.contacttype_contacttypeid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.contacttype_contacttypeid_seq OWNED BY db.contact_type.contact_type_id;
+ALTER SEQUENCE db.contacttype_contacttypeid_seq OWNED BY db.contact_type.id;
 
 
 
@@ -265,8 +265,8 @@ CREATE TABLE db.country_region (
 ALTER TABLE db.country_region OWNER TO postgres;
 
 
-CREATE TABLE db.payment_card (
-    card_id integer NOT NULL,
+CREATE TABLE db.payment_cards (
+    id integer NOT NULL,
     card_type character varying(50) NOT NULL,
     card_number character varying(25) NOT NULL,
     expire_month smallint NOT NULL,
@@ -275,7 +275,7 @@ CREATE TABLE db.payment_card (
 );
 
 
-ALTER TABLE db.payment_card OWNER TO postgres;
+ALTER TABLE db.payment_cards OWNER TO postgres;
 
 
 CREATE SEQUENCE db.creditcard_creditcardid_seq
@@ -290,12 +290,12 @@ CREATE SEQUENCE db.creditcard_creditcardid_seq
 ALTER TABLE db.creditcard_creditcardid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.creditcard_creditcardid_seq OWNED BY db.payment_card.card_id;
+ALTER SEQUENCE db.creditcard_creditcardid_seq OWNED BY db.payment_cards.id;
 
 
 
 CREATE TABLE db.culture (
-    culture_id character(6) NOT NULL,
+    id character(6) NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -312,8 +312,8 @@ CREATE TABLE db.currency (
 ALTER TABLE db.currency OWNER TO postgres;
 
 
-CREATE TABLE db.currency_exchange_rate (
-    currency_exchange_rate_id integer NOT NULL,
+CREATE TABLE db.currency_exchange_rates (
+    id integer NOT NULL,
     currency_rate_date timestamp without time zone NOT NULL,
     from_currency_code character(3) NOT NULL,
     to_currency_code character(3) NOT NULL,
@@ -323,7 +323,7 @@ CREATE TABLE db.currency_exchange_rate (
 );
 
 
-ALTER TABLE db.currency_exchange_rate OWNER TO postgres;
+ALTER TABLE db.currency_exchange_rates OWNER TO postgres;
 
 
 CREATE SEQUENCE db.currencyrate_currencyrateid_seq
@@ -338,12 +338,12 @@ CREATE SEQUENCE db.currencyrate_currencyrateid_seq
 ALTER TABLE db.currencyrate_currencyrateid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.currencyrate_currencyrateid_seq OWNED BY db.currency_exchange_rate.currency_exchange_rate_id;
+ALTER SEQUENCE db.currencyrate_currencyrateid_seq OWNED BY db.currency_exchange_rates.id;
 
 
 
 CREATE TABLE db.customer (
-    customer_id integer NOT NULL,
+    id integer NOT NULL,
     person_id integer,
     store_id integer,
     row_guid uuid NOT NULL,
@@ -366,17 +366,17 @@ CREATE SEQUENCE db.customer_customerid_seq
 ALTER TABLE db.customer_customerid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.customer_customerid_seq OWNED BY db.customer.customer_id;
+ALTER SEQUENCE db.customer_customerid_seq OWNED BY db.customer.id;
 
 
 
-CREATE TABLE db.department (
-    branch_id integer NOT NULL,
+CREATE TABLE db.departments (
+    id integer NOT NULL,
     updated_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.department OWNER TO postgres;
+ALTER TABLE db.departments OWNER TO postgres;
 
 
 CREATE TABLE db.discount (
@@ -406,22 +406,22 @@ CREATE TABLE db.document (
     owner integer NOT NULL,
     file_name character varying(400) NOT NULL,
     file_extension character varying(8),
-    revision character(5) NOT NULL,
+    revisions character(5) NOT NULL,
     change_number integer DEFAULT 0 NOT NULL,
-    status smallint NOT NULL,
+    "statuses " smallint NOT NULL,
     document_summary text,
-    document bytea,
+    documents bytea,
     row_guid uuid NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    document_node character varying DEFAULT '/'::character varying NOT NULL,
-    CONSTRAINT "CK_Document_Status" CHECK (((status >= 1) AND (status <= 3)))
+    id character varying DEFAULT '/'::character varying NOT NULL,
+    CONSTRAINT "CK_Document_Status" CHECK ((("statuses " >= 1) AND ("statuses " <= 3)))
 );
 
 
 ALTER TABLE db.document OWNER TO postgres;
 
 
-CREATE TABLE db.email_address (
+CREATE TABLE db.email_addresses (
     business_entity_id integer NOT NULL,
     email_id integer NOT NULL,
     email character varying(50),
@@ -430,7 +430,7 @@ CREATE TABLE db.email_address (
 );
 
 
-ALTER TABLE db.email_address OWNER TO postgres;
+ALTER TABLE db.email_addresses OWNER TO postgres;
 
 
 CREATE SEQUENCE db.emailaddress_emailaddressid_seq
@@ -445,26 +445,26 @@ CREATE SEQUENCE db.emailaddress_emailaddressid_seq
 ALTER TABLE db.emailaddress_emailaddressid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.emailaddress_emailaddressid_seq OWNED BY db.email_address.email_id;
+ALTER SEQUENCE db.emailaddress_emailaddressid_seq OWNED BY db.email_addresses.email_id;
 
 
 
 CREATE TABLE db.employee_pay_history (
-    business_entity_id integer NOT NULL,
+    id integer NOT NULL,
     rate_change_date timestamp without time zone NOT NULL,
-    rate numeric NOT NULL,
+    rates numeric NOT NULL,
     pay_frequency smallint NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
     CONSTRAINT "CK_EmployeePayHistory_PayFrequency" CHECK ((pay_frequency = ANY (ARRAY[1, 2]))),
-    CONSTRAINT "CK_EmployeePayHistory_Rate" CHECK (((rate >= 6.50) AND (rate <= 200.00)))
+    CONSTRAINT "CK_EmployeePayHistory_Rate" CHECK (((rates >= 6.50) AND (rates <= 200.00)))
 );
 
 
 ALTER TABLE db.employee_pay_history OWNER TO postgres;
 
 
-CREATE TABLE db.history_employee_department (
-    business_entity_id integer NOT NULL,
+CREATE TABLE db.history_employee_departments (
+    id integer NOT NULL,
     department_id smallint NOT NULL,
     shift_id smallint NOT NULL,
     joining_date date NOT NULL,
@@ -474,17 +474,17 @@ CREATE TABLE db.history_employee_department (
 );
 
 
-ALTER TABLE db.history_employee_department OWNER TO postgres;
+ALTER TABLE db.history_employee_departments OWNER TO postgres;
 
 
 CREATE TABLE db.history_transaction (
-    transaction_id integer NOT NULL,
+    id integer NOT NULL,
     product_id integer NOT NULL,
     reference_order_id integer NOT NULL,
     reference_order_line_id integer DEFAULT 0 NOT NULL,
     transaction_date timestamp without time zone DEFAULT now() NOT NULL,
     transaction_type character(1) NOT NULL,
-    quantity integer NOT NULL,
+    quantities integer NOT NULL,
     actual_cost numeric NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
     CONSTRAINT "CK_TransactionHistory_TransactionType" CHECK ((upper((transaction_type)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
@@ -494,14 +494,14 @@ CREATE TABLE db.history_transaction (
 ALTER TABLE db.history_transaction OWNER TO postgres;
 
 
-CREATE TABLE db.illustration (
-    illustration_id integer NOT NULL,
-    diagram xml,
+CREATE TABLE db.illustrations (
+    id integer NOT NULL,
+    diagrams xml,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.illustration OWNER TO postgres;
+ALTER TABLE db.illustrations OWNER TO postgres;
 
 
 CREATE SEQUENCE db.illustration_illustrationid_seq
@@ -516,7 +516,7 @@ CREATE SEQUENCE db.illustration_illustrationid_seq
 ALTER TABLE db.illustration_illustrationid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.illustration_illustrationid_seq OWNED BY db.illustration.illustration_id;
+ALTER SEQUENCE db.illustration_illustrationid_seq OWNED BY db.illustrations.id;
 
 
 
@@ -532,7 +532,7 @@ CREATE SEQUENCE db.jobcandidate_jobcandidateid_seq
 ALTER TABLE db.jobcandidate_jobcandidateid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.jobcandidate_jobcandidateid_seq OWNED BY db.applicant_for_job.applicant_for_job_id;
+ALTER SEQUENCE db.jobcandidate_jobcandidateid_seq OWNED BY db.applicants_for_job.id;
 
 
 
@@ -548,12 +548,12 @@ CREATE SEQUENCE db.location_locationid_seq
 ALTER TABLE db.location_locationid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.location_locationid_seq OWNED BY db.area.location_id;
+ALTER SEQUENCE db.location_locationid_seq OWNED BY db.areas.id;
 
 
 
 CREATE TABLE db.measure_unit (
-    unit_measure_code character(3) NOT NULL,
+    id character(3) NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -561,7 +561,7 @@ CREATE TABLE db.measure_unit (
 ALTER TABLE db.measure_unit OWNER TO postgres;
 
 
-CREATE TABLE db.password (
+CREATE TABLE db.passwords (
     business_entity_id integer NOT NULL,
     password_hash character varying(128) NOT NULL,
     password_salt character varying(10) NOT NULL,
@@ -570,7 +570,7 @@ CREATE TABLE db.password (
 );
 
 
-ALTER TABLE db.password OWNER TO postgres;
+ALTER TABLE db.passwords OWNER TO postgres;
 
 
 CREATE TABLE db.payment_card_person (
@@ -583,22 +583,6 @@ CREATE TABLE db.payment_card_person (
 ALTER TABLE db.payment_card_person OWNER TO postgres;
 
 
-CREATE TABLE db.person (
-    business_entity_id integer NOT NULL,
-    gender_person character(2) NOT NULL,
-    title_name character varying(8),
-    email_promotion integer DEFAULT 0 NOT NULL,
-    extra_contact_information xml,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_Person_EmailPromotion" CHECK (((email_promotion >= 0) AND (email_promotion <= 2))),
-    CONSTRAINT "CK_Person_PersonType" CHECK (((gender_person IS NULL) OR (upper((gender_person)::text) = ANY (ARRAY['SC'::text, 'VC'::text, 'IN'::text, 'EM'::text, 'SP'::text, 'GC'::text]))))
-);
-
-
-ALTER TABLE db.person OWNER TO postgres;
-
-
 CREATE TABLE db.person_phone (
     business_entity_id integer NOT NULL,
     phone_number_type_id integer NOT NULL,
@@ -609,13 +593,29 @@ CREATE TABLE db.person_phone (
 ALTER TABLE db.person_phone OWNER TO postgres;
 
 
-CREATE TABLE db.phone_number_type (
-    phone_number_type_id integer NOT NULL,
+CREATE TABLE db.persons (
+    business_entity_id integer NOT NULL,
+    gender character(2) NOT NULL,
+    title_name character varying(8),
+    email_promotion integer DEFAULT 0 NOT NULL,
+    extra_contact_information xml,
+    row_guid uuid NOT NULL,
+    modified_date timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_Person_EmailPromotion" CHECK (((email_promotion >= 0) AND (email_promotion <= 2))),
+    CONSTRAINT "CK_Person_PersonType" CHECK (((gender IS NULL) OR (upper((gender)::text) = ANY (ARRAY['SC'::text, 'VC'::text, 'IN'::text, 'EM'::text, 'SP'::text, 'GC'::text]))))
+);
+
+
+ALTER TABLE db.persons OWNER TO postgres;
+
+
+CREATE TABLE db.phone_number_types (
+    id integer NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.phone_number_type OWNER TO postgres;
+ALTER TABLE db.phone_number_types OWNER TO postgres;
 
 
 CREATE SEQUENCE db.phonenumbertype_phonenumbertypeid_seq
@@ -630,47 +630,8 @@ CREATE SEQUENCE db.phonenumbertype_phonenumbertypeid_seq
 ALTER TABLE db.phonenumbertype_phonenumbertypeid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.phonenumbertype_phonenumbertypeid_seq OWNED BY db.phone_number_type.phone_number_type_id;
+ALTER SEQUENCE db.phonenumbertype_phonenumbertypeid_seq OWNED BY db.phone_number_types.id;
 
-
-
-CREATE TABLE db.product (
-    product_id integer NOT NULL,
-    product_number character varying(25) NOT NULL,
-    color character varying(15),
-    safety_stock_level smallint NOT NULL,
-    reorder_point smallint NOT NULL,
-    standard_cost numeric NOT NULL,
-    list_price numeric NOT NULL,
-    size character varying(5),
-    size_unit_measure_code character(3),
-    weight_unit_measure_code character(3),
-    weight numeric(8,2),
-    days_to_manufacture integer NOT NULL,
-    product_line character(2),
-    class character(2),
-    style character(2),
-    product_subcategory_id integer,
-    product_model_id integer,
-    sell_start_date timestamp without time zone NOT NULL,
-    sellend_date timestamp without time zone,
-    discontinued_date timestamp without time zone,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_Product_Class" CHECK (((upper((class)::text) = ANY (ARRAY['L'::text, 'M'::text, 'H'::text])) OR (class IS NULL))),
-    CONSTRAINT "CK_Product_DaysToManufacture" CHECK ((days_to_manufacture >= 0)),
-    CONSTRAINT "CK_Product_ListPrice" CHECK ((list_price >= 0.00)),
-    CONSTRAINT "CK_Product_ProductLine" CHECK (((upper((product_line)::text) = ANY (ARRAY['S'::text, 'T'::text, 'M'::text, 'R'::text])) OR (product_line IS NULL))),
-    CONSTRAINT "CK_Product_ReorderPoint" CHECK ((reorder_point > 0)),
-    CONSTRAINT "CK_Product_SafetyStockLevel" CHECK ((safety_stock_level > 0)),
-    CONSTRAINT "CK_Product_SellEndDate" CHECK (((sellend_date >= sell_start_date) OR (sellend_date IS NULL))),
-    CONSTRAINT "CK_Product_StandardCost" CHECK ((standard_cost >= 0.00)),
-    CONSTRAINT "CK_Product_Style" CHECK (((upper((style)::text) = ANY (ARRAY['W'::text, 'M'::text, 'U'::text])) OR (style IS NULL))),
-    CONSTRAINT "CK_Product_Weight" CHECK ((weight > 0.00))
-);
-
-
-ALTER TABLE db.product OWNER TO postgres;
 
 
 CREATE TABLE db.product_cost_history (
@@ -687,7 +648,7 @@ CREATE TABLE db.product_cost_history (
 ALTER TABLE db.product_cost_history OWNER TO postgres;
 
 
-CREATE TABLE db.product_dealer (
+CREATE TABLE db.product_dealers (
     product_id integer NOT NULL,
     business_entity_id integer NOT NULL,
     average_time integer NOT NULL,
@@ -708,22 +669,22 @@ CREATE TABLE db.product_dealer (
 );
 
 
-ALTER TABLE db.product_dealer OWNER TO postgres;
+ALTER TABLE db.product_dealers OWNER TO postgres;
 
 
-CREATE TABLE db.product_description (
-    product_description_id integer NOT NULL,
-    description character varying(400) NOT NULL,
+CREATE TABLE db.product_descriptions (
+    id integer NOT NULL,
+    descriptions character varying(400) NOT NULL,
     row_guid uuid NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.product_description OWNER TO postgres;
+ALTER TABLE db.product_descriptions OWNER TO postgres;
 
 
 CREATE TABLE db.product_discount (
-    product_discount_id integer NOT NULL,
+    id integer NOT NULL,
     product_id integer NOT NULL,
     row_guid uuid NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
@@ -733,27 +694,27 @@ CREATE TABLE db.product_discount (
 ALTER TABLE db.product_discount OWNER TO postgres;
 
 
-CREATE TABLE db.product_document (
+CREATE TABLE db.product_documents (
     product_id integer NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
     document_node character varying DEFAULT '/'::character varying NOT NULL
 );
 
 
-ALTER TABLE db.product_document OWNER TO postgres;
+ALTER TABLE db.product_documents OWNER TO postgres;
 
 
-CREATE TABLE db.product_image (
-    product_photo_id integer NOT NULL,
-    thumbnail_photo bytea,
+CREATE TABLE db.product_images (
+    id integer NOT NULL,
+    thumbnail_photos bytea,
     thumbnail_photo_file_name character varying(50),
-    large_photo bytea,
+    large_photos bytea,
     large_photo_file_name character varying(50),
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.product_image OWNER TO postgres;
+ALTER TABLE db.product_images OWNER TO postgres;
 
 
 CREATE TABLE db.product_inventory (
@@ -769,18 +730,6 @@ CREATE TABLE db.product_inventory (
 
 
 ALTER TABLE db.product_inventory OWNER TO postgres;
-
-
-CREATE TABLE db.product_model (
-    product_model_id integer NOT NULL,
-    catalog_description xml,
-    instructions xml,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE db.product_model OWNER TO postgres;
 
 
 CREATE TABLE db.product_model_illustration (
@@ -804,6 +753,57 @@ CREATE TABLE db.product_model_product_description_culture (
 ALTER TABLE db.product_model_product_description_culture OWNER TO postgres;
 
 
+CREATE TABLE db.product_models (
+    id integer NOT NULL,
+    catalog_descriptions xml,
+    instructions xml,
+    row_guid uuid NOT NULL,
+    modified_date timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE db.product_models OWNER TO postgres;
+
+
+CREATE TABLE db.products (
+    id integer NOT NULL,
+    product_numbers character varying(25) NOT NULL,
+    colors character varying(15),
+    safety_stock_level smallint NOT NULL,
+    reorder_point smallint NOT NULL,
+    standard_cost numeric NOT NULL,
+    list_price numeric NOT NULL,
+    sizes character varying(5),
+    size_unit_measure_code character(3),
+    weight_unit_measure_code character(3),
+    weights numeric(8,2),
+    days_to_manufacture integer NOT NULL,
+    product_line character(2),
+    class character(2),
+    styles character(2),
+    product_subcategory_id integer,
+    product_model_id integer,
+    sell_start_date timestamp without time zone NOT NULL,
+    sellend_date timestamp without time zone,
+    discontinued_date timestamp without time zone,
+    row_guid uuid NOT NULL,
+    modified_date timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_Product_Class" CHECK (((upper((class)::text) = ANY (ARRAY['L'::text, 'M'::text, 'H'::text])) OR (class IS NULL))),
+    CONSTRAINT "CK_Product_DaysToManufacture" CHECK ((days_to_manufacture >= 0)),
+    CONSTRAINT "CK_Product_ListPrice" CHECK ((list_price >= 0.00)),
+    CONSTRAINT "CK_Product_ProductLine" CHECK (((upper((product_line)::text) = ANY (ARRAY['S'::text, 'T'::text, 'M'::text, 'R'::text])) OR (product_line IS NULL))),
+    CONSTRAINT "CK_Product_ReorderPoint" CHECK ((reorder_point > 0)),
+    CONSTRAINT "CK_Product_SafetyStockLevel" CHECK ((safety_stock_level > 0)),
+    CONSTRAINT "CK_Product_SellEndDate" CHECK (((sellend_date >= sell_start_date) OR (sellend_date IS NULL))),
+    CONSTRAINT "CK_Product_StandardCost" CHECK ((standard_cost >= 0.00)),
+    CONSTRAINT "CK_Product_Style" CHECK (((upper((styles)::text) = ANY (ARRAY['W'::text, 'M'::text, 'U'::text])) OR (styles IS NULL))),
+    CONSTRAINT "CK_Product_Weight" CHECK ((weights > 0.00))
+);
+
+
+ALTER TABLE db.products OWNER TO postgres;
+
+
 CREATE SEQUENCE db.product_productid_seq
     AS integer
     START WITH 1
@@ -816,11 +816,11 @@ CREATE SEQUENCE db.product_productid_seq
 ALTER TABLE db.product_productid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.product_productid_seq OWNED BY db.product.product_id;
+ALTER SEQUENCE db.product_productid_seq OWNED BY db.products.id;
 
 
 
-CREATE TABLE db.product_review (
+CREATE TABLE db.product_reviews (
     product_review_id integer NOT NULL,
     product_id integer NOT NULL,
     review_date timestamp without time zone DEFAULT now() NOT NULL,
@@ -832,21 +832,21 @@ CREATE TABLE db.product_review (
 );
 
 
-ALTER TABLE db.product_review OWNER TO postgres;
+ALTER TABLE db.product_reviews OWNER TO postgres;
 
 
-CREATE TABLE db.product_section (
-    product_category_id integer NOT NULL,
+CREATE TABLE db.product_sections (
+    id integer NOT NULL,
     row_guid uuid NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.product_section OWNER TO postgres;
+ALTER TABLE db.product_sections OWNER TO postgres;
 
 
 CREATE TABLE db.product_subcategory (
-    product_subcategory_id integer NOT NULL,
+    id integer NOT NULL,
     product_category_id integer NOT NULL,
     row_guid uuid NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
@@ -868,7 +868,7 @@ CREATE SEQUENCE db.productcategory_productcategoryid_seq
 ALTER TABLE db.productcategory_productcategoryid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.productcategory_productcategoryid_seq OWNED BY db.product_section.product_category_id;
+ALTER SEQUENCE db.productcategory_productcategoryid_seq OWNED BY db.product_sections.id;
 
 
 
@@ -884,7 +884,7 @@ CREATE SEQUENCE db.productdescription_productdescriptionid_seq
 ALTER TABLE db.productdescription_productdescriptionid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.productdescription_productdescriptionid_seq OWNED BY db.product_description.product_description_id;
+ALTER SEQUENCE db.productdescription_productdescriptionid_seq OWNED BY db.product_descriptions.id;
 
 
 
@@ -900,7 +900,7 @@ CREATE SEQUENCE db.productmodel_productmodelid_seq
 ALTER TABLE db.productmodel_productmodelid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.productmodel_productmodelid_seq OWNED BY db.product_model.product_model_id;
+ALTER SEQUENCE db.productmodel_productmodelid_seq OWNED BY db.product_models.id;
 
 
 
@@ -916,7 +916,7 @@ CREATE SEQUENCE db.productphoto_productphotoid_seq
 ALTER TABLE db.productphoto_productphotoid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.productphoto_productphotoid_seq OWNED BY db.product_image.product_photo_id;
+ALTER SEQUENCE db.productphoto_productphotoid_seq OWNED BY db.product_images.id;
 
 
 
@@ -932,7 +932,7 @@ CREATE SEQUENCE db.productreview_productreviewid_seq
 ALTER TABLE db.productreview_productreviewid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.productreview_productreviewid_seq OWNED BY db.product_review.product_review_id;
+ALTER SEQUENCE db.productreview_productreviewid_seq OWNED BY db.product_reviews.product_review_id;
 
 
 
@@ -948,7 +948,7 @@ CREATE SEQUENCE db.productsubcategory_productsubcategoryid_seq
 ALTER TABLE db.productsubcategory_productsubcategoryid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.productsubcategory_productsubcategoryid_seq OWNED BY db.product_subcategory.product_subcategory_id;
+ALTER SEQUENCE db.productsubcategory_productsubcategoryid_seq OWNED BY db.product_subcategory.id;
 
 
 
@@ -964,83 +964,82 @@ CREATE SEQUENCE db.purchaseorderdetail_purchaseorderdetailid_seq
 ALTER TABLE db.purchaseorderdetail_purchaseorderdetailid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.purchaseorderdetail_purchaseorderdetailid_seq OWNED BY db.buy_details.buy_details_id;
+ALTER SEQUENCE db.purchaseorderdetail_purchaseorderdetailid_seq OWNED BY db.buy_details.id;
 
 
 
-CREATE TABLE db.sales_order (
-    sales_order_id integer NOT NULL,
+CREATE TABLE db.sales_order_details (
+    id integer NOT NULL,
+    tracking_number character varying(25),
+    order_quantity smallint NOT NULL,
+    product_id integer NOT NULL,
+    discount_id integer NOT NULL,
+    unit_prices numeric NOT NULL,
+    unit_price_discount numeric DEFAULT 0.0 NOT NULL,
+    row_guid uuid NOT NULL,
+    modified_date timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT "CK_SalesOrderDetail_OrderQty" CHECK ((order_quantity > 0)),
+    CONSTRAINT "CK_SalesOrderDetail_UnitPrice" CHECK ((unit_prices >= 0.00)),
+    CONSTRAINT "CK_SalesOrderDetail_UnitPriceDiscount" CHECK ((unit_price_discount >= 0.00))
+);
+
+
+ALTER TABLE db.sales_order_details OWNER TO postgres;
+
+
+CREATE TABLE db.sales_orders (
+    id integer NOT NULL,
     sales_reason_id integer NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.sales_order OWNER TO postgres;
+ALTER TABLE db.sales_orders OWNER TO postgres;
 
 
-CREATE TABLE db.sales_order_detail (
-    sales_order_id integer NOT NULL,
-    sales_order_detail_id integer NOT NULL,
-    tracking_number character varying(25),
-    order_quantity smallint NOT NULL,
-    product_id integer NOT NULL,
-    discount_id integer NOT NULL,
-    unit_price numeric NOT NULL,
-    unit_price_discount numeric DEFAULT 0.0 NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesOrderDetail_OrderQty" CHECK ((order_quantity > 0)),
-    CONSTRAINT "CK_SalesOrderDetail_UnitPrice" CHECK ((unit_price >= 0.00)),
-    CONSTRAINT "CK_SalesOrderDetail_UnitPriceDiscount" CHECK ((unit_price_discount >= 0.00))
-);
-
-
-ALTER TABLE db.sales_order_detail OWNER TO postgres;
-
-
-CREATE TABLE db.sales_person (
+CREATE TABLE db.sales_persons (
     business_entity_id integer NOT NULL,
-    bonus numeric DEFAULT 0.00 NOT NULL,
+    bonuses numeric DEFAULT 0.00 NOT NULL,
     commission numeric DEFAULT 0.00 NOT NULL,
     sales_ytd numeric DEFAULT 0.00 NOT NULL,
     row_guid uuid NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesPerson_Bonus" CHECK ((bonus >= 0.00)),
+    CONSTRAINT "CK_SalesPerson_Bonus" CHECK ((bonuses >= 0.00)),
     CONSTRAINT "CK_SalesPerson_CommissionPct" CHECK ((commission >= 0.00)),
     CONSTRAINT "CK_SalesPerson_SalesYTD" CHECK ((sales_ytd >= 0.00))
 );
 
 
-ALTER TABLE db.sales_person OWNER TO postgres;
+ALTER TABLE db.sales_persons OWNER TO postgres;
 
 
-CREATE TABLE db.sales_reason (
-    sales_reason_id integer NOT NULL,
+CREATE TABLE db.sales_reasons (
+    id integer NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.sales_reason OWNER TO postgres;
+ALTER TABLE db.sales_reasons OWNER TO postgres;
 
 
-CREATE TABLE db.sales_tax_rate (
-    sales_tax_rate_id integer NOT NULL,
+CREATE TABLE db.sales_tax_rates (
+    id integer NOT NULL,
     state_province_id integer NOT NULL,
-    tax_type smallint NOT NULL,
+    tax_types smallint NOT NULL,
     tax_rate numeric DEFAULT 0.00 NOT NULL,
     row_guid uuid NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesTaxRate_TaxType" CHECK (((tax_type >= 1) AND (tax_type <= 3)))
+    CONSTRAINT "CK_SalesTaxRate_TaxType" CHECK (((tax_types >= 1) AND (tax_types <= 3)))
 );
 
 
-ALTER TABLE db.sales_tax_rate OWNER TO postgres;
+ALTER TABLE db.sales_tax_rates OWNER TO postgres;
 
 
 CREATE TABLE db.sales_territory (
     territory_id integer NOT NULL,
     country_region_code character varying(3) NOT NULL,
-    "group" character varying(50) NOT NULL,
+    groups character varying(50) NOT NULL,
     sales_ytd numeric DEFAULT 0.00 NOT NULL,
     sales_last_year numeric DEFAULT 0.00 NOT NULL,
     cost_ytd numeric DEFAULT 0.00 NOT NULL,
@@ -1069,7 +1068,7 @@ CREATE SEQUENCE db.salesorderdetail_salesorderdetailid_seq
 ALTER TABLE db.salesorderdetail_salesorderdetailid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.salesorderdetail_salesorderdetailid_seq OWNED BY db.sales_order_detail.sales_order_detail_id;
+ALTER SEQUENCE db.salesorderdetail_salesorderdetailid_seq OWNED BY db.sales_order_details.id;
 
 
 
@@ -1085,7 +1084,7 @@ CREATE SEQUENCE db.salesreason_salesreasonid_seq
 ALTER TABLE db.salesreason_salesreasonid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.salesreason_salesreasonid_seq OWNED BY db.sales_reason.sales_reason_id;
+ALTER SEQUENCE db.salesreason_salesreasonid_seq OWNED BY db.sales_reasons.id;
 
 
 
@@ -1101,7 +1100,7 @@ CREATE SEQUENCE db.salestaxrate_salestaxrateid_seq
 ALTER TABLE db.salestaxrate_salestaxrateid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.salestaxrate_salestaxrateid_seq OWNED BY db.sales_tax_rate.sales_tax_rate_id;
+ALTER SEQUENCE db.salestaxrate_salestaxrateid_seq OWNED BY db.sales_tax_rates.id;
 
 
 
@@ -1122,7 +1121,7 @@ ALTER SEQUENCE db.salesterritory_territoryid_seq OWNED BY db.sales_territory.ter
 
 
 CREATE TABLE db.scrap_reason (
-    scrap_reason_id integer NOT NULL,
+    id integer NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -1142,23 +1141,23 @@ CREATE SEQUENCE db.scrapreason_scrapreasonid_seq
 ALTER TABLE db.scrapreason_scrapreasonid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.scrapreason_scrapreasonid_seq OWNED BY db.scrap_reason.scrap_reason_id;
+ALTER SEQUENCE db.scrapreason_scrapreasonid_seq OWNED BY db.scrap_reason.id;
 
 
 
-CREATE TABLE db.shift (
-    shift_id integer NOT NULL,
+CREATE TABLE db.shifts (
+    id integer NOT NULL,
     starting_shift time without time zone NOT NULL,
     ending_shift time without time zone NOT NULL,
     date_updated timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.shift OWNER TO postgres;
+ALTER TABLE db.shifts OWNER TO postgres;
 
 
-CREATE TABLE db.shipment_method (
-    shipment_method_id integer NOT NULL,
+CREATE TABLE db.shipment_methods (
+    id integer NOT NULL,
     shipping_price numeric DEFAULT 0.00 NOT NULL,
     row_guid uuid NOT NULL,
     modified_date timestamp without time zone DEFAULT now() NOT NULL,
@@ -1166,7 +1165,7 @@ CREATE TABLE db.shipment_method (
 );
 
 
-ALTER TABLE db.shipment_method OWNER TO postgres;
+ALTER TABLE db.shipment_methods OWNER TO postgres;
 
 
 CREATE SEQUENCE db.shipmethod_shipmethodid_seq
@@ -1181,12 +1180,12 @@ CREATE SEQUENCE db.shipmethod_shipmethodid_seq
 ALTER TABLE db.shipmethod_shipmethodid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.shipmethod_shipmethodid_seq OWNED BY db.shipment_method.shipment_method_id;
+ALTER SEQUENCE db.shipmethod_shipmethodid_seq OWNED BY db.shipment_methods.id;
 
 
 
 CREATE TABLE db.shopping_cart (
-    shopping_cart_item_id integer NOT NULL,
+    id integer NOT NULL,
     shopping_cart_id character varying(50) NOT NULL,
     number_of_product integer DEFAULT 1 NOT NULL,
     product_id integer NOT NULL,
@@ -1211,7 +1210,7 @@ CREATE SEQUENCE db.shoppingcartitem_shoppingcartitemid_seq
 ALTER TABLE db.shoppingcartitem_shoppingcartitemid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.shoppingcartitem_shoppingcartitemid_seq OWNED BY db.shopping_cart.shopping_cart_item_id;
+ALTER SEQUENCE db.shoppingcartitem_shoppingcartitemid_seq OWNED BY db.shopping_cart.id;
 
 
 
@@ -1232,7 +1231,7 @@ ALTER SEQUENCE db.specialoffer_specialofferid_seq OWNED BY db.discount.discount_
 
 
 CREATE TABLE db.state_province (
-    state_province_id integer NOT NULL,
+    id integer NOT NULL,
     state_province_code character(3) NOT NULL,
     country_region_code character varying(3) NOT NULL,
     territory_id integer NOT NULL,
@@ -1256,11 +1255,11 @@ CREATE SEQUENCE db.stateprovince_stateprovinceid_seq
 ALTER TABLE db.stateprovince_stateprovinceid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.stateprovince_stateprovinceid_seq OWNED BY db.state_province.state_province_id;
+ALTER SEQUENCE db.stateprovince_stateprovinceid_seq OWNED BY db.state_province.id;
 
 
 
-CREATE TABLE db.store (
+CREATE TABLE db.stores (
     business_entity_id integer NOT NULL,
     sales_person_id integer,
     demographics xml,
@@ -1269,7 +1268,7 @@ CREATE TABLE db.store (
 );
 
 
-ALTER TABLE db.store OWNER TO postgres;
+ALTER TABLE db.stores OWNER TO postgres;
 
 
 CREATE SEQUENCE db.transactionhistory_transactionid_seq
@@ -1284,12 +1283,12 @@ CREATE SEQUENCE db.transactionhistory_transactionid_seq
 ALTER TABLE db.transactionhistory_transactionid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.transactionhistory_transactionid_seq OWNED BY db.history_transaction.transaction_id;
+ALTER SEQUENCE db.transactionhistory_transactionid_seq OWNED BY db.history_transaction.id;
 
 
 
-CREATE TABLE db.work_order (
-    work_order_id integer NOT NULL,
+CREATE TABLE db.work_orders (
+    id integer NOT NULL,
     product_id integer NOT NULL,
     order_qty integer NOT NULL,
     scrapped_qty smallint NOT NULL,
@@ -1304,7 +1303,7 @@ CREATE TABLE db.work_order (
 );
 
 
-ALTER TABLE db.work_order OWNER TO postgres;
+ALTER TABLE db.work_orders OWNER TO postgres;
 
 
 CREATE SEQUENCE db.workorder_workorderid_seq
@@ -1319,11 +1318,7 @@ CREATE SEQUENCE db.workorder_workorderid_seq
 ALTER TABLE db.workorder_workorderid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.workorder_workorderid_seq OWNED BY db.work_order.work_order_id;
-
-
-
-ALTER TABLE ONLY db.address ALTER COLUMN address_id SET DEFAULT nextval('db.address_addressid_seq'::regclass);
+ALTER SEQUENCE db.workorder_workorderid_seq OWNED BY db.work_orders.id;
 
 
 
@@ -1331,31 +1326,35 @@ ALTER TABLE ONLY db.address_type ALTER COLUMN address_type_id SET DEFAULT nextva
 
 
 
-ALTER TABLE ONLY db.applicant_for_job ALTER COLUMN applicant_for_job_id SET DEFAULT nextval('db.jobcandidate_jobcandidateid_seq'::regclass);
+ALTER TABLE ONLY db.addresses ALTER COLUMN id SET DEFAULT nextval('db.address_addressid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.area ALTER COLUMN location_id SET DEFAULT nextval('db.location_locationid_seq'::regclass);
+ALTER TABLE ONLY db.applicants_for_job ALTER COLUMN id SET DEFAULT nextval('db.jobcandidate_jobcandidateid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.business_entity ALTER COLUMN business_entity_id SET DEFAULT nextval('db.businessentity_businessentityid_seq'::regclass);
+ALTER TABLE ONLY db.areas ALTER COLUMN id SET DEFAULT nextval('db.location_locationid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.buy_details ALTER COLUMN buy_details_id SET DEFAULT nextval('db.purchaseorderdetail_purchaseorderdetailid_seq'::regclass);
+ALTER TABLE ONLY db.business_entity ALTER COLUMN id SET DEFAULT nextval('db.businessentity_businessentityid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.contact_type ALTER COLUMN contact_type_id SET DEFAULT nextval('db.contacttype_contacttypeid_seq'::regclass);
+ALTER TABLE ONLY db.buy_details ALTER COLUMN id SET DEFAULT nextval('db.purchaseorderdetail_purchaseorderdetailid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.currency_exchange_rate ALTER COLUMN currency_exchange_rate_id SET DEFAULT nextval('db.currencyrate_currencyrateid_seq'::regclass);
+ALTER TABLE ONLY db.contact_type ALTER COLUMN id SET DEFAULT nextval('db.contacttype_contacttypeid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.customer ALTER COLUMN customer_id SET DEFAULT nextval('db.customer_customerid_seq'::regclass);
+ALTER TABLE ONLY db.currency_exchange_rates ALTER COLUMN id SET DEFAULT nextval('db.currencyrate_currencyrateid_seq'::regclass);
+
+
+
+ALTER TABLE ONLY db.customer ALTER COLUMN id SET DEFAULT nextval('db.customer_customerid_seq'::regclass);
 
 
 
@@ -1363,15 +1362,15 @@ ALTER TABLE ONLY db.discount ALTER COLUMN discount_id SET DEFAULT nextval('db.sp
 
 
 
-ALTER TABLE ONLY db.email_address ALTER COLUMN email_id SET DEFAULT nextval('db.emailaddress_emailaddressid_seq'::regclass);
+ALTER TABLE ONLY db.email_addresses ALTER COLUMN email_id SET DEFAULT nextval('db.emailaddress_emailaddressid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.history_transaction ALTER COLUMN transaction_id SET DEFAULT nextval('db.transactionhistory_transactionid_seq'::regclass);
+ALTER TABLE ONLY db.history_transaction ALTER COLUMN id SET DEFAULT nextval('db.transactionhistory_transactionid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.illustration ALTER COLUMN illustration_id SET DEFAULT nextval('db.illustration_illustrationid_seq'::regclass);
+ALTER TABLE ONLY db.illustrations ALTER COLUMN id SET DEFAULT nextval('db.illustration_illustrationid_seq'::regclass);
 
 
 
@@ -1379,51 +1378,51 @@ ALTER TABLE ONLY db.materials_bills ALTER COLUMN bill_of_materials_id SET DEFAUL
 
 
 
-ALTER TABLE ONLY db.payment_card ALTER COLUMN card_id SET DEFAULT nextval('db.creditcard_creditcardid_seq'::regclass);
+ALTER TABLE ONLY db.payment_cards ALTER COLUMN id SET DEFAULT nextval('db.creditcard_creditcardid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.phone_number_type ALTER COLUMN phone_number_type_id SET DEFAULT nextval('db.phonenumbertype_phonenumbertypeid_seq'::regclass);
+ALTER TABLE ONLY db.phone_number_types ALTER COLUMN id SET DEFAULT nextval('db.phonenumbertype_phonenumbertypeid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.product ALTER COLUMN product_id SET DEFAULT nextval('db.product_productid_seq'::regclass);
+ALTER TABLE ONLY db.product_descriptions ALTER COLUMN id SET DEFAULT nextval('db.productdescription_productdescriptionid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.product_description ALTER COLUMN product_description_id SET DEFAULT nextval('db.productdescription_productdescriptionid_seq'::regclass);
+ALTER TABLE ONLY db.product_images ALTER COLUMN id SET DEFAULT nextval('db.productphoto_productphotoid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.product_image ALTER COLUMN product_photo_id SET DEFAULT nextval('db.productphoto_productphotoid_seq'::regclass);
+ALTER TABLE ONLY db.product_models ALTER COLUMN id SET DEFAULT nextval('db.productmodel_productmodelid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.product_model ALTER COLUMN product_model_id SET DEFAULT nextval('db.productmodel_productmodelid_seq'::regclass);
+ALTER TABLE ONLY db.product_reviews ALTER COLUMN product_review_id SET DEFAULT nextval('db.productreview_productreviewid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.product_review ALTER COLUMN product_review_id SET DEFAULT nextval('db.productreview_productreviewid_seq'::regclass);
+ALTER TABLE ONLY db.product_sections ALTER COLUMN id SET DEFAULT nextval('db.productcategory_productcategoryid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.product_section ALTER COLUMN product_category_id SET DEFAULT nextval('db.productcategory_productcategoryid_seq'::regclass);
+ALTER TABLE ONLY db.product_subcategory ALTER COLUMN id SET DEFAULT nextval('db.productsubcategory_productsubcategoryid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.product_subcategory ALTER COLUMN product_subcategory_id SET DEFAULT nextval('db.productsubcategory_productsubcategoryid_seq'::regclass);
+ALTER TABLE ONLY db.products ALTER COLUMN id SET DEFAULT nextval('db.product_productid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.sales_order_detail ALTER COLUMN sales_order_detail_id SET DEFAULT nextval('db.salesorderdetail_salesorderdetailid_seq'::regclass);
+ALTER TABLE ONLY db.sales_order_details ALTER COLUMN id SET DEFAULT nextval('db.salesorderdetail_salesorderdetailid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.sales_reason ALTER COLUMN sales_reason_id SET DEFAULT nextval('db.salesreason_salesreasonid_seq'::regclass);
+ALTER TABLE ONLY db.sales_reasons ALTER COLUMN id SET DEFAULT nextval('db.salesreason_salesreasonid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.sales_tax_rate ALTER COLUMN sales_tax_rate_id SET DEFAULT nextval('db.salestaxrate_salestaxrateid_seq'::regclass);
+ALTER TABLE ONLY db.sales_tax_rates ALTER COLUMN id SET DEFAULT nextval('db.salestaxrate_salestaxrateid_seq'::regclass);
 
 
 
@@ -1431,23 +1430,23 @@ ALTER TABLE ONLY db.sales_territory ALTER COLUMN territory_id SET DEFAULT nextva
 
 
 
-ALTER TABLE ONLY db.scrap_reason ALTER COLUMN scrap_reason_id SET DEFAULT nextval('db.scrapreason_scrapreasonid_seq'::regclass);
+ALTER TABLE ONLY db.scrap_reason ALTER COLUMN id SET DEFAULT nextval('db.scrapreason_scrapreasonid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.shipment_method ALTER COLUMN shipment_method_id SET DEFAULT nextval('db.shipmethod_shipmethodid_seq'::regclass);
+ALTER TABLE ONLY db.shipment_methods ALTER COLUMN id SET DEFAULT nextval('db.shipmethod_shipmethodid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.shopping_cart ALTER COLUMN shopping_cart_item_id SET DEFAULT nextval('db.shoppingcartitem_shoppingcartitemid_seq'::regclass);
+ALTER TABLE ONLY db.shopping_cart ALTER COLUMN id SET DEFAULT nextval('db.shoppingcartitem_shoppingcartitemid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.state_province ALTER COLUMN state_province_id SET DEFAULT nextval('db.stateprovince_stateprovinceid_seq'::regclass);
+ALTER TABLE ONLY db.state_province ALTER COLUMN id SET DEFAULT nextval('db.stateprovince_stateprovinceid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.work_order ALTER COLUMN work_order_id SET DEFAULT nextval('db.workorder_workorderid_seq'::regclass);
+ALTER TABLE ONLY db.work_orders ALTER COLUMN id SET DEFAULT nextval('db.workorder_workorderid_seq'::regclass);
 
 
 
@@ -1458,10 +1457,10 @@ ALTER TABLE db.address_type CLUSTER ON "PK_AddressType_AddressTypeID";
 
 
 
-ALTER TABLE ONLY db.address
-    ADD CONSTRAINT "PK_Address_AddressID" PRIMARY KEY (address_id);
+ALTER TABLE ONLY db.addresses
+    ADD CONSTRAINT "PK_Address_AddressID" PRIMARY KEY (id);
 
-ALTER TABLE db.address CLUSTER ON "PK_Address_AddressID";
+ALTER TABLE db.addresses CLUSTER ON "PK_Address_AddressID";
 
 
 
@@ -1470,29 +1469,29 @@ ALTER TABLE ONLY db.materials_bills
 
 
 
-ALTER TABLE ONLY db.business_entity_address
-    ADD CONSTRAINT "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType" PRIMARY KEY (business_entity_id, address_id, address_type_id);
+ALTER TABLE ONLY db.business_entity_addresses
+    ADD CONSTRAINT "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType" PRIMARY KEY (id, address_id, address_type_id);
 
-ALTER TABLE db.business_entity_address CLUSTER ON "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType";
+ALTER TABLE db.business_entity_addresses CLUSTER ON "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType";
 
 
 
-ALTER TABLE ONLY db.business_entity_contact
-    ADD CONSTRAINT "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI" PRIMARY KEY (business_entity_id, person_id, type_contact_id);
+ALTER TABLE ONLY db.business_entity_contacts
+    ADD CONSTRAINT "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI" PRIMARY KEY (id, person_id, type_contact_id);
 
-ALTER TABLE db.business_entity_contact CLUSTER ON "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI";
+ALTER TABLE db.business_entity_contacts CLUSTER ON "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI";
 
 
 
 ALTER TABLE ONLY db.business_entity
-    ADD CONSTRAINT "PK_BusinessEntity_BusinessEntityID" PRIMARY KEY (business_entity_id);
+    ADD CONSTRAINT "PK_BusinessEntity_BusinessEntityID" PRIMARY KEY (id);
 
 ALTER TABLE db.business_entity CLUSTER ON "PK_BusinessEntity_BusinessEntityID";
 
 
 
 ALTER TABLE ONLY db.contact_type
-    ADD CONSTRAINT "PK_ContactType_ContactTypeID" PRIMARY KEY (contact_type_id);
+    ADD CONSTRAINT "PK_ContactType_ContactTypeID" PRIMARY KEY (id);
 
 ALTER TABLE db.contact_type CLUSTER ON "PK_ContactType_ContactTypeID";
 
@@ -1512,24 +1511,24 @@ ALTER TABLE db.country_region CLUSTER ON "PK_CountryRegion_CountryRegionCode";
 
 
 
-ALTER TABLE ONLY db.payment_card
-    ADD CONSTRAINT "PK_CreditCard_CreditCardID" PRIMARY KEY (card_id);
+ALTER TABLE ONLY db.payment_cards
+    ADD CONSTRAINT "PK_CreditCard_CreditCardID" PRIMARY KEY (id);
 
-ALTER TABLE db.payment_card CLUSTER ON "PK_CreditCard_CreditCardID";
+ALTER TABLE db.payment_cards CLUSTER ON "PK_CreditCard_CreditCardID";
 
 
 
 ALTER TABLE ONLY db.culture
-    ADD CONSTRAINT "PK_Culture_CultureID" PRIMARY KEY (culture_id);
+    ADD CONSTRAINT "PK_Culture_CultureID" PRIMARY KEY (id);
 
 ALTER TABLE db.culture CLUSTER ON "PK_Culture_CultureID";
 
 
 
-ALTER TABLE ONLY db.currency_exchange_rate
-    ADD CONSTRAINT "PK_CurrencyRate_CurrencyRateID" PRIMARY KEY (currency_exchange_rate_id);
+ALTER TABLE ONLY db.currency_exchange_rates
+    ADD CONSTRAINT "PK_CurrencyRate_CurrencyRateID" PRIMARY KEY (id);
 
-ALTER TABLE db.currency_exchange_rate CLUSTER ON "PK_CurrencyRate_CurrencyRateID";
+ALTER TABLE db.currency_exchange_rates CLUSTER ON "PK_CurrencyRate_CurrencyRateID";
 
 
 
@@ -1541,72 +1540,72 @@ ALTER TABLE db.currency CLUSTER ON "PK_Currency_CurrencyCode";
 
 
 ALTER TABLE ONLY db.customer
-    ADD CONSTRAINT "PK_Customer_CustomerID" PRIMARY KEY (customer_id);
+    ADD CONSTRAINT "PK_Customer_CustomerID" PRIMARY KEY (id);
 
 ALTER TABLE db.customer CLUSTER ON "PK_Customer_CustomerID";
 
 
 
-ALTER TABLE ONLY db.department
-    ADD CONSTRAINT "PK_Department_DepartmentID" PRIMARY KEY (branch_id);
+ALTER TABLE ONLY db.departments
+    ADD CONSTRAINT "PK_Department_DepartmentID" PRIMARY KEY (id);
 
-ALTER TABLE db.department CLUSTER ON "PK_Department_DepartmentID";
+ALTER TABLE db.departments CLUSTER ON "PK_Department_DepartmentID";
 
 
 
 ALTER TABLE ONLY db.document
-    ADD CONSTRAINT "PK_Document_DocumentNode" PRIMARY KEY (document_node);
+    ADD CONSTRAINT "PK_Document_DocumentNode" PRIMARY KEY (id);
 
 ALTER TABLE db.document CLUSTER ON "PK_Document_DocumentNode";
 
 
 
-ALTER TABLE ONLY db.email_address
+ALTER TABLE ONLY db.email_addresses
     ADD CONSTRAINT "PK_EmailAddress_BusinessEntityID_EmailAddressID" PRIMARY KEY (business_entity_id, email_id);
 
-ALTER TABLE db.email_address CLUSTER ON "PK_EmailAddress_BusinessEntityID_EmailAddressID";
+ALTER TABLE db.email_addresses CLUSTER ON "PK_EmailAddress_BusinessEntityID_EmailAddressID";
 
 
 
-ALTER TABLE ONLY db.history_employee_department
-    ADD CONSTRAINT "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm" PRIMARY KEY (business_entity_id, joining_date, department_id, shift_id);
+ALTER TABLE ONLY db.history_employee_departments
+    ADD CONSTRAINT "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm" PRIMARY KEY (id, joining_date, department_id, shift_id);
 
-ALTER TABLE db.history_employee_department CLUSTER ON "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm";
+ALTER TABLE db.history_employee_departments CLUSTER ON "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm";
 
 
 
 ALTER TABLE ONLY db.employee_pay_history
-    ADD CONSTRAINT "PK_EmployeePayHistory_BusinessEntityID_RateChangeDate" PRIMARY KEY (business_entity_id, rate_change_date);
+    ADD CONSTRAINT "PK_EmployeePayHistory_BusinessEntityID_RateChangeDate" PRIMARY KEY (id, rate_change_date);
 
 ALTER TABLE db.employee_pay_history CLUSTER ON "PK_EmployeePayHistory_BusinessEntityID_RateChangeDate";
 
 
 
-ALTER TABLE ONLY db.illustration
-    ADD CONSTRAINT "PK_Illustration_IllustrationID" PRIMARY KEY (illustration_id);
+ALTER TABLE ONLY db.illustrations
+    ADD CONSTRAINT "PK_Illustration_IllustrationID" PRIMARY KEY (id);
 
-ALTER TABLE db.illustration CLUSTER ON "PK_Illustration_IllustrationID";
-
-
-
-ALTER TABLE ONLY db.applicant_for_job
-    ADD CONSTRAINT "PK_JobCandidate_JobCandidateID" PRIMARY KEY (applicant_for_job_id);
-
-ALTER TABLE db.applicant_for_job CLUSTER ON "PK_JobCandidate_JobCandidateID";
+ALTER TABLE db.illustrations CLUSTER ON "PK_Illustration_IllustrationID";
 
 
 
-ALTER TABLE ONLY db.area
-    ADD CONSTRAINT "PK_Location_LocationID" PRIMARY KEY (location_id);
+ALTER TABLE ONLY db.applicants_for_job
+    ADD CONSTRAINT "PK_JobCandidate_JobCandidateID" PRIMARY KEY (id);
 
-ALTER TABLE db.area CLUSTER ON "PK_Location_LocationID";
+ALTER TABLE db.applicants_for_job CLUSTER ON "PK_JobCandidate_JobCandidateID";
 
 
 
-ALTER TABLE ONLY db.password
+ALTER TABLE ONLY db.areas
+    ADD CONSTRAINT "PK_Location_LocationID" PRIMARY KEY (id);
+
+ALTER TABLE db.areas CLUSTER ON "PK_Location_LocationID";
+
+
+
+ALTER TABLE ONLY db.passwords
     ADD CONSTRAINT "PK_Password_BusinessEntityID" PRIMARY KEY (business_entity_id);
 
-ALTER TABLE db.password CLUSTER ON "PK_Password_BusinessEntityID";
+ALTER TABLE db.passwords CLUSTER ON "PK_Password_BusinessEntityID";
 
 
 
@@ -1617,24 +1616,24 @@ ALTER TABLE db.payment_card_person CLUSTER ON "PK_PersonCreditCard_BusinessEntit
 
 
 
-ALTER TABLE ONLY db.person
+ALTER TABLE ONLY db.persons
     ADD CONSTRAINT "PK_Person_BusinessEntityID" PRIMARY KEY (business_entity_id);
 
-ALTER TABLE db.person CLUSTER ON "PK_Person_BusinessEntityID";
+ALTER TABLE db.persons CLUSTER ON "PK_Person_BusinessEntityID";
 
 
 
-ALTER TABLE ONLY db.phone_number_type
-    ADD CONSTRAINT "PK_PhoneNumberType_PhoneNumberTypeID" PRIMARY KEY (phone_number_type_id);
+ALTER TABLE ONLY db.phone_number_types
+    ADD CONSTRAINT "PK_PhoneNumberType_PhoneNumberTypeID" PRIMARY KEY (id);
 
-ALTER TABLE db.phone_number_type CLUSTER ON "PK_PhoneNumberType_PhoneNumberTypeID";
+ALTER TABLE db.phone_number_types CLUSTER ON "PK_PhoneNumberType_PhoneNumberTypeID";
 
 
 
-ALTER TABLE ONLY db.product_section
-    ADD CONSTRAINT "PK_ProductCategory_ProductCategoryID" PRIMARY KEY (product_category_id);
+ALTER TABLE ONLY db.product_sections
+    ADD CONSTRAINT "PK_ProductCategory_ProductCategoryID" PRIMARY KEY (id);
 
-ALTER TABLE db.product_section CLUSTER ON "PK_ProductCategory_ProductCategoryID";
+ALTER TABLE db.product_sections CLUSTER ON "PK_ProductCategory_ProductCategoryID";
 
 
 
@@ -1645,17 +1644,17 @@ ALTER TABLE db.product_cost_history CLUSTER ON "PK_ProductCostHistory_ProductID_
 
 
 
-ALTER TABLE ONLY db.product_description
-    ADD CONSTRAINT "PK_ProductDescription_ProductDescriptionID" PRIMARY KEY (product_description_id);
+ALTER TABLE ONLY db.product_descriptions
+    ADD CONSTRAINT "PK_ProductDescription_ProductDescriptionID" PRIMARY KEY (id);
 
-ALTER TABLE db.product_description CLUSTER ON "PK_ProductDescription_ProductDescriptionID";
+ALTER TABLE db.product_descriptions CLUSTER ON "PK_ProductDescription_ProductDescriptionID";
 
 
 
-ALTER TABLE ONLY db.product_document
+ALTER TABLE ONLY db.product_documents
     ADD CONSTRAINT "PK_ProductDocument_ProductID_DocumentNode" PRIMARY KEY (product_id, document_node);
 
-ALTER TABLE db.product_document CLUSTER ON "PK_ProductDocument_ProductID_DocumentNode";
+ALTER TABLE db.product_documents CLUSTER ON "PK_ProductDocument_ProductID_DocumentNode";
 
 
 
@@ -1680,80 +1679,73 @@ ALTER TABLE db.product_model_product_description_culture CLUSTER ON "PK_ProductM
 
 
 
-ALTER TABLE ONLY db.product_model
-    ADD CONSTRAINT "PK_ProductModel_ProductModelID" PRIMARY KEY (product_model_id);
+ALTER TABLE ONLY db.product_models
+    ADD CONSTRAINT "PK_ProductModel_ProductModelID" PRIMARY KEY (id);
 
-ALTER TABLE db.product_model CLUSTER ON "PK_ProductModel_ProductModelID";
-
-
-
-ALTER TABLE ONLY db.product_image
-    ADD CONSTRAINT "PK_ProductPhoto_ProductPhotoID" PRIMARY KEY (product_photo_id);
-
-ALTER TABLE db.product_image CLUSTER ON "PK_ProductPhoto_ProductPhotoID";
+ALTER TABLE db.product_models CLUSTER ON "PK_ProductModel_ProductModelID";
 
 
 
-ALTER TABLE ONLY db.product_review
+ALTER TABLE ONLY db.product_images
+    ADD CONSTRAINT "PK_ProductPhoto_ProductPhotoID" PRIMARY KEY (id);
+
+ALTER TABLE db.product_images CLUSTER ON "PK_ProductPhoto_ProductPhotoID";
+
+
+
+ALTER TABLE ONLY db.product_reviews
     ADD CONSTRAINT "PK_ProductReview_ProductReviewID" PRIMARY KEY (product_review_id);
 
-ALTER TABLE db.product_review CLUSTER ON "PK_ProductReview_ProductReviewID";
+ALTER TABLE db.product_reviews CLUSTER ON "PK_ProductReview_ProductReviewID";
 
 
 
 ALTER TABLE ONLY db.product_subcategory
-    ADD CONSTRAINT "PK_ProductSubcategory_ProductSubcategoryID" PRIMARY KEY (product_subcategory_id);
+    ADD CONSTRAINT "PK_ProductSubcategory_ProductSubcategoryID" PRIMARY KEY (id);
 
 ALTER TABLE db.product_subcategory CLUSTER ON "PK_ProductSubcategory_ProductSubcategoryID";
 
 
 
-ALTER TABLE ONLY db.product_dealer
+ALTER TABLE ONLY db.product_dealers
     ADD CONSTRAINT "PK_ProductVendor_ProductID_BusinessEntityID" PRIMARY KEY (product_id, business_entity_id);
 
-ALTER TABLE db.product_dealer CLUSTER ON "PK_ProductVendor_ProductID_BusinessEntityID";
+ALTER TABLE db.product_dealers CLUSTER ON "PK_ProductVendor_ProductID_BusinessEntityID";
 
 
 
-ALTER TABLE ONLY db.product
-    ADD CONSTRAINT "PK_Product_ProductID" PRIMARY KEY (product_id);
+ALTER TABLE ONLY db.products
+    ADD CONSTRAINT "PK_Product_ProductID" PRIMARY KEY (id);
 
-ALTER TABLE db.product CLUSTER ON "PK_Product_ProductID";
-
-
-
-ALTER TABLE ONLY db.sales_order_detail
-    ADD CONSTRAINT "PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID" PRIMARY KEY (sales_order_id, sales_order_detail_id);
-
-ALTER TABLE db.sales_order_detail CLUSTER ON "PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID";
+ALTER TABLE db.products CLUSTER ON "PK_Product_ProductID";
 
 
 
-ALTER TABLE ONLY db.sales_order
-    ADD CONSTRAINT "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID" PRIMARY KEY (sales_order_id, sales_reason_id);
+ALTER TABLE ONLY db.sales_orders
+    ADD CONSTRAINT "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID" PRIMARY KEY (id, sales_reason_id);
 
-ALTER TABLE db.sales_order CLUSTER ON "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID";
+ALTER TABLE db.sales_orders CLUSTER ON "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID";
 
 
 
-ALTER TABLE ONLY db.sales_person
+ALTER TABLE ONLY db.sales_persons
     ADD CONSTRAINT "PK_SalesPerson_BusinessEntityID" PRIMARY KEY (business_entity_id);
 
-ALTER TABLE db.sales_person CLUSTER ON "PK_SalesPerson_BusinessEntityID";
+ALTER TABLE db.sales_persons CLUSTER ON "PK_SalesPerson_BusinessEntityID";
 
 
 
-ALTER TABLE ONLY db.sales_reason
-    ADD CONSTRAINT "PK_SalesReason_SalesReasonID" PRIMARY KEY (sales_reason_id);
+ALTER TABLE ONLY db.sales_reasons
+    ADD CONSTRAINT "PK_SalesReason_SalesReasonID" PRIMARY KEY (id);
 
-ALTER TABLE db.sales_reason CLUSTER ON "PK_SalesReason_SalesReasonID";
+ALTER TABLE db.sales_reasons CLUSTER ON "PK_SalesReason_SalesReasonID";
 
 
 
-ALTER TABLE ONLY db.sales_tax_rate
-    ADD CONSTRAINT "PK_SalesTaxRate_SalesTaxRateID" PRIMARY KEY (sales_tax_rate_id);
+ALTER TABLE ONLY db.sales_tax_rates
+    ADD CONSTRAINT "PK_SalesTaxRate_SalesTaxRateID" PRIMARY KEY (id);
 
-ALTER TABLE db.sales_tax_rate CLUSTER ON "PK_SalesTaxRate_SalesTaxRateID";
+ALTER TABLE db.sales_tax_rates CLUSTER ON "PK_SalesTaxRate_SalesTaxRateID";
 
 
 
@@ -1765,35 +1757,35 @@ ALTER TABLE db.sales_territory CLUSTER ON "PK_SalesTerritory_TerritoryID";
 
 
 ALTER TABLE ONLY db.scrap_reason
-    ADD CONSTRAINT "PK_ScrapReason_ScrapReasonID" PRIMARY KEY (scrap_reason_id);
+    ADD CONSTRAINT "PK_ScrapReason_ScrapReasonID" PRIMARY KEY (id);
 
 ALTER TABLE db.scrap_reason CLUSTER ON "PK_ScrapReason_ScrapReasonID";
 
 
 
-ALTER TABLE ONLY db.shift
-    ADD CONSTRAINT "PK_Shift_ShiftID" PRIMARY KEY (shift_id);
+ALTER TABLE ONLY db.shifts
+    ADD CONSTRAINT "PK_Shift_ShiftID" PRIMARY KEY (id);
 
-ALTER TABLE db.shift CLUSTER ON "PK_Shift_ShiftID";
+ALTER TABLE db.shifts CLUSTER ON "PK_Shift_ShiftID";
 
 
 
-ALTER TABLE ONLY db.shipment_method
-    ADD CONSTRAINT "PK_ShipMethod_ShipMethodID" PRIMARY KEY (shipment_method_id);
+ALTER TABLE ONLY db.shipment_methods
+    ADD CONSTRAINT "PK_ShipMethod_ShipMethodID" PRIMARY KEY (id);
 
-ALTER TABLE db.shipment_method CLUSTER ON "PK_ShipMethod_ShipMethodID";
+ALTER TABLE db.shipment_methods CLUSTER ON "PK_ShipMethod_ShipMethodID";
 
 
 
 ALTER TABLE ONLY db.shopping_cart
-    ADD CONSTRAINT "PK_ShoppingCartItem_ShoppingCartItemID" PRIMARY KEY (shopping_cart_item_id);
+    ADD CONSTRAINT "PK_ShoppingCartItem_ShoppingCartItemID" PRIMARY KEY (id);
 
 ALTER TABLE db.shopping_cart CLUSTER ON "PK_ShoppingCartItem_ShoppingCartItemID";
 
 
 
 ALTER TABLE ONLY db.product_discount
-    ADD CONSTRAINT "PK_SpecialOfferProduct_SpecialOfferID_ProductID" PRIMARY KEY (product_discount_id, product_id);
+    ADD CONSTRAINT "PK_SpecialOfferProduct_SpecialOfferID_ProductID" PRIMARY KEY (id, product_id);
 
 ALTER TABLE db.product_discount CLUSTER ON "PK_SpecialOfferProduct_SpecialOfferID_ProductID";
 
@@ -1807,44 +1799,44 @@ ALTER TABLE db.discount CLUSTER ON "PK_SpecialOffer_SpecialOfferID";
 
 
 ALTER TABLE ONLY db.state_province
-    ADD CONSTRAINT "PK_StateProvince_StateProvinceID" PRIMARY KEY (state_province_id);
+    ADD CONSTRAINT "PK_StateProvince_StateProvinceID" PRIMARY KEY (id);
 
 ALTER TABLE db.state_province CLUSTER ON "PK_StateProvince_StateProvinceID";
 
 
 
-ALTER TABLE ONLY db.store
+ALTER TABLE ONLY db.stores
     ADD CONSTRAINT "PK_Store_BusinessEntityID" PRIMARY KEY (business_entity_id);
 
-ALTER TABLE db.store CLUSTER ON "PK_Store_BusinessEntityID";
+ALTER TABLE db.stores CLUSTER ON "PK_Store_BusinessEntityID";
 
 
 
 ALTER TABLE ONLY db.history_transaction
-    ADD CONSTRAINT "PK_TransactionHistory_TransactionID" PRIMARY KEY (transaction_id);
+    ADD CONSTRAINT "PK_TransactionHistory_TransactionID" PRIMARY KEY (id);
 
 ALTER TABLE db.history_transaction CLUSTER ON "PK_TransactionHistory_TransactionID";
 
 
 
 ALTER TABLE ONLY db.measure_unit
-    ADD CONSTRAINT "PK_UnitMeasure_UnitMeasureCode" PRIMARY KEY (unit_measure_code);
+    ADD CONSTRAINT "PK_UnitMeasure_UnitMeasureCode" PRIMARY KEY (id);
 
 ALTER TABLE db.measure_unit CLUSTER ON "PK_UnitMeasure_UnitMeasureCode";
 
 
 
-ALTER TABLE ONLY db.buyer
-    ADD CONSTRAINT "PK_Vendor_BusinessEntityID" PRIMARY KEY (business_entity_id);
+ALTER TABLE ONLY db.buyers
+    ADD CONSTRAINT "PK_Vendor_BusinessEntityID" PRIMARY KEY (id);
 
-ALTER TABLE db.buyer CLUSTER ON "PK_Vendor_BusinessEntityID";
+ALTER TABLE db.buyers CLUSTER ON "PK_Vendor_BusinessEntityID";
 
 
 
-ALTER TABLE ONLY db.work_order
-    ADD CONSTRAINT "PK_WorkOrder_WorkOrderID" PRIMARY KEY (work_order_id);
+ALTER TABLE ONLY db.work_orders
+    ADD CONSTRAINT "PK_WorkOrder_WorkOrderID" PRIMARY KEY (id);
 
-ALTER TABLE db.work_order CLUSTER ON "PK_WorkOrder_WorkOrderID";
+ALTER TABLE db.work_orders CLUSTER ON "PK_WorkOrder_WorkOrderID";
 
 
 
@@ -1853,53 +1845,53 @@ ALTER TABLE ONLY db.document
 
 
 
-ALTER TABLE ONLY db.address
-    ADD CONSTRAINT "FK_Address_StateProvince_StateProvinceID" FOREIGN KEY (district_id) REFERENCES db.state_province(state_province_id);
+ALTER TABLE ONLY db.addresses
+    ADD CONSTRAINT "FK_Address_StateProvince_StateProvinceID" FOREIGN KEY (district_id) REFERENCES db.state_province(id);
 
 
 
 ALTER TABLE ONLY db.materials_bills
-    ADD CONSTRAINT "FK_BillOfMaterials_Product_ComponentID" FOREIGN KEY (component_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_BillOfMaterials_Product_ComponentID" FOREIGN KEY (component_id) REFERENCES db.products(id);
 
 
 
 ALTER TABLE ONLY db.materials_bills
-    ADD CONSTRAINT "FK_BillOfMaterials_Product_ProductAssemblyID" FOREIGN KEY (product_assembly_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_BillOfMaterials_Product_ProductAssemblyID" FOREIGN KEY (product_assembly_id) REFERENCES db.products(id);
 
 
 
 ALTER TABLE ONLY db.materials_bills
-    ADD CONSTRAINT "FK_BillOfMaterials_UnitMeasure_UnitMeasureCode" FOREIGN KEY (unit_measure_code) REFERENCES db.measure_unit(unit_measure_code);
+    ADD CONSTRAINT "FK_BillOfMaterials_UnitMeasure_UnitMeasureCode" FOREIGN KEY (unit_measure_code) REFERENCES db.measure_unit(id);
 
 
 
-ALTER TABLE ONLY db.business_entity_address
+ALTER TABLE ONLY db.business_entity_addresses
     ADD CONSTRAINT "FK_BusinessEntityAddress_AddressType_AddressTypeID" FOREIGN KEY (address_type_id) REFERENCES db.address_type(address_type_id);
 
 
 
-ALTER TABLE ONLY db.business_entity_address
-    ADD CONSTRAINT "FK_BusinessEntityAddress_Address_AddressID" FOREIGN KEY (address_id) REFERENCES db.address(address_id);
+ALTER TABLE ONLY db.business_entity_addresses
+    ADD CONSTRAINT "FK_BusinessEntityAddress_Address_AddressID" FOREIGN KEY (address_id) REFERENCES db.addresses(id);
 
 
 
-ALTER TABLE ONLY db.business_entity_address
-    ADD CONSTRAINT "FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(business_entity_id);
+ALTER TABLE ONLY db.business_entity_addresses
+    ADD CONSTRAINT "FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID" FOREIGN KEY (id) REFERENCES db.business_entity(id);
 
 
 
-ALTER TABLE ONLY db.business_entity_contact
-    ADD CONSTRAINT "FK_BusinessEntityContact_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(business_entity_id);
+ALTER TABLE ONLY db.business_entity_contacts
+    ADD CONSTRAINT "FK_BusinessEntityContact_BusinessEntity_BusinessEntityID" FOREIGN KEY (id) REFERENCES db.business_entity(id);
 
 
 
-ALTER TABLE ONLY db.business_entity_contact
-    ADD CONSTRAINT "FK_BusinessEntityContact_ContactType_ContactTypeID" FOREIGN KEY (type_contact_id) REFERENCES db.contact_type(contact_type_id);
+ALTER TABLE ONLY db.business_entity_contacts
+    ADD CONSTRAINT "FK_BusinessEntityContact_ContactType_ContactTypeID" FOREIGN KEY (type_contact_id) REFERENCES db.contact_type(id);
 
 
 
-ALTER TABLE ONLY db.business_entity_contact
-    ADD CONSTRAINT "FK_BusinessEntityContact_Person_PersonID" FOREIGN KEY (person_id) REFERENCES db.person(business_entity_id);
+ALTER TABLE ONLY db.business_entity_contacts
+    ADD CONSTRAINT "FK_BusinessEntityContact_Person_PersonID" FOREIGN KEY (person_id) REFERENCES db.persons(business_entity_id);
 
 
 
@@ -1913,178 +1905,178 @@ ALTER TABLE ONLY db.country_currency
 
 
 
-ALTER TABLE ONLY db.currency_exchange_rate
+ALTER TABLE ONLY db.currency_exchange_rates
     ADD CONSTRAINT "FK_CurrencyRate_Currency_FromCurrencyCode" FOREIGN KEY (from_currency_code) REFERENCES db.currency(currency_code);
 
 
 
-ALTER TABLE ONLY db.currency_exchange_rate
+ALTER TABLE ONLY db.currency_exchange_rates
     ADD CONSTRAINT "FK_CurrencyRate_Currency_ToCurrencyCode" FOREIGN KEY (to_currency_code) REFERENCES db.currency(currency_code);
 
 
 
 ALTER TABLE ONLY db.customer
-    ADD CONSTRAINT "FK_Customer_Person_PersonID" FOREIGN KEY (person_id) REFERENCES db.person(business_entity_id);
+    ADD CONSTRAINT "FK_Customer_Person_PersonID" FOREIGN KEY (person_id) REFERENCES db.persons(business_entity_id);
 
 
 
 ALTER TABLE ONLY db.customer
-    ADD CONSTRAINT "FK_Customer_Store_StoreID" FOREIGN KEY (store_id) REFERENCES db.store(business_entity_id);
+    ADD CONSTRAINT "FK_Customer_Store_StoreID" FOREIGN KEY (store_id) REFERENCES db.stores(business_entity_id);
 
 
 
-ALTER TABLE ONLY db.email_address
-    ADD CONSTRAINT "FK_EmailAddress_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.person(business_entity_id);
+ALTER TABLE ONLY db.email_addresses
+    ADD CONSTRAINT "FK_EmailAddress_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.persons(business_entity_id);
 
 
 
-ALTER TABLE ONLY db.history_employee_department
-    ADD CONSTRAINT "FK_EmployeeDepartmentHistory_Department_DepartmentID" FOREIGN KEY (department_id) REFERENCES db.department(branch_id);
+ALTER TABLE ONLY db.history_employee_departments
+    ADD CONSTRAINT "FK_EmployeeDepartmentHistory_Department_DepartmentID" FOREIGN KEY (department_id) REFERENCES db.departments(id);
 
 
 
-ALTER TABLE ONLY db.history_employee_department
-    ADD CONSTRAINT "FK_EmployeeDepartmentHistory_Shift_ShiftID" FOREIGN KEY (shift_id) REFERENCES db.shift(shift_id);
+ALTER TABLE ONLY db.history_employee_departments
+    ADD CONSTRAINT "FK_EmployeeDepartmentHistory_Shift_ShiftID" FOREIGN KEY (shift_id) REFERENCES db.shifts(id);
 
 
 
-ALTER TABLE ONLY db.password
-    ADD CONSTRAINT "FK_Password_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.person(business_entity_id);
-
-
-
-ALTER TABLE ONLY db.payment_card_person
-    ADD CONSTRAINT "FK_PersonCreditCard_CreditCard_CreditCardID" FOREIGN KEY (card_id) REFERENCES db.payment_card(card_id);
+ALTER TABLE ONLY db.passwords
+    ADD CONSTRAINT "FK_Password_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.persons(business_entity_id);
 
 
 
 ALTER TABLE ONLY db.payment_card_person
-    ADD CONSTRAINT "FK_PersonCreditCard_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.person(business_entity_id);
+    ADD CONSTRAINT "FK_PersonCreditCard_CreditCard_CreditCardID" FOREIGN KEY (card_id) REFERENCES db.payment_cards(id);
+
+
+
+ALTER TABLE ONLY db.payment_card_person
+    ADD CONSTRAINT "FK_PersonCreditCard_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.persons(business_entity_id);
 
 
 
 ALTER TABLE ONLY db.person_phone
-    ADD CONSTRAINT "FK_PersonPhone_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.person(business_entity_id);
+    ADD CONSTRAINT "FK_PersonPhone_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.persons(business_entity_id);
 
 
 
 ALTER TABLE ONLY db.person_phone
-    ADD CONSTRAINT "FK_PersonPhone_PhoneNumberType_PhoneNumberTypeID" FOREIGN KEY (phone_number_type_id) REFERENCES db.phone_number_type(phone_number_type_id);
+    ADD CONSTRAINT "FK_PersonPhone_PhoneNumberType_PhoneNumberTypeID" FOREIGN KEY (phone_number_type_id) REFERENCES db.phone_number_types(id);
 
 
 
-ALTER TABLE ONLY db.person
-    ADD CONSTRAINT "FK_Person_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(business_entity_id);
+ALTER TABLE ONLY db.persons
+    ADD CONSTRAINT "FK_Person_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(id);
 
 
 
 ALTER TABLE ONLY db.product_cost_history
-    ADD CONSTRAINT "FK_ProductCostHistory_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_ProductCostHistory_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
-ALTER TABLE ONLY db.product_document
-    ADD CONSTRAINT "FK_ProductDocument_Document_DocumentNode" FOREIGN KEY (document_node) REFERENCES db.document(document_node);
+ALTER TABLE ONLY db.product_documents
+    ADD CONSTRAINT "FK_ProductDocument_Document_DocumentNode" FOREIGN KEY (document_node) REFERENCES db.document(id);
 
 
 
-ALTER TABLE ONLY db.product_document
-    ADD CONSTRAINT "FK_ProductDocument_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
-
-
-
-ALTER TABLE ONLY db.product_inventory
-    ADD CONSTRAINT "FK_ProductInventory_Location_LocationID" FOREIGN KEY (location_id) REFERENCES db.area(location_id);
+ALTER TABLE ONLY db.product_documents
+    ADD CONSTRAINT "FK_ProductDocument_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
 ALTER TABLE ONLY db.product_inventory
-    ADD CONSTRAINT "FK_ProductInventory_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_ProductInventory_Location_LocationID" FOREIGN KEY (location_id) REFERENCES db.areas(id);
+
+
+
+ALTER TABLE ONLY db.product_inventory
+    ADD CONSTRAINT "FK_ProductInventory_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
 ALTER TABLE ONLY db.product_model_illustration
-    ADD CONSTRAINT "FK_ProductModelIllustration_Illustration_IllustrationID" FOREIGN KEY (illustration_id) REFERENCES db.illustration(illustration_id);
+    ADD CONSTRAINT "FK_ProductModelIllustration_Illustration_IllustrationID" FOREIGN KEY (illustration_id) REFERENCES db.illustrations(id);
 
 
 
 ALTER TABLE ONLY db.product_model_illustration
-    ADD CONSTRAINT "FK_ProductModelIllustration_ProductModel_ProductModelID" FOREIGN KEY (product_model_id) REFERENCES db.product_model(product_model_id);
+    ADD CONSTRAINT "FK_ProductModelIllustration_ProductModel_ProductModelID" FOREIGN KEY (product_model_id) REFERENCES db.product_models(id);
 
 
 
 ALTER TABLE ONLY db.product_model_product_description_culture
-    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_Culture_CultureID" FOREIGN KEY (culture_id) REFERENCES db.culture(culture_id);
+    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_Culture_CultureID" FOREIGN KEY (culture_id) REFERENCES db.culture(id);
 
 
 
 ALTER TABLE ONLY db.product_model_product_description_culture
-    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_ProductDescription_Pro" FOREIGN KEY (product_description_id) REFERENCES db.product_description(product_description_id);
+    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_ProductDescription_Pro" FOREIGN KEY (product_description_id) REFERENCES db.product_descriptions(id);
 
 
 
 ALTER TABLE ONLY db.product_model_product_description_culture
-    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_ProductModel_ProductMo" FOREIGN KEY (product_model_id) REFERENCES db.product_model(product_model_id);
+    ADD CONSTRAINT "FK_ProductModelProductDescriptionCulture_ProductModel_ProductMo" FOREIGN KEY (product_model_id) REFERENCES db.product_models(id);
 
 
 
 ALTER TABLE ONLY db.product_subcategory
-    ADD CONSTRAINT "FK_ProductSubcategory_ProductCategory_ProductCategoryID" FOREIGN KEY (product_category_id) REFERENCES db.product_section(product_category_id);
+    ADD CONSTRAINT "FK_ProductSubcategory_ProductCategory_ProductCategoryID" FOREIGN KEY (product_category_id) REFERENCES db.product_sections(id);
 
 
 
-ALTER TABLE ONLY db.product_dealer
-    ADD CONSTRAINT "FK_ProductVendor_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
+ALTER TABLE ONLY db.product_dealers
+    ADD CONSTRAINT "FK_ProductVendor_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
-ALTER TABLE ONLY db.product_dealer
-    ADD CONSTRAINT "FK_ProductVendor_UnitMeasure_UnitMeasureCode" FOREIGN KEY (unit_measure_code) REFERENCES db.measure_unit(unit_measure_code);
+ALTER TABLE ONLY db.product_dealers
+    ADD CONSTRAINT "FK_ProductVendor_UnitMeasure_UnitMeasureCode" FOREIGN KEY (unit_measure_code) REFERENCES db.measure_unit(id);
 
 
 
-ALTER TABLE ONLY db.product_dealer
-    ADD CONSTRAINT "FK_ProductVendor_Vendor_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.buyer(business_entity_id);
+ALTER TABLE ONLY db.product_dealers
+    ADD CONSTRAINT "FK_ProductVendor_Vendor_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.buyers(id);
 
 
 
-ALTER TABLE ONLY db.product
-    ADD CONSTRAINT "FK_Product_ProductModel_ProductModelID" FOREIGN KEY (product_model_id) REFERENCES db.product_model(product_model_id);
+ALTER TABLE ONLY db.products
+    ADD CONSTRAINT "FK_Product_ProductModel_ProductModelID" FOREIGN KEY (product_model_id) REFERENCES db.product_models(id);
 
 
 
-ALTER TABLE ONLY db.product
-    ADD CONSTRAINT "FK_Product_ProductSubcategory_ProductSubcategoryID" FOREIGN KEY (product_subcategory_id) REFERENCES db.product_subcategory(product_subcategory_id);
+ALTER TABLE ONLY db.products
+    ADD CONSTRAINT "FK_Product_ProductSubcategory_ProductSubcategoryID" FOREIGN KEY (product_subcategory_id) REFERENCES db.product_subcategory(id);
 
 
 
-ALTER TABLE ONLY db.product
-    ADD CONSTRAINT "FK_Product_UnitMeasure_SizeUnitMeasureCode" FOREIGN KEY (size_unit_measure_code) REFERENCES db.measure_unit(unit_measure_code);
+ALTER TABLE ONLY db.products
+    ADD CONSTRAINT "FK_Product_UnitMeasure_SizeUnitMeasureCode" FOREIGN KEY (size_unit_measure_code) REFERENCES db.measure_unit(id);
 
 
 
-ALTER TABLE ONLY db.product
-    ADD CONSTRAINT "FK_Product_UnitMeasure_WeightUnitMeasureCode" FOREIGN KEY (weight_unit_measure_code) REFERENCES db.measure_unit(unit_measure_code);
+ALTER TABLE ONLY db.products
+    ADD CONSTRAINT "FK_Product_UnitMeasure_WeightUnitMeasureCode" FOREIGN KEY (weight_unit_measure_code) REFERENCES db.measure_unit(id);
 
 
 
 ALTER TABLE ONLY db.buy_details
-    ADD CONSTRAINT "FK_PurchaseOrderDetail_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_PurchaseOrderDetail_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
-ALTER TABLE ONLY db.sales_order_detail
-    ADD CONSTRAINT "FK_SalesOrderDetail_SpecialOfferProduct_SpecialOfferIDProductID" FOREIGN KEY (discount_id, product_id) REFERENCES db.product_discount(product_discount_id, product_id);
+ALTER TABLE ONLY db.sales_order_details
+    ADD CONSTRAINT "FK_SalesOrderDetail_SpecialOfferProduct_SpecialOfferIDProductID" FOREIGN KEY (discount_id, product_id) REFERENCES db.product_discount(id, product_id);
 
 
 
-ALTER TABLE ONLY db.sales_order
-    ADD CONSTRAINT "FK_SalesOrderHeaderSalesReason_SalesReason_SalesReasonID" FOREIGN KEY (sales_reason_id) REFERENCES db.sales_reason(sales_reason_id);
+ALTER TABLE ONLY db.sales_orders
+    ADD CONSTRAINT "FK_SalesOrderHeaderSalesReason_SalesReason_SalesReasonID" FOREIGN KEY (sales_reason_id) REFERENCES db.sales_reasons(id);
 
 
 
-ALTER TABLE ONLY db.sales_tax_rate
-    ADD CONSTRAINT "FK_SalesTaxRate_StateProvince_StateProvinceID" FOREIGN KEY (state_province_id) REFERENCES db.state_province(state_province_id);
+ALTER TABLE ONLY db.sales_tax_rates
+    ADD CONSTRAINT "FK_SalesTaxRate_StateProvince_StateProvinceID" FOREIGN KEY (state_province_id) REFERENCES db.state_province(id);
 
 
 
@@ -2094,17 +2086,17 @@ ALTER TABLE ONLY db.sales_territory
 
 
 ALTER TABLE ONLY db.shopping_cart
-    ADD CONSTRAINT "FK_ShoppingCartItem_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_ShoppingCartItem_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
 ALTER TABLE ONLY db.product_discount
-    ADD CONSTRAINT "FK_SpecialOfferProduct_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_SpecialOfferProduct_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
 ALTER TABLE ONLY db.product_discount
-    ADD CONSTRAINT "FK_SpecialOfferProduct_SpecialOffer_SpecialOfferID" FOREIGN KEY (product_discount_id) REFERENCES db.discount(discount_id);
+    ADD CONSTRAINT "FK_SpecialOfferProduct_SpecialOffer_SpecialOfferID" FOREIGN KEY (id) REFERENCES db.discount(discount_id);
 
 
 
@@ -2118,33 +2110,33 @@ ALTER TABLE ONLY db.state_province
 
 
 
-ALTER TABLE ONLY db.store
-    ADD CONSTRAINT "FK_Store_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(business_entity_id);
+ALTER TABLE ONLY db.stores
+    ADD CONSTRAINT "FK_Store_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(id);
 
 
 
-ALTER TABLE ONLY db.store
-    ADD CONSTRAINT "FK_Store_SalesPerson_SalesPersonID" FOREIGN KEY (sales_person_id) REFERENCES db.sales_person(business_entity_id);
+ALTER TABLE ONLY db.stores
+    ADD CONSTRAINT "FK_Store_SalesPerson_SalesPersonID" FOREIGN KEY (sales_person_id) REFERENCES db.sales_persons(business_entity_id);
 
 
 
 ALTER TABLE ONLY db.history_transaction
-    ADD CONSTRAINT "FK_TransactionHistory_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_TransactionHistory_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
-ALTER TABLE ONLY db.buyer
-    ADD CONSTRAINT "FK_Vendor_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(business_entity_id);
+ALTER TABLE ONLY db.buyers
+    ADD CONSTRAINT "FK_Vendor_BusinessEntity_BusinessEntityID" FOREIGN KEY (id) REFERENCES db.business_entity(id);
 
 
 
-ALTER TABLE ONLY db.work_order
-    ADD CONSTRAINT "FK_WorkOrder_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.product(product_id);
+ALTER TABLE ONLY db.work_orders
+    ADD CONSTRAINT "FK_WorkOrder_Product_ProductID" FOREIGN KEY (product_id) REFERENCES db.products(id);
 
 
 
-ALTER TABLE ONLY db.work_order
-    ADD CONSTRAINT "FK_WorkOrder_ScrapReason_ScrapReasonID" FOREIGN KEY (scrap_reason_id) REFERENCES db.scrap_reason(scrap_reason_id);
+ALTER TABLE ONLY db.work_orders
+    ADD CONSTRAINT "FK_WorkOrder_ScrapReason_ScrapReasonID" FOREIGN KEY (scrap_reason_id) REFERENCES db.scrap_reason(id);
 
 
 
