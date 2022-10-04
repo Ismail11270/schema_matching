@@ -277,7 +277,7 @@ ALTER TABLE db.business_entity_address OWNER TO postgres;
 
 CREATE TABLE db.business_entity_contact (
                                             business_entity_id integer NOT NULL,
-                                            db_id integer NOT NULL,
+                                            person_id integer NOT NULL,
                                             type_contact_id integer NOT NULL,
                                             row_guid uuid NOT NULL,
                                             modified_date timestamp without time zone DEFAULT now() NOT NULL
@@ -379,28 +379,28 @@ ALTER TABLE db.password OWNER TO postgres;
 
 CREATE TABLE db.db (
                        business_entity_id integer NOT NULL,
-                       gender_db character(2) NOT NULL,
+                       gender_person character(2) NOT NULL,
                        title_name character varying(8),
                        email_promotion integer DEFAULT 0 NOT NULL,
                        extra_contact_information xml,
                        row_guid uuid NOT NULL,
                        modified_date timestamp without time zone DEFAULT now() NOT NULL,
-                       CONSTRAINT "CK_db_EmailPromotion" CHECK (((email_promotion >= 0) AND (email_promotion <= 2))),
-                       CONSTRAINT "CK_db_dbType" CHECK (((gender_db IS NULL) OR (upper((gender_db)::text) = ANY (ARRAY['SC'::text, 'VC'::text, 'IN'::text, 'EM'::text, 'SP'::text, 'GC'::text]))))
+                       CONSTRAINT "CK_Person_EmailPromotion" CHECK (((email_promotion >= 0) AND (email_promotion <= 2))),
+                       CONSTRAINT "CK_Person_PersonType" CHECK (((gender_person IS NULL) OR (upper((gender_person)::text) = ANY (ARRAY['SC'::text, 'VC'::text, 'IN'::text, 'EM'::text, 'SP'::text, 'GC'::text]))))
 );
 
 
 ALTER TABLE db.db OWNER TO postgres;
 
 
-CREATE TABLE db.db_phone (
-                             business_entity_id integer NOT NULL,
-                             phone_number_type_id integer NOT NULL,
-                             modified_date timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.person_phone (
+                                 business_entity_id integer NOT NULL,
+                                 phone_number_type_id integer NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.db_phone OWNER TO postgres;
+ALTER TABLE db.person_phone OWNER TO postgres;
 
 
 CREATE TABLE db.phone_number_type (
@@ -1042,7 +1042,7 @@ ALTER SEQUENCE db.currencyrate_currencyrateid_seq OWNED BY db.currency_exchange_
 
 CREATE TABLE db.customer (
                              customer_id integer NOT NULL,
-                             db_id integer,
+                             person_id integer,
                              store_id integer,
                              row_guid uuid NOT NULL,
                              modified_date timestamp without time zone DEFAULT now() NOT NULL
@@ -1090,14 +1090,14 @@ CREATE TABLE db.discount (
 ALTER TABLE db.discount OWNER TO postgres;
 
 
-CREATE TABLE db.payment_card_db (
-                                    business_entity_id integer NOT NULL,
-                                    card_id integer NOT NULL,
-                                    modified_date timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.payment_card_person (
+                                        business_entity_id integer NOT NULL,
+                                        card_id integer NOT NULL,
+                                        modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.payment_card_db OWNER TO postgres;
+ALTER TABLE db.payment_card_person OWNER TO postgres;
 
 
 CREATE TABLE db.product_discount (
@@ -1111,96 +1111,96 @@ CREATE TABLE db.product_discount (
 ALTER TABLE db.product_discount OWNER TO postgres;
 
 
-CREATE TABLE db.db_order (
-                             db_order_id integer NOT NULL,
-                             db_reason_id integer NOT NULL,
-                             modified_date timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.sales_order (
+                                sales_order_id integer NOT NULL,
+                                sales_reason_id integer NOT NULL,
+                                modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.db_order OWNER TO postgres;
+ALTER TABLE db.sales_order OWNER TO postgres;
 
 
-CREATE TABLE db.db_order_detail (
-                                    db_order_id integer NOT NULL,
-                                    db_order_detail_id integer NOT NULL,
-                                    tracking_number character varying(25),
-                                    order_quantity smallint NOT NULL,
-                                    product_id integer NOT NULL,
-                                    discount_id integer NOT NULL,
-                                    unit_price numeric NOT NULL,
-                                    unit_price_discount numeric DEFAULT 0.0 NOT NULL,
-                                    row_guid uuid NOT NULL,
-                                    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-                                    CONSTRAINT "CK_dbOrderDetail_OrderQty" CHECK ((order_quantity > 0)),
-                                    CONSTRAINT "CK_dbOrderDetail_UnitPrice" CHECK ((unit_price >= 0.00)),
-                                    CONSTRAINT "CK_dbOrderDetail_UnitPriceDiscount" CHECK ((unit_price_discount >= 0.00))
+CREATE TABLE db.sales_order_detail (
+                                       sales_order_id integer NOT NULL,
+                                       sales_order_detail_id integer NOT NULL,
+                                       tracking_number character varying(25),
+                                       order_quantity smallint NOT NULL,
+                                       product_id integer NOT NULL,
+                                       discount_id integer NOT NULL,
+                                       unit_price numeric NOT NULL,
+                                       unit_price_discount numeric DEFAULT 0.0 NOT NULL,
+                                       row_guid uuid NOT NULL,
+                                       modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                       CONSTRAINT "CK_SalesOrderDetail_OrderQty" CHECK ((order_quantity > 0)),
+                                       CONSTRAINT "CK_SalesOrderDetail_UnitPrice" CHECK ((unit_price >= 0.00)),
+                                       CONSTRAINT "CK_SalesOrderDetail_UnitPriceDiscount" CHECK ((unit_price_discount >= 0.00))
 );
 
 
-ALTER TABLE db.db_order_detail OWNER TO postgres;
+ALTER TABLE db.sales_order_detail OWNER TO postgres;
 
 
-CREATE TABLE db.db_db (
-                          business_entity_id integer NOT NULL,
-                          bonus numeric DEFAULT 0.00 NOT NULL,
-                          commission numeric DEFAULT 0.00 NOT NULL,
-                          db_ytd numeric DEFAULT 0.00 NOT NULL,
-                          row_guid uuid NOT NULL,
-                          modified_date timestamp without time zone DEFAULT now() NOT NULL,
-                          CONSTRAINT "CK_dbdb_Bonus" CHECK ((bonus >= 0.00)),
-                          CONSTRAINT "CK_dbdb_CommissionPct" CHECK ((commission >= 0.00)),
-                          CONSTRAINT "CK_dbdb_dbYTD" CHECK ((db_ytd >= 0.00))
-);
-
-
-ALTER TABLE db.db_db OWNER TO postgres;
-
-
-CREATE TABLE db.db_reason (
-                              db_reason_id integer NOT NULL,
-                              modified_date timestamp without time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE db.db_reason OWNER TO postgres;
-
-
-CREATE TABLE db.db_tax_rate (
-                                db_tax_rate_id integer NOT NULL,
-                                state_province_id integer NOT NULL,
-                                tax_type smallint NOT NULL,
-                                tax_rate numeric DEFAULT 0.00 NOT NULL,
-                                row_guid uuid NOT NULL,
-                                modified_date timestamp without time zone DEFAULT now() NOT NULL,
-                                CONSTRAINT "CK_dbTaxRate_TaxType" CHECK (((tax_type >= 1) AND (tax_type <= 3)))
-);
-
-
-ALTER TABLE db.db_tax_rate OWNER TO postgres;
-
-
-CREATE TABLE db.db_territory (
-                                 territory_id integer NOT NULL,
-                                 country_region_code character varying(3) NOT NULL,
-                                 "group" character varying(50) NOT NULL,
-                                 db_ytd numeric DEFAULT 0.00 NOT NULL,
-                                 db_last_year numeric DEFAULT 0.00 NOT NULL,
-                                 cost_ytd numeric DEFAULT 0.00 NOT NULL,
-                                 cost_last_year numeric DEFAULT 0.00 NOT NULL,
+CREATE TABLE db.sales_person (
+                                 business_entity_id integer NOT NULL,
+                                 bonus numeric DEFAULT 0.00 NOT NULL,
+                                 commission numeric DEFAULT 0.00 NOT NULL,
+                                 sales_ytd numeric DEFAULT 0.00 NOT NULL,
                                  row_guid uuid NOT NULL,
                                  modified_date timestamp without time zone DEFAULT now() NOT NULL,
-                                 CONSTRAINT "CK_dbTerritory_CostLastYear" CHECK ((cost_last_year >= 0.00)),
-                                 CONSTRAINT "CK_dbTerritory_CostYTD" CHECK ((cost_ytd >= 0.00)),
-                                 CONSTRAINT "CK_dbTerritory_dbLastYear" CHECK ((db_last_year >= 0.00)),
-                                 CONSTRAINT "CK_dbTerritory_dbYTD" CHECK ((db_ytd >= 0.00))
+                                 CONSTRAINT "CK_SalesPerson_Bonus" CHECK ((bonus >= 0.00)),
+                                 CONSTRAINT "CK_SalesPerson_CommissionPct" CHECK ((commission >= 0.00)),
+                                 CONSTRAINT "CK_SalesPerson_SalesYTD" CHECK ((sales_ytd >= 0.00))
 );
 
 
-ALTER TABLE db.db_territory OWNER TO postgres;
+ALTER TABLE db.sales_person OWNER TO postgres;
 
 
-CREATE SEQUENCE db.dborderdetail_dborderdetailid_seq
+CREATE TABLE db.sales_reason (
+                                 sales_reason_id integer NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE db.sales_reason OWNER TO postgres;
+
+
+CREATE TABLE db.sales_tax_rate (
+                                   sales_tax_rate_id integer NOT NULL,
+                                   state_province_id integer NOT NULL,
+                                   tax_type smallint NOT NULL,
+                                   tax_rate numeric DEFAULT 0.00 NOT NULL,
+                                   row_guid uuid NOT NULL,
+                                   modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                   CONSTRAINT "CK_SalesTaxRate_TaxType" CHECK (((tax_type >= 1) AND (tax_type <= 3)))
+);
+
+
+ALTER TABLE db.sales_tax_rate OWNER TO postgres;
+
+
+CREATE TABLE db.sales_territory (
+                                    territory_id integer NOT NULL,
+                                    country_region_code character varying(3) NOT NULL,
+                                    "group" character varying(50) NOT NULL,
+                                    sales_ytd numeric DEFAULT 0.00 NOT NULL,
+                                    sales_last_year numeric DEFAULT 0.00 NOT NULL,
+                                    cost_ytd numeric DEFAULT 0.00 NOT NULL,
+                                    cost_last_year numeric DEFAULT 0.00 NOT NULL,
+                                    row_guid uuid NOT NULL,
+                                    modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                    CONSTRAINT "CK_SalesTerritory_CostLastYear" CHECK ((cost_last_year >= 0.00)),
+                                    CONSTRAINT "CK_SalesTerritory_CostYTD" CHECK ((cost_ytd >= 0.00)),
+                                    CONSTRAINT "CK_SalesTerritory_SalesLastYear" CHECK ((sales_last_year >= 0.00)),
+                                    CONSTRAINT "CK_SalesTerritory_SalesYTD" CHECK ((sales_ytd >= 0.00))
+);
+
+
+ALTER TABLE db.sales_territory OWNER TO postgres;
+
+
+CREATE SEQUENCE db.salesorderdetail_salesorderdetailid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -1209,14 +1209,14 @@ CREATE SEQUENCE db.dborderdetail_dborderdetailid_seq
     CACHE 1;
 
 
-ALTER TABLE db.dborderdetail_dborderdetailid_seq OWNER TO postgres;
+ALTER TABLE db.salesorderdetail_salesorderdetailid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.dborderdetail_dborderdetailid_seq OWNED BY db.db_order_detail.db_order_detail_id;
+ALTER SEQUENCE db.salesorderdetail_salesorderdetailid_seq OWNED BY db.sales_order_detail.sales_order_detail_id;
 
 
 
-CREATE SEQUENCE db.dbreason_dbreasonid_seq
+CREATE SEQUENCE db.salesreason_salesreasonid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -1225,14 +1225,14 @@ CREATE SEQUENCE db.dbreason_dbreasonid_seq
     CACHE 1;
 
 
-ALTER TABLE db.dbreason_dbreasonid_seq OWNER TO postgres;
+ALTER TABLE db.salesreason_salesreasonid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.dbreason_dbreasonid_seq OWNED BY db.db_reason.db_reason_id;
+ALTER SEQUENCE db.salesreason_salesreasonid_seq OWNED BY db.sales_reason.sales_reason_id;
 
 
 
-CREATE SEQUENCE db.dbtaxrate_dbtaxrateid_seq
+CREATE SEQUENCE db.salestaxrate_salestaxrateid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -1241,14 +1241,14 @@ CREATE SEQUENCE db.dbtaxrate_dbtaxrateid_seq
     CACHE 1;
 
 
-ALTER TABLE db.dbtaxrate_dbtaxrateid_seq OWNER TO postgres;
+ALTER TABLE db.salestaxrate_salestaxrateid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.dbtaxrate_dbtaxrateid_seq OWNED BY db.db_tax_rate.db_tax_rate_id;
+ALTER SEQUENCE db.salestaxrate_salestaxrateid_seq OWNED BY db.sales_tax_rate.sales_tax_rate_id;
 
 
 
-CREATE SEQUENCE db.dbterritory_territoryid_seq
+CREATE SEQUENCE db.salesterritory_territoryid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -1257,10 +1257,10 @@ CREATE SEQUENCE db.dbterritory_territoryid_seq
     CACHE 1;
 
 
-ALTER TABLE db.dbterritory_territoryid_seq OWNER TO postgres;
+ALTER TABLE db.salesterritory_territoryid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.dbterritory_territoryid_seq OWNED BY db.db_territory.territory_id;
+ALTER SEQUENCE db.salesterritory_territoryid_seq OWNED BY db.sales_territory.territory_id;
 
 
 
@@ -1312,7 +1312,7 @@ ALTER SEQUENCE db.specialoffer_specialofferid_seq OWNED BY db.discount.discount_
 
 CREATE TABLE db.store (
                           business_entity_id integer NOT NULL,
-                          db_db_id integer,
+                          sales_person_id integer,
                           demographics xml,
                           row_guid uuid NOT NULL,
                           modified_date timestamp without time zone DEFAULT now() NOT NULL
@@ -1430,19 +1430,19 @@ ALTER TABLE ONLY db.payment_card ALTER COLUMN card_id SET DEFAULT nextval('db.cr
 
 
 
-ALTER TABLE ONLY db.db_order_detail ALTER COLUMN db_order_detail_id SET DEFAULT nextval('db.dborderdetail_dborderdetailid_seq'::regclass);
+ALTER TABLE ONLY db.sales_order_detail ALTER COLUMN sales_order_detail_id SET DEFAULT nextval('db.salesorderdetail_salesorderdetailid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.db_reason ALTER COLUMN db_reason_id SET DEFAULT nextval('db.dbreason_dbreasonid_seq'::regclass);
+ALTER TABLE ONLY db.sales_reason ALTER COLUMN sales_reason_id SET DEFAULT nextval('db.salesreason_salesreasonid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.db_tax_rate ALTER COLUMN db_tax_rate_id SET DEFAULT nextval('db.dbtaxrate_dbtaxrateid_seq'::regclass);
+ALTER TABLE ONLY db.sales_tax_rate ALTER COLUMN sales_tax_rate_id SET DEFAULT nextval('db.salestaxrate_salestaxrateid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.db_territory ALTER COLUMN territory_id SET DEFAULT nextval('db.dbterritory_territoryid_seq'::regclass);
+ALTER TABLE ONLY db.sales_territory ALTER COLUMN territory_id SET DEFAULT nextval('db.salesterritory_territoryid_seq'::regclass);
 
 
 
@@ -1528,9 +1528,9 @@ ALTER TABLE db.business_entity_address CLUSTER ON "PK_BusinessEntityAddress_Busi
 
 
 ALTER TABLE ONLY db.business_entity_contact
-    ADD CONSTRAINT "PK_BusinessEntityContact_BusinessEntityID_dbID_ContactTypeI" PRIMARY KEY (business_entity_id, db_id, type_contact_id);
+    ADD CONSTRAINT "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI" PRIMARY KEY (business_entity_id, person_id, type_contact_id);
 
-ALTER TABLE db.business_entity_contact CLUSTER ON "PK_BusinessEntityContact_BusinessEntityID_dbID_ContactTypeI";
+ALTER TABLE db.business_entity_contact CLUSTER ON "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI";
 
 
 
@@ -1570,9 +1570,9 @@ ALTER TABLE db.password CLUSTER ON "PK_Password_BusinessEntityID";
 
 
 ALTER TABLE ONLY db.db
-    ADD CONSTRAINT "PK_db_BusinessEntityID" PRIMARY KEY (business_entity_id);
+    ADD CONSTRAINT "PK_Person_BusinessEntityID" PRIMARY KEY (business_entity_id);
 
-ALTER TABLE db.db CLUSTER ON "PK_db_BusinessEntityID";
+ALTER TABLE db.db CLUSTER ON "PK_Person_BusinessEntityID";
 
 
 
@@ -1775,52 +1775,52 @@ ALTER TABLE db.customer CLUSTER ON "PK_Customer_CustomerID";
 
 
 
-ALTER TABLE ONLY db.payment_card_db
-    ADD CONSTRAINT "PK_dbCreditCard_BusinessEntityID_CreditCardID" PRIMARY KEY (business_entity_id, card_id);
+ALTER TABLE ONLY db.payment_card_person
+    ADD CONSTRAINT "PK_PersonCreditCard_BusinessEntityID_CreditCardID" PRIMARY KEY (business_entity_id, card_id);
 
-ALTER TABLE db.payment_card_db CLUSTER ON "PK_dbCreditCard_BusinessEntityID_CreditCardID";
-
-
-
-ALTER TABLE ONLY db.db_order_detail
-    ADD CONSTRAINT "PK_dbOrderDetail_dbOrderID_dbOrderDetailID" PRIMARY KEY (db_order_id, db_order_detail_id);
-
-ALTER TABLE db.db_order_detail CLUSTER ON "PK_dbOrderDetail_dbOrderID_dbOrderDetailID";
+ALTER TABLE db.payment_card_person CLUSTER ON "PK_PersonCreditCard_BusinessEntityID_CreditCardID";
 
 
 
-ALTER TABLE ONLY db.db_order
-    ADD CONSTRAINT "PK_dbOrderHeaderdbReason_dbOrderID_dbReasonID" PRIMARY KEY (db_order_id, db_reason_id);
+ALTER TABLE ONLY db.sales_order_detail
+    ADD CONSTRAINT "PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID" PRIMARY KEY (sales_order_id, sales_order_detail_id);
 
-ALTER TABLE db.db_order CLUSTER ON "PK_dbOrderHeaderdbReason_dbOrderID_dbReasonID";
-
-
-
-ALTER TABLE ONLY db.db_db
-    ADD CONSTRAINT "PK_dbdb_BusinessEntityID" PRIMARY KEY (business_entity_id);
-
-ALTER TABLE db.db_db CLUSTER ON "PK_dbdb_BusinessEntityID";
+ALTER TABLE db.sales_order_detail CLUSTER ON "PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID";
 
 
 
-ALTER TABLE ONLY db.db_reason
-    ADD CONSTRAINT "PK_dbReason_dbReasonID" PRIMARY KEY (db_reason_id);
+ALTER TABLE ONLY db.sales_order
+    ADD CONSTRAINT "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID" PRIMARY KEY (sales_order_id, sales_reason_id);
 
-ALTER TABLE db.db_reason CLUSTER ON "PK_dbReason_dbReasonID";
-
-
-
-ALTER TABLE ONLY db.db_tax_rate
-    ADD CONSTRAINT "PK_dbTaxRate_dbTaxRateID" PRIMARY KEY (db_tax_rate_id);
-
-ALTER TABLE db.db_tax_rate CLUSTER ON "PK_dbTaxRate_dbTaxRateID";
+ALTER TABLE db.sales_order CLUSTER ON "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID";
 
 
 
-ALTER TABLE ONLY db.db_territory
-    ADD CONSTRAINT "PK_dbTerritory_TerritoryID" PRIMARY KEY (territory_id);
+ALTER TABLE ONLY db.sales_person
+    ADD CONSTRAINT "PK_SalesPerson_BusinessEntityID" PRIMARY KEY (business_entity_id);
 
-ALTER TABLE db.db_territory CLUSTER ON "PK_dbTerritory_TerritoryID";
+ALTER TABLE db.sales_person CLUSTER ON "PK_SalesPerson_BusinessEntityID";
+
+
+
+ALTER TABLE ONLY db.sales_reason
+    ADD CONSTRAINT "PK_SalesReason_SalesReasonID" PRIMARY KEY (sales_reason_id);
+
+ALTER TABLE db.sales_reason CLUSTER ON "PK_SalesReason_SalesReasonID";
+
+
+
+ALTER TABLE ONLY db.sales_tax_rate
+    ADD CONSTRAINT "PK_SalesTaxRate_SalesTaxRateID" PRIMARY KEY (sales_tax_rate_id);
+
+ALTER TABLE db.sales_tax_rate CLUSTER ON "PK_SalesTaxRate_SalesTaxRateID";
+
+
+
+ALTER TABLE ONLY db.sales_territory
+    ADD CONSTRAINT "PK_SalesTerritory_TerritoryID" PRIMARY KEY (territory_id);
+
+ALTER TABLE db.sales_territory CLUSTER ON "PK_SalesTerritory_TerritoryID";
 
 
 
@@ -1918,32 +1918,32 @@ ALTER TABLE ONLY db.business_entity_contact
 
 
 ALTER TABLE ONLY db.business_entity_contact
-    ADD CONSTRAINT "FK_BusinessEntityContact_db_dbID" FOREIGN KEY (db_id) REFERENCES db.db(business_entity_id);
+    ADD CONSTRAINT "FK_BusinessEntityContact_Person_PersonID" FOREIGN KEY (person_id) REFERENCES db.db(business_entity_id);
 
 
 
 ALTER TABLE ONLY db.email_address
-    ADD CONSTRAINT "FK_EmailAddress_db_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.db(business_entity_id);
+    ADD CONSTRAINT "FK_EmailAddress_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.db(business_entity_id);
 
 
 
 ALTER TABLE ONLY db.password
-    ADD CONSTRAINT "FK_Password_db_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.db(business_entity_id);
+    ADD CONSTRAINT "FK_Password_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.db(business_entity_id);
 
 
 
-ALTER TABLE ONLY db.db_phone
-    ADD CONSTRAINT "FK_dbPhone_db_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.db(business_entity_id);
+ALTER TABLE ONLY db.person_phone
+    ADD CONSTRAINT "FK_PersonPhone_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.db(business_entity_id);
 
 
 
-ALTER TABLE ONLY db.db_phone
-    ADD CONSTRAINT "FK_dbPhone_PhoneNumberType_PhoneNumberTypeID" FOREIGN KEY (phone_number_type_id) REFERENCES db.phone_number_type(phone_number_type_id);
+ALTER TABLE ONLY db.person_phone
+    ADD CONSTRAINT "FK_PersonPhone_PhoneNumberType_PhoneNumberTypeID" FOREIGN KEY (phone_number_type_id) REFERENCES db.phone_number_type(phone_number_type_id);
 
 
 
 ALTER TABLE ONLY db.db
-    ADD CONSTRAINT "FK_db_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(business_entity_id);
+    ADD CONSTRAINT "FK_Person_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.business_entity(business_entity_id);
 
 
 
@@ -1953,7 +1953,7 @@ ALTER TABLE ONLY db.state_province
 
 
 ALTER TABLE ONLY db.state_province
-    ADD CONSTRAINT "FK_StateProvince_dbTerritory_TerritoryID" FOREIGN KEY (territory_id) REFERENCES db.db_territory(territory_id);
+    ADD CONSTRAINT "FK_StateProvince_SalesTerritory_TerritoryID" FOREIGN KEY (territory_id) REFERENCES db.sales_territory(territory_id);
 
 
 
@@ -2083,7 +2083,7 @@ ALTER TABLE ONLY db.currency_exchange_rate
 
 
 ALTER TABLE ONLY db.customer
-    ADD CONSTRAINT "FK_Customer_db_dbID" FOREIGN KEY (db_id) REFERENCES db.db(business_entity_id);
+    ADD CONSTRAINT "FK_Customer_Person_PersonID" FOREIGN KEY (person_id) REFERENCES db.db(business_entity_id);
 
 
 
@@ -2092,33 +2092,33 @@ ALTER TABLE ONLY db.customer
 
 
 
-ALTER TABLE ONLY db.payment_card_db
-    ADD CONSTRAINT "FK_dbCreditCard_CreditCard_CreditCardID" FOREIGN KEY (card_id) REFERENCES db.payment_card(card_id);
+ALTER TABLE ONLY db.payment_card_person
+    ADD CONSTRAINT "FK_PersonCreditCard_CreditCard_CreditCardID" FOREIGN KEY (card_id) REFERENCES db.payment_card(card_id);
 
 
 
-ALTER TABLE ONLY db.payment_card_db
-    ADD CONSTRAINT "FK_dbCreditCard_db_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.db(business_entity_id);
+ALTER TABLE ONLY db.payment_card_person
+    ADD CONSTRAINT "FK_PersonCreditCard_Person_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.db(business_entity_id);
 
 
 
-ALTER TABLE ONLY db.db_order_detail
-    ADD CONSTRAINT "FK_dbOrderDetail_SpecialOfferProduct_SpecialOfferIDProductID" FOREIGN KEY (discount_id, product_id) REFERENCES db.product_discount(product_discount_id, product_id);
+ALTER TABLE ONLY db.sales_order_detail
+    ADD CONSTRAINT "FK_SalesOrderDetail_SpecialOfferProduct_SpecialOfferIDProductID" FOREIGN KEY (discount_id, product_id) REFERENCES db.product_discount(product_discount_id, product_id);
 
 
 
-ALTER TABLE ONLY db.db_order
-    ADD CONSTRAINT "FK_dbOrderHeaderdbReason_dbReason_dbReasonID" FOREIGN KEY (db_reason_id) REFERENCES db.db_reason(db_reason_id);
+ALTER TABLE ONLY db.sales_order
+    ADD CONSTRAINT "FK_SalesOrderHeaderSalesReason_SalesReason_SalesReasonID" FOREIGN KEY (sales_reason_id) REFERENCES db.sales_reason(sales_reason_id);
 
 
 
-ALTER TABLE ONLY db.db_tax_rate
-    ADD CONSTRAINT "FK_dbTaxRate_StateProvince_StateProvinceID" FOREIGN KEY (state_province_id) REFERENCES db.state_province(state_province_id);
+ALTER TABLE ONLY db.sales_tax_rate
+    ADD CONSTRAINT "FK_SalesTaxRate_StateProvince_StateProvinceID" FOREIGN KEY (state_province_id) REFERENCES db.state_province(state_province_id);
 
 
 
-ALTER TABLE ONLY db.db_territory
-    ADD CONSTRAINT "FK_dbTerritory_CountryRegion_CountryRegionCode" FOREIGN KEY (country_region_code) REFERENCES db.country_region(country_code);
+ALTER TABLE ONLY db.sales_territory
+    ADD CONSTRAINT "FK_SalesTerritory_CountryRegion_CountryRegionCode" FOREIGN KEY (country_region_code) REFERENCES db.country_region(country_code);
 
 
 
@@ -2143,7 +2143,7 @@ ALTER TABLE ONLY db.store
 
 
 ALTER TABLE ONLY db.store
-    ADD CONSTRAINT "FK_Store_dbdb_dbdbID" FOREIGN KEY (db_db_id) REFERENCES db.db_db(business_entity_id);
+    ADD CONSTRAINT "FK_Store_SalesPerson_SalesPersonID" FOREIGN KEY (sales_person_id) REFERENCES db.sales_person(business_entity_id);
 
 
 
