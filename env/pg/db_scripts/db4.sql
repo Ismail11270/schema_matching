@@ -22,18 +22,18 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 
-CREATE TABLE db.ads (
-    ads_id integer NOT NULL,
-    street_name_1 character varying(60) NOT NULL,
-    city character varying(30) NOT NULL,
-    zip_code character varying(15) NOT NULL,
-    geo_location character varying(44),
-    row_guid uuid NOT NULL,
-    updated_date timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.addr (
+                         addr_id integer NOT NULL,
+                         street_name_1 character varying(60) NOT NULL,
+                         city character varying(30) NOT NULL,
+                         zip_code character varying(15) NOT NULL,
+                         geo_location character varying(44),
+                         row_guid uuid NOT NULL,
+                         updated_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.ads OWNER TO postgres;
+ALTER TABLE db.addr OWNER TO postgres;
 
 
 CREATE SEQUENCE db.address_addressid_seq
@@ -48,18 +48,18 @@ CREATE SEQUENCE db.address_addressid_seq
 ALTER TABLE db.address_addressid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.address_addressid_seq OWNED BY db.ads.ads_id;
+ALTER SEQUENCE db.address_addressid_seq OWNED BY db.addr.addr_id;
 
 
 
-CREATE TABLE db.ads_typ (
-    ads_typ_id integer NOT NULL,
-    row_guid uuid NOT NULL,
-    updated_date timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.addr_typ (
+                             addr_typ_id integer NOT NULL,
+                             row_guid uuid NOT NULL,
+                             updated_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.ads_typ OWNER TO postgres;
+ALTER TABLE db.addr_typ OWNER TO postgres;
 
 
 CREATE SEQUENCE db.addresstype_addresstypeid_seq
@@ -74,15 +74,15 @@ CREATE SEQUENCE db.addresstype_addresstypeid_seq
 ALTER TABLE db.addresstype_addresstypeid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.addresstype_addresstypeid_seq OWNED BY db.ads_typ.ads_typ_id;
+ALTER SEQUENCE db.addresstype_addresstypeid_seq OWNED BY db.addr_typ.addr_typ_id;
 
 
 
 CREATE TABLE db.applicant_for_job (
-    applicant_for_job_id integer NOT NULL,
-    busin_entity_id integer,
-    cv xml,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                      applicant_for_job_id integer NOT NULL,
+                                      bsns_entity_id integer,
+                                      cv xml,
+                                      modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -90,11 +90,11 @@ ALTER TABLE db.applicant_for_job OWNER TO postgres;
 
 
 CREATE TABLE db.area (
-    lct_id integer NOT NULL,
-    cost_rate numeric DEFAULT 0.00 NOT NULL,
-    avail numeric(8,2) DEFAULT 0.00 NOT NULL,
-    CONSTRAINT "CK_Location_Availability" CHECK ((avail >= 0.00)),
-    CONSTRAINT "CK_Location_CostRate" CHECK ((cost_rate >= 0.00))
+                         lct_id integer NOT NULL,
+                         cost_rate numeric DEFAULT 0.00 NOT NULL,
+                         avail numeric(8,2) DEFAULT 0.00 NOT NULL,
+                         CONSTRAINT "CK_Location_Availability" CHECK ((avail >= 0.00)),
+                         CONSTRAINT "CK_Location_CostRate" CHECK ((cost_rate >= 0.00))
 );
 
 
@@ -102,18 +102,18 @@ ALTER TABLE db.area OWNER TO postgres;
 
 
 CREATE TABLE db.b_details (
-    b_details_id integer NOT NULL,
-    end_date timestamp without time zone NOT NULL,
-    quantity_order smallint NOT NULL,
-    product_id integer NOT NULL,
-    unit_price numeric NOT NULL,
-    quantity_received numeric(8,2) NOT NULL,
-    quantity_rejected numeric(8,2) NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_PurchaseOrderDetail_OrderQty" CHECK ((quantity_order > 0)),
-    CONSTRAINT "CK_PurchaseOrderDetail_ReceivedQty" CHECK ((quantity_received >= 0.00)),
-    CONSTRAINT "CK_PurchaseOrderDetail_RejectedQty" CHECK ((quantity_rejected >= 0.00)),
-    CONSTRAINT "CK_PurchaseOrderDetail_UnitPrice" CHECK ((unit_price >= 0.00))
+                              b_details_id integer NOT NULL,
+                              end_date timestamp without time zone NOT NULL,
+                              quantity_order smallint NOT NULL,
+                              product_id integer NOT NULL,
+                              unit_price numeric NOT NULL,
+                              quantity_received numeric(8,2) NOT NULL,
+                              quantity_rejected numeric(8,2) NOT NULL,
+                              modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                              CONSTRAINT "CK_PurchaseOrderDetail_OrderQty" CHECK ((quantity_order > 0)),
+                              CONSTRAINT "CK_PurchaseOrderDetail_ReceivedQty" CHECK ((quantity_received >= 0.00)),
+                              CONSTRAINT "CK_PurchaseOrderDetail_RejectedQty" CHECK ((quantity_rejected >= 0.00)),
+                              CONSTRAINT "CK_PurchaseOrderDetail_UnitPrice" CHECK ((unit_price >= 0.00))
 );
 
 
@@ -121,19 +121,19 @@ ALTER TABLE db.b_details OWNER TO postgres;
 
 
 CREATE TABLE db.materials_bills (
-    bill_of_materials_id integer NOT NULL,
-    product_assembly_id integer,
-    compnt_id integer NOT NULL,
-    start_date timestamp without time zone DEFAULT now() NOT NULL,
-    end_date timestamp without time zone,
-    unit_measure_code character(3) NOT NULL,
-    bom_level smallint NOT NULL,
-    per_assembly_qty numeric(8,2) DEFAULT 1.00 NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_BillOfMaterials_BOMLevel" CHECK ((((product_assembly_id IS NULL) AND (bom_level = 0) AND (per_assembly_qty = 1.00)) OR ((product_assembly_id IS NOT NULL) AND (bom_level >= 1)))),
-    CONSTRAINT "CK_BillOfMaterials_EndDate" CHECK (((end_date > start_date) OR (end_date IS NULL))),
-    CONSTRAINT "CK_BillOfMaterials_PerAssemblyQty" CHECK ((per_assembly_qty >= 1.00)),
-    CONSTRAINT "CK_BillOfMaterials_ProductAssemblyID" CHECK ((product_assembly_id <> compnt_id))
+                                    bill_of_materials_id integer NOT NULL,
+                                    product_assembly_id integer,
+                                    cpnt_id integer NOT NULL,
+                                    start_date timestamp without time zone DEFAULT now() NOT NULL,
+                                    end_date timestamp without time zone,
+                                    unit_measure_code character(3) NOT NULL,
+                                    bom_level smallint NOT NULL,
+                                    per_assembly_qty numeric(8,2) DEFAULT 1.00 NOT NULL,
+                                    modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                    CONSTRAINT "CK_BillOfMaterials_BOMLevel" CHECK ((((product_assembly_id IS NULL) AND (bom_level = 0) AND (per_assembly_qty = 1.00)) OR ((product_assembly_id IS NOT NULL) AND (bom_level >= 1)))),
+                                    CONSTRAINT "CK_BillOfMaterials_EndDate" CHECK (((end_date > start_date) OR (end_date IS NULL))),
+                                    CONSTRAINT "CK_BillOfMaterials_PerAssemblyQty" CHECK ((per_assembly_qty >= 1.00)),
+                                    CONSTRAINT "CK_BillOfMaterials_ProductAssemblyID" CHECK ((product_assembly_id <> cpnt_id))
 );
 
 
@@ -156,35 +156,35 @@ ALTER SEQUENCE db.billofmaterials_billofmaterialsid_seq OWNED BY db.materials_bi
 
 
 
-CREATE TABLE db.busi_enty (
-    busi_enty_id integer NOT NULL,
-    row_guid uuid NOT NULL,
-    date_modified timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.bsns_entity (
+                                bsns_enty_id integer NOT NULL,
+                                row_guid uuid NOT NULL,
+                                date_modified timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.busi_enty OWNER TO postgres;
+ALTER TABLE db.bsns_entity OWNER TO postgres;
 
 
-CREATE TABLE db.busi_enty_ads (
-    busi_enty_id integer NOT NULL,
-    ads_id integer NOT NULL,
-    ads_typ_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.bsns_enty_addr (
+                                   bsns_enty_id integer NOT NULL,
+                                   addr_id integer NOT NULL,
+                                   addr_typ_id integer NOT NULL,
+                                   modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.busi_enty_ads OWNER TO postgres;
+ALTER TABLE db.bsns_enty_addr OWNER TO postgres;
 
 
-CREATE TABLE db.busi_enty_contc (
-    busi_enty_id integer NOT NULL,
-    person_id integer NOT NULL,
-    type_contact_id integer NOT NULL
+CREATE TABLE db.bsns_enty_contact (
+                                      bsns_enty_id integer NOT NULL,
+                                      person_id integer NOT NULL,
+                                      type_contact_id integer NOT NULL
 );
 
 
-ALTER TABLE db.busi_enty_contc OWNER TO postgres;
+ALTER TABLE db.bsns_enty_contact OWNER TO postgres;
 
 
 CREATE SEQUENCE db.businessentity_businessentityid_seq
@@ -199,28 +199,28 @@ CREATE SEQUENCE db.businessentity_businessentityid_seq
 ALTER TABLE db.businessentity_businessentityid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.businessentity_businessentityid_seq OWNED BY db.busi_enty.busi_enty_id;
+ALTER SEQUENCE db.businessentity_businessentityid_seq OWNED BY db.bsns_entity.bsns_enty_id;
 
 
 
 CREATE TABLE db.buyer (
-    busi_enty_id integer NOT NULL,
-    credit_rate smallint NOT NULL,
-    website_url character varying(1024),
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_Vendor_CreditRating" CHECK (((credit_rate >= 1) AND (credit_rate <= 5)))
+                          bsns_enty_id integer NOT NULL,
+                          credit_rate smallint NOT NULL,
+                          website_url character varying(1024),
+                          modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                          CONSTRAINT "CK_Vendor_CreditRating" CHECK (((credit_rate >= 1) AND (credit_rate <= 5)))
 );
 
 
 ALTER TABLE db.buyer OWNER TO postgres;
 
 
-CREATE TABLE db.cont_typ (
+CREATE TABLE db.contact_typ (
     cont_typ_id integer NOT NULL
 );
 
 
-ALTER TABLE db.cont_typ OWNER TO postgres;
+ALTER TABLE db.contact_typ OWNER TO postgres;
 
 
 CREATE SEQUENCE db.contacttype_contacttypeid_seq
@@ -235,14 +235,14 @@ CREATE SEQUENCE db.contacttype_contacttypeid_seq
 ALTER TABLE db.contacttype_contacttypeid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.contacttype_contacttypeid_seq OWNED BY db.cont_typ.cont_typ_id;
+ALTER SEQUENCE db.contacttype_contacttypeid_seq OWNED BY db.contact_typ.cont_typ_id;
 
 
 
 CREATE TABLE db.country_currency (
-    country_code character varying(3) NOT NULL,
-    currency_code character(3) NOT NULL,
-    updated_date timestamp without time zone DEFAULT now() NOT NULL
+                                     country_code character varying(3) NOT NULL,
+                                     currency_code character(3) NOT NULL,
+                                     updated_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -250,8 +250,8 @@ ALTER TABLE db.country_currency OWNER TO postgres;
 
 
 CREATE TABLE db.country_region (
-    country_code character varying(3) NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                   country_code character varying(3) NOT NULL,
+                                   modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -259,12 +259,12 @@ ALTER TABLE db.country_region OWNER TO postgres;
 
 
 CREATE TABLE db.payment_card (
-    card_id integer NOT NULL,
-    card_typ character varying(50) NOT NULL,
-    card_num character varying(25) NOT NULL,
-    expire_month smallint NOT NULL,
-    expire_year smallint NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                 card_id integer NOT NULL,
+                                 card_typ character varying(50) NOT NULL,
+                                 card_num character varying(25) NOT NULL,
+                                 expire_month smallint NOT NULL,
+                                 expire_year smallint NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -288,8 +288,8 @@ ALTER SEQUENCE db.creditcard_creditcardid_seq OWNED BY db.payment_card.card_id;
 
 
 CREATE TABLE db.culture (
-    culture_id character(6) NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                            culture_id character(6) NOT NULL,
+                            modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -297,8 +297,8 @@ ALTER TABLE db.culture OWNER TO postgres;
 
 
 CREATE TABLE db.currency (
-    currency_code character(3) NOT NULL,
-    updated_date timestamp without time zone DEFAULT now() NOT NULL
+                             currency_code character(3) NOT NULL,
+                             updated_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -306,13 +306,13 @@ ALTER TABLE db.currency OWNER TO postgres;
 
 
 CREATE TABLE db.currency_exchange_rate (
-    currency_exchange_rate_id integer NOT NULL,
-    currency_rate_date timestamp without time zone NOT NULL,
-    from_currency_code character(3) NOT NULL,
-    to_currency_code character(3) NOT NULL,
-    average_rate numeric NOT NULL,
-    end_of_day_rate numeric NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                           currency_exchange_rate_id integer NOT NULL,
+                                           currency_rate_date timestamp without time zone NOT NULL,
+                                           from_currency_code character(3) NOT NULL,
+                                           to_currency_code character(3) NOT NULL,
+                                           average_rate numeric NOT NULL,
+                                           end_of_day_rate numeric NOT NULL,
+                                           modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -336,11 +336,11 @@ ALTER SEQUENCE db.currencyrate_currencyrateid_seq OWNED BY db.currency_exchange_
 
 
 CREATE TABLE db.customer (
-    customer_id integer NOT NULL,
-    person_id integer,
-    store_id integer,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                             customer_id integer NOT NULL,
+                             person_id integer,
+                             store_id integer,
+                             row_guid uuid NOT NULL,
+                             modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -364,8 +364,8 @@ ALTER SEQUENCE db.customer_customerid_seq OWNED BY db.customer.customer_id;
 
 
 CREATE TABLE db.department (
-    branch_id integer NOT NULL,
-    updated_date timestamp without time zone DEFAULT now() NOT NULL
+                               branch_id integer NOT NULL,
+                               updated_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -373,21 +373,21 @@ ALTER TABLE db.department OWNER TO postgres;
 
 
 CREATE TABLE db.discount (
-    discount_id integer NOT NULL,
-    description character varying(255) NOT NULL,
-    discount_amount numeric DEFAULT 0.00 NOT NULL,
-    discount_type character varying(50) NOT NULL,
-    category character varying(50) NOT NULL,
-    start_date timestamp without time zone NOT NULL,
-    end_date timestamp without time zone NOT NULL,
-    min_quantity integer DEFAULT 0 NOT NULL,
-    max_quantity integer,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SpecialOffer_DiscountPct" CHECK ((discount_amount >= 0.00)),
-    CONSTRAINT "CK_SpecialOffer_EndDate" CHECK ((end_date >= start_date)),
-    CONSTRAINT "CK_SpecialOffer_MaxQty" CHECK ((max_quantity >= 0)),
-    CONSTRAINT "CK_SpecialOffer_MinQty" CHECK ((min_quantity >= 0))
+                             discount_id integer NOT NULL,
+                             description character varying(255) NOT NULL,
+                             discount_amount numeric DEFAULT 0.00 NOT NULL,
+                             discount_type character varying(50) NOT NULL,
+                             category character varying(50) NOT NULL,
+                             start_date timestamp without time zone NOT NULL,
+                             end_date timestamp without time zone NOT NULL,
+                             min_quantity integer DEFAULT 0 NOT NULL,
+                             max_quantity integer,
+                             row_guid uuid NOT NULL,
+                             modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                             CONSTRAINT "CK_SpecialOffer_DiscountPct" CHECK ((discount_amount >= 0.00)),
+                             CONSTRAINT "CK_SpecialOffer_EndDate" CHECK ((end_date >= start_date)),
+                             CONSTRAINT "CK_SpecialOffer_MaxQty" CHECK ((max_quantity >= 0)),
+                             CONSTRAINT "CK_SpecialOffer_MinQty" CHECK ((min_quantity >= 0))
 );
 
 
@@ -395,35 +395,35 @@ ALTER TABLE db.discount OWNER TO postgres;
 
 
 CREATE TABLE db.doc (
-    title character varying(50) NOT NULL,
-    owner integer NOT NULL,
-    file_name character varying(400) NOT NULL,
-    file_ext character varying(8),
-    revision character(5) NOT NULL,
-    change_num integer DEFAULT 0 NOT NULL,
-    status smallint NOT NULL,
-    doc_sum text,
-    doc bytea,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    document_node character varying DEFAULT '/'::character varying NOT NULL,
-    CONSTRAINT "CK_Document_Status" CHECK (((status >= 1) AND (status <= 3)))
+                        title character varying(50) NOT NULL,
+                        owner integer NOT NULL,
+                        file_name character varying(400) NOT NULL,
+                        file_ext character varying(8),
+                        revision character(5) NOT NULL,
+                        change_num integer DEFAULT 0 NOT NULL,
+                        status smallint NOT NULL,
+                        doc_sum text,
+                        doc bytea,
+                        row_guid uuid NOT NULL,
+                        modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                        document_node character varying DEFAULT '/'::character varying NOT NULL,
+                        CONSTRAINT "CK_Document_Status" CHECK (((status >= 1) AND (status <= 3)))
 );
 
 
 ALTER TABLE db.doc OWNER TO postgres;
 
 
-CREATE TABLE db.email_ads (
-    busi_enty_id integer NOT NULL,
-    email_id integer NOT NULL,
-    email character varying(50),
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.email_addr (
+                               bsns_enty_id integer NOT NULL,
+                               email_id integer NOT NULL,
+                               email character varying(50),
+                               row_guid uuid NOT NULL,
+                               modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.email_ads OWNER TO postgres;
+ALTER TABLE db.email_addr OWNER TO postgres;
 
 
 CREATE SEQUENCE db.emailaddress_emailaddressid_seq
@@ -438,18 +438,18 @@ CREATE SEQUENCE db.emailaddress_emailaddressid_seq
 ALTER TABLE db.emailaddress_emailaddressid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.emailaddress_emailaddressid_seq OWNED BY db.email_ads.email_id;
+ALTER SEQUENCE db.emailaddress_emailaddressid_seq OWNED BY db.email_addr.email_id;
 
 
 
 CREATE TABLE db.employee_pay_history (
-    business_entity_id integer NOT NULL,
-    rate_change_date timestamp without time zone NOT NULL,
-    rate numeric NOT NULL,
-    pay_frequency smallint NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_EmployeePayHistory_PayFrequency" CHECK ((pay_frequency = ANY (ARRAY[1, 2]))),
-    CONSTRAINT "CK_EmployeePayHistory_Rate" CHECK (((rate >= 6.50) AND (rate <= 200.00)))
+                                         business_entity_id integer NOT NULL,
+                                         rate_change_date timestamp without time zone NOT NULL,
+                                         rate numeric NOT NULL,
+                                         pay_frequency smallint NOT NULL,
+                                         modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                         CONSTRAINT "CK_EmployeePayHistory_PayFrequency" CHECK ((pay_frequency = ANY (ARRAY[1, 2]))),
+                                         CONSTRAINT "CK_EmployeePayHistory_Rate" CHECK (((rate >= 6.50) AND (rate <= 200.00)))
 );
 
 
@@ -457,13 +457,13 @@ ALTER TABLE db.employee_pay_history OWNER TO postgres;
 
 
 CREATE TABLE db.history_employee_depart (
-    busi_enty_id integer NOT NULL,
-    depart_id smallint NOT NULL,
-    shift_id smallint NOT NULL,
-    joining_date date NOT NULL,
-    end_date date,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_EmployeeDepartmentHistory_EndDate" CHECK (((end_date >= joining_date) OR (end_date IS NULL)))
+                                            bsns_enty_id integer NOT NULL,
+                                            depart_id smallint NOT NULL,
+                                            shift_id smallint NOT NULL,
+                                            joining_date date NOT NULL,
+                                            end_date date,
+                                            modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                            CONSTRAINT "CK_EmployeeDepartmentHistory_EndDate" CHECK (((end_date >= joining_date) OR (end_date IS NULL)))
 );
 
 
@@ -471,16 +471,16 @@ ALTER TABLE db.history_employee_depart OWNER TO postgres;
 
 
 CREATE TABLE db.history_transaction (
-    transaction_id integer NOT NULL,
-    product_id integer NOT NULL,
-    ref_order_id integer NOT NULL,
-    ref_order_line_id integer DEFAULT 0 NOT NULL,
-    transaction_date timestamp without time zone DEFAULT now() NOT NULL,
-    transaction_type character(1) NOT NULL,
-    qnty integer NOT NULL,
-    actual_cost numeric NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_TransactionHistory_TransactionType" CHECK ((upper((transaction_type)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
+                                        transaction_id integer NOT NULL,
+                                        product_id integer NOT NULL,
+                                        ref_order_id integer NOT NULL,
+                                        ref_order_line_id integer DEFAULT 0 NOT NULL,
+                                        transaction_date timestamp without time zone DEFAULT now() NOT NULL,
+                                        transaction_type character(1) NOT NULL,
+                                        qnt integer NOT NULL,
+                                        actual_cost numeric NOT NULL,
+                                        modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                        CONSTRAINT "CK_TransactionHistory_TransactionType" CHECK ((upper((transaction_type)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
 );
 
 
@@ -488,9 +488,9 @@ ALTER TABLE db.history_transaction OWNER TO postgres;
 
 
 CREATE TABLE db.illus (
-    illus_id integer NOT NULL,
-    diagram xml,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                          illus_id integer NOT NULL,
+                          diagram xml,
+                          modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -546,30 +546,30 @@ ALTER SEQUENCE db.location_locationid_seq OWNED BY db.area.lct_id;
 
 
 CREATE TABLE db.measure_unit (
-    unit_measure_code character(3) NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                 unit_measure_code character(3) NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
 ALTER TABLE db.measure_unit OWNER TO postgres;
 
 
-CREATE TABLE db.pass (
-    busi_enty_id integer NOT NULL,
-    pass_hash character varying(128) NOT NULL,
-    pass_salt character varying(10) NOT NULL,
-    row_guid uuid NOT NULL,
-    update_date timestamp without time zone DEFAULT now() NOT NULL
+CREATE TABLE db.passwd (
+                           bsns_enty_id integer NOT NULL,
+                           pass_hash character varying(128) NOT NULL,
+                           pass_salt character varying(10) NOT NULL,
+                           row_guid uuid NOT NULL,
+                           update_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.pass OWNER TO postgres;
+ALTER TABLE db.passwd OWNER TO postgres;
 
 
 CREATE TABLE db.payment_card_person (
-    business_entity_id integer NOT NULL,
-    card_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                        business_entity_id integer NOT NULL,
+                                        card_id integer NOT NULL,
+                                        modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -577,15 +577,15 @@ ALTER TABLE db.payment_card_person OWNER TO postgres;
 
 
 CREATE TABLE db.person (
-    business_entity_id integer NOT NULL,
-    gender_person character(2) NOT NULL,
-    title_name character varying(8),
-    email_promotion integer DEFAULT 0 NOT NULL,
-    extra_contact_information xml,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_Person_EmailPromotion" CHECK (((email_promotion >= 0) AND (email_promotion <= 2))),
-    CONSTRAINT "CK_Person_PersonType" CHECK (((gender_person IS NULL) OR (upper((gender_person)::text) = ANY (ARRAY['SC'::text, 'VC'::text, 'IN'::text, 'EM'::text, 'SP'::text, 'GC'::text]))))
+                           business_entity_id integer NOT NULL,
+                           gender_person character(2) NOT NULL,
+                           title_name character varying(8),
+                           email_promotion integer DEFAULT 0 NOT NULL,
+                           extra_contact_information xml,
+                           row_guid uuid NOT NULL,
+                           modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                           CONSTRAINT "CK_Person_EmailPromotion" CHECK (((email_promotion >= 0) AND (email_promotion <= 2))),
+                           CONSTRAINT "CK_Person_PersonType" CHECK (((gender_person IS NULL) OR (upper((gender_person)::text) = ANY (ARRAY['SC'::text, 'VC'::text, 'IN'::text, 'EM'::text, 'SP'::text, 'GC'::text]))))
 );
 
 
@@ -593,9 +593,9 @@ ALTER TABLE db.person OWNER TO postgres;
 
 
 CREATE TABLE db.person_phone (
-    business_entity_id integer NOT NULL,
-    phn_num_typ_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                 business_entity_id integer NOT NULL,
+                                 phn_num_typ_id integer NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -603,8 +603,8 @@ ALTER TABLE db.person_phone OWNER TO postgres;
 
 
 CREATE TABLE db.phn_num_typ (
-    phone_number_type_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                phone_number_type_id integer NOT NULL,
+                                modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -628,38 +628,38 @@ ALTER SEQUENCE db.phonenumbertype_phonenumbertypeid_seq OWNED BY db.phn_num_typ.
 
 
 CREATE TABLE db.product (
-    product_id integer NOT NULL,
-    product_number character varying(25) NOT NULL,
-    color character varying(15),
-    safety_stock_level smallint NOT NULL,
-    reorder_point smallint NOT NULL,
-    standard_cost numeric NOT NULL,
-    list_price numeric NOT NULL,
-    size character varying(5),
-    size_unit_measure_code character(3),
-    weight_unit_measure_code character(3),
-    weight numeric(8,2),
-    days_to_manufacture integer NOT NULL,
-    product_line character(2),
-    class character(2),
-    style character(2),
-    product_subcategory_id integer,
-    product_model_id integer,
-    sell_start_date timestamp without time zone NOT NULL,
-    sellend_date timestamp without time zone,
-    discontinued_date timestamp without time zone,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_Product_Class" CHECK (((upper((class)::text) = ANY (ARRAY['L'::text, 'M'::text, 'H'::text])) OR (class IS NULL))),
-    CONSTRAINT "CK_Product_DaysToManufacture" CHECK ((days_to_manufacture >= 0)),
-    CONSTRAINT "CK_Product_ListPrice" CHECK ((list_price >= 0.00)),
-    CONSTRAINT "CK_Product_ProductLine" CHECK (((upper((product_line)::text) = ANY (ARRAY['S'::text, 'T'::text, 'M'::text, 'R'::text])) OR (product_line IS NULL))),
-    CONSTRAINT "CK_Product_ReorderPoint" CHECK ((reorder_point > 0)),
-    CONSTRAINT "CK_Product_SafetyStockLevel" CHECK ((safety_stock_level > 0)),
-    CONSTRAINT "CK_Product_SellEndDate" CHECK (((sellend_date >= sell_start_date) OR (sellend_date IS NULL))),
-    CONSTRAINT "CK_Product_StandardCost" CHECK ((standard_cost >= 0.00)),
-    CONSTRAINT "CK_Product_Style" CHECK (((upper((style)::text) = ANY (ARRAY['W'::text, 'M'::text, 'U'::text])) OR (style IS NULL))),
-    CONSTRAINT "CK_Product_Weight" CHECK ((weight > 0.00))
+                            product_id integer NOT NULL,
+                            product_number character varying(25) NOT NULL,
+                            color character varying(15),
+                            safety_stock_level smallint NOT NULL,
+                            reorder_point smallint NOT NULL,
+                            standard_cost numeric NOT NULL,
+                            list_price numeric NOT NULL,
+                            size character varying(5),
+                            size_unit_measure_code character(3),
+                            weight_unit_measure_code character(3),
+                            weight numeric(8,2),
+                            days_to_manufacture integer NOT NULL,
+                            product_line character(2),
+                            class character(2),
+                            style character(2),
+                            product_subcategory_id integer,
+                            product_model_id integer,
+                            sell_start_date timestamp without time zone NOT NULL,
+                            sellend_date timestamp without time zone,
+                            discontinued_date timestamp without time zone,
+                            row_guid uuid NOT NULL,
+                            modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                            CONSTRAINT "CK_Product_Class" CHECK (((upper((class)::text) = ANY (ARRAY['L'::text, 'M'::text, 'H'::text])) OR (class IS NULL))),
+                            CONSTRAINT "CK_Product_DaysToManufacture" CHECK ((days_to_manufacture >= 0)),
+                            CONSTRAINT "CK_Product_ListPrice" CHECK ((list_price >= 0.00)),
+                            CONSTRAINT "CK_Product_ProductLine" CHECK (((upper((product_line)::text) = ANY (ARRAY['S'::text, 'T'::text, 'M'::text, 'R'::text])) OR (product_line IS NULL))),
+                            CONSTRAINT "CK_Product_ReorderPoint" CHECK ((reorder_point > 0)),
+                            CONSTRAINT "CK_Product_SafetyStockLevel" CHECK ((safety_stock_level > 0)),
+                            CONSTRAINT "CK_Product_SellEndDate" CHECK (((sellend_date >= sell_start_date) OR (sellend_date IS NULL))),
+                            CONSTRAINT "CK_Product_StandardCost" CHECK ((standard_cost >= 0.00)),
+                            CONSTRAINT "CK_Product_Style" CHECK (((upper((style)::text) = ANY (ARRAY['W'::text, 'M'::text, 'U'::text])) OR (style IS NULL))),
+                            CONSTRAINT "CK_Product_Weight" CHECK ((weight > 0.00))
 );
 
 
@@ -667,13 +667,13 @@ ALTER TABLE db.product OWNER TO postgres;
 
 
 CREATE TABLE db.product_cost_history (
-    product_id integer NOT NULL,
-    start_date timestamp without time zone NOT NULL,
-    end_date timestamp without time zone,
-    standard_cost numeric NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ProductCostHistory_EndDate" CHECK (((end_date >= start_date) OR (end_date IS NULL))),
-    CONSTRAINT "CK_ProductCostHistory_StandardCost" CHECK ((standard_cost >= 0.00))
+                                         product_id integer NOT NULL,
+                                         start_date timestamp without time zone NOT NULL,
+                                         end_date timestamp without time zone,
+                                         standard_cost numeric NOT NULL,
+                                         modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                         CONSTRAINT "CK_ProductCostHistory_EndDate" CHECK (((end_date >= start_date) OR (end_date IS NULL))),
+                                         CONSTRAINT "CK_ProductCostHistory_StandardCost" CHECK ((standard_cost >= 0.00))
 );
 
 
@@ -681,23 +681,23 @@ ALTER TABLE db.product_cost_history OWNER TO postgres;
 
 
 CREATE TABLE db.product_dealer (
-    product_id integer NOT NULL,
-    busi_enty_id integer NOT NULL,
-    avg_time integer NOT NULL,
-    standard_price numeric NOT NULL,
-    last_receipt_cost numeric,
-    last_receipt_date timestamp without time zone,
-    min_order_qty integer NOT NULL,
-    max_order_qty integer NOT NULL,
-    on_order_qunt integer,
-    unit_measure_code character(3) NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ProductVendor_AverageLeadTime" CHECK ((avg_time >= 1)),
-    CONSTRAINT "CK_ProductVendor_LastReceiptCost" CHECK ((last_receipt_cost > 0.00)),
-    CONSTRAINT "CK_ProductVendor_MaxOrderQty" CHECK ((max_order_qty >= 1)),
-    CONSTRAINT "CK_ProductVendor_MinOrderQty" CHECK ((min_order_qty >= 1)),
-    CONSTRAINT "CK_ProductVendor_OnOrderQty" CHECK ((on_order_qunt >= 0)),
-    CONSTRAINT "CK_ProductVendor_StandardPrice" CHECK ((standard_price > 0.00))
+                                   product_id integer NOT NULL,
+                                   bsns_enty_id integer NOT NULL,
+                                   avg_time integer NOT NULL,
+                                   standard_price numeric NOT NULL,
+                                   last_receipt_cost numeric,
+                                   last_receipt_date timestamp without time zone,
+                                   min_order_qty integer NOT NULL,
+                                   max_order_qty integer NOT NULL,
+                                   on_order_qunt integer,
+                                   unit_measure_code character(3) NOT NULL,
+                                   modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                   CONSTRAINT "CK_ProductVendor_AverageLeadTime" CHECK ((avg_time >= 1)),
+                                   CONSTRAINT "CK_ProductVendor_LastReceiptCost" CHECK ((last_receipt_cost > 0.00)),
+                                   CONSTRAINT "CK_ProductVendor_MaxOrderQty" CHECK ((max_order_qty >= 1)),
+                                   CONSTRAINT "CK_ProductVendor_MinOrderQty" CHECK ((min_order_qty >= 1)),
+                                   CONSTRAINT "CK_ProductVendor_OnOrderQty" CHECK ((on_order_qunt >= 0)),
+                                   CONSTRAINT "CK_ProductVendor_StandardPrice" CHECK ((standard_price > 0.00))
 );
 
 
@@ -705,10 +705,10 @@ ALTER TABLE db.product_dealer OWNER TO postgres;
 
 
 CREATE TABLE db.product_desc (
-    product_description_id integer NOT NULL,
-    description character varying(400) NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                 product_description_id integer NOT NULL,
+                                 description character varying(400) NOT NULL,
+                                 row_guid uuid NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -716,9 +716,9 @@ ALTER TABLE db.product_desc OWNER TO postgres;
 
 
 CREATE TABLE db.product_doc (
-    product_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    doc_node character varying DEFAULT '/'::character varying NOT NULL
+                                product_id integer NOT NULL,
+                                modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                doc_node character varying DEFAULT '/'::character varying NOT NULL
 );
 
 
@@ -726,10 +726,10 @@ ALTER TABLE db.product_doc OWNER TO postgres;
 
 
 CREATE TABLE db.product_dscnt (
-    product_dscnt_id integer NOT NULL,
-    product_id integer NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                  product_dscnt_id integer NOT NULL,
+                                  product_id integer NOT NULL,
+                                  row_guid uuid NOT NULL,
+                                  modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -737,12 +737,12 @@ ALTER TABLE db.product_dscnt OWNER TO postgres;
 
 
 CREATE TABLE db.product_img (
-    product_photo_id integer NOT NULL,
-    thumb_photo bytea,
-    thumb_photo_file_name character varying(50),
-    large_photo bytea,
-    large_photo_file_name character varying(50),
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                product_photo_id integer NOT NULL,
+                                thumb_photo bytea,
+                                thumb_photo_file_name character varying(50),
+                                large_photo bytea,
+                                large_photo_file_name character varying(50),
+                                modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -750,14 +750,14 @@ ALTER TABLE db.product_img OWNER TO postgres;
 
 
 CREATE TABLE db.product_inventory (
-    product_id integer NOT NULL,
-    location_id smallint NOT NULL,
-    shelf character varying(10) NOT NULL,
-    bin smallint NOT NULL,
-    quantity smallint DEFAULT 0 NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ProductInventory_Bin" CHECK (((bin >= 0) AND (bin <= 100)))
+                                      product_id integer NOT NULL,
+                                      location_id smallint NOT NULL,
+                                      shelf character varying(10) NOT NULL,
+                                      bin smallint NOT NULL,
+                                      quantity smallint DEFAULT 0 NOT NULL,
+                                      row_guid uuid NOT NULL,
+                                      modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                      CONSTRAINT "CK_ProductInventory_Bin" CHECK (((bin >= 0) AND (bin <= 100)))
 );
 
 
@@ -765,11 +765,11 @@ ALTER TABLE db.product_inventory OWNER TO postgres;
 
 
 CREATE TABLE db.product_model (
-    product_model_id integer NOT NULL,
-    catalog_desc xml,
-    instructions xml,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                  product_model_id integer NOT NULL,
+                                  catalog_desc xml,
+                                  instructions xml,
+                                  row_guid uuid NOT NULL,
+                                  modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -777,9 +777,9 @@ ALTER TABLE db.product_model OWNER TO postgres;
 
 
 CREATE TABLE db.product_model_illustration (
-    product_model_id integer NOT NULL,
-    illus_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                               product_model_id integer NOT NULL,
+                                               illus_id integer NOT NULL,
+                                               modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -787,10 +787,10 @@ ALTER TABLE db.product_model_illustration OWNER TO postgres;
 
 
 CREATE TABLE db.product_model_product_desc_culture (
-    product_model_id integer NOT NULL,
-    product_desc_id integer NOT NULL,
-    culture_id character(6) NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                                       product_model_id integer NOT NULL,
+                                                       product_desc_id integer NOT NULL,
+                                                       culture_id character(6) NOT NULL,
+                                                       modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -814,14 +814,14 @@ ALTER SEQUENCE db.product_productid_seq OWNED BY db.product.product_id;
 
 
 CREATE TABLE db.product_review (
-    product_review_id integer NOT NULL,
-    product_id integer NOT NULL,
-    review_date timestamp without time zone DEFAULT now() NOT NULL,
-    email_ads character varying(50) NOT NULL,
-    rating integer NOT NULL,
-    cmnt character varying(3850),
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ProductReview_Rating" CHECK (((rating >= 1) AND (rating <= 5)))
+                                   product_review_id integer NOT NULL,
+                                   product_id integer NOT NULL,
+                                   review_date timestamp without time zone DEFAULT now() NOT NULL,
+                                   email_addr character varying(50) NOT NULL,
+                                   rating integer NOT NULL,
+                                   cmnt character varying(3850),
+                                   modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                   CONSTRAINT "CK_ProductReview_Rating" CHECK (((rating >= 1) AND (rating <= 5)))
 );
 
 
@@ -829,9 +829,9 @@ ALTER TABLE db.product_review OWNER TO postgres;
 
 
 CREATE TABLE db.product_section (
-    product_ctgr_id integer NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                    product_category_id integer NOT NULL,
+                                    row_guid uuid NOT NULL,
+                                    modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -839,10 +839,10 @@ ALTER TABLE db.product_section OWNER TO postgres;
 
 
 CREATE TABLE db.product_subcategory (
-    product_subcategory_id integer NOT NULL,
-    product_ctgr_id integer NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                        product_subcategory_id integer NOT NULL,
+                                        product_category_id integer NOT NULL,
+                                        row_guid uuid NOT NULL,
+                                        modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -861,7 +861,7 @@ CREATE SEQUENCE db.productcategory_productcategoryid_seq
 ALTER TABLE db.productcategory_productcategoryid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.productcategory_productcategoryid_seq OWNED BY db.product_section.product_ctgr_id;
+ALTER SEQUENCE db.productcategory_productcategoryid_seq OWNED BY db.product_section.product_category_id;
 
 
 
@@ -962,9 +962,9 @@ ALTER SEQUENCE db.purchaseorderdetail_purchaseorderdetailid_seq OWNED BY db.b_de
 
 
 CREATE TABLE db.sales_order (
-    sales_order_id integer NOT NULL,
-    sales_reason_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                sales_order_id integer NOT NULL,
+                                sales_reason_id integer NOT NULL,
+                                modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -972,19 +972,19 @@ ALTER TABLE db.sales_order OWNER TO postgres;
 
 
 CREATE TABLE db.sales_order_detail (
-    sales_order_id integer NOT NULL,
-    sales_order_detail_id integer NOT NULL,
-    tracking_num character varying(25),
-    order_qty smallint NOT NULL,
-    product_id integer NOT NULL,
-    discount_id integer NOT NULL,
-    unit_price numeric NOT NULL,
-    unit_price_dscnt numeric DEFAULT 0.0 NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesOrderDetail_OrderQty" CHECK ((order_qty > 0)),
-    CONSTRAINT "CK_SalesOrderDetail_UnitPrice" CHECK ((unit_price >= 0.00)),
-    CONSTRAINT "CK_SalesOrderDetail_UnitPriceDiscount" CHECK ((unit_price_dscnt >= 0.00))
+                                       sales_order_id integer NOT NULL,
+                                       sales_order_detail_id integer NOT NULL,
+                                       tracking_num character varying(25),
+                                       order_qty smallint NOT NULL,
+                                       product_id integer NOT NULL,
+                                       discount_id integer NOT NULL,
+                                       unit_price numeric NOT NULL,
+                                       unit_price_dscnt numeric DEFAULT 0.0 NOT NULL,
+                                       row_guid uuid NOT NULL,
+                                       modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                       CONSTRAINT "CK_SalesOrderDetail_OrderQty" CHECK ((order_qty > 0)),
+                                       CONSTRAINT "CK_SalesOrderDetail_UnitPrice" CHECK ((unit_price >= 0.00)),
+                                       CONSTRAINT "CK_SalesOrderDetail_UnitPriceDiscount" CHECK ((unit_price_dscnt >= 0.00))
 );
 
 
@@ -992,15 +992,15 @@ ALTER TABLE db.sales_order_detail OWNER TO postgres;
 
 
 CREATE TABLE db.sales_person (
-    busi_enty_id integer NOT NULL,
-    bonus numeric DEFAULT 0.00 NOT NULL,
-    commission numeric DEFAULT 0.00 NOT NULL,
-    sales_ytd numeric DEFAULT 0.00 NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesPerson_Bonus" CHECK ((bonus >= 0.00)),
-    CONSTRAINT "CK_SalesPerson_CommissionPct" CHECK ((commission >= 0.00)),
-    CONSTRAINT "CK_SalesPerson_SalesYTD" CHECK ((sales_ytd >= 0.00))
+                                 bsns_enty_id integer NOT NULL,
+                                 bonus numeric DEFAULT 0.00 NOT NULL,
+                                 commission numeric DEFAULT 0.00 NOT NULL,
+                                 sales_ytd numeric DEFAULT 0.00 NOT NULL,
+                                 row_guid uuid NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                 CONSTRAINT "CK_SalesPerson_Bonus" CHECK ((bonus >= 0.00)),
+                                 CONSTRAINT "CK_SalesPerson_CommissionPct" CHECK ((commission >= 0.00)),
+                                 CONSTRAINT "CK_SalesPerson_SalesYTD" CHECK ((sales_ytd >= 0.00))
 );
 
 
@@ -1008,8 +1008,8 @@ ALTER TABLE db.sales_person OWNER TO postgres;
 
 
 CREATE TABLE db.sales_reason (
-    sales_reason_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                 sales_reason_id integer NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -1017,13 +1017,13 @@ ALTER TABLE db.sales_reason OWNER TO postgres;
 
 
 CREATE TABLE db.sales_tax_rate (
-    sales_tax_rate_id integer NOT NULL,
-    state_province_id integer NOT NULL,
-    tax_type smallint NOT NULL,
-    tax_rate numeric DEFAULT 0.00 NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesTaxRate_TaxType" CHECK (((tax_type >= 1) AND (tax_type <= 3)))
+                                   sales_tax_rate_id integer NOT NULL,
+                                   state_province_id integer NOT NULL,
+                                   tax_type smallint NOT NULL,
+                                   tax_rate numeric DEFAULT 0.00 NOT NULL,
+                                   row_guid uuid NOT NULL,
+                                   modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                   CONSTRAINT "CK_SalesTaxRate_TaxType" CHECK (((tax_type >= 1) AND (tax_type <= 3)))
 );
 
 
@@ -1031,19 +1031,19 @@ ALTER TABLE db.sales_tax_rate OWNER TO postgres;
 
 
 CREATE TABLE db.sales_territory (
-    territory_id integer NOT NULL,
-    country_region_code character varying(3) NOT NULL,
-    "group" character varying(50) NOT NULL,
-    sales_ytd numeric DEFAULT 0.00 NOT NULL,
-    sales_last_year numeric DEFAULT 0.00 NOT NULL,
-    cost_ytd numeric DEFAULT 0.00 NOT NULL,
-    cost_last_year numeric DEFAULT 0.00 NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesTerritory_CostLastYear" CHECK ((cost_last_year >= 0.00)),
-    CONSTRAINT "CK_SalesTerritory_CostYTD" CHECK ((cost_ytd >= 0.00)),
-    CONSTRAINT "CK_SalesTerritory_SalesLastYear" CHECK ((sales_last_year >= 0.00)),
-    CONSTRAINT "CK_SalesTerritory_SalesYTD" CHECK ((sales_ytd >= 0.00))
+                                    territory_id integer NOT NULL,
+                                    country_region_code character varying(3) NOT NULL,
+                                    "group" character varying(50) NOT NULL,
+                                    sales_ytd numeric DEFAULT 0.00 NOT NULL,
+                                    sales_last_year numeric DEFAULT 0.00 NOT NULL,
+                                    cost_ytd numeric DEFAULT 0.00 NOT NULL,
+                                    cost_last_year numeric DEFAULT 0.00 NOT NULL,
+                                    row_guid uuid NOT NULL,
+                                    modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                    CONSTRAINT "CK_SalesTerritory_CostLastYear" CHECK ((cost_last_year >= 0.00)),
+                                    CONSTRAINT "CK_SalesTerritory_CostYTD" CHECK ((cost_ytd >= 0.00)),
+                                    CONSTRAINT "CK_SalesTerritory_SalesLastYear" CHECK ((sales_last_year >= 0.00)),
+                                    CONSTRAINT "CK_SalesTerritory_SalesYTD" CHECK ((sales_ytd >= 0.00))
 );
 
 
@@ -1115,8 +1115,8 @@ ALTER SEQUENCE db.salesterritory_territoryid_seq OWNED BY db.sales_territory.ter
 
 
 CREATE TABLE db.scrap_reason (
-    scrap_reason_id integer NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                 scrap_reason_id integer NOT NULL,
+                                 modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -1140,10 +1140,10 @@ ALTER SEQUENCE db.scrapreason_scrapreasonid_seq OWNED BY db.scrap_reason.scrap_r
 
 
 CREATE TABLE db.shift (
-    shift_id integer NOT NULL,
-    starting_shift time without time zone NOT NULL,
-    ending_shift time without time zone NOT NULL,
-    date_updated timestamp without time zone DEFAULT now() NOT NULL
+                          shift_id integer NOT NULL,
+                          starting_shift time without time zone NOT NULL,
+                          ending_shift time without time zone NOT NULL,
+                          date_updated timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -1151,11 +1151,11 @@ ALTER TABLE db.shift OWNER TO postgres;
 
 
 CREATE TABLE db.shipment_method (
-    shipment_method_id integer NOT NULL,
-    shipping_price numeric DEFAULT 0.00 NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ShipMethod_ShipRate" CHECK ((shipping_price > 0.00))
+                                    shipment_method_id integer NOT NULL,
+                                    shipping_price numeric DEFAULT 0.00 NOT NULL,
+                                    row_guid uuid NOT NULL,
+                                    modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                    CONSTRAINT "CK_ShipMethod_ShipRate" CHECK ((shipping_price > 0.00))
 );
 
 
@@ -1179,13 +1179,13 @@ ALTER SEQUENCE db.shipmethod_shipmethodid_seq OWNED BY db.shipment_method.shipme
 
 
 CREATE TABLE db.shopping_cart (
-    shopping_cart_item_id integer NOT NULL,
-    shopping_cart_id character varying(50) NOT NULL,
-    num_of_product integer DEFAULT 1 NOT NULL,
-    product_id integer NOT NULL,
-    date_created timestamp without time zone DEFAULT now() NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ShoppingCartItem_Quantity" CHECK ((num_of_product >= 1))
+                                  shopping_cart_item_id integer NOT NULL,
+                                  shopping_cart_id character varying(50) NOT NULL,
+                                  num_of_product integer DEFAULT 1 NOT NULL,
+                                  product_id integer NOT NULL,
+                                  date_created timestamp without time zone DEFAULT now() NOT NULL,
+                                  modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                                  CONSTRAINT "CK_ShoppingCartItem_Quantity" CHECK ((num_of_product >= 1))
 );
 
 
@@ -1225,12 +1225,12 @@ ALTER SEQUENCE db.specialoffer_specialofferid_seq OWNED BY db.discount.discount_
 
 
 CREATE TABLE db.state_province (
-    state_province_id integer NOT NULL,
-    state_province_code character(3) NOT NULL,
-    country_region_code character varying(3) NOT NULL,
-    territory_id integer NOT NULL,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                                   state_province_id integer NOT NULL,
+                                   state_province_code character(3) NOT NULL,
+                                   country_region_code character varying(3) NOT NULL,
+                                   territory_id integer NOT NULL,
+                                   row_guid uuid NOT NULL,
+                                   modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -1254,11 +1254,11 @@ ALTER SEQUENCE db.stateprovince_stateprovinceid_seq OWNED BY db.state_province.s
 
 
 CREATE TABLE db.store (
-    busi_enty_id integer NOT NULL,
-    sales_person_id integer,
-    demographics xml,
-    row_guid uuid NOT NULL,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL
+                          bsns_enty_id integer NOT NULL,
+                          sales_person_id integer,
+                          demographics xml,
+                          row_guid uuid NOT NULL,
+                          modified_date timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -1282,18 +1282,18 @@ ALTER SEQUENCE db.transactionhistory_transactionid_seq OWNED BY db.history_trans
 
 
 CREATE TABLE db.work_order (
-    work_order_id integer NOT NULL,
-    product_id integer NOT NULL,
-    order_qty integer NOT NULL,
-    scrapped_qty smallint NOT NULL,
-    start_date timestamp without time zone NOT NULL,
-    end_date timestamp without time zone,
-    due_date timestamp without time zone NOT NULL,
-    scrap_reason_id smallint,
-    modified_date timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_WorkOrder_EndDate" CHECK (((end_date >= start_date) OR (end_date IS NULL))),
-    CONSTRAINT "CK_WorkOrder_OrderQty" CHECK ((order_qty > 0)),
-    CONSTRAINT "CK_WorkOrder_ScrappedQty" CHECK ((scrapped_qty >= 0))
+                               work_order_id integer NOT NULL,
+                               product_id integer NOT NULL,
+                               order_qty integer NOT NULL,
+                               scrapped_qty smallint NOT NULL,
+                               start_date timestamp without time zone NOT NULL,
+                               end_date timestamp without time zone,
+                               due_date timestamp without time zone NOT NULL,
+                               scrap_reason_id smallint,
+                               modified_date timestamp without time zone DEFAULT now() NOT NULL,
+                               CONSTRAINT "CK_WorkOrder_EndDate" CHECK (((end_date >= start_date) OR (end_date IS NULL))),
+                               CONSTRAINT "CK_WorkOrder_OrderQty" CHECK ((order_qty > 0)),
+                               CONSTRAINT "CK_WorkOrder_ScrappedQty" CHECK ((scrapped_qty >= 0))
 );
 
 
@@ -1316,11 +1316,11 @@ ALTER SEQUENCE db.workorder_workorderid_seq OWNED BY db.work_order.work_order_id
 
 
 
-ALTER TABLE ONLY db.ads ALTER COLUMN ads_id SET DEFAULT nextval('db.address_addressid_seq'::regclass);
+ALTER TABLE ONLY db.addr ALTER COLUMN addr_id SET DEFAULT nextval('db.address_addressid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.ads_typ ALTER COLUMN ads_typ_id SET DEFAULT nextval('db.addresstype_addresstypeid_seq'::regclass);
+ALTER TABLE ONLY db.addr_typ ALTER COLUMN addr_typ_id SET DEFAULT nextval('db.addresstype_addresstypeid_seq'::regclass);
 
 
 
@@ -1336,11 +1336,11 @@ ALTER TABLE ONLY db.b_details ALTER COLUMN b_details_id SET DEFAULT nextval('db.
 
 
 
-ALTER TABLE ONLY db.busi_enty ALTER COLUMN busi_enty_id SET DEFAULT nextval('db.businessentity_businessentityid_seq'::regclass);
+ALTER TABLE ONLY db.bsns_entity ALTER COLUMN bsns_enty_id SET DEFAULT nextval('db.businessentity_businessentityid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.cont_typ ALTER COLUMN cont_typ_id SET DEFAULT nextval('db.contacttype_contacttypeid_seq'::regclass);
+ALTER TABLE ONLY db.contact_typ ALTER COLUMN cont_typ_id SET DEFAULT nextval('db.contacttype_contacttypeid_seq'::regclass);
 
 
 
@@ -1356,7 +1356,7 @@ ALTER TABLE ONLY db.discount ALTER COLUMN discount_id SET DEFAULT nextval('db.sp
 
 
 
-ALTER TABLE ONLY db.email_ads ALTER COLUMN email_id SET DEFAULT nextval('db.emailaddress_emailaddressid_seq'::regclass);
+ALTER TABLE ONLY db.email_addr ALTER COLUMN email_id SET DEFAULT nextval('db.emailaddress_emailaddressid_seq'::regclass);
 
 
 
@@ -1400,7 +1400,7 @@ ALTER TABLE ONLY db.product_review ALTER COLUMN product_review_id SET DEFAULT ne
 
 
 
-ALTER TABLE ONLY db.product_section ALTER COLUMN product_ctgr_id SET DEFAULT nextval('db.productcategory_productcategoryid_seq'::regclass);
+ALTER TABLE ONLY db.product_section ALTER COLUMN product_category_id SET DEFAULT nextval('db.productcategory_productcategoryid_seq'::regclass);
 
 
 
@@ -1444,17 +1444,17 @@ ALTER TABLE ONLY db.work_order ALTER COLUMN work_order_id SET DEFAULT nextval('d
 
 
 
-ALTER TABLE ONLY db.ads_typ
-    ADD CONSTRAINT "PK_AddressType_AddressTypeID" PRIMARY KEY (ads_typ_id);
+ALTER TABLE ONLY db.addr_typ
+    ADD CONSTRAINT "PK_AddressType_AddressTypeID" PRIMARY KEY (addr_typ_id);
 
-ALTER TABLE db.ads_typ CLUSTER ON "PK_AddressType_AddressTypeID";
+ALTER TABLE db.addr_typ CLUSTER ON "PK_AddressType_AddressTypeID";
 
 
 
-ALTER TABLE ONLY db.ads
-    ADD CONSTRAINT "PK_Address_AddressID" PRIMARY KEY (ads_id);
+ALTER TABLE ONLY db.addr
+    ADD CONSTRAINT "PK_Address_AddressID" PRIMARY KEY (addr_id);
 
-ALTER TABLE db.ads CLUSTER ON "PK_Address_AddressID";
+ALTER TABLE db.addr CLUSTER ON "PK_Address_AddressID";
 
 
 
@@ -1463,31 +1463,31 @@ ALTER TABLE ONLY db.materials_bills
 
 
 
-ALTER TABLE ONLY db.busi_enty_ads
-    ADD CONSTRAINT "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType" PRIMARY KEY (busi_enty_id, ads_id, ads_typ_id);
+ALTER TABLE ONLY db.bsns_enty_addr
+    ADD CONSTRAINT "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType" PRIMARY KEY (bsns_enty_id, addr_id, addr_typ_id);
 
-ALTER TABLE db.busi_enty_ads CLUSTER ON "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType";
-
-
-
-ALTER TABLE ONLY db.busi_enty_contc
-    ADD CONSTRAINT "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI" PRIMARY KEY (busi_enty_id, person_id, type_contact_id);
-
-ALTER TABLE db.busi_enty_contc CLUSTER ON "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI";
+ALTER TABLE db.bsns_enty_addr CLUSTER ON "PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressType";
 
 
 
-ALTER TABLE ONLY db.busi_enty
-    ADD CONSTRAINT "PK_BusinessEntity_BusinessEntityID" PRIMARY KEY (busi_enty_id);
+ALTER TABLE ONLY db.bsns_enty_contact
+    ADD CONSTRAINT "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI" PRIMARY KEY (bsns_enty_id, person_id, type_contact_id);
 
-ALTER TABLE db.busi_enty CLUSTER ON "PK_BusinessEntity_BusinessEntityID";
+ALTER TABLE db.bsns_enty_contact CLUSTER ON "PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeI";
 
 
 
-ALTER TABLE ONLY db.cont_typ
+ALTER TABLE ONLY db.bsns_entity
+    ADD CONSTRAINT "PK_BusinessEntity_BusinessEntityID" PRIMARY KEY (bsns_enty_id);
+
+ALTER TABLE db.bsns_entity CLUSTER ON "PK_BusinessEntity_BusinessEntityID";
+
+
+
+ALTER TABLE ONLY db.contact_typ
     ADD CONSTRAINT "PK_ContactType_ContactTypeID" PRIMARY KEY (cont_typ_id);
 
-ALTER TABLE db.cont_typ CLUSTER ON "PK_ContactType_ContactTypeID";
+ALTER TABLE db.contact_typ CLUSTER ON "PK_ContactType_ContactTypeID";
 
 
 
@@ -1554,15 +1554,15 @@ ALTER TABLE db.doc CLUSTER ON "PK_Document_DocumentNode";
 
 
 
-ALTER TABLE ONLY db.email_ads
-    ADD CONSTRAINT "PK_EmailAddress_BusinessEntityID_EmailAddressID" PRIMARY KEY (busi_enty_id, email_id);
+ALTER TABLE ONLY db.email_addr
+    ADD CONSTRAINT "PK_EmailAddress_BusinessEntityID_EmailAddressID" PRIMARY KEY (bsns_enty_id, email_id);
 
-ALTER TABLE db.email_ads CLUSTER ON "PK_EmailAddress_BusinessEntityID_EmailAddressID";
+ALTER TABLE db.email_addr CLUSTER ON "PK_EmailAddress_BusinessEntityID_EmailAddressID";
 
 
 
 ALTER TABLE ONLY db.history_employee_depart
-    ADD CONSTRAINT "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm" PRIMARY KEY (busi_enty_id, joining_date, depart_id, shift_id);
+    ADD CONSTRAINT "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm" PRIMARY KEY (bsns_enty_id, joining_date, depart_id, shift_id);
 
 ALTER TABLE db.history_employee_depart CLUSTER ON "PK_EmployeeDepartmentHistory_BusinessEntityID_StartDate_Departm";
 
@@ -1596,10 +1596,10 @@ ALTER TABLE db.area CLUSTER ON "PK_Location_LocationID";
 
 
 
-ALTER TABLE ONLY db.pass
-    ADD CONSTRAINT "PK_Password_BusinessEntityID" PRIMARY KEY (busi_enty_id);
+ALTER TABLE ONLY db.passwd
+    ADD CONSTRAINT "PK_Password_BusinessEntityID" PRIMARY KEY (bsns_enty_id);
 
-ALTER TABLE db.pass CLUSTER ON "PK_Password_BusinessEntityID";
+ALTER TABLE db.passwd CLUSTER ON "PK_Password_BusinessEntityID";
 
 
 
@@ -1625,7 +1625,7 @@ ALTER TABLE db.phn_num_typ CLUSTER ON "PK_PhoneNumberType_PhoneNumberTypeID";
 
 
 ALTER TABLE ONLY db.product_section
-    ADD CONSTRAINT "PK_ProductCategory_ProductCategoryID" PRIMARY KEY (product_ctgr_id);
+    ADD CONSTRAINT "PK_ProductCategory_ProductCategoryID" PRIMARY KEY (product_category_id);
 
 ALTER TABLE db.product_section CLUSTER ON "PK_ProductCategory_ProductCategoryID";
 
@@ -1702,7 +1702,7 @@ ALTER TABLE db.product_subcategory CLUSTER ON "PK_ProductSubcategory_ProductSubc
 
 
 ALTER TABLE ONLY db.product_dealer
-    ADD CONSTRAINT "PK_ProductVendor_ProductID_BusinessEntityID" PRIMARY KEY (product_id, busi_enty_id);
+    ADD CONSTRAINT "PK_ProductVendor_ProductID_BusinessEntityID" PRIMARY KEY (product_id, bsns_enty_id);
 
 ALTER TABLE db.product_dealer CLUSTER ON "PK_ProductVendor_ProductID_BusinessEntityID";
 
@@ -1730,7 +1730,7 @@ ALTER TABLE db.sales_order CLUSTER ON "PK_SalesOrderHeaderSalesReason_SalesOrder
 
 
 ALTER TABLE ONLY db.sales_person
-    ADD CONSTRAINT "PK_SalesPerson_BusinessEntityID" PRIMARY KEY (busi_enty_id);
+    ADD CONSTRAINT "PK_SalesPerson_BusinessEntityID" PRIMARY KEY (bsns_enty_id);
 
 ALTER TABLE db.sales_person CLUSTER ON "PK_SalesPerson_BusinessEntityID";
 
@@ -1807,7 +1807,7 @@ ALTER TABLE db.state_province CLUSTER ON "PK_StateProvince_StateProvinceID";
 
 
 ALTER TABLE ONLY db.store
-    ADD CONSTRAINT "PK_Store_BusinessEntityID" PRIMARY KEY (busi_enty_id);
+    ADD CONSTRAINT "PK_Store_BusinessEntityID" PRIMARY KEY (bsns_enty_id);
 
 ALTER TABLE db.store CLUSTER ON "PK_Store_BusinessEntityID";
 
@@ -1828,7 +1828,7 @@ ALTER TABLE db.measure_unit CLUSTER ON "PK_UnitMeasure_UnitMeasureCode";
 
 
 ALTER TABLE ONLY db.buyer
-    ADD CONSTRAINT "PK_Vendor_BusinessEntityID" PRIMARY KEY (busi_enty_id);
+    ADD CONSTRAINT "PK_Vendor_BusinessEntityID" PRIMARY KEY (bsns_enty_id);
 
 ALTER TABLE db.buyer CLUSTER ON "PK_Vendor_BusinessEntityID";
 
@@ -1847,7 +1847,7 @@ ALTER TABLE ONLY db.doc
 
 
 ALTER TABLE ONLY db.materials_bills
-    ADD CONSTRAINT "FK_BillOfMaterials_Product_ComponentID" FOREIGN KEY (compnt_id) REFERENCES db.product(product_id);
+    ADD CONSTRAINT "FK_BillOfMaterials_Product_ComponentID" FOREIGN KEY (cpnt_id) REFERENCES db.product(product_id);
 
 
 
@@ -1861,32 +1861,32 @@ ALTER TABLE ONLY db.materials_bills
 
 
 
-ALTER TABLE ONLY db.busi_enty_ads
-    ADD CONSTRAINT "FK_BusinessEntityAddress_AddressType_AddressTypeID" FOREIGN KEY (ads_typ_id) REFERENCES db.ads_typ(ads_typ_id);
+ALTER TABLE ONLY db.bsns_enty_addr
+    ADD CONSTRAINT "FK_BusinessEntityAddress_AddressType_AddressTypeID" FOREIGN KEY (addr_typ_id) REFERENCES db.addr_typ(addr_typ_id);
 
 
 
-ALTER TABLE ONLY db.busi_enty_ads
-    ADD CONSTRAINT "FK_BusinessEntityAddress_Address_AddressID" FOREIGN KEY (ads_id) REFERENCES db.ads(ads_id);
+ALTER TABLE ONLY db.bsns_enty_addr
+    ADD CONSTRAINT "FK_BusinessEntityAddress_Address_AddressID" FOREIGN KEY (addr_id) REFERENCES db.addr(addr_id);
 
 
 
-ALTER TABLE ONLY db.busi_enty_ads
-    ADD CONSTRAINT "FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID" FOREIGN KEY (busi_enty_id) REFERENCES db.busi_enty(busi_enty_id);
+ALTER TABLE ONLY db.bsns_enty_addr
+    ADD CONSTRAINT "FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID" FOREIGN KEY (bsns_enty_id) REFERENCES db.bsns_entity(bsns_enty_id);
 
 
 
-ALTER TABLE ONLY db.busi_enty_contc
-    ADD CONSTRAINT "FK_BusinessEntityContact_BusinessEntity_BusinessEntityID" FOREIGN KEY (busi_enty_id) REFERENCES db.busi_enty(busi_enty_id);
+ALTER TABLE ONLY db.bsns_enty_contact
+    ADD CONSTRAINT "FK_BusinessEntityContact_BusinessEntity_BusinessEntityID" FOREIGN KEY (bsns_enty_id) REFERENCES db.bsns_entity(bsns_enty_id);
 
 
 
-ALTER TABLE ONLY db.busi_enty_contc
-    ADD CONSTRAINT "FK_BusinessEntityContact_ContactType_ContactTypeID" FOREIGN KEY (type_contact_id) REFERENCES db.cont_typ(cont_typ_id);
+ALTER TABLE ONLY db.bsns_enty_contact
+    ADD CONSTRAINT "FK_BusinessEntityContact_ContactType_ContactTypeID" FOREIGN KEY (type_contact_id) REFERENCES db.contact_typ(cont_typ_id);
 
 
 
-ALTER TABLE ONLY db.busi_enty_contc
+ALTER TABLE ONLY db.bsns_enty_contact
     ADD CONSTRAINT "FK_BusinessEntityContact_Person_PersonID" FOREIGN KEY (person_id) REFERENCES db.person(business_entity_id);
 
 
@@ -1917,12 +1917,12 @@ ALTER TABLE ONLY db.customer
 
 
 ALTER TABLE ONLY db.customer
-    ADD CONSTRAINT "FK_Customer_Store_StoreID" FOREIGN KEY (store_id) REFERENCES db.store(busi_enty_id);
+    ADD CONSTRAINT "FK_Customer_Store_StoreID" FOREIGN KEY (store_id) REFERENCES db.store(bsns_enty_id);
 
 
 
-ALTER TABLE ONLY db.email_ads
-    ADD CONSTRAINT "FK_EmailAddress_Person_BusinessEntityID" FOREIGN KEY (busi_enty_id) REFERENCES db.person(business_entity_id);
+ALTER TABLE ONLY db.email_addr
+    ADD CONSTRAINT "FK_EmailAddress_Person_BusinessEntityID" FOREIGN KEY (bsns_enty_id) REFERENCES db.person(business_entity_id);
 
 
 
@@ -1936,8 +1936,8 @@ ALTER TABLE ONLY db.history_employee_depart
 
 
 
-ALTER TABLE ONLY db.pass
-    ADD CONSTRAINT "FK_Password_Person_BusinessEntityID" FOREIGN KEY (busi_enty_id) REFERENCES db.person(business_entity_id);
+ALTER TABLE ONLY db.passwd
+    ADD CONSTRAINT "FK_Password_Person_BusinessEntityID" FOREIGN KEY (bsns_enty_id) REFERENCES db.person(business_entity_id);
 
 
 
@@ -1962,7 +1962,7 @@ ALTER TABLE ONLY db.person_phone
 
 
 ALTER TABLE ONLY db.person
-    ADD CONSTRAINT "FK_Person_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.busi_enty(busi_enty_id);
+    ADD CONSTRAINT "FK_Person_BusinessEntity_BusinessEntityID" FOREIGN KEY (business_entity_id) REFERENCES db.bsns_entity(bsns_enty_id);
 
 
 
@@ -2017,7 +2017,7 @@ ALTER TABLE ONLY db.product_model_product_desc_culture
 
 
 ALTER TABLE ONLY db.product_subcategory
-    ADD CONSTRAINT "FK_ProductSubcategory_ProductCategory_ProductCategoryID" FOREIGN KEY (product_ctgr_id) REFERENCES db.product_section(product_ctgr_id);
+    ADD CONSTRAINT "FK_ProductSubcategory_ProductCategory_ProductCategoryID" FOREIGN KEY (product_category_id) REFERENCES db.product_section(product_category_id);
 
 
 
@@ -2032,7 +2032,7 @@ ALTER TABLE ONLY db.product_dealer
 
 
 ALTER TABLE ONLY db.product_dealer
-    ADD CONSTRAINT "FK_ProductVendor_Vendor_BusinessEntityID" FOREIGN KEY (busi_enty_id) REFERENCES db.buyer(busi_enty_id);
+    ADD CONSTRAINT "FK_ProductVendor_Vendor_BusinessEntityID" FOREIGN KEY (bsns_enty_id) REFERENCES db.buyer(bsns_enty_id);
 
 
 
@@ -2107,12 +2107,12 @@ ALTER TABLE ONLY db.state_province
 
 
 ALTER TABLE ONLY db.store
-    ADD CONSTRAINT "FK_Store_BusinessEntity_BusinessEntityID" FOREIGN KEY (busi_enty_id) REFERENCES db.busi_enty(busi_enty_id);
+    ADD CONSTRAINT "FK_Store_BusinessEntity_BusinessEntityID" FOREIGN KEY (bsns_enty_id) REFERENCES db.bsns_entity(bsns_enty_id);
 
 
 
 ALTER TABLE ONLY db.store
-    ADD CONSTRAINT "FK_Store_SalesPerson_SalesPersonID" FOREIGN KEY (sales_person_id) REFERENCES db.sales_person(busi_enty_id);
+    ADD CONSTRAINT "FK_Store_SalesPerson_SalesPersonID" FOREIGN KEY (sales_person_id) REFERENCES db.sales_person(bsns_enty_id);
 
 
 
@@ -2122,7 +2122,7 @@ ALTER TABLE ONLY db.history_transaction
 
 
 ALTER TABLE ONLY db.buyer
-    ADD CONSTRAINT "FK_Vendor_BusinessEntity_BusinessEntityID" FOREIGN KEY (busi_enty_id) REFERENCES db.busi_enty(busi_enty_id);
+    ADD CONSTRAINT "FK_Vendor_BusinessEntity_BusinessEntityID" FOREIGN KEY (bsns_enty_id) REFERENCES db.bsns_entity(bsns_enty_id);
 
 
 
