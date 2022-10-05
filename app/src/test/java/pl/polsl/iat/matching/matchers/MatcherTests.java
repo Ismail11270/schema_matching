@@ -28,8 +28,8 @@ public class MatcherTests {
 
     @Test
     public void testMatchers() {
-        Words a = strPrc.process("first_name");
-        Words b = strPrc.process("name_ffirst");
+        Words a = strPrc.process("usr_first_name");
+        Words b = strPrc.process("complete_name");
 
         System.out.println(matcher.doMatch(a, b));
     }

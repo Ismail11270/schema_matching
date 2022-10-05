@@ -1,11 +1,13 @@
 package pl.polsl.iat.matching.util;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
+import pl.polsl.iat.matching.matchers.word.WordsMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
 import pl.polsl.iat.matching.processing.ProcessorType;
 
@@ -155,12 +157,20 @@ public class MatcherSettings {
                             eElement.getElementsByTagName(Const.SettingsXml.TYPE_TAG).item(0).getTextContent().toUpperCase());
                     boolean enabled = Boolean.parseBoolean(
                             eElement.getElementsByTagName(Const.SettingsXml.ACTIVE_TAG).item(0).getTextContent());
+                    WordMatcher matcher = WordsMatcherFactory.getMatherOfType(matcherType);
+                    if(matcherType == WordMatcher.Type.FUZZY) {
+                        Node node = eElement.getElementsByTagName(Const.SettingsXml.METHOD).item(0);
+                        String method = node == null ? "tokenSetRatio" : node.getTextContent();
+                        matcher.addOption(WordMatcher.Options.Fuzzy.METHOD, FuzzySearch.class.getMethod(method, String.class, String.class));
+                    }
                     if (enabled) {
-                        settingsInstance.availableWordMatchers.put(matcherType, WordsMatcherFactory.getMatherOfType(matcherType));
+                        settingsInstance.availableWordMatchers.put(matcherType, matcher);
                     }
                 }
             } catch (IllegalArgumentException iae) {
                 System.err.println("Failed to read matcher configuration: \n" + iae.getMessage());
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
             }
         }
     }

@@ -19,6 +19,7 @@ public class WordsMatchingResult extends AbstractResult {
     public int getTotalResult() {
         //TODO Combine results
         if(combinedResult == null) {
+//            combinedResult = resultsMap.get(WordMatcher.Type.FUZZY);
             combinedResult = resultsMap.values().stream().reduce(0, (a, b) -> a + b / 2);
         }
         return combinedResult;

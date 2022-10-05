@@ -16,17 +16,18 @@
 	<word-matchers>
 		<matcher>
 			<type>exact</type>
-			<active>false</active>
+			<active>true</active>
 		</matcher>
 
 		<matcher>
 			<type>fuzzy</type>
+<!--			<method>tokenSetRatio</method>-->
 			<active>true</active>
 		</matcher>
 
 		<matcher>
 			<type>semantic</type>
-			<active>true</active>
+			<active>false</active>
 		</matcher>
 	</word-matchers>
 

@@ -18,6 +18,7 @@ public class Const {
         public static final String LOAD_TO_RAM_TAG = "load-wordnet-to-ram";
         public static final String LOG_LEVEL_TAG = "log-level";
         public static final String PRIORITY_DEFAULT = "default";
+        public static final String METHOD = "method";
     }
 
 }

@@ -16,8 +16,8 @@ public class DictionaryTest {
 
     @Test
     public void test() {
-       LexicalDictionary dictionary = NLPTools.getLexicalDictionary();
-        int first_name = dictionary.getNumberOfSynonyms("code", POS.NOUN);
+        LexicalDictionary dictionary = NLPTools.getLexicalDictionary();
+        int first_name = dictionary.getNumberOfSynonyms("name", POS.NOUN);
         System.out.println(first_name);
     }
 }
