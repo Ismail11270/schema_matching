@@ -29,12 +29,15 @@ public class MatcherSettings {
 
     public final static String DEFAULT_STOP_WORDS_FILE_NAME = "stopwords.txt";
     public static final String DEFAULT_PREFIXES_FILE_NAME = "prefixes.txt";
+    public final static String DEFAULT_SHORT_WORDS_FILE_NAME = "shortword.txt";
 
     public final static String STOP_WORDS_FILE_NAME = Optional.ofNullable(System.getenv(STOP_WORDS_FILE_VAR)).orElse(DEFAULT_STOP_WORDS_FILE_NAME);
     public static final String PREFIXES_FILE_NAME = Optional.ofNullable(System.getenv(PREFIXES_FILE_VAR)).orElse(DEFAULT_PREFIXES_FILE_NAME);
 
     public static String STOP_WORDS_FILE_PATH;
     public static String PREFIXES_FILE_PATH;
+    public static String SHORT_WORDS_FILE_PATH;
+
     public static String RESOURCES_DIR;
 
     private static final MatcherSettings settingsInstance;
@@ -104,6 +107,8 @@ public class MatcherSettings {
             RESOURCES_DIR = inputFile.getParent();
             STOP_WORDS_FILE_PATH = RESOURCES_DIR + "\\nlp\\" + STOP_WORDS_FILE_NAME;
             PREFIXES_FILE_PATH = RESOURCES_DIR + "\\nlp\\" + PREFIXES_FILE_NAME;
+            SHORT_WORDS_FILE_PATH = RESOURCES_DIR + "\\nlp\\" + DEFAULT_SHORT_WORDS_FILE_NAME;
+
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputFile);
             doc.getDocumentElement().normalize();
 
@@ -200,7 +205,8 @@ public class MatcherSettings {
                     }
                 }
             } catch (IllegalArgumentException iae) {
-                System.err.println("Failed to read matcher configuration: \n" + iae.getMessage());
+                System.err.println("Failed to read preprocessor configuration: \n" + iae.getMessage());
+                iae.printStackTrace();
             }
         }
 //        settingsInstance.availablePreprocessors.add(ProcessorType.PART_OF_SPEECH_TAGGER);

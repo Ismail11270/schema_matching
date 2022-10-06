@@ -1,0 +1,2 @@
+cnt=count
+world=world_is_one

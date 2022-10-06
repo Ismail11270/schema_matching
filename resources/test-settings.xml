@@ -39,6 +39,12 @@
 		</processor>
 
 		<processor>
+			<type>short_words_changer</type>
+			<active>TRUE</active>
+			<priority>default</priority>
+		</processor>
+
+		<processor>
 			<type>clean_non_alphabetic</type>
 			<active>false</active>
 			<priority>default</priority>
