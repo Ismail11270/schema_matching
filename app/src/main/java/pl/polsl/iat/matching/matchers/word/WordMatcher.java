@@ -54,4 +54,6 @@ public abstract class WordMatcher implements Matcher<Word, Integer> {
     public Object getOption(String key) {
         return matcherOptions.get(key);
     }
+
+    public abstract Type getType();
 }

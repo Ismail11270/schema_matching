@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class PartOfSpeechTagger implements TextProcessor<Words> {
 
-    private POSTagger tagger;
+    private final POSTagger tagger;
     private final Object lock = new Object();
 
     public PartOfSpeechTagger() {
@@ -20,9 +20,10 @@ public class PartOfSpeechTagger implements TextProcessor<Words> {
     @Override
     public Words process(Words words) {
         if (tagger == null) return words;
-        List<POSTag> tags = new ArrayList<>();
+        List<POSTag> tags;
         synchronized (lock) {
-             tags.addAll(tagger.tag(words.wordsAsStrings()));
+             tags = new ArrayList<>(tagger.tag(words.wordsAsStrings()));
+             words.getRawWord().setPos(tagger.tag(words.getRawWord().toString()).get(0));
         }
         IntStream.range(0, tags.size())
                 .forEach(i -> words.get(i).setPos(tags.get(i)));

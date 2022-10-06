@@ -5,46 +5,49 @@ import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
 import pl.polsl.iat.matching.matchers.Matcher;
 import pl.polsl.iat.matching.processing.Words;
 import pl.polsl.iat.matching.util.Logger;
-import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class WordsMatcher implements Matcher<Words, WordsMatchingResult> {
 
-    private final Map<WordMatcher.Type, WordMatcher> stringMatcher;
+    private final Map<WordMatcher.Type, WordMatcher> wordMatchers;
 
     WordsMatcher(Map<WordMatcher.Type, WordMatcher> matchers) {
-        this.stringMatcher=matchers;
+        this.wordMatchers=matchers;
     }
-
-    private Map<WordMatcher.Type, WordMatcher> availableWordMatchers = MatcherSettings.getSettings().getAvailableWordMatchers();
 
     @Override
     public WordsMatchingResult doMatch(Words left, Words right) {
         WordsMatchingResult result = new WordsMatchingResult();
-        for (WordMatcher.Type typeMatcher : availableWordMatchers.entrySet().stream().map(e -> e.getKey()).collect(Collectors.toList())) {
+        for (WordMatcher.Type typeMatcher : wordMatchers.keySet().stream().toList()) {
             try {
                 int matcherResult = matchWithMatcher(typeMatcher.getMatcher(), left, right);
-                result.addResult(typeMatcher, matcherResult);
+                if(matcherResult <= result.getResult())
+                    continue;
+                result.setResult(matcherResult, typeMatcher);
                 if(matcherResult == 100) {
                     break;
                 }
             } catch (Exception e) {
                 Logger.warn("Error trying to match '%s' and '%s' using [%s] matcher.\tDetails:\t%s",left.toString(), right.toString(), typeMatcher.getName(), e.getClass().getName());
+                e.printStackTrace();
             }
         }
         return result;
     }
 
     private int matchWithMatcher(WordMatcher matcher, Words A, Words B) {
-        int rawMatch = matcher.doMatch(A.getRawWord(), B.getRawWord());
-        System.out.println(rawMatch);
-        if(rawMatch == 100) {
-            return 100;
+        try {
+            if(matcher.getType() == WordMatcher.Type.EXACT) {
+                int rawMatch = matcher.doMatch(A.getRawWord(), B.getRawWord());
+                if (rawMatch == 100) {
+                    return 100;
+                }
+            }
+        } catch (Exception e) {
+            Logger.warn("Error matching raw words");
         }
         Words smaller = A.size() < B.size() ? A : B;
         Words bigger = A.size() < B.size() ? B : A;

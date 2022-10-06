@@ -21,13 +21,19 @@
 
 		<matcher>
 			<type>fuzzy</type>
+			<method>ratio</method>
+<!--			<method>partialRatio</method>-->
 <!--			<method>tokenSetRatio</method>-->
-			<active>false</active>
+<!--			<method>tokenSetPartialRatio</method>-->
+<!--			<method>tokenSortRatio</method>-->
+<!--			<method>tokenSortPartialRatio</method>-->
+<!--			<method>weightedRatio</method>-->
+			<active>true</active>
 		</matcher>
 
 		<matcher>
 			<type>semantic</type>
-			<active>true</active>
+			<active>false</active>
 		</matcher>
 	</word-matchers>
 

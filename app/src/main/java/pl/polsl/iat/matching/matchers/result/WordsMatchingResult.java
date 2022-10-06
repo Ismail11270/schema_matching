@@ -3,37 +3,33 @@ package pl.polsl.iat.matching.matchers.result;
 
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class WordsMatchingResult extends AbstractResult {
 
-    private Integer combinedResult;
-
-    private Map<WordMatcher.Type, Integer> resultsMap = new HashMap<>();
+    private int result;
+    private WordMatcher.Type type;
 
     public WordsMatchingResult(){
 
     }
 
-    public int getTotalResult() {
-        //TODO Combine results
-        if(combinedResult == null) {
-//            combinedResult = resultsMap.get(WordMatcher.Type.FUZZY);
-            combinedResult = resultsMap.values().stream().reduce(0, (a, b) -> a + b / 2);
-        }
-        return combinedResult;
+    public int getResult() {
+        return result;
     }
 
-    public WordsMatchingResult addResult(WordMatcher.Type matcherType, int result) {
-        this.resultsMap.put(matcherType, result);
-        return this;
+    public WordMatcher.Type getType() {
+        return type;
+    }
+
+    public void setResult(int result, WordMatcher.Type type) {
+        this.result = result;
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "NameMatchingResult{" +
-                "result=" + getTotalResult() +
+                "result=" + result +
                 '}';
     }
 

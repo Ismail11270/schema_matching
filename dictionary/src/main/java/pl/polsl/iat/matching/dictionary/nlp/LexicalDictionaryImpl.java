@@ -33,7 +33,6 @@ class LexicalDictionaryImpl implements LexicalDictionary {
     @Override
     public float compare(String first, String second, POS pos) {
         wordnet.getRelatedWords(first, pos).forEach(System.out::println);
-//        return new MatchResult();
         return 0f;
     }
 }

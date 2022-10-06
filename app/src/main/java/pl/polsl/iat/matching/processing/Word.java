@@ -17,6 +17,11 @@ public class Word implements Matchable {
         this.word = word;
     }
 
+    public Word(String word, POSTag pos) {
+        this.word = word;
+        this.pos = pos;
+    }
+
     @Override
     public String toString() {
         return word;
@@ -27,9 +32,8 @@ public class Word implements Matchable {
         return this;
     }
 
-    public Word remove(Pattern pattern) {
+    public void remove(Pattern pattern) {
         this.word = pattern.matcher(this.word).replaceAll("");
-        return this;
     }
 
     public void setPos(POSTag pos) {
@@ -50,7 +54,7 @@ public class Word implements Matchable {
 
     @Override
     public boolean equals(Object o) {
-        if (o != null && o instanceof Word)
+        if (o instanceof Word)
             return word.equals(((Word) o).word);
         return false;
     }

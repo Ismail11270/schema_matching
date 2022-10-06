@@ -36,7 +36,7 @@ public class NLPTools {
 
         String dictionaryLocation = Optional.ofNullable(System.getenv(DICTIONARY_LOCATION_VAR))
                 .orElse(DEFAULT_DICTIONARY_LOCATION);
-        instance.wordnet = loadToRam ? new RamJwiWordnet(dictionaryLocation) : new JwiWordnet(dictionaryLocation);
+        instance.wordnet = new JwiWordnet(dictionaryLocation, loadToRam);
         instance.dictionary = new LexicalDictionaryImpl(instance.wordnet);
         instance.stemmer = new NLPStemmer(instance.wordnet.getStemmer());
         instance.lemmatizer = new NLPLemmatizer();

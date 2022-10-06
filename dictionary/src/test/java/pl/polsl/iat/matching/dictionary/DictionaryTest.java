@@ -7,7 +7,6 @@ import pl.polsl.iat.matching.dictionary.exception.NlpMildException;
 import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
 
 import java.util.Collection;
-import java.util.List;
 
 public class DictionaryTest {
 
@@ -23,8 +22,8 @@ public class DictionaryTest {
 //        int first_name = dictionary.getNumberOfSynonyms("user", POS.NOUN);
 
         long timeStart = System.currentTimeMillis();
-        Collection<String> user = dictionary.getRelatedSynsetIds("applicant", POS.NOUN);
-        Collection<String> person = dictionary.getRelatedSynsetIds("candidate", POS.NOUN);
+        Collection<String> user = dictionary.getRelatedSynsetIds("job", POS.NOUN);
+        Collection<String> person = dictionary.getRelatedSynsetIds("job", POS.NOUN);
         var bigger = user.size() > person.size() ? user : person;
         var smaller = user.size() < person.size() ? user : person;
 

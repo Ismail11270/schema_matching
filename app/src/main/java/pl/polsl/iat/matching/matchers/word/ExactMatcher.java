@@ -22,4 +22,9 @@ class ExactMatcher extends WordMatcher {
     public Integer doMatch(Word left, Word right) {
         return left.equals(right) ? 100 : 0;
     }
+
+    @Override
+    public Type getType() {
+        return Type.EXACT;
+    }
 }
