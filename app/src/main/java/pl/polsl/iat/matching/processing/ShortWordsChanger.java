@@ -17,7 +17,7 @@ class ShortWordsChanger implements TextProcessor<Words>{
     private Properties prop;
 
     ShortWordsChanger() throws IOException {
-        System.out.println("Created");
+
         try (BufferedReader reader = new BufferedReader(new FileReader(MatcherSettings.SHORT_WORDS_FILE_PATH))) {
             prop = new Properties();
             prop.load(reader);
@@ -44,14 +44,10 @@ class ShortWordsChanger implements TextProcessor<Words>{
 
     @Override
     public Words process(Words input) {
-        System.out.println("processed");
 
-        for(Word word : input.get()){
-            String value = prop.getProperty(word.toString());
-            if(value != null){
-                word.updateWord(value);
-            }
-        }
+        input.get().stream()
+                .filter(word -> prop.containsKey(word.toString()))
+                .forEach(word -> word.updateWord(prop.getProperty(word.toString())));
         return input;
     }
 
