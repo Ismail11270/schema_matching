@@ -9,6 +9,7 @@ import pl.polsl.iat.matching.dictionary.nlp.POSTagger;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class Main {
         System.out.println(tags);
 //        int id = dict.getNumberOfSynonyms("pupil", tags.get(0));
         List<String> pupil = new ArrayList<>(dict.getRelatedSynsetIds("good", POS.ADJECTIVE));
-        List<String> student = dict.getRelatedSynsetIds("category", POS.NOUN);
+        Collection<String> student = dict.getRelatedSynsetIds("category", POS.NOUN);
         System.out.println("Size a = " + pupil.size() + " size b = " + student.size());
         int init_size = pupil.size();
         pupil.removeAll(student);

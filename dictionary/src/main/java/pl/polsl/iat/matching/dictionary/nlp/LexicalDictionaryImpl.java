@@ -4,6 +4,7 @@ import edu.mit.jwi.item.POS;
 import pl.polsl.iat.matching.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
 
+import java.util.Collection;
 import java.util.List;
 
 class LexicalDictionaryImpl implements LexicalDictionary {
@@ -20,8 +21,8 @@ class LexicalDictionaryImpl implements LexicalDictionary {
     }
 
     @Override
-    public List<String> getRelatedSynsetIds(String word, POS pos) {
-        return wordnet.getRelatedWords(word, pos);
+    public Collection<String> getRelatedSynsetIds(String word, POS pos) {
+        return wordnet.getRleatedSynsets(word, pos);
     }
 
     @Override

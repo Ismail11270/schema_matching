@@ -16,18 +16,18 @@
 	<word-matchers>
 		<matcher>
 			<type>exact</type>
-			<active>true</active>
+			<active>false</active>
 		</matcher>
 
 		<matcher>
 			<type>fuzzy</type>
 <!--			<method>tokenSetRatio</method>-->
-			<active>true</active>
+			<active>false</active>
 		</matcher>
 
 		<matcher>
 			<type>semantic</type>
-			<active>false</active>
+			<active>true</active>
 		</matcher>
 	</word-matchers>
 
@@ -40,19 +40,19 @@
 
 		<processor>
 			<type>clean_non_alphabetic</type>
-			<active>TRUE</active>
+			<active>false</active>
 			<priority>default</priority>
 		</processor>
 
 		<processor>
 			<type>lemmatization</type>
-			<active>FALSE</active>
+			<active>true</active>
 			<priority>default</priority>
 		</processor>
 
 		<processor>
 			<type>stemming</type>
-			<active>TRUE</active>
+			<active>false</active>
 			<priority>default</priority>
 		</processor>
 
