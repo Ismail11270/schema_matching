@@ -17,6 +17,7 @@ public class StringProcessingTest {
     @BeforeAll
     public static void before() throws NlpMildException {
         NLPTools.init(false);
+        MatcherSettings.getSettings();
     }
 
     @Test
@@ -60,6 +61,7 @@ public class StringProcessingTest {
 
     @Test
     public void test1() {
-
+//        "pf_hello_world"
+        System.out.println(ProcessorType.SHORT_WORDS_CHANGER.getProcessor().get().process(new Words(new Word("cnt_world"), "cnt", "world")));
     }
 }
