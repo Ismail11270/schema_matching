@@ -64,7 +64,7 @@ public class MatchTaskManager {
             rMatchingComponent.setMatchScore(1);
 //            rMatchingComponent.setMatch(new TableMatcher(first,second,rMatchingComponent).doMatch());
 //            rMatchingComponent.setMatch(first.getName().equals(second.getName()) ? 100 : 0);
-            Logger.table("%s Finished matching tables [%s] and [%s]", Thread.currentThread().getName(), first.getName(), second.getName());
+//            Logger.table("%s Finished matching tables [%s] and [%s]", Thread.currentThread().getName(), first.getName(), second.getName());
             return true;
         };
     }

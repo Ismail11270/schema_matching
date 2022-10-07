@@ -1,12 +1,12 @@
 package pl.polsl.iat.matching.executor.impl;
 
-import pl.polsl.iat.matching.core.model.result.MatchingResult;
+import pl.polsl.iat.matching.core.model.result.Component;
+import pl.polsl.iat.matching.core.model.result.MatchingComponent;
 import pl.polsl.iat.matching.core.model.schema.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 public class SchemaMatcherRunner {
 
@@ -14,14 +14,14 @@ public class SchemaMatcherRunner {
 
     private final ComponentMatchingExecutor service;
 
-    private final MatchingResult matchingResult;
+    private final MatchingComponent schemaResultMatchingComponent;
 
     private final List<Future<Float>> results = new ArrayList<>();
 
-    SchemaMatcherRunner(Schema left, Schema right, MatchingResult matchingResult) {
+    SchemaMatcherRunner(Schema left, Schema right, MatchingComponent schemaResultMatchingComponent) {
         this.schemaLeft = left;
         this.schemaRight = right;
-        this.matchingResult = matchingResult;
+        this.schemaResultMatchingComponent = schemaResultMatchingComponent;
         this.service = ExecutorServiceHolder.getInstance().getAvailableExecutor();
     }
 
@@ -30,7 +30,7 @@ public class SchemaMatcherRunner {
             MatchTaskManager taskManager = MatchTaskManager.getInstance();
             List<Future<Boolean>> futures = new ArrayList<>(service.invokeAll(
                     taskManager.getTasksForSchemaPair(schemaLeft, schemaRight,
-                            matchingResult.getComponents().get(0).getMatchingComponent().get(0))));
+                            schemaResultMatchingComponent)));
 
 //            service.awaitTermination(20, TimeUnit.SECONDS);
             //TODO detect best matches

@@ -5,8 +5,7 @@ import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
 import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
 import pl.polsl.iat.matching.processing.Word;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 class SemanticMather extends WordMatcher {
 
@@ -25,10 +24,13 @@ class SemanticMather extends WordMatcher {
         return instance;
     }
 
+    Map<String, Collection<String>> cache = new Hashtable<>();
+
     @Override
     public Integer doMatch(Word left, Word right) {
-        Collection<String> leftSynsets = dictionary.getRelatedSynsetIds(left.toString(), left.getPos().getWordnetPos());
-        Collection<String> rightSynsets = dictionary.getRelatedSynsetIds(right.toString(), right.getPos().getWordnetPos());
+
+        Collection<String> leftSynsets = new ArrayList<>(cache.computeIfAbsent(left.toString(), x -> dictionary.getRelatedSynsetIds(left.toString(), left.getPos().getWordnetPos())));
+        Collection<String> rightSynsets = new ArrayList<>(cache.computeIfAbsent(right.toString(), x -> dictionary.getRelatedSynsetIds(right.toString(), right.getPos().getWordnetPos())));
 
         int a = leftSynsets.size(), b = rightSynsets.size();
         leftSynsets.retainAll(rightSynsets);

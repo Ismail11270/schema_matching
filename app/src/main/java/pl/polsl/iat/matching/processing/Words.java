@@ -63,7 +63,7 @@ public class Words implements Matchable {
     }
 
     public Words remove(Pattern pattern) {
-        words.stream().forEach(x -> x.remove(pattern));
+        words.forEach(x -> x.remove(pattern));
         return this;
     }
 

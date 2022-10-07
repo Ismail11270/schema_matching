@@ -13,8 +13,8 @@
     <option name="TEST_OBJECT" value="class" />
     <option name="WORKING_DIRECTORY" value="$ProjectFileDir$" />
     <envs>
-      <env name="MATCHER_SETTINGS_FILE" value="resources\test-settings.xml" />
-      <env name="WORDNET_TO_RAM" value="false" />
+      <env name="MATCHER_SETTINGS_FILE" value="resources\matcher-settings.xml" />
+      <env name="WORDNET_TO_RAM" value="true" />
     </envs>
     <method v="2">
       <option name="Make" enabled="true" />

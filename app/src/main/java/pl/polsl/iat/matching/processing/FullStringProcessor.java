@@ -1,6 +1,5 @@
 package pl.polsl.iat.matching.processing;
 
-import org.w3c.dom.Text;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.List;
@@ -23,16 +22,6 @@ public class FullStringProcessor implements TextProcessor<String> {
 
     @Override
     public Words process(String input) {
-
-        /*TODO
-        *  1. tokenization DONE
-        *  2. to lowercase DONE
-        *  3. remove symbols and numbers DONE
-        *  4. remove stop words
-        *  5. lemmatization?
-        *  6. stemming
-        *  7. prefix detection
-        * */
 
         //Always tokenize and adjust to lowercase
         Words words = new Words(new Word(input), tokenizationPattern.split(input)).toLowerCase();

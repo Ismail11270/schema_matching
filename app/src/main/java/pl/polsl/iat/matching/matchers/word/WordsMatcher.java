@@ -49,6 +49,7 @@ public class WordsMatcher implements Matcher<Words, WordsMatchingResult> {
         } catch (Exception e) {
             Logger.warn("Error matching raw words");
         }
+        //TODO Big regret matching empty strings
         Words smaller = A.size() < B.size() ? A : B;
         Words bigger = A.size() < B.size() ? B : A;
         int nSmaller = smaller.size(), nBigger = bigger.size();

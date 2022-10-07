@@ -8,6 +8,7 @@ import pl.polsl.iat.matching.core.util.ParametersResolver;
 import pl.polsl.iat.matching.dictionary.exception.NlpMildException;
 import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
 import pl.polsl.iat.matching.executor.impl.ExecutorFactory;
+import pl.polsl.iat.matching.executor.impl.SchemaMatcherRunner;
 import pl.polsl.iat.matching.processing.ProcessorType;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
@@ -40,7 +41,7 @@ public class App {
         //Matching start
         startTime = System.currentTimeMillis();
 
-        ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).run();
+        ExecutorFactory.newSchemaMatchingExecutor(matchingResult, schemas).forEach(SchemaMatcherRunner::run);
 
         long matchingTime = System.currentTimeMillis() - startTime;
         //Matching done
@@ -60,7 +61,7 @@ public class App {
 
     private static boolean isLoadToRamSet() {
         try {
-            return Boolean.parseBoolean(Optional.ofNullable(System.getenv("WORDNET_TO_RAM")).orElse("false"));
+            return Boolean.parseBoolean(Optional.ofNullable(System.getenv("WORDNET_TO_RAM")).orElse("true"));
         } catch(Exception e) {
             return false;
         }

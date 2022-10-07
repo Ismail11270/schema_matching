@@ -13,6 +13,7 @@ public class WordsMatchingResult extends AbstractResult {
 
     }
 
+    @Override
     public int getResult() {
         return result;
     }
