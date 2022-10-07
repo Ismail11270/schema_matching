@@ -1,26 +1,8 @@
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
-
-CREATE SCHEMA db;
-ALTER SCHEMA db OWNER TO postgres;
-
-SET default_tablespace = '';
-SET default_table_access_method = heap;
-
 
 CREATE TABLE medicines
 (
     medicine_id INT NOT NULL,
-    drug_name VARCHAR NOT NULL,
+    drug_name VARCHAR(255) NOT NULL,
     expire_date DATE NOT NULL,
     PRIMARY KEY (medicine_id)
 );
@@ -28,7 +10,7 @@ CREATE TABLE medicines
 CREATE TABLE prescriptions
 (
     prescription_id INT NOT NULL,
-    details_report VARCHAR NOT NULL,
+    details_report VARCHAR(255) NOT NULL,
     medicine_id INT NOT NULL,
     PRIMARY KEY (prescription_id),
     FOREIGN KEY (medicine_id) REFERENCES medicines(medicine_id)
@@ -37,22 +19,22 @@ CREATE TABLE prescriptions
 CREATE TABLE addresses
 (
     address_id INT NOT NULL,
-    house_numebr VARCHAR NOT NULL,
-    building_name VARCHAR NOT NULL,
-    street_name VARCHAR NOT NULL,
+    house_numebr VARCHAR(255) NOT NULL,
+    building_name VARCHAR(255) NOT NULL,
+    street_name VARCHAR(255) NOT NULL,
     zipcode INT NOT NULL,
-    city VARCHAR NOT NULL,
-    province VARCHAR NOT NULL,
-    country VARCHAR NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    province VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL,
     PRIMARY KEY (address_id)
 );
 
 CREATE TABLE doctors
 (
     doctor_id INT NOT NULL,
-    first_name VARCHAR NOT NULL,
-    title VARCHAR NOT NULL,
-    last_name VARCHAR NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
     identification_numebr INT NOT NULL,
     address_id INT NOT NULL,
     PRIMARY KEY (doctor_id),
@@ -62,7 +44,7 @@ CREATE TABLE doctors
 CREATE TABLE departments
 (
     department_id INT NOT NULL,
-    department_name VARCHAR NOT NULL,
+    department_name VARCHAR(255) NOT NULL,
     doctor_id INT NOT NULL,
     address_id INT NOT NULL,
     PRIMARY KEY (department_id),
@@ -74,23 +56,31 @@ CREATE TABLE patient_history
 (
     history_id INT NOT NULL,
     visit_id INT NOT NULL,
-    PRIMARY KEY (history_id),
-    FOREIGN KEY (visit_id) REFERENCES visits(visit_id)
+    PRIMARY KEY (history_id)
+    --  FOREIGN KEY (visit_id) REFERENCES visits(visit_id)
 );
 
 CREATE TABLE patients
 (
     patient_id INT NOT NULL,
-    first_name VARCHAR NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
     identification_number INT NOT NULL,
-    last_name VARCHAR NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
     address_id INT NOT NULL,
     history_id INT NOT NULL,
     PRIMARY KEY (patient_id),
     FOREIGN KEY (address_id) REFERENCES addresses(address_id),
     FOREIGN KEY (history_id) REFERENCES patient_history(history_id)
 );
-
+CREATE TABLE appointments
+(
+    appointment_id INT NOT NULL,
+    date DATE NOT NULL,
+    visit_id INT NOT NULL,
+    PRIMARY KEY (appointment_id),
+    --   FOREIGN KEY (visit_id) REFERENCES visits(visit_id),
+    UNIQUE (visit_id)
+);
 CREATE TABLE visits
 (
     visit_id INT NOT NULL,
@@ -109,12 +99,5 @@ CREATE TABLE visits
     UNIQUE (appointment_id)
 );
 
-CREATE TABLE appointments
-(
-    appointment_id INT NOT NULL,
-    date DATE NOT NULL,
-    visit_id INT NOT NULL,
-    PRIMARY KEY (appointment_id),
-    FOREIGN KEY (visit_id) REFERENCES visits(visit_id),
-    UNIQUE (visit_id)
-);
+ALTER TABLE appointments ADD CONSTRAINT fk_appointments_visit_id FOREIGN KEY (visit_id) REFERENCES visits(visit_id);
+ALTER TABLE patient_history ADD CONSTRAINT fk_history_visit_id FOREIGN KEY (visit_id) REFERENCES visits(visit_id)
