@@ -20,6 +20,8 @@ public class App {
         //Init data and instruments
         ParametersResolver parametersResolver = new ParametersResolver(args);
 
+
+        // Settings ended up being dependent on NLPTools so dictionary settings can't be included in the settings therefore they are just taken from the environment
         NLPTools.init(isLoadToRamSet());
         MatcherSettings settings = MatcherSettings.getSettings();
 

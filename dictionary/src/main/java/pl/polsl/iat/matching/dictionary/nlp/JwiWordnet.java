@@ -14,18 +14,24 @@ import java.util.*;
 public class JwiWordnet implements Wordnet {
     private final IRAMDictionary dictionary;
     private final WordnetStemmer stemmer;
+    private final int depth;
 
-    JwiWordnet(String wordnetLocation, boolean loadToRam) throws DictionaryException {
+    JwiWordnet(String wordnetLocation, boolean loadToRam, int depth) throws DictionaryException {
         try {
             dictionary = new RAMDictionary(new URL("file", null, wordnetLocation), ILoadPolicy.IMMEDIATE_LOAD);
             dictionary.open();
             stemmer = new WordnetStemmer(dictionary);
+            this.depth = depth;
             if (loadToRam) {
                 dictionary.load();
             }
         } catch (IOException e) {
             throw new DictionaryException(e);
         }
+    }
+
+    JwiWordnet(String wordnetLocation, boolean loadToRam) throws DictionaryException {
+        this(wordnetLocation, loadToRam, 4);
     }
 
     private void addWordsFromSynset(ISynset synset, List<String> allWords) {
@@ -54,7 +60,7 @@ public class JwiWordnet implements Wordnet {
         Collection<String> synsets = new TreeSet<>();
         for (IWord word : words) {
             ISynset synset = word.getSynset();
-            fun(synset.getID(), synsets, 5);
+            fun(synset.getID(), synsets, depth);
         }
         return synsets;
     }

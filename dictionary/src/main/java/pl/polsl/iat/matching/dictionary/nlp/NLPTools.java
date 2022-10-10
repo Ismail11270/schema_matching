@@ -36,13 +36,17 @@ public class NLPTools {
 
         String dictionaryLocation = Optional.ofNullable(System.getenv(DICTIONARY_LOCATION_VAR))
                 .orElse(DEFAULT_DICTIONARY_LOCATION);
-        instance.wordnet = new JwiWordnet(dictionaryLocation, loadToRam);
+        instance.wordnet = new JwiWordnet(dictionaryLocation, loadToRam, getWordnetDepth());
         instance.dictionary = new LexicalDictionaryImpl(instance.wordnet);
         instance.stemmer = new NLPStemmer(instance.wordnet.getStemmer());
         instance.lemmatizer = new NLPLemmatizer();
         instance.posTagger = new POSTagger();
         instance.initialized = true;
         return instance;
+    }
+
+    private static int getWordnetDepth() {
+        return Integer.parseInt(System.getenv().getOrDefault("WORDNET_DEPTH", "4"));
     }
 
     public static LexicalDictionary getLexicalDictionary() {
