@@ -11,8 +11,8 @@ public class ExecutorFactory {
     public static List<SchemaMatcherRunner> newSchemaMatchingExecutor(MatchingResult mainResult, Schema... schemas) {
         List<SchemaMatcherRunner> runners = new ArrayList<>();
         for(int i = 0; i < schemas.length - 1; i++) {
-            for(int j = i + 1; j < schemas.length; j++) {
-                runners.add(new SchemaMatcherRunner(schemas[i], schemas[j], mainResult.getComponents().get(i).getMatchingComponent().get(schemas.length-j-1)));
+            for(int j = i + 1, k = 0; j < schemas.length && k < mainResult.getComponents().get(i).getMatchingComponent().size(); j++, k++) {
+                runners.add(new SchemaMatcherRunner(schemas[i], schemas[j], mainResult.getComponents().get(i).getMatchingComponent().get(k)));
             }
         }
         return runners;

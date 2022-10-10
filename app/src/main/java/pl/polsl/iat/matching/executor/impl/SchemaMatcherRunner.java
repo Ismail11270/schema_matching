@@ -1,6 +1,5 @@
 package pl.polsl.iat.matching.executor.impl;
 
-import pl.polsl.iat.matching.core.model.result.Component;
 import pl.polsl.iat.matching.core.model.result.MatchingComponent;
 import pl.polsl.iat.matching.core.model.schema.Schema;
 
@@ -32,13 +31,15 @@ public class SchemaMatcherRunner {
                     taskManager.getTasksForSchemaPair(schemaLeft, schemaRight,
                             schemaResultMatchingComponent)));
 
+
+//            taskManager.getTasksForSchemaPair(schemaLeft, schemaRight,
+//                    schemaResultMatchingComponent).forEach(service::submit);
 //            service.awaitTermination(20, TimeUnit.SECONDS);
-            //TODO detect best matches
-            service.shutdown();
+//            service.shutdown();
         } catch (Throwable t) {
             System.out.println(t.getMessage());
         } finally {
-            service.shutdownNow();
+//            service.shutdownNow();
         }
     }
 }
