@@ -31,7 +31,6 @@ public class ExecutorServiceHolder{
 
     public ComponentMatchingExecutor getAvailableExecutor() {
         initExecutor();
-        availableExecutor.shutdown();
         return availableExecutor;
     }
 
