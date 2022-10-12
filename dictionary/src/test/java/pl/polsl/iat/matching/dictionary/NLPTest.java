@@ -18,12 +18,12 @@ public class NLPTest {
 
     @Test
     public void testStemmer() {
-        NLPStemmer stemmer = NLPTools.getStemmer();
-        var a = stemmer.doTheThing("tired");
-        System.out.println(a);
-
-        NLPLemmatizer lemmatizer = NLPTools.getLemmatizer();
-        var b = lemmatizer.doTheThing(new String[]{"tired"}, new POSTag[] {POSTag.JJ});
-        System.out.println(b[0]);
+//        NLPStemmer stemmer = NLPTools.getStemmer();
+//        var a = stemmer.doTheThing("tired");
+//        System.out.println(a);
+//
+//        NLPLemmatizer lemmatizer = NLPTools.getLemmatizer();
+//        var b = lemmatizer.doTheThing(new String[]{"tired"}, new POSTag[] {POSTag.JJ});
+//        System.out.println(b[0]);
     }
 }
