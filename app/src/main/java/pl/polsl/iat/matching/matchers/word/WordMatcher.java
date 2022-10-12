@@ -1,7 +1,6 @@
 package pl.polsl.iat.matching.matchers.word;
 
 import pl.polsl.iat.matching.matchers.Matcher;
-import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
 import pl.polsl.iat.matching.processing.Word;
 
 import java.util.HashMap;

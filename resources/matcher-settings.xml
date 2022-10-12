@@ -1,7 +1,7 @@
 <?xml version = "1.0"?>
 <settings>
 
-	<threads>1</threads>
+	<threads>16</threads>
 	<log-level>table</log-level>
 	<mode>EAGER</mode>
 
@@ -26,7 +26,7 @@
 
 		<matcher>
 			<type>semantic</type>
-			<active>false</active>
+			<active>TRUE</active>
 		</matcher>
 	</word-matchers>
 

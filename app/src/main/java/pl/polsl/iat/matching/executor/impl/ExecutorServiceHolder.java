@@ -3,7 +3,6 @@ package pl.polsl.iat.matching.executor.impl;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class ExecutorServiceHolder{
     private ComponentMatchingExecutor availableExecutor;

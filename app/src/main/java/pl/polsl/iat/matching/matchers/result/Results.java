@@ -1,9 +1,6 @@
 package pl.polsl.iat.matching.matchers.result;
 
-import pl.polsl.iat.matching.core.model.schema.Characteristic;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Results {
 
@@ -34,9 +31,10 @@ public class Results {
             for (AbstractResult<?> absChResult : absChResults) {
                 var chResult = (CharacteristicsResult) absChResult;
                 if(chResult.getResult()) {
-//                    calculatedResult
+                    float res_ = 100 - calculatedResult;
+                    calculatedResult += (int) (res_*chResult.getType().getGeneralType().getPositiveCoef());
                 } else {
-
+                    calculatedResult -= (int) (calculatedResult*chResult.getType().getGeneralType().getNegativeCoef());
                 }
             }
 //            if(calculatedResult == 100)

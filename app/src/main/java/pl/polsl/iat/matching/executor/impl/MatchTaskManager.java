@@ -3,9 +3,9 @@ package pl.polsl.iat.matching.executor.impl;
 import pl.polsl.iat.matching.core.model.result.MatchingComponent;
 import pl.polsl.iat.matching.core.model.schema.*;
 import pl.polsl.iat.matching.matchers.ComponentMatcher;
-import pl.polsl.iat.matching.matchers.result.Results;
 import pl.polsl.iat.matching.util.Logger;
 import pl.polsl.iat.matching.util.Utils;
+import pl.polsl.iat.matching.matchers.result.Results;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.stream.IntStream;
 
 
 /**

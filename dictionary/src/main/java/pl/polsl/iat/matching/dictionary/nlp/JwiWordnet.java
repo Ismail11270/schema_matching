@@ -52,6 +52,9 @@ public class JwiWordnet implements Wordnet {
 
     @Override
     public Collection<String> getRleatedSynsets(String iWord, POS pos) {
+        if(iWord == null || iWord.isBlank()) {
+            return Collections.emptyList();
+        }
         IIndexWord indexWord = dictionary.getIndexWord(iWord, pos);
         if(indexWord == null) {
             return Collections.emptyList();

@@ -4,8 +4,6 @@ import pl.polsl.iat.matching.dictionary.nlp.NLPLemmatizer;
 import pl.polsl.iat.matching.dictionary.nlp.NLPTools;
 import pl.polsl.iat.matching.util.Logger;
 
-import java.util.Arrays;
-
 class Lemmatizer implements TextProcessor<Words> {
 
     private final NLPLemmatizer nlpLemmatizer;

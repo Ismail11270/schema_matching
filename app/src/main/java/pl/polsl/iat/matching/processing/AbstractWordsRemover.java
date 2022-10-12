@@ -1,8 +1,6 @@
 package pl.polsl.iat.matching.processing;
 
-import org.w3c.dom.Text;
 import pl.polsl.iat.matching.util.Logger;
-import pl.polsl.iat.matching.util.MatcherSettings;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

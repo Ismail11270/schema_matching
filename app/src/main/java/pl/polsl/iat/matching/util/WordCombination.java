@@ -1,10 +1,6 @@
 package pl.polsl.iat.matching.util;
 
-import com.google.common.collect.Lists;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
-import pl.polsl.iat.matching.processing.Words;
-
-import java.util.*;
 
 public class WordCombination {
 

@@ -16,6 +16,7 @@
       <module name="dictionary" target="16" />
       <module name="model" target="16" />
       <module name="settings" target="16" />
+      <module name="starter" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>

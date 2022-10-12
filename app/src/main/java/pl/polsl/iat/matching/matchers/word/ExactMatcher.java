@@ -1,6 +1,5 @@
 package pl.polsl.iat.matching.matchers.word;
 
-import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
 import pl.polsl.iat.matching.processing.Word;
 
 class ExactMatcher extends WordMatcher {

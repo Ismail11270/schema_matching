@@ -2,14 +2,11 @@ package pl.polsl.iat.matching.executor.impl;
 
 import pl.polsl.iat.matching.core.model.result.MatchingComponent;
 import pl.polsl.iat.matching.core.model.schema.Schema;
-import pl.polsl.iat.matching.util.Logger;
 
 import java.util.ArrayList;
-import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 
 public class SchemaMatcherRunner {
 
@@ -34,8 +31,8 @@ public class SchemaMatcherRunner {
             List<Future<Integer>> futures = new ArrayList<>(service.invokeAll(
                     taskManager.getTasksForSchemaPair(schemaLeft, schemaRight,
                             schemaResultMatchingComponent)));
-            double average = futures.stream().collect(Collectors.summarizingInt(this::getFutureInt)).getAverage();
-            Logger.schema("Schema total %s", average + "");
+//            double average = futures.stream().collect(Collectors.summarizingInt(this::getFutureInt)).getAverage();
+//            Logger.schema("Schema total %s", average + "");
         } catch (Throwable t) {
             System.out.println(t.getMessage());
         } finally {

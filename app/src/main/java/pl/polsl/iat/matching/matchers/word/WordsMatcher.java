@@ -1,10 +1,10 @@
 package pl.polsl.iat.matching.matchers.word;
 
 import com.google.common.collect.Lists;
-import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
-import pl.polsl.iat.matching.matchers.Matcher;
 import pl.polsl.iat.matching.processing.Words;
 import pl.polsl.iat.matching.util.Logger;
+import pl.polsl.iat.matching.matchers.result.WordsMatchingResult;
+import pl.polsl.iat.matching.matchers.Matcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +49,12 @@ public class WordsMatcher implements Matcher<Words, WordsMatchingResult> {
         } catch (Exception e) {
             Logger.warn("Error matching raw words");
         }
-        //TODO Big regret matching empty strings
         Words smaller = A.size() < B.size() ? A : B;
         Words bigger = A.size() < B.size() ? B : A;
         int nSmaller = smaller.size(), nBigger = bigger.size();
+        if(nSmaller == 0 || nBigger == 0) {
+            return matcher.doMatch(smaller.getRawWord(), bigger.getRawWord());
+        }
         List<List<Integer>> cpResult = new ArrayList<>();
         for(int i = 0; i < nSmaller; i++) {
             List<Integer> temp = new ArrayList<>();
