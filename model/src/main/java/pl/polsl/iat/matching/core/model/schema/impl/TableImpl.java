@@ -81,7 +81,7 @@ class TableImpl implements Table {
             return this;
         }
 
-        public Builder addCharacteristics(List<Characteristic<?,?>> chList){
+        public Builder addCharacteristics(List<? extends Characteristic<?,?>> chList){
             table.characteristics.addAll(chList);
             return this;
         }

@@ -16,6 +16,10 @@ public class KeyCharacteristic implements Characteristic<TableKey, List<BaseChar
         return childCharacteristics;
     }
 
+    public String getChildValue(String key) {
+        return childCharacteristics.stream().filter(ch -> key.equals(ch.getKey())).map(BaseCharacteristic::getValue).findFirst().orElse("");
+    }
+
     @Override
     public TableKey getKey() {
         return key;

@@ -3,14 +3,17 @@ package pl.polsl.iat.matching.executor.impl;
 import pl.polsl.iat.matching.core.model.result.MatchingComponent;
 import pl.polsl.iat.matching.core.model.schema.*;
 import pl.polsl.iat.matching.matchers.ComponentMatcher;
+import pl.polsl.iat.matching.matchers.result.Results;
 import pl.polsl.iat.matching.util.Logger;
 import pl.polsl.iat.matching.util.Utils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.stream.IntStream;
 
 
 /**
@@ -31,11 +34,11 @@ public class MatchTaskManager {
         return managerInstance;
     }
 
-    public List<Callable<Boolean>> getTasksForSchemaPair(Schema first, Schema second, MatchingComponent rMatchingComponent) {
+    public List<Callable<Integer>> getTasksForSchemaPair(Schema first, Schema second, MatchingComponent rMatchingComponent) {
         Logger.schema("Started matching schemas [%s] and [%s]", first.getName(), second.getName());
         int nFirst = first.getComponents().size();
         int nSecond = second.getComponents().size();
-        List<Callable<Boolean>> subTasks = new ArrayList<>();
+        List<Callable<Integer>> subTasks = new ArrayList<>();
         for (int i = 0; i < nFirst; i++) {
             for (int j = 0; j < nSecond; j++) {
                 subTasks.add(getTaskTable(first.getComponents().get(i), second.getComponents().get(j),
@@ -48,10 +51,10 @@ public class MatchTaskManager {
         return subTasks;
     }
 
-    private Callable<Boolean> getTaskTable(Table first, Table second, MatchingComponent rMatchingComponent) {
+    private Callable<Integer> getTaskTable(Table first, Table second, MatchingComponent rMatchingComponent) {
         return () -> {
             Logger.table("Started matching tables [%s] and [%s]", first.getName(), second.getName());
-            List<Boolean> columnMatchResults = new ArrayList<>();
+            List<Integer> columnMatchResults = new ArrayList<>();
             int nFirst = first.getComponents().size();
             int nSecond = second.getComponents().size();
             for (int i = 0; i < nFirst; i++) {
@@ -62,17 +65,19 @@ public class MatchTaskManager {
             }
              rMatchingComponent.setMetadataScore(Utils.parseResult(metaMatchers.get(ComponentType.TABLE).doMatch(first,second)));
             rMatchingComponent.setMatchScore(1);
-            return true;
+            rMatchingComponent.setChildScore(BigDecimal.valueOf(columnMatchResults.stream().mapToInt(x -> x).average().orElse(0.0)));
+            return 1;
         };
     }
 
-    private Callable<Boolean> getTaskColumn(Column first, Column second, MatchingComponent rMatchingComponent) {
+    private Callable<Integer> getTaskColumn(Column first, Column second, MatchingComponent rMatchingComponent) {
         return () -> {
               Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
-            rMatchingComponent.setMatchScore(1);
-            rMatchingComponent.setMetadataScore(Utils.parseResult(metaMatchers.get(ComponentType.COLUMN).doMatch(first,second)));
+            Results results = metaMatchers.get(ComponentType.COLUMN).doMatch(first, second);
+            rMatchingComponent.setMatchScore(results.calculateResult());
+            rMatchingComponent.setMetadataScore(Utils.parseResult(results));
             Logger.column("Finished matching columns [%s] and [%s]", first.getName(), second.getName());
-            return true;
+            return results.calculateResult();
         };
     }
 

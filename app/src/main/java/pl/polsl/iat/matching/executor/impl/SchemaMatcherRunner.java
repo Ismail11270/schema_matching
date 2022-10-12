@@ -2,16 +2,20 @@ package pl.polsl.iat.matching.executor.impl;
 
 import pl.polsl.iat.matching.core.model.result.MatchingComponent;
 import pl.polsl.iat.matching.core.model.schema.Schema;
+import pl.polsl.iat.matching.util.Logger;
 
 import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 public class SchemaMatcherRunner {
 
     private final Schema schemaLeft, schemaRight;
 
-    private final ComponentMatchingExecutor service;
+    private ComponentMatchingExecutor service;
 
     private final MatchingComponent schemaResultMatchingComponent;
 
@@ -21,25 +25,32 @@ public class SchemaMatcherRunner {
         this.schemaLeft = left;
         this.schemaRight = right;
         this.schemaResultMatchingComponent = schemaResultMatchingComponent;
-        this.service = ExecutorServiceHolder.getInstance().getAvailableExecutor();
     }
 
     public void run() {
         try {
+            this.service = ExecutorServiceHolder.getInstance().getAvailableExecutor();
             MatchTaskManager taskManager = MatchTaskManager.getInstance();
-            List<Future<Boolean>> futures = new ArrayList<>(service.invokeAll(
+            List<Future<Integer>> futures = new ArrayList<>(service.invokeAll(
                     taskManager.getTasksForSchemaPair(schemaLeft, schemaRight,
                             schemaResultMatchingComponent)));
-
-
-//            taskManager.getTasksForSchemaPair(schemaLeft, schemaRight,
-//                    schemaResultMatchingComponent).forEach(service::submit);
-//            service.awaitTermination(20, TimeUnit.SECONDS);
-//            service.shutdown();
+            double average = futures.stream().collect(Collectors.summarizingInt(this::getFutureInt)).getAverage();
+            Logger.schema("Schema total %s", average + "");
         } catch (Throwable t) {
             System.out.println(t.getMessage());
         } finally {
-//            service.shutdownNow();
+            service.shutdownNow();
         }
+    }
+
+    private Integer getFutureInt(Future<Integer> futureInt) {
+        try {
+            if(futureInt.isDone() && !futureInt.isCancelled()) {
+                return futureInt.get();
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

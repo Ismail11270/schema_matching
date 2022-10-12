@@ -18,9 +18,4 @@ public class ExecutorFactory {
         return runners;
     }
 
-
-
-//    public static MatcherRunner newTableMatchingExecutor(Table left, Table right, MatchingResult mainResult) {
-//        return new MatcherRunner(List.of(left,right));
-//    }
 }

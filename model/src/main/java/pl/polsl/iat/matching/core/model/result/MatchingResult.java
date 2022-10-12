@@ -6,6 +6,7 @@
 //
 package pl.polsl.iat.matching.core.model.result;
 
+import com.google.common.collect.Lists;
 import pl.polsl.iat.matching.core.exception.MatchingException;
 
 import javax.xml.bind.JAXBContext;
@@ -13,13 +14,18 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
 import java.io.File;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * <p>Java class for matching-result complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="matching-result"&gt;
  *   &lt;complexContent&gt;
@@ -32,8 +38,8 @@ import java.util.List;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "matching-result", propOrder = {
@@ -47,11 +53,11 @@ public class MatchingResult {
 
     /**
      * Gets the value of the component property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Component }
-     *     
+     *
      */
     public List<Component> getComponents() {
         return components;
@@ -59,11 +65,11 @@ public class MatchingResult {
 
     /**
      * Sets the value of the component property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Component }
-     *     
+     *
      */
     public void setComponents(List<Component> value) {
         this.components = value;
@@ -71,11 +77,11 @@ public class MatchingResult {
 
     /**
      * Gets the value of the matchingComponent property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link MatchingComponent }
-     *     
+     *
      */
 //    public MatchingComponent getMatchingComponent() {
 //        return matchingComponent;
@@ -83,10 +89,10 @@ public class MatchingResult {
 
     /**
      * Sets the value of the matchingComponent property.
-     * 
+     *
      *     allowed object is
      *     {@link MatchingComponent }
-     *     
+     *
      */
 //    public void setMatchingComponent(MatchingComponent value) {
 //        this.matchingComponent = value;
@@ -102,4 +108,55 @@ public class MatchingResult {
             throw new MatchingException("Failed to write result file to " + filePath, e);
         }
     }
+
+    /**
+     * Schema1
+     *  Schema2
+     *    Schema1.Table1
+     *      Schema2.Table1
+     *        Schema1.Table1.Column1
+     *          Schema2.Table2.Column1
+     *          Schema2.Table2.Column2
+     *          Schema2.Table2.Column3
+     *        Schema1.Table1.Column2
+     *          .....
+     *        Schema1.Table1.Column3
+     *          ....
+     *      Schema2.Table2
+     *
+     *      Schema2.Table3
+     *  Schema3
+     */
+//    public void evaluate() {
+//        for (Component schema : components) {
+//            evaluateChildren(schema);
+//        }
+//    }
+
+//
+//    public void evaluateChildren(Component component) {
+//        for (MatchingComponent schemaMatch : component.getMatchingComponent()) {
+//            List<List<BigDecimal>> lists = new ArrayList<>();
+//            for (Component table : schemaMatch.getComponent()) {
+//                if(table.type != ResultComponentType.COLUMN)
+//                    evaluateChildren(table);
+//                List<BigDecimal> list = new ArrayList<>();
+//                for (MatchingComponent tableMatch : table.getMatchingComponent()) {
+//                    list.add(tableMatch.getMetadataScore());
+//                }
+//                lists.add(list);
+//            }
+//
+//            List<List<BigDecimal>> lists1 = Lists.cartesianProduct(lists);
+//
+//            Double max = lists1.stream()
+//                    .map(list ->
+//                            list.stream()
+//                                    .collect(Collectors.summarizingDouble(BigDecimal::doubleValue))
+//                                    .getAverage())
+//                    .max(Double::compareTo).orElse(0.0);
+//            schemaMatch.setChildScore(new BigDecimal(max));
+//        }
+//    }
+
 }

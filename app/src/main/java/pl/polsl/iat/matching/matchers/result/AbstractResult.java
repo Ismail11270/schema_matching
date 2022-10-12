@@ -1,7 +1,7 @@
 package pl.polsl.iat.matching.matchers.result;
 
-public abstract class AbstractResult {
+public abstract class AbstractResult<T> {
 
-    public abstract int getResult();
+    public abstract T getResult();
     public abstract float getWeight();
 }

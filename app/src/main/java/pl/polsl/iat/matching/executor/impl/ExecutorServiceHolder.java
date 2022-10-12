@@ -36,12 +36,5 @@ public class ExecutorServiceHolder{
 
     public void initiateShutdown() {
         availableExecutor.shutdown();
-        try {
-            if (!availableExecutor.awaitTermination(SHUTDOWN_TIMEOUT, TimeUnit.SECONDS)) {
-                availableExecutor.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            availableExecutor.shutdownNow();
-        }
     }
 }

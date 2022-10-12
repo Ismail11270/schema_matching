@@ -9,7 +9,6 @@ public class ColumnCharacteristic implements BaseCharacteristic<ColumnCharacteri
 
     private ColumnCharacteristicType key;
     private String value;
-    private CharacteristicType type;
 
     public ColumnCharacteristic(ColumnCharacteristicType key, String value){
         this.key = key;
@@ -28,7 +27,7 @@ public class ColumnCharacteristic implements BaseCharacteristic<ColumnCharacteri
 
     @Override
     public CharacteristicType getCharacteristicType() {
-        return null;
+        return key.getGeneralType();
     }
 
     @Override

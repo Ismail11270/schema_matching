@@ -31,9 +31,11 @@ class TableExtractor {
         try {
             builder.setName(tableName);
             builder.setTableSchema(tableSchemaName);
-            ColumnsGenerator generator = new ColumnsGenerator(metaData, schema, tableName);
-            builder.addCharacteristics(loadKeyInfo(TableKey.PK, metaData, schema, tableName, tableSchemaName));
-            builder.addCharacteristics(loadKeyInfo(TableKey.FK, metaData, schema, tableName, tableSchemaName));
+            List<KeyCharacteristic> primaryKeyCh = loadKeyInfo(TableKey.PK, metaData, schema, tableName, tableSchemaName);
+            List<KeyCharacteristic> foreignKeyCh = loadKeyInfo(TableKey.FK, metaData, schema, tableName, tableSchemaName);
+            builder.addCharacteristics(primaryKeyCh);
+            builder.addCharacteristics(foreignKeyCh);
+            ColumnsGenerator generator = new ColumnsGenerator(metaData, schema, tableName, primaryKeyCh, foreignKeyCh);
             builder.setColumns(Stream.generate(generator).takeWhile(generator));
         } catch (Exception e) {
             throw new DatabaseException("Failed to acquire columns metadata", e);
@@ -41,9 +43,9 @@ class TableExtractor {
         return builder.build();
     }
 
-    private List<Characteristic<?, ?>> loadKeyInfo(TableKey key, DatabaseMetaData metaData, String schema, String tableName, String tableSchemaName) throws SQLException {
+    private List<KeyCharacteristic> loadKeyInfo(TableKey key, DatabaseMetaData metaData, String schema, String tableName, String tableSchemaName) throws SQLException {
         ResultSet rs = getRsForKeyType(key, metaData, schema, tableName, tableSchemaName);
-        List<Characteristic<?,?>> chList = new ArrayList<>();
+        List<KeyCharacteristic> chList = new ArrayList<>();
         while (rs.next()){
             chList.add(buildKeyChar(rs, key));
         }

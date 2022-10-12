@@ -1,8 +1,9 @@
 package pl.polsl.iat.matching.matchers;
 
+import pl.polsl.iat.matching.core.model.schema.Schema;
 import pl.polsl.iat.matching.core.util.Const;
 
-public class SchemaMatcher extends ComponentMatcher {
+public class SchemaMatcher extends ComponentMatcher<Schema> {
 
     private static final SchemaMatcher instance = new SchemaMatcher();
     public static SchemaMatcher getInstance() {

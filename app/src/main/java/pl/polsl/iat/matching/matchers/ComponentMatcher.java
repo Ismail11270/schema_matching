@@ -16,7 +16,7 @@ import java.util.Map;
  * ComponentMatcher only does name matching so far
  * TODO add metadata matching
  */
-public abstract class ComponentMatcher implements Matcher<Component, Results> {
+public abstract class ComponentMatcher<T extends Component> implements Matcher<T, Results> {
 
 //    private static final ComponentMatcher instance = new ComponentMatcher();
 
@@ -35,7 +35,7 @@ public abstract class ComponentMatcher implements Matcher<Component, Results> {
     private final WordsMatcher wordsMatcher = WordsMatcherFactory.getWordsMatcher();
 
     @Override
-    public Results doMatch(Component left, Component  right) {
+    public Results doMatch(T left, T  right) {
         //Combined results for all characteristics
         Results results = new Results();
 
@@ -54,6 +54,7 @@ public abstract class ComponentMatcher implements Matcher<Component, Results> {
         Words leftWords = strProc.process(left.get(getNameCharacteristicsKey()).getValue());
         Words rightWords = strProc.process(right.get(getNameCharacteristicsKey()).getValue());
         WordsMatchingResult nameMatchingResult = wordsMatcher.doMatch(leftWords, rightWords);
+
         results.add(nameMatchingResult);
     }
 

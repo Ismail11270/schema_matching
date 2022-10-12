@@ -7,7 +7,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
-import pl.polsl.iat.matching.matchers.word.WordsMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
 import pl.polsl.iat.matching.processing.ProcessorType;
 
@@ -17,7 +16,7 @@ import java.util.*;
 
 public class MatcherSettings {
 
-    public enum MatchingOptions {
+    public enum MatchingOption {
         INCLUDE_CHILDREN,
         METADATA,
         COMBINED
@@ -97,8 +96,11 @@ public class MatcherSettings {
         return loadToRam;
     }
 
-    private final List<MatchingOptions> availableMatchingOptions = new ArrayList<>();
+    private final List<MatchingOption> availableMatchingOptions = new ArrayList<>();
 
+    public boolean checkMatchingOption(MatchingOption option) {
+        return availableMatchingOptions.contains(option);
+    }
 
     static {
         settingsInstance = new MatcherSettings();
@@ -138,7 +140,7 @@ public class MatcherSettings {
             NodeList components = extraMatching.getElementsByTagName(Const.SettingsXml.MATCHING_COMPONENT_TAG);
             for (int i = 0; i < components.getLength(); i++) {
                 try {
-                    MatchingOptions matchingOption = MatchingOptions.valueOf(components.item(i).getTextContent().toUpperCase());
+                    MatchingOption matchingOption = MatchingOption.valueOf(components.item(i).getTextContent().toUpperCase());
                     settingsInstance.availableMatchingOptions.add(matchingOption);
                 } catch (IllegalArgumentException iae) {
                     System.err.println("Failed to read matching options configuration: \n" + iae.getMessage());

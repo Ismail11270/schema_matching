@@ -4,7 +4,7 @@ package pl.polsl.iat.matching.matchers.result;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
 
 
-public class WordsMatchingResult extends AbstractResult {
+public class WordsMatchingResult extends AbstractResult<Integer> {
 
     private int result;
     private WordMatcher.Type type;
@@ -14,7 +14,7 @@ public class WordsMatchingResult extends AbstractResult {
     }
 
     @Override
-    public int getResult() {
+    public Integer getResult() {
         return result;
     }
 

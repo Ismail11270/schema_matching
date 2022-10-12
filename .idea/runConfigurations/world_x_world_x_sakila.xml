@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="sakila_x_sakila" type="Application" factoryName="Application">
+  <configuration default="false" name="world_x_world_x_sakila" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="16" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <envs>
