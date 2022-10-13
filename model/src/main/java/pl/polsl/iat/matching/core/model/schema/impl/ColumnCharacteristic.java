@@ -31,6 +31,20 @@ public class ColumnCharacteristic implements BaseCharacteristic<ColumnCharacteri
     }
 
     @Override
+    public int match(BaseCharacteristic<?> o) {
+        if(value == null || o.getValue() == null) {
+            return 0;
+        }
+        if(key == ColumnCharacteristicType.FOREIGN_KEY || key == ColumnCharacteristicType.PRIMARY_KEY) {
+            boolean left = Boolean.parseBoolean(value);
+            boolean right = Boolean.parseBoolean(o.getValue());
+            return left && right ? 1 : !left && !right ? 0 : -1;
+        } else {
+            return value.equals(o.getValue()) ? 1 : -1;
+        }
+    }
+
+    @Override
     public String toString() {
         return key + "=" + value;
     }

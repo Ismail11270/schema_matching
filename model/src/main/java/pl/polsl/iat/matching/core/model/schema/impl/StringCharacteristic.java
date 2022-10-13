@@ -35,6 +35,11 @@ public class StringCharacteristic implements BaseCharacteristic<String> {
     }
 
     @Override
+    public int match(BaseCharacteristic<?> o) {
+        return value.equals(o.getValue()) ? 1 : -1;
+    }
+
+    @Override
     public String toString() {
         return key + "=" + value;
     }

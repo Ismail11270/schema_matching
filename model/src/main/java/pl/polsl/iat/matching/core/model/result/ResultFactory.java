@@ -54,33 +54,39 @@ public class ResultFactory {
             Component schema = factory.createComponent();
             schema.type = ResultComponentType.SCHEMA;
             schema.name = schemas[jj].getName();
+            schema.id = "c" + jj;
             for (int ii = jj+1; ii < schemas.length; ii++) {
                 var schemaMatch = factory.createComponentMatch();
                 schemaMatch.type = ResultComponentType.SCHEMA;
                 schemaMatch.name = schemas[ii].getName();
                 schemaMatch.matchScore = BigDecimal.valueOf(0);
+                schemaMatch.id = "" + ii;
                 for (int i = 0; i < schemas[jj].getComponents().size(); i++) {
                     var table = factory.createComponent();
                     Table t0 = schemas[jj].getComponents().get(i);
                     table.name = t0.getName();
                     table.type = ResultComponentType.TABLE;
+                    table.id = schema.id + "." + i;
                     for (int j = 0; j < schemas[ii].getComponents().size(); j++) {
                         Table t1 = schemas[ii].getComponents().get(j);
                         var matchTable = factory.createComponentMatch();
                         matchTable.name = t1.getName();
                         matchTable.type = ResultComponentType.TABLE;
                         matchTable.matchScore = BigDecimal.valueOf(0);
+                        matchTable.id = ii + "." + j;
                         for (int k = 0; k < t0.getComponents().size(); k++) {
                             Column c0 = t0.getComponents().get(k);
                             var column = factory.createComponent();
                             column.name = c0.getName();
                             column.type = ResultComponentType.COLUMN;
+                            column.id = table.id + "." + k;
                             for (int l = 0; l < t1.getComponents().size(); l++) {
                                 Column c1 = t1.getComponents().get(l);
                                 var columnMatch = factory.createComponentMatch();
                                 columnMatch.name = c1.getName();
                                 columnMatch.type = ResultComponentType.COLUMN;
                                 columnMatch.matchScore = BigDecimal.valueOf(0);
+                                columnMatch.id = ii + "." + j + "." + l;
                                 column.matchingComponent.add(columnMatch);
                             }
                             matchTable.component.add(column);

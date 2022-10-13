@@ -37,11 +37,11 @@ public class ColumnMatcher extends ComponentMatcher<Column> {
     private void compareCharacteristics(ColumnCharacteristicType type, BaseCharacteristic<?> left, BaseCharacteristic<?> right, Results results) {
         if(left == null || right == null)
             return;
-        String valLeft = left.getValue();
-        String valRight = right.getValue();
-        if(valLeft == null || valRight == null) {
-            return;
-        }
-        results.add(new CharacteristicsResult(type, valLeft.equals(valRight)));
+//        String valLeft = left.getValue();
+//        String valRight = right.getValue();
+//        if(valLeft == null || valRight == null) {
+//            return;
+//        }
+        results.add(new CharacteristicsResult(type, left.match(right)));
     }
 }

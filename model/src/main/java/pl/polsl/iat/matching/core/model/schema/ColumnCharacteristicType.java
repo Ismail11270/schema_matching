@@ -31,7 +31,7 @@ public enum ColumnCharacteristicType {
     }
 
     static {
-        typesToCompare = List.of(DATA_TYPE, COLUMN_DEF, IS_NULLABLE, PRIMARY_KEY, FOREIGN_KEY);
+        typesToCompare = List.of(DATA_TYPE, COLUMN_DEF, PRIMARY_KEY, FOREIGN_KEY);
     }
     public static final List<ColumnCharacteristicType> typesToCompare;
 }

@@ -5,7 +5,7 @@ public enum CharacteristicType {
     TableName(1f, 1f), TableSchemaName(0.1f), ColumnName(0.2f),
     Type(0.05f, 0.5f), AutoIncrement(0.1f),
     Date(0.01f), PrimaryKey(0.8f, 0.8f),
-    ForeignKey(0.3f, 0.3f), Default(0.3f, 0.1f),
+    ForeignKey(0.3f, 0.3f), Default(0.3f, 0.03f),
     Nullable(0.1f, 0.1f), Other(0), Ignored(-1);
 
     private final float positiveCoef;

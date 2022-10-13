@@ -2,18 +2,18 @@ package pl.polsl.iat.matching.matchers.result;
 
 import pl.polsl.iat.matching.core.model.schema.ColumnCharacteristicType;
 
-public class CharacteristicsResult extends AbstractResult<Boolean> {
+public class CharacteristicsResult extends AbstractResult<Integer> {
 
-    private final boolean result;
+    private final int result;
     private final ColumnCharacteristicType type;
 
-    public CharacteristicsResult(ColumnCharacteristicType type, boolean result) {
+    public CharacteristicsResult(ColumnCharacteristicType type, int result) {
         this.result = result;
         this.type = type;
     }
 
     @Override
-    public Boolean getResult() {
+    public Integer getResult() {
         return result;
     }
 

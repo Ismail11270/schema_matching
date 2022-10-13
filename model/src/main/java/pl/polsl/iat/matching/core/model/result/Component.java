@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>Java class for component complex type.
@@ -45,6 +46,20 @@ public class Component {
     protected ResultComponentType type;
     @XmlAttribute(name = "name", required = true)
     protected String name;
+
+    @XmlAttribute(name = "id", required = true)
+    protected String id;
+
+    @XmlAttribute(name = "score")
+    protected Integer score;
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
 
     @XmlTransient
     public MatchingComponent selectedComponent;
@@ -130,4 +145,24 @@ public class Component {
         this.name = value;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Component component = (Component) o;
+        return id.equals(component.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

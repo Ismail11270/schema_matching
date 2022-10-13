@@ -52,7 +52,7 @@ public class App {
 
         //Saving result
         startTime = System.currentTimeMillis();
-//        matchingResult.evaluate();
+        matchingResult.evaluate();
         matchingResult.save(getResultFile());
         long resultProcessingTime = System.currentTimeMillis() - startTime;
         //Saving result done

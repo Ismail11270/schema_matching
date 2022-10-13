@@ -30,10 +30,10 @@ public class Results {
                 return calculatedResult;
             for (AbstractResult<?> absChResult : absChResults) {
                 var chResult = (CharacteristicsResult) absChResult;
-                if(chResult.getResult()) {
+                if(chResult.getResult() == 1) {
                     float res_ = 100 - calculatedResult;
                     calculatedResult += (int) (res_*chResult.getType().getGeneralType().getPositiveCoef());
-                } else {
+                } else if(chResult.getResult() == -1) {
                     calculatedResult -= (int) (calculatedResult*chResult.getType().getGeneralType().getNegativeCoef());
                 }
             }

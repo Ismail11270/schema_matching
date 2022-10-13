@@ -10,4 +10,5 @@ public interface BaseCharacteristic<U> extends Characteristic<U,String>{
     U getKey();
     CharacteristicType getCharacteristicType();
 
+    int match(BaseCharacteristic<?> o);
 }

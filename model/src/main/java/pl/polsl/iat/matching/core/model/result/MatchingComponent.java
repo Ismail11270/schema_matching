@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -56,8 +57,17 @@ public class MatchingComponent {
     @XmlAttribute(name = "metadataScore", required = false)
     protected BigDecimal metadataScore;
     @XmlAttribute(name = "combinedScore", required = false)
-    protected BigDecimal combinedScore;
+    protected Integer combinedScore;
+    @XmlAttribute(name = "id", required = true)
+    protected String id;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     /**
      * Gets the value of the component property.
      * 
@@ -159,12 +169,12 @@ public class MatchingComponent {
         this.matchScore = BigDecimal.valueOf(value);
     }
 
-    public BigDecimal getCombinedScore() {
+    public Integer getCombinedScore() {
         return this.combinedScore;
     }
 
-    public void setCombinedScore(float value) {
-        this.combinedScore = BigDecimal.valueOf(value);
+    public void setCombinedScore(int value) {
+        this.combinedScore = value;
     }
 
     public void setMatchScore(BigDecimal matchScore) {
@@ -186,5 +196,18 @@ public class MatchingComponent {
     public boolean setMetadataScore(BigDecimal metadataScore) {
         this.metadataScore = metadataScore;
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchingComponent matchingComponent = (MatchingComponent) o;
+        return id.equals(matchingComponent.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

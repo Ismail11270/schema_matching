@@ -127,7 +127,47 @@ public class MatchingResult {
      */
     public void evaluate() {
         for (Component schema : components) {
-            evaluateChildren(schema);
+            for (MatchingComponent schemaMatch : schema.getMatchingComponent()) {
+                for (Component table : schemaMatch.getComponent()) {
+                    for (MatchingComponent tableMatch : table.getMatchingComponent()) {
+                        Map<String, String> matchMap = new TreeMap<>();
+//                        List<List<Integer>> combinations = new ArrayList<>();
+                        List<Component> columns = tableMatch.getComponent();
+//                        List<String> columnsToMatch = columns.stream().map(Component::getName).toList();
+                        int total = 0;
+                        for(Component column : columns) {
+
+                            List<MatchingComponent> columnMatches = getMatchingComponentSorted(column);
+                            int i = 0;
+                            int result = columnMatches.get(i).getMetadataScore().intValue();
+                            while (matchMap.containsKey(columnMatches.get(i).name) && i < columnMatches.size() - 1) {
+                                i++;
+                                result += columnMatches.get(i).getMetadataScore().intValue();
+                            }
+                            matchMap.put(column.name, columnMatches.get(i).name);
+                            total+=result;
+                            column.setScore(result);
+                        }
+                        tableMatch.setCombinedScore(total/columns.size());
+                    }
+
+//                for (MatchingComponent childMatchingComponent : childComponent.getMatchingComponent()) {
+
+//                    list.add(childMatchingComponent.getMetadataScore());
+
+//                }
+                }
+
+//            List<List<BigDecimal>> lists1 = Lists.cartesianProduct(lists);
+
+//            Double max = lists1.stream()
+//                    .map(list ->
+//                            list.stream()
+//                                    .collect(Collectors.summarizingDouble(BigDecimal::doubleValue))
+//                                    .getAverage())
+//                    .max(Double::compareTo).orElse(0.0);
+//            parentComponentMatch.setChildScore(new BigDecimal(max));
+            }
         }
     }
 
@@ -217,9 +257,11 @@ public class MatchingResult {
     public void evaluateChildren(Component parentComponent) {
         for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
             List<List<Integer>> combinations = new ArrayList<>();
+            Map<String, String> matchMap = new HashMap<>();
             for (Component childComponent : parentComponentMatch.getComponent()) {
                 if(childComponent.type != ResultComponentType.COLUMN)
                     evaluateChildren(childComponent);
+
                 List<MatchingComponent> childMatchingComponents = getMatchingComponentSorted(childComponent);
 
 //                for (MatchingComponent childMatchingComponent : childComponent.getMatchingComponent()) {
@@ -240,6 +282,7 @@ public class MatchingResult {
 //            parentComponentMatch.setChildScore(new BigDecimal(max));
         }
     }
+
 
     public void evaluateChildren1(Component parentComponent) {
         for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
