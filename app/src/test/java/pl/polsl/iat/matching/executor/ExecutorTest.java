@@ -39,7 +39,7 @@ public class ExecutorTest {
         long start = System.currentTimeMillis();
         new ResultFactory()
                 .createMatchingResult(parametersResolver.getConnectionProperties().stream()
-                        .map(p -> new SchemaExtractor(p).load(MatcherSettings.getSettings().getLoaderMode()))
+                        .map(p -> new SchemaExtractor(p).load())
                         .toArray(Schema[]::new))
                 .save("..\\result\\actual-result.xml");
         System.out.println("Time taken = " + (System.currentTimeMillis() - start));

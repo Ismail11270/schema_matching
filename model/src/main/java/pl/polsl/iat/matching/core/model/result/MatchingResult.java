@@ -15,9 +15,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
 import java.io.File;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -127,36 +125,145 @@ public class MatchingResult {
      *      Schema2.Table3
      *  Schema3
      */
-//    public void evaluate() {
-//        for (Component schema : components) {
-//            evaluateChildren(schema);
-//        }
-//    }
+    public void evaluate() {
+        for (Component schema : components) {
+            evaluateChildren(schema);
+        }
+    }
 
-//
-//    public void evaluateChildren(Component component) {
-//        for (MatchingComponent schemaMatch : component.getMatchingComponent()) {
-//            List<List<BigDecimal>> lists = new ArrayList<>();
-//            for (Component table : schemaMatch.getComponent()) {
-//                if(table.type != ResultComponentType.COLUMN)
-//                    evaluateChildren(table);
-//                List<BigDecimal> list = new ArrayList<>();
-//                for (MatchingComponent tableMatch : table.getMatchingComponent()) {
-//                    list.add(tableMatch.getMetadataScore());
+
+    private List<MatchingComponent> getMatchingComponentSorted(Component component) {
+        if(!component.sorted) {
+            component.getMatchingComponent().sort((o1, o2) -> Comparator.comparing(MatchingComponent::getMetadataScore).reversed().compare(o1,o2));
+            component.sorted = true;
+        }
+        return component.getMatchingComponent();
+    }
+    /**
+     * <strong>Schema Structure</strong>
+     * A
+     *  A.AA
+     *   A.AA.A
+     *   A.AA.B
+     *   A.AA.C
+     *  A.AB
+     *   A.AB.A
+     *   A.AB.B
+     *   A.AB.C
+     *
+     * B
+     *  B.AA
+     *   B.AA.A
+     *   B.AA.B
+     *   B.AA.C
+     *  B.AB
+     *   B.AB.A
+     *   B.AB.B
+     *   B.AB.C
+     *
+     *
+     *   A.AA -- B.AA
+     *     A.AA.A -- B.AA.A
+     *     A.AA.A -- B.AA.B
+     *     A.AA.A -- B.AA.C
+     *     A.AA.B -- B.AA.A
+     *     A.AA.B -- B.AA.B
+     *     A.AA.B -- B.AA.C
+     *     A.AA.C -- B.AA.A
+     *     A.AA.C -- B.AA.B
+     *     A.AA.C -- B.AA.C
+     *
+     *   A.AA -- B.AB
+     *     A.AA.A -- B.AB.A
+     *     A.AA.A -- B.AB.B
+     *     A.AA.A -- B.AB.C
+     *     A.AA.B -- B.AB.A
+     *     A.AA.B -- B.AB.B
+     *     A.AA.B -- B.AB.C
+     *     A.AA.C -- B.AB.A
+     *     A.AA.C -- B.AB.B
+     *     A.AA.C -- B.AB.C
+     *
+     *   A.AB -- B.AA
+     *     A.AB.A -- B.AA.A
+     *     A.AB.A -- B.AA.B
+     *     A.AB.A -- B.AA.C
+     *     A.AB.B -- B.AA.A
+     *     A.AB.B -- B.AA.B
+     *     A.AB.B -- B.AA.C
+     *     A.AB.C -- B.AA.A
+     *     A.AB.C -- B.AA.B
+     *     A.AB.C -- B.AA.C
+     *
+     *   A.AB -- B.AB
+     *     A.AB.A -- B.AB.A
+     *     A.AB.A -- B.AB.B
+     *     A.AB.A -- B.AB.C
+     *     A.AB.B -- B.AB.A
+     *     A.AB.B -- B.AB.B
+     *     A.AB.B -- B.AB.C
+     *     A.AB.C -- B.AB.A
+     *     A.AB.C -- B.AB.B
+     *     A.AB.C -- B.AB.C
+     *
+     * parentComponenet -                                               A - schema, A.AA, A.AB - tables
+     * parentComponentMatch - each pair for that component              B - schema, B.AA, B.AB - tables
+     * childComponent - table for schema, and column for table parent   A.AA, A.AB - tables; A.AA.A, A.AA.B, A.AA.C, A.AB.A, A.AB.B, A.AB.C
+     * childMatchingComponent - tableMatch or columnMatch               B.AA, B.AB - tables; B.AA.A, B.AA.B, B.AA.C, B.AB.A, B.AB.B, B.AB.C
+     *
+     * @param parentComponent - schema or table, those components that have child components
+     *
+     */
+    public void evaluateChildren(Component parentComponent) {
+        for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
+            List<List<Integer>> combinations = new ArrayList<>();
+            for (Component childComponent : parentComponentMatch.getComponent()) {
+                if(childComponent.type != ResultComponentType.COLUMN)
+                    evaluateChildren(childComponent);
+                List<MatchingComponent> childMatchingComponents = getMatchingComponentSorted(childComponent);
+
+//                for (MatchingComponent childMatchingComponent : childComponent.getMatchingComponent()) {
+
+//                    list.add(childMatchingComponent.getMetadataScore());
+
 //                }
-//                lists.add(list);
-//            }
-//
+            }
+
 //            List<List<BigDecimal>> lists1 = Lists.cartesianProduct(lists);
-//
+
 //            Double max = lists1.stream()
 //                    .map(list ->
 //                            list.stream()
 //                                    .collect(Collectors.summarizingDouble(BigDecimal::doubleValue))
 //                                    .getAverage())
 //                    .max(Double::compareTo).orElse(0.0);
-//            schemaMatch.setChildScore(new BigDecimal(max));
-//        }
-//    }
+//            parentComponentMatch.setChildScore(new BigDecimal(max));
+        }
+    }
+
+    public void evaluateChildren1(Component parentComponent) {
+        for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
+            List<List<BigDecimal>> lists = new ArrayList<>();
+            for (Component childComponent : parentComponentMatch.getComponent()) {
+                if(childComponent.type != ResultComponentType.COLUMN)
+                    evaluateChildren(childComponent);
+                List<BigDecimal> list = new ArrayList<>();
+                for (MatchingComponent childMatchingComponent : childComponent.getMatchingComponent()) {
+                    list.add(childMatchingComponent.getMetadataScore());
+                }
+                lists.add(list);
+            }
+
+            List<List<BigDecimal>> lists1 = Lists.cartesianProduct(lists);
+
+            Double max = lists1.stream()
+                    .map(list ->
+                            list.stream()
+                                    .collect(Collectors.summarizingDouble(BigDecimal::doubleValue))
+                                    .getAverage())
+                    .max(Double::compareTo).orElse(0.0);
+            parentComponentMatch.setChildScore(new BigDecimal(max));
+        }
+    }
 
 }

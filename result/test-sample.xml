@@ -3,29 +3,19 @@
     <component type="schema" name="Schema_1">
         <matching-component type="schema" name="Schema_2">
             <component type="table" name="Schema_1.Table_0">
-                <matching-component type="table" name="Schema_2.Table_0" match="0.9000000357627869">
-                    <component type="column" name="Schema_1.Table_0.Column_0"/>
-                    <component type="column" name="Schema_1.Table_0.Column_1"/>
-                </matching-component>
-                <matching-component type="table" name="Schema_2.Table_1" match="0.30000001192092896">
-                    <component type="column" name="Schema_1.Table_0.Column_0">
-                        <matching-component type="column" name="Schema_2.Table_1.Column_0" match="0.699999988079071"/>
-                    </component>
-                    <component type="column" name="Schema_1.Table_0.Column_1">
-                        <matching-component type="column" name="Schema_2.Table_1.Column_0" match="0.0"/>
-                    </component>
-                </matching-component>
-                <matching-component type="table" name="Schema_2.Table_2" match="0.10000000149011612"/>
-                <matching-component type="table" name="Schema_2.Table_3" match="0.699999988079071"/>
+                <matching-component type="table" name="Schema_2.Table_0" matchScore="0.20000000298023224"/>
             </component>
-            <component type="table" name="Schema_1.Table_1">
-                <matching-component type="table" name="Schema_2.Table_0" match="0.0">
-                    <component type="column" name="Schema_1.Table_1.Column_0">
-                        <matching-component type="column" name="Schema_2.Table_0.Column_0" match="0.699999988079071"/>
+            <component type="table" name="Schema_1.Table_1"/>
+            <component type="table" name="Schema_1.Table_2">
+                <matching-component type="table" name="Schema_2.Table_0" matchScore="0.30000001192092896">
+                    <component type="column" name="Schema_1.Table_2.Column_0">
+                        <matching-component type="column" name="Schema_2.Table_0.Column_0" matchScore="0.10000000149011612"/>
+                        <matching-component type="column" name="Schema_2.Table_0.Column_1" matchScore="0.6000000238418579"/>
                     </component>
-                    <component type="column" name="Schema_1.Table_1.Column_1">
-                        <matching-component type="column" name="Schema_2.Table_0.Column_0" match="0.30000001192092896"/>
-                    </component>
+                </matching-component>
+                <matching-component type="table" name="Schema_2.Table_1" matchScore="0.6000000238418579">
+                    <component type="column" name="Schema_1.Table_2.Column_0"/>
+                    <component type="column" name="Schema_1.Table_2.Column_1"/>
                 </matching-component>
             </component>
         </matching-component>

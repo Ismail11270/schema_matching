@@ -54,8 +54,8 @@ class SchemaImpl implements Schema {
         private final SchemaImpl schema = new SchemaImpl();
         private final SchemaExtractor.Mode loaderMode;
 
-        public Builder(SchemaExtractor.Mode loaderMode){
-            this.loaderMode = Objects.requireNonNull(loaderMode);
+        public Builder(){
+            this.loaderMode = Objects.requireNonNull(SchemaExtractor.Mode.EAGER);
         }
 
         public Builder setName(String schemaName){

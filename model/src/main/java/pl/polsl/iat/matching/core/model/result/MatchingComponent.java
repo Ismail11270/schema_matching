@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>Java class for matching-component complex type.
@@ -179,7 +180,7 @@ public class MatchingComponent {
     }
 
     public BigDecimal getMetadataScore() {
-        return metadataScore;
+        return Optional.ofNullable(metadataScore).orElse(BigDecimal.ZERO);
     }
 
     public boolean setMetadataScore(BigDecimal metadataScore) {

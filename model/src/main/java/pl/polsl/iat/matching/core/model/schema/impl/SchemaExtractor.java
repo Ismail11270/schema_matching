@@ -25,13 +25,13 @@ public class SchemaExtractor {
         this.schemaName = properties.getSchemaName();
     }
 
-    public Schema load(Mode extractionMode) throws SchemaExtractorException {
-        SchemaImpl.Builder builder = new SchemaImpl.Builder(extractionMode);
+    public Schema load() throws SchemaExtractorException {
+        SchemaImpl.Builder builder = new SchemaImpl.Builder();
         try {
             SchemaConnection connection = ConnectionFactory.getSchemaConnection(this.properties);
             this.metaData = connection.getMetadata();
             builder.setName(schemaName);
-            TablesGenerator tablesGenerator = new TablesGenerator(metaData, schemaName, extractionMode);
+            TablesGenerator tablesGenerator = new TablesGenerator(metaData, schemaName);
             builder.setTablesSource(Stream.generate(tablesGenerator).takeWhile(tablesGenerator));
             return builder.build();
         } catch (DatabaseException de) {

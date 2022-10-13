@@ -20,8 +20,8 @@ class TablesGenerator implements Supplier<Table>, Predicate<Table> {
 
     private Status status = Status.CONTINUE;
 
-    TablesGenerator(DatabaseMetaData metaData, String schemaName, SchemaExtractor.Mode extractionMode) {
-        this.tableExtractor = new TableExtractor(metaData, schemaName, extractionMode);
+    TablesGenerator(DatabaseMetaData metaData, String schemaName) {
+        this.tableExtractor = new TableExtractor(metaData, schemaName);
         try {
             this.tablesRs = metaData.getTables(schemaName, null, null, new String[]{"TABLE"});
         } catch (SQLException e) {

@@ -26,7 +26,7 @@
 
 		<matcher>
 			<type>semantic</type>
-			<active>TRUE</active>
+			<active>false</active>
 		</matcher>
 	</word-matchers>
 

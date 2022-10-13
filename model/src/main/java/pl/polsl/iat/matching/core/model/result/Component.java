@@ -46,6 +46,10 @@ public class Component {
     @XmlAttribute(name = "name", required = true)
     protected String name;
 
+    @XmlTransient
+    public MatchingComponent selectedComponent;
+    @XmlTransient
+    boolean sorted = false;
     /**
      * Gets the value of the matchingComponent property.
      * 
@@ -70,11 +74,14 @@ public class Component {
      */
     public List<MatchingComponent> getMatchingComponent() {
         if (matchingComponent == null) {
-            matchingComponent = new ArrayList<MatchingComponent>();
+            matchingComponent = new ArrayList<>();
         }
         return this.matchingComponent;
     }
 
+    public void setMatchingComponent(List<MatchingComponent> matchingComponents) {
+        this.matchingComponent = matchingComponents;
+    }
     /**
      * Gets the value of the type property.
      * 

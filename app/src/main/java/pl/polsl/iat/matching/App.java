@@ -12,7 +12,9 @@ import pl.polsl.iat.matching.executor.impl.SchemaMatcherRunner;
 import pl.polsl.iat.matching.processing.ProcessorType;
 import pl.polsl.iat.matching.util.MatcherSettings;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class App {
 
@@ -29,7 +31,7 @@ public class App {
         long startTime = System.currentTimeMillis();
         Schema[] schemas = parametersResolver.getConnectionProperties()
                 .stream()
-                .map(p -> new SchemaExtractor(p).load(settings.getLoaderMode()))
+                .map(p -> new SchemaExtractor(p).load())
                 .toArray(Schema[]::new);
         MatchingResult matchingResult =
                 new ResultFactory().createMatchingResult(schemas);
@@ -50,7 +52,8 @@ public class App {
 
         //Saving result
         startTime = System.currentTimeMillis();
-        matchingResult.save("result\\actual-result.xml");
+//        matchingResult.evaluate();
+        matchingResult.save(getResultFile());
         long resultProcessingTime = System.currentTimeMillis() - startTime;
         //Saving result done
 
@@ -68,4 +71,15 @@ public class App {
             return false;
         }
     }
+
+    private static String getResultFile() {
+        try {
+            String result_dir = Optional.ofNullable(System.getenv("RESULT_DIR")).orElse("result");
+            return result_dir + "\\results.xml";
+        } catch(Exception e) {
+            e.printStackTrace();
+            return "result\\actual-result.xml";
+        }
+    }
 }
+
