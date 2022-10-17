@@ -45,7 +45,6 @@ public class MatchTaskManager {
             }
         }
         rMatchingComponent.setMetadataScore(Utils.parseResult(metaMatchers.get(ComponentType.SCHEMA).doMatch(first,second)));
-        rMatchingComponent.setMatchScore(1);
         Logger.schema("Finished matching schemas [%s] and [%s]", first.getName(), second.getName());
         return subTasks;
     }
@@ -63,17 +62,14 @@ public class MatchTaskManager {
                 }
             }
              rMatchingComponent.setMetadataScore(Utils.parseResult(metaMatchers.get(ComponentType.TABLE).doMatch(first,second)));
-            rMatchingComponent.setMatchScore(1);
-            rMatchingComponent.setChildScore(BigDecimal.valueOf(columnMatchResults.stream().mapToInt(x -> x).average().orElse(0.0)));
             return 1;
         };
     }
 
     private Callable<Integer> getTaskColumn(Column first, Column second, MatchingComponent rMatchingComponent) {
         return () -> {
-              Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
+            Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
             Results results = metaMatchers.get(ComponentType.COLUMN).doMatch(first, second);
-            rMatchingComponent.setMatchScore(results.calculateResult());
             rMatchingComponent.setMetadataScore(Utils.parseResult(results));
             Logger.column("Finished matching columns [%s] and [%s]", first.getName(), second.getName());
             return results.calculateResult();

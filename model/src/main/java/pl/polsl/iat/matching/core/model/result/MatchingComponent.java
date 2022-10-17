@@ -56,10 +56,34 @@ public class MatchingComponent {
     protected BigDecimal childScore;
     @XmlAttribute(name = "metadataScore", required = false)
     protected BigDecimal metadataScore;
-    @XmlAttribute(name = "combinedScore", required = false)
-    protected Integer combinedScore;
+    @XmlAttribute(name = "combinedScoreAverage", required = false)
+    protected Integer combinedScoreAverage;
+    @XmlAttribute(name = "combinedScoreGreedy", required = false)
+    protected Integer combinedScoreGreedy;
+    @XmlAttribute(name = "combinedScoreRandom", required = false)
+    protected Integer combinedScoreRandom;
     @XmlAttribute(name = "id", required = true)
     protected String id;
+
+    public void setCombinedScoreAverage(Integer combinedScoreAverage) {
+        this.combinedScoreAverage = combinedScoreAverage;
+    }
+
+    public Integer getCombinedScoreGreedy() {
+        return combinedScoreGreedy;
+    }
+
+    public void setCombinedScoreGreedy(Integer combinedScoreGreedy) {
+        this.combinedScoreGreedy = combinedScoreGreedy;
+    }
+
+    public Integer getCombinedScoreRandom() {
+        return combinedScoreRandom;
+    }
+
+    public void setCombinedScoreRandom(Integer combinedScoreRandom) {
+        this.combinedScoreRandom = combinedScoreRandom;
+    }
 
     public String getId() {
         return id;
@@ -169,12 +193,8 @@ public class MatchingComponent {
         this.matchScore = BigDecimal.valueOf(value);
     }
 
-    public Integer getCombinedScore() {
-        return this.combinedScore;
-    }
-
-    public void setCombinedScore(int value) {
-        this.combinedScore = value;
+    public Integer getCombinedScoreAverage() {
+        return this.combinedScoreAverage;
     }
 
     public void setMatchScore(BigDecimal matchScore) {

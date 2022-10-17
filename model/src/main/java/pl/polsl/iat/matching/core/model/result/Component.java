@@ -53,6 +53,17 @@ public class Component {
     @XmlAttribute(name = "score")
     protected Integer score;
 
+    @XmlAttribute(name = "mCompId")
+    protected String matchingComponentId;
+
+    public String getMatchingComponentId() {
+        return matchingComponentId;
+    }
+
+    public void setMatchingComponentId(String matchingComponentId) {
+        this.matchingComponentId = matchingComponentId;
+    }
+
     public Integer getScore() {
         return score;
     }

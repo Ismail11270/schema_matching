@@ -16,8 +16,8 @@ import javax.xml.bind.annotation.*;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * <p>Java class for matching-result complex type.
@@ -125,15 +125,13 @@ public class MatchingResult {
      *      Schema2.Table3
      *  Schema3
      */
-    public void evaluate() {
+    private void evaluateParentsAverage() {
         for (Component schema : components) {
             for (MatchingComponent schemaMatch : schema.getMatchingComponent()) {
                 for (Component table : schemaMatch.getComponent()) {
                     for (MatchingComponent tableMatch : table.getMatchingComponent()) {
                         Map<String, String> matchMap = new TreeMap<>();
-//                        List<List<Integer>> combinations = new ArrayList<>();
                         List<Component> columns = tableMatch.getComponent();
-//                        List<String> columnsToMatch = columns.stream().map(Component::getName).toList();
                         int total = 0;
                         for(Component column : columns) {
 
@@ -148,25 +146,45 @@ public class MatchingResult {
                             total+=result;
                             column.setScore(result);
                         }
-                        tableMatch.setCombinedScore(total/columns.size());
+                        tableMatch.setCombinedScoreAverage(total/columns.size());
                     }
 
-//                for (MatchingComponent childMatchingComponent : childComponent.getMatchingComponent()) {
-
-//                    list.add(childMatchingComponent.getMetadataScore());
-
-//                }
                 }
+            }
+        }
+    }
 
-//            List<List<BigDecimal>> lists1 = Lists.cartesianProduct(lists);
 
-//            Double max = lists1.stream()
-//                    .map(list ->
-//                            list.stream()
-//                                    .collect(Collectors.summarizingDouble(BigDecimal::doubleValue))
-//                                    .getAverage())
-//                    .max(Double::compareTo).orElse(0.0);
-//            parentComponentMatch.setChildScore(new BigDecimal(max));
+    public void evaluate() {
+        evaluateParentsGreedy();
+        evaluateParentsAverage();
+    }
+
+    private void evaluateParentsGreedy() {
+        for (Component schema : components) {
+            for (MatchingComponent schemaMatch : schema.getMatchingComponent()) {
+                for (Component table : schemaMatch.getComponent()) {
+                    for (MatchingComponent tableMatch : table.getMatchingComponent()) {
+                        int greedyResult = 0;
+
+                        List<Component> columns = tableMatch.getComponent();
+                        Set<MatchingComponent> used = new HashSet<>();
+                        for(Component column : columns) {
+
+                            MatchingComponent columnMatch = getMatchingComponentSorted(column)
+                                    .stream()
+                                    .filter(Predicate.not(used::contains))
+                                    .findFirst().orElse(null);
+                            if(columnMatch != null) {
+                                column.setMatchingComponentId(columnMatch.getId());
+                                column.setScore(columnMatch.getMetadataScore().intValue());
+                                used.add(columnMatch);
+                            }
+                            greedyResult = (int) (used.stream().map(MatchingComponent::getMetadataScore).mapToDouble(BigDecimal::doubleValue).sum() / used.size());
+                        }
+                        tableMatch.setCombinedScoreGreedy(greedyResult);
+                    }
+                }
             }
         }
     }
