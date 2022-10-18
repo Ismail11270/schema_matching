@@ -34,7 +34,7 @@ public class App {
                 .map(p -> new SchemaExtractor(p).load())
                 .toArray(Schema[]::new);
         MatchingResult matchingResult =
-                new ResultFactory().createMatchingResult(schemas);
+                new ResultFactory().createMatchingResult(settings.getResultLevel(), schemas);
         long schemaLoadingTime = System.currentTimeMillis() - startTime;
         //Schema loading end
         System.out.println("==========================================================================================");

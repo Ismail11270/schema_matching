@@ -5,6 +5,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import pl.polsl.iat.matching.core.model.result.MatchingResult;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
 import pl.polsl.iat.matching.matchers.word.WordMatcher;
 import pl.polsl.iat.matching.matchers.word.WordsMatcherFactory;
@@ -56,6 +57,8 @@ public class MatcherSettings {
 
     private Logger.LogLevel logLevel = Logger.LogLevel.TABLE;
 
+    private MatchingResult.ResultLevel resultLevel = MatchingResult.ResultLevel.COLUMN;
+
     private boolean loadToRam;
 
     /**
@@ -66,7 +69,7 @@ public class MatcherSettings {
         return loaderMode;
     }
 
-    private SchemaExtractor.Mode loaderMode;
+    private SchemaExtractor.Mode loaderMode = SchemaExtractor.Mode.EAGER;
 
     public boolean hasMatcher(WordMatcher.Type type) {
         return availableWordMatchers.containsKey(type);
@@ -96,6 +99,10 @@ public class MatcherSettings {
         return loadToRam;
     }
 
+    public MatchingResult.ResultLevel getResultLevel() {
+        return resultLevel;
+    }
+
     private final List<MatchingOption> availableMatchingOptions = new ArrayList<>();
 
     public boolean checkMatchingOption(MatchingOption option) {
@@ -118,14 +125,16 @@ public class MatcherSettings {
             initWordMatchers(doc);
             initPreprocessors(doc);
 
-            NodeList modeTag = doc.getElementsByTagName(Const.SettingsXml.MODE_TAG);
-            settingsInstance.loaderMode = SchemaExtractor.Mode.valueOf(modeTag.item(0).getTextContent().toUpperCase());
             NodeList threadsTag = doc.getElementsByTagName(Const.SettingsXml.THREADS_TAG);
             settingsInstance.numberOfThreads = Integer.parseInt(threadsTag.item(0).getTextContent());
             NodeList loadToRamTag = doc.getElementsByTagName(Const.SettingsXml.LOAD_TO_RAM_TAG);
             settingsInstance.loadToRam = Boolean.parseBoolean(loadToRamTag.item(0).getTextContent());
             NodeList logLevelTag = doc.getElementsByTagName(Const.SettingsXml.LOG_LEVEL_TAG);
             settingsInstance.logLevel = Logger.LogLevel.valueOf((logLevelTag.item(0).getTextContent()).toUpperCase());
+            NodeList resultLevelTag = doc.getElementsByTagName(Const.SettingsXml.RESULT_LEVEL_TAG);
+            Node resultLevelItem = resultLevelTag.item(0);
+            if(resultLevelItem != null)
+                settingsInstance.resultLevel = MatchingResult.ResultLevel.valueOf(resultLevelItem.getTextContent().toUpperCase());
         } catch (NumberFormatException e) {
             Logger.error("Invalid thread number configuration! Using default value of 8");
         } catch (Exception e) {

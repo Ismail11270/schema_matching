@@ -14,18 +14,26 @@ public class ResultTest {
     public void test() {
 
 
-        List<Integer> A = List.of(100, 55, 27);
-        List<Integer> B = List.of(55, 100, 50);
-        List<Integer> C = List.of(27, 50, 100);
+        List<Integer> A = List.of(100, 55, 27, 43);
+        List<Integer> B = List.of(55, 100, 50, 54);
+        List<Integer> C = List.of(55, 100, 50, 54);
+        List<Integer> D = List.of(55, 100, 50, 54);
+        List<Integer> E = List.of(55, 100, 50, 54);
+
+//        List<Integer> C = List.of(27, 50, 100);
 
 
-        long start = System.currentTimeMillis();
-        long end = System.currentTimeMillis();
-        System.out.println(end - start);
-//        var x = cartesianProduct(List.of(A,B,C));
-//        List<List<Integer>> lists = Lists.cartesianProduct(List.of(A, B, C));
+//        long start = System.currentTimeMillis();
+//        long end = System.currentTimeMillis();
+//        System.out.println(end - start);
+//        var x = cartesianProduct(List.of(A,B));
+        List<List<Integer>> lists = Lists.cartesianProduct(List.of(A, B, C, D, E));
 
-//        System.out.println(lists.size());
+        System.out.println(lists.size());
+        double a = 45235423452345d;
+        int x = (int)a;
+        System.out.println(x == Integer.MAX_VALUE);
+//        lists.forEach(System.out::println);
 //        lists.stream().map(list -> list.stream().collect(Collectors.summarizingInt(x -> x)).getAverage()).forEach(System.out::println);
 
     }

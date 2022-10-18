@@ -70,7 +70,7 @@ public class MatchTaskManager {
         return () -> {
             Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
             Results results = metaMatchers.get(ComponentType.COLUMN).doMatch(first, second);
-            rMatchingComponent.setMetadataScore(Utils.parseResult(results));
+            rMatchingComponent.setMatchScore(Utils.parseResult(results));
             Logger.column("Finished matching columns [%s] and [%s]", first.getName(), second.getName());
             return results.calculateResult();
         };

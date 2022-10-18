@@ -11,7 +11,6 @@ public class Const {
         public static final String MATCHING_COMPONENT_TAG = "component";
         public static final String TYPE_TAG = "type";
         public static final String ACTIVE_TAG = "active";
-        public static final String MODE_TAG = "mode";
         public static final String MATCHER_SETTINGS_VAR = "MATCHER_SETTINGS_FILE";
         public static final String THREADS_TAG = "threads";
         public static final String PREPROCESSOR_PRIORITY_TAG = "priority";
@@ -19,6 +18,7 @@ public class Const {
         public static final String LOG_LEVEL_TAG = "log-level";
         public static final String PRIORITY_DEFAULT = "default";
         public static final String METHOD = "method";
+        public static final String RESULT_LEVEL_TAG = "result-level";
     }
 
 }

@@ -3,7 +3,7 @@
 
 	<threads>16</threads>
 	<log-level>table</log-level>
-	<mode>EAGER</mode>
+	<result-level>TABLE</result-level>
 
 	<load-wordnet-to-ram>false</load-wordnet-to-ram>
 

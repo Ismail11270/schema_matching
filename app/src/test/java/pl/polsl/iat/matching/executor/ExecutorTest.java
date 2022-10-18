@@ -1,6 +1,7 @@
 package pl.polsl.iat.matching.executor;
 
 import org.junit.jupiter.api.Test;
+import pl.polsl.iat.matching.core.model.result.MatchingResult;
 import pl.polsl.iat.matching.core.model.result.ResultFactory;
 import pl.polsl.iat.matching.core.model.schema.Schema;
 import pl.polsl.iat.matching.core.model.schema.impl.SchemaExtractor;
@@ -38,7 +39,7 @@ public class ExecutorTest {
 
         long start = System.currentTimeMillis();
         new ResultFactory()
-                .createMatchingResult(parametersResolver.getConnectionProperties().stream()
+                .createMatchingResult(MatchingResult.ResultLevel.COLUMN, parametersResolver.getConnectionProperties().stream()
                         .map(p -> new SchemaExtractor(p).load())
                         .toArray(Schema[]::new))
                 .save("..\\result\\actual-result.xml");

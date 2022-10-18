@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * <p>Java class for matching-result complex type.
@@ -48,6 +49,10 @@ public class MatchingResult {
 
     @XmlElement(required = true, name = "component")
     protected List<Component> components;
+
+
+    @XmlTransient
+    protected ResultLevel resultLevel = ResultLevel.COLUMN;
 
     /**
      * Gets the value of the component property.
@@ -85,6 +90,14 @@ public class MatchingResult {
 //        return matchingComponent;
 //    }
 
+    public ResultLevel getResultLevel() {
+        return resultLevel;
+    }
+
+    public void setResultLevel(ResultLevel resultLevel) {
+        this.resultLevel = resultLevel;
+    }
+
     /**
      * Sets the value of the matchingComponent property.
      *
@@ -96,8 +109,22 @@ public class MatchingResult {
 //        this.matchingComponent = value;
 //    }
 
+
     public void save(String filePath) {
         try {
+            if(resultLevel != ResultLevel.COLUMN) {
+                for (Component schemaComp : components) {
+                    for (MatchingComponent schemaMatch : schemaComp.matchingComponent) {
+                        if (resultLevel == ResultLevel.SCHEMA)
+                            schemaMatch.clearChildren();
+                        else if (resultLevel == ResultLevel.TABLE) {
+                            for (Component tableComp : schemaMatch.component)
+                                for (MatchingComponent tableMatch : tableComp.matchingComponent)
+                                    tableMatch.clearChildren();
+                        }
+                    }
+                }
+            }
             JAXBContext context = JAXBContext.newInstance(MatchingResult.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -154,10 +181,17 @@ public class MatchingResult {
         }
     }
 
+    public static enum ResultLevel {
+        SCHEMA, TABLE, COLUMN
+    }
 
     public void evaluate() {
-        evaluateParentsGreedy();
-        evaluateParentsAverage();
+//        evaluateParentsGreedy();
+//        evaluateParentsAverage();
+
+        iterateTree(components);
+
+//        evaluateParentsRandom();
     }
 
     private void evaluateParentsGreedy() {
@@ -189,6 +223,167 @@ public class MatchingResult {
         }
     }
 
+    /**
+     * 1. A
+     * 2. B
+     *
+     * 1. a
+     * 2. b
+     * 3. c
+     *
+     * Aa Bc
+     * Ab Ba
+     * Ac B
+     */
+    private void evaluateParentsRandom() {
+
+        double maxCombinations = Math.pow(8,8);
+//        double maxCombinations = 1d;
+        for (Component schema : components) {
+            for (MatchingComponent schemaMatch : schema.getMatchingComponent()) {
+                for (Component table : schemaMatch.getComponent()) {
+                    for (MatchingComponent tableMatch : table.getMatchingComponent()) {
+                        int sizeLeft = tableMatch.getComponent().size();
+                        int sizeRight = tableMatch.getComponent().get(0).getMatchingComponent().size();
+                        double numberOfCombinations = Math.pow(Math.min(sizeLeft, sizeRight), Math.max(sizeLeft, sizeRight));
+                        int iter = numberOfCombinations <= maxCombinations ? (int) numberOfCombinations : (int)maxCombinations;
+                        Combo bestCombination = null;
+                        List<Component> components = tableMatch.getComponent();
+                        List<MatchingComponent> matchingComponents = components.get(0).getMatchingComponent();
+                        for(int i = 0; i < iter; i++) {
+                            Combo combo = getRandomCombo(new ArrayList<>(components), new ArrayList<>(matchingComponents));
+                            if(bestCombination == null) {
+                                bestCombination = combo;
+                            } else if(bestCombination.getResult() < combo.getResult()) {
+                                bestCombination = combo;
+                            }
+                        }
+                        tableMatch.setCombinedScoreRandom(bestCombination.getResult());
+                    }
+                }
+            }
+        }
+    }
+
+    @XmlTransient
+    private Random r = new Random(System.currentTimeMillis());
+
+    @XmlTransient
+    private double maxCombinations = 20;//Math.pow(8,8);
+
+
+    private Combo getRandomCombo(ArrayList<Component> components, ArrayList<MatchingComponent> matchingComponents) {
+        Combo combo = new Combo();
+        List<Integer> availableComponents = new ArrayList<>(IntStream.range(0, matchingComponents.size()).boxed().toList());
+        while(components.size() > 0 && availableComponents.size() > 0) {
+            Component a = components.remove(r.nextInt(components.size()));
+            MatchingComponent b = a.getMatchingComponent().get(availableComponents.remove(r.nextInt(availableComponents.size())));
+            combo.add(new Pair(a, b, b.getMetadataScore().intValue()));
+        }
+        return combo;
+    }
+
+    static class Combo extends ArrayList<Pair> {
+        int result;
+        boolean ready = false;
+
+        public int getResult() {
+            if(ready) {
+                return result;
+            }
+            result = this.stream().mapToInt(x -> x.result).sum() / this.size();
+            ready = true;
+            return result;
+        }
+    }
+
+    static class Pair {
+        Component component;
+        MatchingComponent matchingComponent;
+        Integer result;
+
+        public Pair(Component component, MatchingComponent matchingComponent, Integer result) {
+            this.component = component;
+            this.matchingComponent = matchingComponent;
+            this.result = result;
+        }
+    }
+
+    private void iterateTree(List<Component> parentComponents) {
+        //schema match
+        for(Component parentComponent : parentComponents) {
+            for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
+                if (parentComponent.type == ResultComponentType.SCHEMA)
+                    iterateTree(parentComponentMatch.getComponent());
+                int greedyResult = getGreedyResult(parentComponentMatch);
+                parentComponentMatch.setCombinedScoreGreedy(greedyResult);
+                int randomResult = getRandomResult(parentComponentMatch);
+                parentComponentMatch.setCombinedScoreRandom(randomResult);
+                int averageResult = getAverageResult(parentComponentMatch);
+                parentComponentMatch.setCombinedScoreAverage(averageResult);
+            }
+        }
+    }
+
+    private int getAverageResult(MatchingComponent parentComponentMatch) {
+        Map<String, String> matchMap = new TreeMap<>();
+        List<Component> columns = parentComponentMatch.getComponent();
+        int total = 0;
+        for(Component column : columns) {
+
+            List<MatchingComponent> columnMatches = getMatchingComponentSorted(column);
+            int i = 0;
+            int result = columnMatches.get(i).getMetadataScore().intValue();
+            while (matchMap.containsKey(columnMatches.get(i).name) && i < columnMatches.size() - 1) {
+                i++;
+                result += columnMatches.get(i).getMetadataScore().intValue();
+            }
+            matchMap.put(column.name, columnMatches.get(i).name);
+            total+=result;
+            column.setScore(result);
+        }
+        return total/columns.size();
+
+    }
+
+    private int getRandomResult(MatchingComponent parentComponentMatch) {
+        int sizeLeft = parentComponentMatch.getComponent().size();
+        int sizeRight = parentComponentMatch.getComponent().get(0).getMatchingComponent().size();
+        double numberOfCombinations = Math.pow(Math.min(sizeLeft, sizeRight), Math.max(sizeLeft, sizeRight));
+        int iter = numberOfCombinations <= maxCombinations ? (int) numberOfCombinations : (int)maxCombinations;
+        Combo bestCombination = null;
+        List<Component> components = parentComponentMatch.getComponent();
+        List<MatchingComponent> matchingComponents = components.get(0).getMatchingComponent();
+        for(int i = 0; i < iter; i++) {
+            Combo combo = getRandomCombo(new ArrayList<>(components), new ArrayList<>(matchingComponents));
+            if(bestCombination == null) {
+                bestCombination = combo;
+            } else if(bestCombination.getResult() < combo.getResult()) {
+                bestCombination = combo;
+            }
+        }
+        return bestCombination.getResult();
+    }
+
+    private int getGreedyResult(MatchingComponent parentComponentMatch) {
+        int greedyResult = 0;
+        List<Component> childComponents = parentComponentMatch.getComponent();
+        Set<MatchingComponent> used = new HashSet<>();
+        for(Component childComponent : childComponents) {
+
+            MatchingComponent columnMatch = getMatchingComponentSorted(childComponent)
+                    .stream()
+                    .filter(Predicate.not(used::contains))
+                    .findFirst().orElse(null);
+            if(columnMatch != null) {
+                childComponent.setMatchingComponentId(columnMatch.getId());
+                childComponent.setScore(columnMatch.getMatchScore().intValue());
+                used.add(columnMatch);
+            }
+            greedyResult = (int) (used.stream().map(MatchingComponent::getMetadataScore).mapToDouble(BigDecimal::doubleValue).sum() / used.size());
+        }
+        return greedyResult;
+    }
 
     private List<MatchingComponent> getMatchingComponentSorted(Component component) {
         if(!component.sorted) {

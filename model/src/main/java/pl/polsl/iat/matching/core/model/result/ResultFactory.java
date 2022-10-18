@@ -46,8 +46,9 @@ public class ResultFactory {
     }
 
 
-    public MatchingResult createMatchingResult(Schema... schemas) {
+    public MatchingResult createMatchingResult(MatchingResult.ResultLevel resultLevel, Schema... schemas) {
         var result = new MatchingResult();
+        result.setResultLevel(resultLevel);
         var factory = new ResultFactory();
         result.components = Collections.synchronizedList(new ArrayList<>());
         for(int jj = 0; jj < schemas.length - 1; jj++) {

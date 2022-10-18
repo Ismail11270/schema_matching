@@ -81,6 +81,10 @@ public class MatchingComponent {
         return combinedScoreRandom;
     }
 
+    public void clearChildren() {
+        component.clear();
+    }
+
     public void setCombinedScoreRandom(Integer combinedScoreRandom) {
         this.combinedScoreRandom = combinedScoreRandom;
     }
@@ -229,5 +233,10 @@ public class MatchingComponent {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return id;
     }
 }
