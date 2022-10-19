@@ -326,7 +326,6 @@ public class MatchingResult {
                 metaDataScore *= y;
                 greedyResult = (int) Math.ceil(greedyResult * (1 - y) + metaDataScore);
                 randomResult = (int) Math.ceil(randomResult * (1 - y) + metaDataScore);
-                System.out.println(x + " " + y);
                 parentComponentMatch.setCombinedScoreGreedy(greedyResult);
                 parentComponentMatch.setCombinedScoreRandom(randomResult);
 //                int averageResult = getAverageResult(parentComponentMatch);

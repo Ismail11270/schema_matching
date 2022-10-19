@@ -53,7 +53,11 @@ public class App {
         //Saving result
         startTime = System.currentTimeMillis();
         matchingResult.evaluate();
-        matchingResult.save(getResultFile());
+        matchingResult.save(getResultFile(matchingResult.getResultLevel()));
+        if(matchingResult.getResultLevel() == MatchingResult.ResultLevel.COLUMN) {
+            matchingResult.setResultLevel(MatchingResult.ResultLevel.TABLE);
+            matchingResult.save(getResultFile(MatchingResult.ResultLevel.TABLE));
+        }
         long resultProcessingTime = System.currentTimeMillis() - startTime;
         //Saving result done
 
@@ -72,10 +76,10 @@ public class App {
         }
     }
 
-    private static String getResultFile() {
+    private static String getResultFile(MatchingResult.ResultLevel level) {
         try {
             String result_dir = Optional.ofNullable(System.getenv("RESULT_DIR")).orElse("result");
-            return result_dir + "\\results.xml";
+            return result_dir + "\\results_" + level +".xml";
         } catch(Exception e) {
             e.printStackTrace();
             return "result\\actual-result.xml";
