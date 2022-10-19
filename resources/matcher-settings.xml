@@ -1,8 +1,8 @@
 <?xml version = "1.0"?>
 <settings>
 
-	<threads>16</threads>
-	<log-level>table</log-level>
+	<threads>1</threads>
+	<log-level>column</log-level>
 	<result-level>COLUMN</result-level>
 
 	<load-wordnet-to-ram>false</load-wordnet-to-ram>

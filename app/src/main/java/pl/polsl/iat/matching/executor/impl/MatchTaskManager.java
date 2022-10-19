@@ -51,7 +51,7 @@ public class MatchTaskManager {
 
     private Callable<Integer> getTaskTable(Table first, Table second, MatchingComponent rMatchingComponent) {
         return () -> {
-            Logger.table("Started matching tables [%s] and [%s]", first.getName(), second.getName());
+//            Logger.table("Started matching tables [%s] and [%s]", first.getName(), second.getName());
             List<Integer> columnMatchResults = new ArrayList<>();
             int nFirst = first.getComponents().size();
             int nSecond = second.getComponents().size();
@@ -68,10 +68,10 @@ public class MatchTaskManager {
 
     private Callable<Integer> getTaskColumn(Column first, Column second, MatchingComponent rMatchingComponent) {
         return () -> {
-            Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
+//            Logger.column("Started matching columns [%s] and [%s]", first.getName(), second.getName());
             Results results = metaMatchers.get(ComponentType.COLUMN).doMatch(first, second);
             rMatchingComponent.setMatchScore(Utils.parseResult(results));
-            Logger.column("Finished matching columns [%s] and [%s]", first.getName(), second.getName());
+            Logger.column( first.getName() + "==" +  second.getName() + "=" + rMatchingComponent.getMatchScore());
             return results.calculateResult();
         };
     }

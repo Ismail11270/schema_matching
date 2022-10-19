@@ -64,13 +64,15 @@ public class MatchingComponent {
     protected Integer combinedScoreRandom;
     @XmlAttribute(name = "id", required = true)
     protected String id;
+    @XmlAttribute(name = "exact")
+    protected Boolean isExact = false;
 
     public void setCombinedScoreAverage(Integer combinedScoreAverage) {
         this.combinedScoreAverage = combinedScoreAverage;
     }
 
     public Integer getCombinedScoreGreedy() {
-        return combinedScoreGreedy;
+        return isExact ? matchScore.intValue() : combinedScoreGreedy;
     }
 
     public void setCombinedScoreGreedy(Integer combinedScoreGreedy) {
@@ -78,7 +80,7 @@ public class MatchingComponent {
     }
 
     public Integer getCombinedScoreRandom() {
-        return combinedScoreRandom;
+        return isExact ? matchScore.intValue() : combinedScoreRandom;
     }
 
     public void clearChildren() {
@@ -194,11 +196,12 @@ public class MatchingComponent {
      *     
      */
     public void setMatchScore(float value) {
+        isExact = true;
         this.matchScore = BigDecimal.valueOf(value);
     }
 
     public Integer getCombinedScoreAverage() {
-        return this.combinedScoreAverage;
+        return isExact ? this.matchScore.intValue() : this.combinedScoreAverage;
     }
 
     public void setMatchScore(BigDecimal matchScore) {

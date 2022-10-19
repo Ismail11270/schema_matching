@@ -270,7 +270,7 @@ public class MatchingResult {
     private Random r = new Random(System.currentTimeMillis());
 
     @XmlTransient
-    private double maxCombinations = 20;//Math.pow(8,8);
+    private final double maxCombinations = Math.pow(8,8);
 
 
     private Combo getRandomCombo(ArrayList<Component> components, ArrayList<MatchingComponent> matchingComponents, Function<MatchingComponent, ? extends Number> getMatchScoreFun) {
@@ -316,18 +316,26 @@ public class MatchingResult {
             for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
                 if (parentComponent.type == ResultComponentType.SCHEMA)
                     iterateTree(parentComponentMatch.getComponent());
-                int greedyResult = getGreedyResult(parentComponentMatch);
                 int randomResult = getRandomResult(parentComponentMatch);
+
                 int metaDataScore = parentComponentMatch.getMetadataScore().intValue();
                 int n = parentComponentMatch.component.size();
                 int m = parentComponentMatch.component.get(0).matchingComponent.size();
                 float x = m*n;
                 float y = (x+1)/x - 1;
                 metaDataScore *= y;
-                greedyResult = (int) Math.ceil(greedyResult * (1 - y) + metaDataScore);
-                randomResult = (int) Math.ceil(randomResult * (1 - y) + metaDataScore);
-                parentComponentMatch.setCombinedScoreGreedy(greedyResult);
-                parentComponentMatch.setCombinedScoreRandom(randomResult);
+//                randomResult = (int) Math.ceil(randomResult * (1 - y) + metaDataScore);
+//                if(parentComponentMatch.isExact) {
+//                    parentComponentMatch.setMatchScore(randomResult);
+//                    continue;
+//                }
+                int greedyResult = getGreedyResult(parentComponentMatch);
+//                greedyResult = (int) Math.ceil(greedyResult * (1 - y) + metaDataScore);
+                float sizeDiffRatio = (float) Math.min(m,n) / (float) Math.max(m,n);
+                int bestResult = (int) (Math.max(randomResult, greedyResult) * sizeDiffRatio);
+                parentComponentMatch.setMatchScore(bestResult);
+//                parentComponentMatch.setCombinedScoreGreedy(greedyResult);
+//                parentComponentMatch.setCombinedScoreRandom(randomResult);
 //                int averageResult = getAverageResult(parentComponentMatch);
 //                parentComponentMatch.setCombinedScoreAverage(averageResult);
             }
@@ -357,18 +365,23 @@ public class MatchingResult {
 
     private int getRandomResult(MatchingComponent parentComponentMatch) {
         Function<MatchingComponent, ? extends Number> getMatchScoreFun = MatchingComponent::getMatchScore;
-        if(ResultComponentType.SCHEMA == parentComponentMatch.type) {
-            getMatchScoreFun = MatchingComponent::getCombinedScoreRandom;
-        }
+//        if(ResultComponentType.SCHEMA == parentComponentMatch.type) {
+//            getMatchScoreFun = MatchingComponent::getCombinedScoreRandom;
+//        }
 
         int sizeLeft = parentComponentMatch.getComponent().size();
         int sizeRight = parentComponentMatch.getComponent().get(0).getMatchingComponent().size();
         double numberOfCombinations = Math.pow(Math.min(sizeLeft, sizeRight), Math.max(sizeLeft, sizeRight));
-        int iter = numberOfCombinations <= maxCombinations ? (int) numberOfCombinations : (int)maxCombinations;
+        if(numberOfCombinations <= maxCombinations) {
+            //cartesian product
+            int result = cartesianProduct(parentComponentMatch, getMatchScoreFun);
+            parentComponentMatch.isExact = true;
+            return result;
+        }
         Combo bestCombination = null;
         List<Component> components = parentComponentMatch.getComponent();
         List<MatchingComponent> matchingComponents = components.get(0).getMatchingComponent();
-        for(int i = 0; i < iter; i++) {
+        for(int i = 0; i < (int)maxCombinations; i++) {
             Combo combo = getRandomCombo(new ArrayList<>(components), new ArrayList<>(matchingComponents), getMatchScoreFun);
             if(bestCombination == null) {
                 bestCombination = combo;
@@ -381,9 +394,9 @@ public class MatchingResult {
 
     private int getGreedyResult(MatchingComponent parentComponentMatch) {
         Function<MatchingComponent, ? extends Number> getMatchScoreFun = MatchingComponent::getMatchScore;
-        if(ResultComponentType.SCHEMA == parentComponentMatch.type) {
-            getMatchScoreFun = MatchingComponent::getCombinedScoreGreedy;
-        }
+//        if(ResultComponentType.SCHEMA == parentComponentMatch.type) {
+//            getMatchScoreFun = MatchingComponent::getCombinedScoreGreedy;
+//        }
 
         List<Component> childComponents = parentComponentMatch.getComponent();
         Set<MatchingComponent> used = new HashSet<>();
@@ -485,7 +498,7 @@ public class MatchingResult {
      *
      */
     public void evaluateChildren(Component parentComponent) {
-        for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
+            for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
             List<List<Integer>> combinations = new ArrayList<>();
             Map<String, String> matchMap = new HashMap<>();
             for (Component childComponent : parentComponentMatch.getComponent()) {
@@ -514,29 +527,28 @@ public class MatchingResult {
     }
 
 
-    public void evaluateChildren1(Component parentComponent) {
-        for (MatchingComponent parentComponentMatch : parentComponent.getMatchingComponent()) {
-            List<List<BigDecimal>> lists = new ArrayList<>();
-            for (Component childComponent : parentComponentMatch.getComponent()) {
-                if(childComponent.type != ResultComponentType.COLUMN)
-                    evaluateChildren(childComponent);
-                List<BigDecimal> list = new ArrayList<>();
-                for (MatchingComponent childMatchingComponent : childComponent.getMatchingComponent()) {
-                    list.add(childMatchingComponent.getMetadataScore());
-                }
-                lists.add(list);
+    public int cartesianProduct(MatchingComponent parentComponentMatch, Function<MatchingComponent, ? extends Number> getMatchScoreFun) {
+        List<List<Number>> lists = new ArrayList<>();
+        for (Component childComponent : parentComponentMatch.getComponent()) {
+            if (childComponent.type != ResultComponentType.COLUMN)
+                evaluateChildren(childComponent);
+            List<Number> list = new ArrayList<>();
+            for (MatchingComponent childMatchingComponent : childComponent.getMatchingComponent()) {
+                list.add(getMatchScoreFun.apply(childMatchingComponent));
             }
-
-            List<List<BigDecimal>> lists1 = Lists.cartesianProduct(lists);
-
-            Double max = lists1.stream()
-                    .map(list ->
-                            list.stream()
-                                    .collect(Collectors.summarizingDouble(BigDecimal::doubleValue))
-                                    .getAverage())
-                    .max(Double::compareTo).orElse(0.0);
-            parentComponentMatch.setChildScore(new BigDecimal(max));
+            lists.add(list);
         }
+
+        List<List<Number>> lists1 = Lists.cartesianProduct(lists);
+
+        Double max = lists1.stream()
+                .map(list ->
+                        list.stream()
+                                .collect(Collectors.summarizingDouble(Number::doubleValue))
+                                .getAverage())
+                .max(Double::compareTo).orElse(0.0);
+        return max.intValue();
     }
+
 
 }

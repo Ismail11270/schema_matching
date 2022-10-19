@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<matchingResult>
+    <component type="schema" name="world" id="c0">
+        <matching-component type="schema" name="world" matchScore="100.0" metadataScore="100" id="1" exact="true">
+            <component type="table" name="city" id="c0.0">
+                <matching-component type="table" name="city" matchScore="100.0" metadataScore="100" id="1.0" exact="true"/>
+                <matching-component type="table" name="country" matchScore="26.0" metadataScore="55" id="1.1" exact="true"/>
+                <matching-component type="table" name="country_language" matchScore="25.0" metadataScore="27" id="1.2" exact="true"/>
+            </component>
+            <component type="table" name="country" id="c0.1">
+                <matching-component type="table" name="country" matchScore="100.0" metadataScore="100" id="1.1" exact="true"/>
+                <matching-component type="table" name="city" matchScore="26.0" metadataScore="55" id="1.0" exact="true"/>
+                <matching-component type="table" name="country_language" matchScore="11.0" metadataScore="50" id="1.2" exact="true"/>
+            </component>
+            <component type="table" name="country_language" id="c0.2">
+                <matching-component type="table" name="country_language" matchScore="100.0" metadataScore="100" id="1.2" exact="true"/>
+                <matching-component type="table" name="country" matchScore="11.0" metadataScore="50" id="1.1" exact="true"/>
+                <matching-component type="table" name="city" matchScore="41.0" metadataScore="27" id="1.0" exact="true"/>
+            </component>
+        </matching-component>
+    </component>
+</matchingResult>

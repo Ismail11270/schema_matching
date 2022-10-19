@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<matchingResult>
+    <component type="schema" name="world" id="c0">
+        <matching-component type="schema" name="world" matchScore="100.0" metadataScore="100" id="1" exact="true">
+            <component type="table" name="city" id="c0.0">
+                <matching-component type="table" name="city" matchScore="100.0" metadataScore="100" id="1.0" exact="true">
+                    <component type="column" name="ID" id="c0.0.0">
+                        <matching-component type="column" name="ID" matchScore="100" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="0" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="2" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="2" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="5" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Name" id="c0.0.1">
+                        <matching-component type="column" name="ID" matchScore="0" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="100" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="41" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="33" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="CountryCode" id="c0.0.2">
+                        <matching-component type="column" name="ID" matchScore="2" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="41" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="100" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="41" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="9" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="District" id="c0.0.3">
+                        <matching-component type="column" name="ID" matchScore="2" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="33" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="41" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="100" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="11" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Population" id="c0.0.4">
+                        <matching-component type="column" name="ID" matchScore="5" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="7" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="9" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="11" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="100" id="1.0.4" exact="false"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="country" matchScore="26.0" metadataScore="55" id="1.1" exact="true">
+                    <component type="column" name="ID" id="c0.0.0">
+                        <matching-component type="column" name="Code" matchScore="83" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="0" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="2" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="3" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="0" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="3" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="5" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="2" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="0" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="2" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="0" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="0" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="2" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="5" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="4" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Name" id="c0.0.1">
+                        <matching-component type="column" name="Code" matchScore="10" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="100" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="33" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="46" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="13" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="11" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="6" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="15" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="7" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="66" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="46" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="25" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="9" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="49" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="CountryCode" id="c0.0.2">
+                        <matching-component type="column" name="Code" matchScore="14" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="41" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="28" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="43" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="15" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="17" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="9" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="15" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="5" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="19" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="48" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="56" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="26" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="7" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="66" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="District" id="c0.0.3">
+                        <matching-component type="column" name="Code" matchScore="9" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="33" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="37" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="52" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="10" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="4" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="11" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="6" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="0" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="5" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="37" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="40" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="26" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="14" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="44" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Population" id="c0.0.4">
+                        <matching-component type="column" name="Code" matchScore="2" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="7" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="21" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="19" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="6" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="7" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="100" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="8" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="8" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="8" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="7" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="5" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="7" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="27" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="7" id="1.1.14" exact="false"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="country_language" matchScore="25.0" metadataScore="27" id="1.2" exact="true">
+                    <component type="column" name="ID" id="c0.0.0">
+                        <matching-component type="column" name="CountryCode" matchScore="81" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="80" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="2" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="0" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Name" id="c0.0.1">
+                        <matching-component type="column" name="CountryCode" matchScore="9" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="14" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="21" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="22" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="CountryCode" id="c0.0.2">
+                        <matching-component type="column" name="CountryCode" matchScore="20" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="8" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="12" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="9" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="District" id="c0.0.3">
+                        <matching-component type="column" name="CountryCode" matchScore="9" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="7" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="28" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="17" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Population" id="c0.0.4">
+                        <matching-component type="column" name="CountryCode" matchScore="2" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="4" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="11" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="10" id="1.2.3" exact="false"/>
+                    </component>
+                </matching-component>
+            </component>
+            <component type="table" name="country" id="c0.1">
+                <matching-component type="table" name="country" matchScore="100.0" metadataScore="100" id="1.1" exact="true">
+                    <component type="column" name="Code" id="c0.1.0">
+                        <matching-component type="column" name="Code" matchScore="100" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="10" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="10" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="10" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="2" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="3" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="2" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="2" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="0" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="3" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="9" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="9" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="4" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="2" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="20" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Name" id="c0.1.1">
+                        <matching-component type="column" name="Code" matchScore="10" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="100" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="33" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="46" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="13" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="11" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="6" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="15" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="7" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="66" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="46" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="25" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="9" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="49" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Continent" id="c0.1.2">
+                        <matching-component type="column" name="Code" matchScore="10" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="33" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="100" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="30" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="6" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="11" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="21" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="8" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="9" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="4" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="19" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="29" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="18" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="19" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="47" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Region" id="c0.1.3">
+                        <matching-component type="column" name="Code" matchScore="10" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="46" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="30" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="100" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="10" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="9" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="19" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="6" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="22" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="11" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="39" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="46" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="14" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="8" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="46" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="SurfaceArea" id="c0.1.4">
+                        <matching-component type="column" name="Code" matchScore="2" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="13" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="6" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="10" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="100" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="18" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="6" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="35" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="5" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="5" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="18" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="14" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="25" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="9" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="9" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="IndepYear" id="c0.1.5">
+                        <matching-component type="column" name="Code" matchScore="3" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="11" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="11" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="9" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="17" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="100" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="18" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="13" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="19" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="17" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="14" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="18" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="5" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="11" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Population" id="c0.1.6">
+                        <matching-component type="column" name="Code" matchScore="2" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="7" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="21" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="19" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="6" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="7" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="100" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="8" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="8" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="8" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="7" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="5" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="7" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="27" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="7" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="LifeExpectancy" id="c0.1.7">
+                        <matching-component type="column" name="Code" matchScore="2" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="6" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="8" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="6" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="35" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="18" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="8" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="100" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="11" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="25" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="13" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="14" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="14" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="9" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="6" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="GNP" id="c0.1.8">
+                        <matching-component type="column" name="Code" matchScore="0" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="15" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="9" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="22" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="5" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="13" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="8" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="11" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="100" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="52" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="7" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="8" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="0" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="10" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="0" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="GNPOld" id="c0.1.9">
+                        <matching-component type="column" name="Code" matchScore="3" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="7" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="4" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="11" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="5" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="13" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="8" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="25" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="52" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="100" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="20" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="15" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="7" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="5" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="14" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="LocalName" id="c0.1.10">
+                        <matching-component type="column" name="Code" matchScore="9" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="66" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="19" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="39" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="22" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="17" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="13" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="7" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="20" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="100" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="55" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="37" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="13" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="41" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="GovernmentForm" id="c0.1.11">
+                        <matching-component type="column" name="Code" matchScore="9" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="46" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="29" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="46" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="13" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="14" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="5" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="14" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="8" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="15" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="54" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="100" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="17" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="3" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="42" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="HeadOfState" id="c0.1.12">
+                        <matching-component type="column" name="Code" matchScore="4" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="25" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="18" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="14" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="25" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="18" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="14" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="0" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="7" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="36" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="11" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="100" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="8" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="16" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Capital" id="c0.1.13">
+                        <matching-component type="column" name="Code" matchScore="2" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="9" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="19" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="8" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="9" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="5" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="27" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="9" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="10" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="5" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="13" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="3" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="8" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="100" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="9" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Code2" id="c0.1.14">
+                        <matching-component type="column" name="Code" matchScore="20" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="49" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="47" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="46" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="9" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="11" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="6" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="0" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="14" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="41" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="42" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="16" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="9" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="100" id="1.1.14" exact="false"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="city" matchScore="26.0" metadataScore="55" id="1.0" exact="true">
+                    <component type="column" name="Code" id="c0.1.0">
+                        <matching-component type="column" name="ID" matchScore="83" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="10" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="14" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="9" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="2" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Name" id="c0.1.1">
+                        <matching-component type="column" name="ID" matchScore="0" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="100" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="41" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="33" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Continent" id="c0.1.2">
+                        <matching-component type="column" name="ID" matchScore="2" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="33" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="28" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="37" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="21" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Region" id="c0.1.3">
+                        <matching-component type="column" name="ID" matchScore="3" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="46" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="43" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="52" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="19" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="SurfaceArea" id="c0.1.4">
+                        <matching-component type="column" name="ID" matchScore="0" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="13" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="16" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="10" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="6" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="IndepYear" id="c0.1.5">
+                        <matching-component type="column" name="ID" matchScore="3" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="11" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="16" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="4" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Population" id="c0.1.6">
+                        <matching-component type="column" name="ID" matchScore="5" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="7" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="9" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="11" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="100" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="LifeExpectancy" id="c0.1.7">
+                        <matching-component type="column" name="ID" matchScore="2" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="6" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="15" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="6" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="8" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="GNP" id="c0.1.8">
+                        <matching-component type="column" name="ID" matchScore="0" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="15" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="5" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="0" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="8" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="GNPOld" id="c0.1.9">
+                        <matching-component type="column" name="ID" matchScore="2" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="7" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="19" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="5" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="8" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="LocalName" id="c0.1.10">
+                        <matching-component type="column" name="ID" matchScore="0" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="66" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="46" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="37" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="GovernmentForm" id="c0.1.11">
+                        <matching-component type="column" name="ID" matchScore="0" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="46" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="54" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="40" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="5" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="HeadOfState" id="c0.1.12">
+                        <matching-component type="column" name="ID" matchScore="2" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="25" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="24" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="26" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Capital" id="c0.1.13">
+                        <matching-component type="column" name="ID" matchScore="5" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="9" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="7" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="14" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="27" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Code2" id="c0.1.14">
+                        <matching-component type="column" name="ID" matchScore="4" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="49" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="66" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="44" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="7" id="1.0.4" exact="false"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="country_language" matchScore="11.0" metadataScore="50" id="1.2" exact="true">
+                    <component type="column" name="Code" id="c0.1.0">
+                        <matching-component type="column" name="CountryCode" matchScore="93" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="88" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="5" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="3" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Name" id="c0.1.1">
+                        <matching-component type="column" name="CountryCode" matchScore="9" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="14" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="21" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="22" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Continent" id="c0.1.2">
+                        <matching-component type="column" name="CountryCode" matchScore="6" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="6" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="27" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="21" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Region" id="c0.1.3">
+                        <matching-component type="column" name="CountryCode" matchScore="9" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="9" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="18" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="19" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="SurfaceArea" id="c0.1.4">
+                        <matching-component type="column" name="CountryCode" matchScore="4" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="2" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="7" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="24" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="IndepYear" id="c0.1.5">
+                        <matching-component type="column" name="CountryCode" matchScore="4" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="2" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="4" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="7" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Population" id="c0.1.6">
+                        <matching-component type="column" name="CountryCode" matchScore="2" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="4" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="11" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="10" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="LifeExpectancy" id="c0.1.7">
+                        <matching-component type="column" name="CountryCode" matchScore="3" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="2" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="6" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="28" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="GNP" id="c0.1.8">
+                        <matching-component type="column" name="CountryCode" matchScore="1" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="2" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="0" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="19" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="GNPOld" id="c0.1.9">
+                        <matching-component type="column" name="CountryCode" matchScore="4" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="1" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="9" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="11" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="LocalName" id="c0.1.10">
+                        <matching-component type="column" name="CountryCode" matchScore="10" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="10" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="33" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="11" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="GovernmentForm" id="c0.1.11">
+                        <matching-component type="column" name="CountryCode" matchScore="11" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="8" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="12" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="13" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="HeadOfState" id="c0.1.12">
+                        <matching-component type="column" name="CountryCode" matchScore="5" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="4" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="12" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="10" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Capital" id="c0.1.13">
+                        <matching-component type="column" name="CountryCode" matchScore="2" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="3" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="27" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="18" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Code2" id="c0.1.14">
+                        <matching-component type="column" name="CountryCode" matchScore="14" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="9" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="21" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="15" id="1.2.3" exact="false"/>
+                    </component>
+                </matching-component>
+            </component>
+            <component type="table" name="country_language" id="c0.2">
+                <matching-component type="table" name="country_language" matchScore="100.0" metadataScore="100" id="1.2" exact="true">
+                    <component type="column" name="CountryCode" id="c0.2.0">
+                        <matching-component type="column" name="CountryCode" matchScore="100" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="87" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="3" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="2" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Language" id="c0.2.1">
+                        <matching-component type="column" name="CountryCode" matchScore="87" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="100" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="4" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="5" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="IsOfficial" id="c0.2.2">
+                        <matching-component type="column" name="CountryCode" matchScore="3" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="4" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="100" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="11" id="1.2.3" exact="false"/>
+                    </component>
+                    <component type="column" name="Percentage" id="c0.2.3">
+                        <matching-component type="column" name="CountryCode" matchScore="2" id="1.2.0" exact="false"/>
+                        <matching-component type="column" name="Language" matchScore="5" id="1.2.1" exact="false"/>
+                        <matching-component type="column" name="IsOfficial" matchScore="11" id="1.2.2" exact="false"/>
+                        <matching-component type="column" name="Percentage" matchScore="100" id="1.2.3" exact="false"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="country" matchScore="11.0" metadataScore="50" id="1.1" exact="true">
+                    <component type="column" name="CountryCode" id="c0.2.0">
+                        <matching-component type="column" name="Code" matchScore="93" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="9" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="6" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="9" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="3" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="4" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="2" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="3" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="1" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="4" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="10" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="12" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="6" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="2" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="14" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Language" id="c0.2.1">
+                        <matching-component type="column" name="Code" matchScore="88" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="14" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="6" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="9" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="2" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="2" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="4" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="2" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="2" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="1" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="10" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="8" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="4" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="3" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="9" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="IsOfficial" id="c0.2.2">
+                        <matching-component type="column" name="Code" matchScore="5" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="21" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="27" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="18" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="7" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="4" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="11" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="6" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="0" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="9" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="33" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="12" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="12" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="27" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="21" id="1.1.14" exact="false"/>
+                    </component>
+                    <component type="column" name="Percentage" id="c0.2.3">
+                        <matching-component type="column" name="Code" matchScore="3" id="1.1.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="22" id="1.1.1" exact="false"/>
+                        <matching-component type="column" name="Continent" matchScore="21" id="1.1.2" exact="false"/>
+                        <matching-component type="column" name="Region" matchScore="19" id="1.1.3" exact="false"/>
+                        <matching-component type="column" name="SurfaceArea" matchScore="24" id="1.1.4" exact="false"/>
+                        <matching-component type="column" name="IndepYear" matchScore="7" id="1.1.5" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="10" id="1.1.6" exact="false"/>
+                        <matching-component type="column" name="LifeExpectancy" matchScore="28" id="1.1.7" exact="false"/>
+                        <matching-component type="column" name="GNP" matchScore="19" id="1.1.8" exact="false"/>
+                        <matching-component type="column" name="GNPOld" matchScore="11" id="1.1.9" exact="false"/>
+                        <matching-component type="column" name="LocalName" matchScore="11" id="1.1.10" exact="false"/>
+                        <matching-component type="column" name="GovernmentForm" matchScore="13" id="1.1.11" exact="false"/>
+                        <matching-component type="column" name="HeadOfState" matchScore="10" id="1.1.12" exact="false"/>
+                        <matching-component type="column" name="Capital" matchScore="18" id="1.1.13" exact="false"/>
+                        <matching-component type="column" name="Code2" matchScore="15" id="1.1.14" exact="false"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="city" matchScore="41.0" metadataScore="27" id="1.0" exact="true">
+                    <component type="column" name="CountryCode" id="c0.2.0">
+                        <matching-component type="column" name="ID" matchScore="81" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="9" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="20" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="9" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="2" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Language" id="c0.2.1">
+                        <matching-component type="column" name="ID" matchScore="80" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="14" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="8" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="7" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="4" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="IsOfficial" id="c0.2.2">
+                        <matching-component type="column" name="ID" matchScore="2" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="21" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="12" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="28" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="11" id="1.0.4" exact="false"/>
+                    </component>
+                    <component type="column" name="Percentage" id="c0.2.3">
+                        <matching-component type="column" name="ID" matchScore="0" id="1.0.0" exact="false"/>
+                        <matching-component type="column" name="Name" matchScore="22" id="1.0.1" exact="false"/>
+                        <matching-component type="column" name="CountryCode" matchScore="9" id="1.0.2" exact="false"/>
+                        <matching-component type="column" name="District" matchScore="17" id="1.0.3" exact="false"/>
+                        <matching-component type="column" name="Population" matchScore="10" id="1.0.4" exact="false"/>
+                    </component>
+                </matching-component>
+            </component>
+        </matching-component>
+    </component>
+</matchingResult>
