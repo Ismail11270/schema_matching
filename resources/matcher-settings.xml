@@ -3,7 +3,7 @@
 
 	<threads>16</threads>
 	<log-level>table</log-level>
-	<result-level>TABLE</result-level>
+	<result-level>COLUMN</result-level>
 
 	<load-wordnet-to-ram>false</load-wordnet-to-ram>
 

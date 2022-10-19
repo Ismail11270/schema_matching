@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<matchingResult>
+    <component type="schema" name="test" id="c0">
+        <matching-component type="schema" name="test_new" matchScore="0" metadataScore="67" combinedScoreGreedy="100" combinedScoreRandom="81" id="1">
+            <component type="table" name="a" id="c0.0">
+                <matching-component type="table" name="a" matchScore="0" metadataScore="100" combinedScoreGreedy="100" combinedScoreRandom="100" id="1.0">
+                    <component type="column" name="AABB" id="c0.0.0">
+                        <matching-component type="column" name="AABB" matchScore="100" id="1.0.0"/>
+                        <matching-component type="column" name="AABC" matchScore="8" id="1.0.1"/>
+                        <matching-component type="column" name="AABA" matchScore="8" id="1.0.2"/>
+                    </component>
+                    <component type="column" name="AABC" id="c0.0.1">
+                        <matching-component type="column" name="AABB" matchScore="8" id="1.0.0"/>
+                        <matching-component type="column" name="AABC" matchScore="100" id="1.0.1"/>
+                        <matching-component type="column" name="AABA" matchScore="76" id="1.0.2"/>
+                    </component>
+                    <component type="column" name="AABA" id="c0.0.2">
+                        <matching-component type="column" name="AABB" matchScore="8" id="1.0.0"/>
+                        <matching-component type="column" name="AABC" matchScore="76" id="1.0.1"/>
+                        <matching-component type="column" name="AABA" matchScore="100" id="1.0.2"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="b" matchScore="0" metadataScore="0" combinedScoreGreedy="82" combinedScoreRandom="73" id="1.1">
+                    <component type="column" name="AABB" id="c0.0.0">
+                        <matching-component type="column" name="BABB" matchScore="95" id="1.1.0"/>
+                        <matching-component type="column" name="BABC" matchScore="5" id="1.1.1"/>
+                        <matching-component type="column" name="BABA" matchScore="5" id="1.1.2"/>
+                    </component>
+                    <component type="column" name="AABC" id="c0.0.1">
+                        <matching-component type="column" name="BABB" matchScore="5" id="1.1.0"/>
+                        <matching-component type="column" name="BABC" matchScore="76" id="1.1.1"/>
+                        <matching-component type="column" name="BABA" matchScore="52" id="1.1.2"/>
+                    </component>
+                    <component type="column" name="AABA" id="c0.0.2">
+                        <matching-component type="column" name="BABB" matchScore="5" id="1.1.0"/>
+                        <matching-component type="column" name="BABC" matchScore="52" id="1.1.1"/>
+                        <matching-component type="column" name="BABA" matchScore="76" id="1.1.2"/>
+                    </component>
+                </matching-component>
+            </component>
+            <component type="table" name="b" id="c0.1">
+                <matching-component type="table" name="b" matchScore="0" metadataScore="100" combinedScoreGreedy="100" combinedScoreRandom="100" id="1.1">
+                    <component type="column" name="BABB" id="c0.1.0">
+                        <matching-component type="column" name="BABB" matchScore="100" id="1.1.0"/>
+                        <matching-component type="column" name="BABC" matchScore="8" id="1.1.1"/>
+                        <matching-component type="column" name="BABA" matchScore="8" id="1.1.2"/>
+                    </component>
+                    <component type="column" name="BABC" id="c0.1.1">
+                        <matching-component type="column" name="BABB" matchScore="8" id="1.1.0"/>
+                        <matching-component type="column" name="BABC" matchScore="100" id="1.1.1"/>
+                        <matching-component type="column" name="BABA" matchScore="76" id="1.1.2"/>
+                    </component>
+                    <component type="column" name="BABA" id="c0.1.2">
+                        <matching-component type="column" name="BABB" matchScore="8" id="1.1.0"/>
+                        <matching-component type="column" name="BABC" matchScore="86" id="1.1.1"/>
+                        <matching-component type="column" name="BABA" matchScore="100" id="1.1.2"/>
+                    </component>
+                </matching-component>
+                <matching-component type="table" name="a" matchScore="0" metadataScore="0" combinedScoreGreedy="82" combinedScoreRandom="73" id="1.0">
+                    <component type="column" name="BABB" id="c0.1.0">
+                        <matching-component type="column" name="AABB" matchScore="95" id="1.0.0"/>
+                        <matching-component type="column" name="AABC" matchScore="5" id="1.0.1"/>
+                        <matching-component type="column" name="AABA" matchScore="5" id="1.0.2"/>
+                    </component>
+                    <component type="column" name="BABC" id="c0.1.1">
+                        <matching-component type="column" name="AABB" matchScore="5" id="1.0.0"/>
+                        <matching-component type="column" name="AABC" matchScore="76" id="1.0.1"/>
+                        <matching-component type="column" name="AABA" matchScore="52" id="1.0.2"/>
+                    </component>
+                    <component type="column" name="BABA" id="c0.1.2">
+                        <matching-component type="column" name="AABB" matchScore="5" id="1.0.0"/>
+                        <matching-component type="column" name="AABC" matchScore="52" id="1.0.1"/>
+                        <matching-component type="column" name="AABA" matchScore="76" id="1.0.2"/>
+                    </component>
+                </matching-component>
+            </component>
+        </matching-component>
+    </component>
+</matchingResult>

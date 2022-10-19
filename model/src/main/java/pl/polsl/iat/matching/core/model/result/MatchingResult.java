@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.*;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -251,7 +252,7 @@ public class MatchingResult {
                         List<Component> components = tableMatch.getComponent();
                         List<MatchingComponent> matchingComponents = components.get(0).getMatchingComponent();
                         for(int i = 0; i < iter; i++) {
-                            Combo combo = getRandomCombo(new ArrayList<>(components), new ArrayList<>(matchingComponents));
+                            Combo combo = getRandomCombo(new ArrayList<>(components), new ArrayList<>(matchingComponents), MatchingComponent::getMatchScore);
                             if(bestCombination == null) {
                                 bestCombination = combo;
                             } else if(bestCombination.getResult() < combo.getResult()) {
@@ -272,13 +273,13 @@ public class MatchingResult {
     private double maxCombinations = 20;//Math.pow(8,8);
 
 
-    private Combo getRandomCombo(ArrayList<Component> components, ArrayList<MatchingComponent> matchingComponents) {
+    private Combo getRandomCombo(ArrayList<Component> components, ArrayList<MatchingComponent> matchingComponents, Function<MatchingComponent, ? extends Number> getMatchScoreFun) {
         Combo combo = new Combo();
         List<Integer> availableComponents = new ArrayList<>(IntStream.range(0, matchingComponents.size()).boxed().toList());
         while(components.size() > 0 && availableComponents.size() > 0) {
             Component a = components.remove(r.nextInt(components.size()));
             MatchingComponent b = a.getMatchingComponent().get(availableComponents.remove(r.nextInt(availableComponents.size())));
-            combo.add(new Pair(a, b, b.getMetadataScore().intValue()));
+            combo.add(new Pair(a, b, getMatchScoreFun.apply(b).intValue()));
         }
         return combo;
     }
@@ -316,11 +317,20 @@ public class MatchingResult {
                 if (parentComponent.type == ResultComponentType.SCHEMA)
                     iterateTree(parentComponentMatch.getComponent());
                 int greedyResult = getGreedyResult(parentComponentMatch);
-                parentComponentMatch.setCombinedScoreGreedy(greedyResult);
                 int randomResult = getRandomResult(parentComponentMatch);
+                int metaDataScore = parentComponentMatch.getMetadataScore().intValue();
+                int n = parentComponentMatch.component.size();
+                int m = parentComponentMatch.component.get(0).matchingComponent.size();
+                float x = m*n;
+                float y = (x+1)/x - 1;
+                metaDataScore *= y;
+                greedyResult = (int) Math.ceil(greedyResult * (1 - y) + metaDataScore);
+                randomResult = (int) Math.ceil(randomResult * (1 - y) + metaDataScore);
+                System.out.println(x + " " + y);
+                parentComponentMatch.setCombinedScoreGreedy(greedyResult);
                 parentComponentMatch.setCombinedScoreRandom(randomResult);
-                int averageResult = getAverageResult(parentComponentMatch);
-                parentComponentMatch.setCombinedScoreAverage(averageResult);
+//                int averageResult = getAverageResult(parentComponentMatch);
+//                parentComponentMatch.setCombinedScoreAverage(averageResult);
             }
         }
     }
@@ -336,17 +346,22 @@ public class MatchingResult {
             int result = columnMatches.get(i).getMetadataScore().intValue();
             while (matchMap.containsKey(columnMatches.get(i).name) && i < columnMatches.size() - 1) {
                 i++;
-                result += columnMatches.get(i).getMetadataScore().intValue();
+                result += columnMatches.get(i).getMatchScore().intValue();
             }
             matchMap.put(column.name, columnMatches.get(i).name);
             total+=result;
-            column.setScore(result);
+//            column.setScore(result);
         }
         return total/columns.size();
 
     }
 
     private int getRandomResult(MatchingComponent parentComponentMatch) {
+        Function<MatchingComponent, ? extends Number> getMatchScoreFun = MatchingComponent::getMatchScore;
+        if(ResultComponentType.SCHEMA == parentComponentMatch.type) {
+            getMatchScoreFun = MatchingComponent::getCombinedScoreRandom;
+        }
+
         int sizeLeft = parentComponentMatch.getComponent().size();
         int sizeRight = parentComponentMatch.getComponent().get(0).getMatchingComponent().size();
         double numberOfCombinations = Math.pow(Math.min(sizeLeft, sizeRight), Math.max(sizeLeft, sizeRight));
@@ -355,7 +370,7 @@ public class MatchingResult {
         List<Component> components = parentComponentMatch.getComponent();
         List<MatchingComponent> matchingComponents = components.get(0).getMatchingComponent();
         for(int i = 0; i < iter; i++) {
-            Combo combo = getRandomCombo(new ArrayList<>(components), new ArrayList<>(matchingComponents));
+            Combo combo = getRandomCombo(new ArrayList<>(components), new ArrayList<>(matchingComponents), getMatchScoreFun);
             if(bestCombination == null) {
                 bestCombination = combo;
             } else if(bestCombination.getResult() < combo.getResult()) {
@@ -366,23 +381,26 @@ public class MatchingResult {
     }
 
     private int getGreedyResult(MatchingComponent parentComponentMatch) {
-        int greedyResult = 0;
+        Function<MatchingComponent, ? extends Number> getMatchScoreFun = MatchingComponent::getMatchScore;
+        if(ResultComponentType.SCHEMA == parentComponentMatch.type) {
+            getMatchScoreFun = MatchingComponent::getCombinedScoreGreedy;
+        }
+
         List<Component> childComponents = parentComponentMatch.getComponent();
         Set<MatchingComponent> used = new HashSet<>();
         for(Component childComponent : childComponents) {
-
             MatchingComponent columnMatch = getMatchingComponentSorted(childComponent)
                     .stream()
                     .filter(Predicate.not(used::contains))
                     .findFirst().orElse(null);
             if(columnMatch != null) {
-                childComponent.setMatchingComponentId(columnMatch.getId());
-                childComponent.setScore(columnMatch.getMatchScore().intValue());
+                //TODO best match
+//                childComponent.setMatchingComponentId(columnMatch.getId());
+//                childComponent.setScore(columnMatch.getMatchScore().intValue());
                 used.add(columnMatch);
             }
-            greedyResult = (int) (used.stream().map(MatchingComponent::getMetadataScore).mapToDouble(BigDecimal::doubleValue).sum() / used.size());
         }
-        return greedyResult;
+        return (int) (used.stream().map(getMatchScoreFun).mapToDouble(Number::doubleValue).sum() / used.size());
     }
 
     private List<MatchingComponent> getMatchingComponentSorted(Component component) {
