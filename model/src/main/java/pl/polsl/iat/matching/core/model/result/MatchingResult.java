@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.*;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -270,8 +271,10 @@ public class MatchingResult {
     private Random r = new Random(System.currentTimeMillis());
 
     @XmlTransient
-    private final double maxCombinations = Math.pow(8,8);
+    private final double maxCombinations = Math.pow(10,10);
 
+    @XmlTransient
+    private final double maxRandomCombination = Math.pow(7,7);
 
     private Combo getRandomCombo(ArrayList<Component> components, ArrayList<MatchingComponent> matchingComponents, Function<MatchingComponent, ? extends Number> getMatchScoreFun) {
         Combo combo = new Combo();
@@ -298,17 +301,29 @@ public class MatchingResult {
         }
     }
 
-    static class Pair {
-        Component component;
-        MatchingComponent matchingComponent;
-        Integer result;
-
-        public Pair(Component component, MatchingComponent matchingComponent, Integer result) {
-            this.component = component;
-            this.matchingComponent = matchingComponent;
-            this.result = result;
-        }
-    }
+//    private void task(List<Component> schemas) throws InterruptedException {
+////        ExecutorService service = Executors.newFixedThreadPool(10);
+////        Executors.newFixedThreadPool()
+////        ExecutorService service = new ThreadPoolExecutor(10,10, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+//        for(Component schema : schemas) {
+////            List<Callable<Boolean>> tasksS = new ArrayList<>();
+//            for(MatchingComponent schemaMatch : schema.getMatchingComponent()) {
+////                List<Callable<Boolean>> tasks = new ArrayList<>();
+//                for(Component table : schemaMatch.getComponent()) {
+//                    for(MatchingComponent tableMatch : table.getMatchingComponent()) {
+////                        tasks.add(() -> iterateTree(tableMatch));
+////                        service.submit(() -> iterateTree(tableMatch));
+//                        iterateTree(tableMatch);
+//                    }
+//                }
+////                service.invokeAll(tasks);
+////                tasksS.add(() -> iterateTree(schemaMatch));
+//                iterateTree(schemaMatch);
+//            }
+////            service.invokeAll(tasksS);
+//        }
+////        service.shutdown();
+//    }
 
     private void iterateTree(List<Component> parentComponents) {
         //schema match
@@ -381,7 +396,7 @@ public class MatchingResult {
         Combo bestCombination = null;
         List<Component> components = parentComponentMatch.getComponent();
         List<MatchingComponent> matchingComponents = components.get(0).getMatchingComponent();
-        for(int i = 0; i < (int)maxCombinations; i++) {
+        for(int i = 0; i < (int)maxRandomCombination; i++) {
             Combo combo = getRandomCombo(new ArrayList<>(components), new ArrayList<>(matchingComponents), getMatchScoreFun);
             if(bestCombination == null) {
                 bestCombination = combo;
@@ -528,27 +543,64 @@ public class MatchingResult {
 
 
     public int cartesianProduct(MatchingComponent parentComponentMatch, Function<MatchingComponent, ? extends Number> getMatchScoreFun) {
-        List<List<Number>> lists = new ArrayList<>();
+        List<List<Pair>> lists = new ArrayList<>();
+        int n = parentComponentMatch.getComponent().size();
+        int m = parentComponentMatch.getComponent().get(0).matchingComponent.size();
         for (Component childComponent : parentComponentMatch.getComponent()) {
             if (childComponent.type != ResultComponentType.COLUMN)
                 evaluateChildren(childComponent);
-            List<Number> list = new ArrayList<>();
+            List<Pair> list = new ArrayList<>();
             for (MatchingComponent childMatchingComponent : childComponent.getMatchingComponent()) {
-                list.add(getMatchScoreFun.apply(childMatchingComponent));
+                list.add(new Pair(childComponent, childMatchingComponent, getMatchScoreFun.apply(childMatchingComponent).intValue()));
             }
             lists.add(list);
         }
+        if(n > m)
+            lists = transpose(lists);
 
-        List<List<Number>> lists1 = Lists.cartesianProduct(lists);
-
-        Double max = lists1.stream()
+        List<List<Pair>> combinations = cartesianProduct(lists);
+        System.out.println(parentComponentMatch.type + " " + combinations.size());
+        Double max = combinations.stream()
                 .map(list ->
                         list.stream()
-                                .collect(Collectors.summarizingDouble(Number::doubleValue))
+                                .collect(Collectors.summarizingInt(Pair::getResult))
                                 .getAverage())
                 .max(Double::compareTo).orElse(0.0);
         return max.intValue();
     }
 
+    protected List<List<Pair>> transpose(List<List<Pair>> matrix) {
+        int m = matrix.get(0).size();
+        int n = matrix.size();
+        List<Pair[]> transpose = new ArrayList<>(m);
+        IntStream.range(0,m).forEach(x -> transpose.add(new Pair[n]));
+        for(int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                transpose.get(j)[i] = matrix.get(i).get(j);
+            }
+        }
+        return transpose.stream().map(List::of).toList();
+    }
 
+    protected <T> List<List<T>> cartesianProduct(List<List<T>> lists) {
+        List<List<T>> resultLists = new ArrayList<List<T>>();
+        if (lists.size() == 0) {
+            resultLists.add(new ArrayList<T>());
+            return resultLists;
+        } else {
+            List<T> firstList = lists.get(0);
+            List<List<T>> remainingLists = cartesianProduct(lists.subList(1, lists.size()));
+            for (T condition : firstList) {
+                for (List<T> remainingList : remainingLists) {
+                    ArrayList<T> resultList = new ArrayList<T>();
+                    if(remainingList.contains(condition))
+                        continue;
+                    resultList.add(condition);
+                    resultList.addAll(remainingList);
+                    resultLists.add(resultList);
+                }
+            }
+        }
+        return resultLists;
+    }
 }

@@ -4,6 +4,9 @@ import pl.polsl.iat.matching.dictionary.LexicalDictionary;
 import pl.polsl.iat.matching.dictionary.exception.DictionaryException;
 import pl.polsl.iat.matching.dictionary.exception.NlpMildException;
 
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.Optional;
 
 public class NLPTools {
@@ -43,6 +46,12 @@ public class NLPTools {
         instance.posTagger = new POSTagger();
         instance.initialized = true;
         return instance;
+    }
+
+    private static Map<String, Collection<String>> synsetCache = new Hashtable<>();
+
+    public static Map<String, Collection<String>> getSynsetCache() {
+        return synsetCache;
     }
 
     private static int getWordnetDepth() {

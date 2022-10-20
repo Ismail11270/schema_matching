@@ -23,13 +23,15 @@ class SemanticMather extends WordMatcher {
         return instance;
     }
 
-    Map<String, Collection<String>> cache = new Hashtable<>();
+
 
     @Override
     public Integer doMatch(Word left, Word right) {
 
-        Collection<String> leftSynsets = new ArrayList<>(cache.computeIfAbsent(left.toString(), x -> dictionary.getRelatedSynsetIds(left.toString(), left.getPos().getWordnetPos())));
-        Collection<String> rightSynsets = new ArrayList<>(cache.computeIfAbsent(right.toString(), x -> dictionary.getRelatedSynsetIds(right.toString(), right.getPos().getWordnetPos())));
+        Collection<String> leftSynsets = new ArrayList<>(NLPTools.getSynsetCache().computeIfAbsent(left.toString(), x -> dictionary.getRelatedSynsetIds(left.toString(), left.getPos().getWordnetPos())));
+        Collection<String> rightSynsets = new ArrayList<>(NLPTools.getSynsetCache().computeIfAbsent(right.toString(), x -> dictionary.getRelatedSynsetIds(right.toString(), right.getPos().getWordnetPos())));
+//        Collection<String> leftSynsets = dictionary.getRelatedSynsetIds(left.toString(), left.getPos().getWordnetPos());
+//        Collection<String> rightSynsets = dictionary.getRelatedSynsetIds(right.toString(), right.getPos().getWordnetPos());
 
         int a = leftSynsets.size(), b = rightSynsets.size();
         leftSynsets.retainAll(rightSynsets);

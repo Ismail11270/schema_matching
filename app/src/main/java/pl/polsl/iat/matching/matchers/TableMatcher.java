@@ -20,7 +20,7 @@ public class TableMatcher extends ComponentMatcher<Table> {
     @Override
     public Results doMatch(Table left, Table right) {
         Results results = super.doMatch(left, right);
-//        Logger.table(left.getName() + " == " + right.getName() + " = " + results.calculateResult());
+        Logger.table(left.getName() + " == " + right.getName() + " = " + results.calculateResult());
         return results;
     }
 }
