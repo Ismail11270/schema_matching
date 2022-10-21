@@ -338,7 +338,7 @@ public class MatchingResult {
                 int m = parentComponentMatch.component.get(0).matchingComponent.size();
                 float x = m*n;
                 float y = (x+1)/x - 1;
-                metaDataScore *= y;
+                metaDataScore = (int)Math.ceil(metaDataScore * y);
 //                randomResult = (int) Math.ceil(randomResult * (1 - y) + metaDataScore);
 //                if(parentComponentMatch.isExact) {
 //                    parentComponentMatch.setMatchScore(randomResult);
@@ -347,7 +347,16 @@ public class MatchingResult {
                 int greedyResult = getGreedyResult(parentComponentMatch);
 //                greedyResult = (int) Math.ceil(greedyResult * (1 - y) + metaDataScore);
                 float sizeDiffRatio = (float) Math.min(m,n) / (float) Math.max(m,n);
-                int bestResult = (int) (Math.max(randomResult, greedyResult) * sizeDiffRatio);
+                if(Math.max(greedyResult, randomResult) == 100) {
+                    System.out.println("START");
+                    System.out.println(sizeDiffRatio);
+                    System.out.println(100*sizeDiffRatio);
+                    System.out.println(100*(1-y));
+                    System.out.println(metaDataScore);
+                    System.out.println("END");
+                }
+                int bestResult = (int) (Math.ceil((Math.max(randomResult, greedyResult) * sizeDiffRatio) * (1 - y)) + metaDataScore);
+
                 parentComponentMatch.setMatchScore(bestResult);
 //                parentComponentMatch.setCombinedScoreGreedy(greedyResult);
 //                parentComponentMatch.setCombinedScoreRandom(randomResult);
@@ -559,7 +568,6 @@ public class MatchingResult {
             lists = transpose(lists);
 
         List<List<Pair>> combinations = cartesianProduct(lists);
-        System.out.println(parentComponentMatch.type + " " + combinations.size());
         Double max = combinations.stream()
                 .map(list ->
                         list.stream()

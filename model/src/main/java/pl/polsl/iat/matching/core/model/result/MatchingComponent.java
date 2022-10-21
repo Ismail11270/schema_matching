@@ -197,7 +197,7 @@ public class MatchingComponent {
      */
     public void setMatchScore(float value) {
         isExact = true;
-        this.matchScore = BigDecimal.valueOf(value);
+        this.matchScore = BigDecimal.valueOf(value > 100 ? 100: value);
     }
 
     public Integer getCombinedScoreAverage() {
