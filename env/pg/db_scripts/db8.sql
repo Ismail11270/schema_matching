@@ -35,10 +35,10 @@ CREATE TABLE db.pl_address (
 );
 
 
-ALTER TABLE db.pl_pl_address OWNER TO postgres;
+ALTER TABLE db.pl_address OWNER TO postgres;
 
 
-CREATE SEQUENCE db.pl_pl_address_addressid_seq
+CREATE SEQUENCE db.pl_address_addressid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -47,24 +47,24 @@ CREATE SEQUENCE db.pl_pl_address_addressid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_pl_address_addressid_seq OWNER TO postgres;
+ALTER TABLE db.pl_address_addressid_seq OWNER TO postgres;
 
 
-ALTER SEQUENCE db.pl_pl_address_addressid_seq OWNED BY db.pl_pl_address.pl_address_id;
+ALTER SEQUENCE db.pl_address_addressid_seq OWNED BY db.pl_address.pl_address_id;
 
 
 
-CREATE TABLE db.pl_pl_address_type (
+CREATE TABLE db.pl_address_type (
     address_type_id integer NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.pl_pl_address_type OWNER TO postgres;
+ALTER TABLE db.pl_address_type OWNER TO postgres;
 
 
-CREATE SEQUENCE db.pl_pl_addresstype_addresstypeid_seq
+CREATE SEQUENCE db.pl_addresstype_addresstypeid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -73,7 +73,7 @@ CREATE SEQUENCE db.pl_pl_addresstype_addresstypeid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_pl_addresstype_addresstypeid_seq OWNER TO postgres;
+ALTER TABLE db.pl_addresstype_addresstypeid_seq OWNER TO postgres;
 
 
 ALTER SEQUENCE db.pl_addresstype_addresstypeid_seq OWNED BY db.pl_address_type.address_type_id;
