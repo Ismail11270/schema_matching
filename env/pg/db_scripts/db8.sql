@@ -572,8 +572,8 @@ CREATE TABLE db.pl_merchandise (
     pl_merchandise_line character(2),
     class character(2),
     pl_style character(2),
-    pl_merchandise_subcategory_id integer,
-    merchandise_model_id integer,
+    pl_merchandise_subpl_category_id integer,
+    pl_merchandise_model_id integer,
     pl_sell_start_date timestamp without time zone NOT NULL,
     pl_sell_end_date timestamp without time zone,
     pl_discontinued_date timestamp without time zone,
@@ -595,14 +595,14 @@ CREATE TABLE db.pl_merchandise (
 ALTER TABLE db.pl_merchandise owner TO postgres;
 
 
-CREATE TABLE db.pl_merchandise_category (
-    pl_merchandise_category_id integer NOT NULL,
+CREATE TABLE db.pl_merchandise_pl_category (
+    pl_merchandise_pl_category_id integer NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.pl_merchandise_category owner TO postgres;
+ALTER TABLE db.pl_merchandise_pl_category owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_cost_history (
@@ -619,15 +619,15 @@ CREATE TABLE db.pl_merchandise_cost_history (
 ALTER TABLE db.pl_merchandise_cost_history owner TO postgres;
 
 
-CREATE TABLE db.pl_merchandise_description (
-    merch_descr_id integer NOT NULL,
-    description character varying(400) NOT NULL,
+CREATE TABLE db.pl_merchandise_pl_description (
+    pl_merch_descr_id integer NOT NULL,
+    pl_description character varying(400) NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.pl_merchandise_description owner TO postgres;
+ALTER TABLE db.pl_merchandise_pl_description owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_document (
@@ -643,9 +643,9 @@ ALTER TABLE db.pl_merchandise_document owner TO postgres;
 CREATE TABLE db.pl_merchandise_stock (
     pl_merch_id integer NOT NULL,
     pl_location_id smallint NOT NULL,
-    shelf character varying(10) NOT NULL,
+    pl_shelf character varying(10) NOT NULL,
     bin smallint NOT NULL,
-    amount smallint DEFAULT 0 NOT NULL,
+    pl_amount smallint DEFAULT 0 NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
     CONSTRAINT "CK_merchandiseInventory_Bin" CHECK (((bin >= 0) AND (bin <= 100)))
@@ -659,10 +659,10 @@ CREATE TABLE db.pl_merchandise_list_price_history (
     pl_merch_id integer NOT NULL,
     pl_start_date timestamp without time zone NOT NULL,
     pl_end_date timestamp without time zone,
-    list_price numeric NOT NULL,
+    pl_list_price numeric NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
     CONSTRAINT "CK_merchandiseListPriceHistory_EndDate" CHECK (((pl_end_date >= pl_start_date) OR (pl_end_date IS NULL))),
-    CONSTRAINT "CK_merchandiseListPriceHistory_ListPrice" CHECK ((list_price > 0.00))
+    CONSTRAINT "CK_merchandiseListPriceHistory_ListPrice" CHECK ((pl_list_price > 0.00))
 );
 
 
@@ -670,9 +670,9 @@ ALTER TABLE db.pl_merchandise_list_price_history owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_model (
-    merchandise_model_id integer NOT NULL,
-    catalog_description xml,
-    instructions xml,
+    pl_merchandise_model_id integer NOT NULL,
+    pl_catalog_pl_description xml,
+    pl_instructions xml,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -682,7 +682,7 @@ ALTER TABLE db.pl_merchandise_model owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_model_graphic (
-    merchandise_model_id integer NOT NULL,
+    pl_merchandise_model_id integer NOT NULL,
     pl_graphic_id integer NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -691,23 +691,23 @@ CREATE TABLE db.pl_merchandise_model_graphic (
 ALTER TABLE db.pl_merchandise_model_graphic owner TO postgres;
 
 
-CREATE TABLE db.pl_merchandise_model_merchandise_description_culture (
-    merchandise_model_id integer NOT NULL,
-    merch_descr_id integer NOT NULL,
+CREATE TABLE db.pl_merchandise_model_merchandise_pl_description_culture (
+    pl_merchandise_model_id integer NOT NULL,
+    pl_merch_descr_id integer NOT NULL,
     pl_culture_id character(6) NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.pl_merchandise_model_merchandise_description_culture owner TO postgres;
+ALTER TABLE db.pl_merchandise_model_merchandise_pl_description_culture owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_image (
-    merchandise_image_id integer NOT NULL,
-    thumbnail_image bytea,
-    thumbnail_image_pl_file_path character varying(50),
-    original_image bytea,
-    original_image_pl_file_path character varying(50),
+    pl_merchandise_image_id integer NOT NULL,
+    pl_thumbnail_image bytea,
+    pl_thumbnail_image_pl_file_path character varying(50),
+    pl_original_image bytea,
+    pl_original_image_pl_file_path character varying(50),
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -717,7 +717,7 @@ ALTER TABLE db.pl_merchandise_image owner TO postgres;
 
 CREATE TABLE db.pl_merchandise_merchandise_image (
     pl_merch_id integer NOT NULL,
-    merchandise_image_id integer NOT NULL,
+    pl_merchandise_image_id integer NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -742,29 +742,29 @@ ALTER TABLE db.pl_merchandise_merchandiseid_seq owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_review (
-    merchandise_review_id integer NOT NULL,
+    pl_merchandise_review_id integer NOT NULL,
     pl_merch_id integer NOT NULL,
-    date_posted timestamp without time zone DEFAULT now() NOT NULL,
-    email_address character varying(50) NOT NULL,
-    review_rating integer NOT NULL,
-    notes character varying(3850),
+    pl_date_posted timestamp without time zone DEFAULT now() NOT NULL,
+    pl_email_address character varying(50) NOT NULL,
+    pl_review_rating integer NOT NULL,
+    pl_notes character varying(3850),
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_merchandiseReview_review_rating" CHECK (((review_rating >= 1) AND (review_rating <= 5)))
+    CONSTRAINT "CK_merchandiseReview_review_rating" CHECK (((pl_review_rating >= 1) AND (pl_review_rating <= 5)))
 );
 
 
 ALTER TABLE db.pl_merchandise_review owner TO postgres;
 
 
-CREATE TABLE db.pl_merchandise_subcategory (
-    pl_merchandise_subcategory_id integer NOT NULL,
-    pl_merchandise_category_id integer NOT NULL,
+CREATE TABLE db.pl_merchandise_subpl_category (
+    pl_merchandise_subpl_category_id integer NOT NULL,
+    pl_merchandise_pl_category_id integer NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
-ALTER TABLE db.pl_merchandise_subcategory owner TO postgres;
+ALTER TABLE db.pl_merchandise_subpl_category owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_vendor (
@@ -791,7 +791,7 @@ CREATE TABLE db.pl_merchandise_vendor (
 ALTER TABLE db.pl_merchandise_vendor owner TO postgres;
 
 
-CREATE SEQUENCE db.pl_merchandisecategory_merchandisecategoryid_seq
+CREATE SEQUENCE db.pl_merchandisepl_category_merchandisepl_categoryid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -800,14 +800,14 @@ CREATE SEQUENCE db.pl_merchandisecategory_merchandisecategoryid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandisecategory_merchandisecategoryid_seq owner TO postgres;
+ALTER TABLE db.pl_merchandisepl_category_merchandisepl_categoryid_seq owner TO postgres;
 
 
--- db.pl_merchandisecategory_merchandisecategoryid_seq OWNED BY db.pl_merchandise_category.pl_merchandise_category_id;
+-- db.pl_merchandisepl_category_merchandisepl_categoryid_seq OWNED BY db.pl_merchandise_pl_category.pl_merchandise_pl_category_id;
 
 
 
-CREATE SEQUENCE db.pl_merchandisedescription_merchandisedescriptionid_seq
+CREATE SEQUENCE db.pl_merchandisepl_description_merchandisepl_descriptionid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -816,10 +816,10 @@ CREATE SEQUENCE db.pl_merchandisedescription_merchandisedescriptionid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandisedescription_merchandisedescriptionid_seq owner TO postgres;
+ALTER TABLE db.pl_merchandisepl_description_merchandisepl_descriptionid_seq owner TO postgres;
 
 
--- db.pl_merchandisedescription_merchandisedescriptionid_seq OWNED BY db.pl_merchandise_description.merch_descr_id;
+-- db.pl_merchandisepl_description_merchandisepl_descriptionid_seq OWNED BY db.pl_merchandise_pl_description.pl_merch_descr_id;
 
 
 
@@ -835,7 +835,7 @@ CREATE SEQUENCE db.pl_merchandisemodel_merchandisemodelid_seq
 ALTER TABLE db.pl_merchandisemodel_merchandisemodelid_seq owner TO postgres;
 
 
--- db.pl_merchandisemodel_merchandisemodelid_seq OWNED BY db.pl_merchandise_model.merchandise_model_id;
+-- db.pl_merchandisemodel_merchandisemodelid_seq OWNED BY db.pl_merchandise_model.pl_merchandise_model_id;
 
 
 
@@ -851,7 +851,7 @@ CREATE SEQUENCE db.pl_merchandiseimage_merchandiseimageid_seq
 ALTER TABLE db.pl_merchandiseimage_merchandiseimageid_seq owner TO postgres;
 
 
--- db.pl_merchandiseimage_merchandiseimageid_seq OWNED BY db.pl_merchandise_image.merchandise_image_id;
+-- db.pl_merchandiseimage_merchandiseimageid_seq OWNED BY db.pl_merchandise_image.pl_merchandise_image_id;
 
 
 
@@ -867,11 +867,11 @@ CREATE SEQUENCE db.pl_merchandisereview_merchandisereviewid_seq
 ALTER TABLE db.pl_merchandisereview_merchandisereviewid_seq owner TO postgres;
 
 
--- db.pl_merchandisereview_merchandisereviewid_seq OWNED BY db.pl_merchandise_review.merchandise_review_id;
+-- db.pl_merchandisereview_merchandisereviewid_seq OWNED BY db.pl_merchandise_review.pl_merchandise_review_id;
 
 
 
-CREATE SEQUENCE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq
+CREATE SEQUENCE db.pl_merchandisesubpl_category_merchandisesubpl_categoryid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -880,10 +880,10 @@ CREATE SEQUENCE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq owner TO postgres;
+ALTER TABLE db.pl_merchandisesubpl_category_merchandisesubpl_categoryid_seq owner TO postgres;
 
 
--- db.pl_merchandisesubcategory_merchandisesubcategoryid_seq OWNED BY db.pl_merchandise_subcategory.pl_merchandise_subcategory_id;
+-- db.pl_merchandisesubpl_category_merchandisesubpl_categoryid_seq OWNED BY db.pl_merchandise_subpl_category.pl_merchandise_subpl_category_id;
 
 
 
@@ -923,7 +923,7 @@ CREATE TABLE db.pl_purchase_order_header (
     CONSTRAINT "CK_PurchaseOrderHeader_pl_cargo" CHECK ((pl_cargo >= 0.00)),
     CONSTRAINT "CK_PurchaseOrderHeader_ShipDate" CHECK (((pl_shipment_date >= pl_order_date) OR (pl_shipment_date IS NULL))),
     CONSTRAINT "CK_PurchaseOrderHeader_pl_status" CHECK (((pl_status >= 1) AND (pl_status <= 4))),
-    CONSTRAINT "CK_PurchaseOrderHeader_SubTotal" CHECK ((pl_subtotal >= 0.00)),
+    CONSTRAINT "CK_PurchaseOrderHeader_pl_subtotal" CHECK ((pl_subtotal >= 0.00)),
     CONSTRAINT "CK_PurchaseOrderHeader_TaxAmt" CHECK ((pl_tax_amt >= 0.00))
 );
 
@@ -964,18 +964,18 @@ ALTER TABLE db.pl_purchaseorderheader_purchaseorderid_seq owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_order_detail (
-    sales_order_id integer NOT NULL,
-    sales_order_detail_id integer NOT NULL,
-    courier_tracking_number character varying(25),
-    order_qty smallint NOT NULL,
+    pl_sales_order_id integer NOT NULL,
+    pl_sales_order_detail_id integer NOT NULL,
+    pl_courier_tracking_number character varying(25),
+    pl_order_qty smallint NOT NULL,
     pl_merch_id integer NOT NULL,
-    promotion_id integer NOT NULL,
-    unit_price numeric NOT NULL,
-    unit_price_discount numeric DEFAULT 0.0 NOT NULL,
+    pl_promotion_id integer NOT NULL,
+    pl_unit_price numeric NOT NULL,
+    pl_unit_price_discount numeric DEFAULT 0.0 NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesOrderDetail_OrderQty" CHECK ((order_qty > 0)),
-    CONSTRAINT "CK_SalesOrderDetail_UnitPrice" CHECK ((unit_price >= 0.00)),
+    CONSTRAINT "CK_SalesOrderDetail_OrderQty" CHECK ((pl_order_qty > 0)),
+    CONSTRAINT "CK_SalesOrderDetail_UnitPrice" CHECK ((pl_unit_price >= 0.00)),
     CONSTRAINT "CK_SalesOrderDetail_UnitPriceDiscount" CHECK ((unit_price_discount >= 0.00))
 );
 
@@ -984,34 +984,34 @@ ALTER TABLE db.pl_sales_order_detail owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_order_header (
-    sales_order_id integer NOT NULL,
-    audit_num smallint DEFAULT 0 NOT NULL,
-    order_date timestamp without time zone DEFAULT now() NOT NULL,
+    pl_sales_order_id integer NOT NULL,
+    pl_audit_num smallint DEFAULT 0 NOT NULL,
+    pl_order_date timestamp without time zone DEFAULT now() NOT NULL,
     pl_due_date timestamp without time zone NOT NULL,
-    shipment_date timestamp without time zone,
+    pl_shipment_date timestamp without time zone,
     pl_status smallint DEFAULT 1 NOT NULL,
     pl_client_id integer NOT NULL,
-    salesman_id integer,
+    pl_salesman_id integer,
     pl_zone_id integer,
-    billing_address integer NOT NULL,
-    shipping_address integer NOT NULL,
+    pl_billing_address integer NOT NULL,
+    pl_shipping_address integer NOT NULL,
     pl_shipment_method integer NOT NULL,
     pl_bank_card_id integer,
-    bank_card_verification_code character varying(15),
+    pl_bank_card_verification_code character varying(15),
     pl_exchange_rate_it integer,
-    subtotal numeric DEFAULT 0.00 NOT NULL,
-    tax_amt numeric DEFAULT 0.00 NOT NULL,
+    pl_subtotal numeric DEFAULT 0.00 NOT NULL,
+    pl_tax_amt numeric DEFAULT 0.00 NOT NULL,
     pl_cargo numeric DEFAULT 0.00 NOT NULL,
-    total_due numeric,
+    pl_total_due numeric,
     comment character varying(128),
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesOrderHeader_DueDate" CHECK ((pl_due_date >= order_date)),
+    CONSTRAINT "CK_SalesOrderHeader_DueDate" CHECK ((pl_due_date >= pl_order_date)),
     CONSTRAINT "CK_SalesOrderHeader_pl_cargo" CHECK ((pl_cargo >= 0.00)),
-    CONSTRAINT "CK_SalesOrderHeader_ShipDate" CHECK (((shipment_date >= order_date) OR (shipment_date IS NULL))),
+    CONSTRAINT "CK_SalesOrderHeader_ShipDate" CHECK (((pl_shipment_date >= pl_order_date) OR (pl_shipment_date IS NULL))),
     CONSTRAINT "CK_SalesOrderHeader_pl_status" CHECK (((pl_status >= 0) AND (pl_status <= 8))),
-    CONSTRAINT "CK_SalesOrderHeader_SubTotal" CHECK ((subtotal >= 0.00)),
-    CONSTRAINT "CK_SalesOrderHeader_TaxAmt" CHECK ((tax_amt >= 0.00))
+    CONSTRAINT "CK_SalesOrderHeader_pl_subtotal" CHECK ((pl_subtotal >= 0.00)),
+    CONSTRAINT "CK_SalesOrderHeader_TaxAmt" CHECK ((pl_tax_amt >= 0.00))
 );
 
 
@@ -1019,8 +1019,8 @@ ALTER TABLE db.pl_sales_order_header owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_order_header_sale_justification (
-    sales_order_id integer NOT NULL,
-    sale_justification_id integer NOT NULL,
+    pl_sales_order_id integer NOT NULL,
+    pl_sale_justification_id integer NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -1031,18 +1031,18 @@ ALTER TABLE db.pl_sales_order_header_sale_justification owner TO postgres;
 CREATE TABLE db.pl_sales_person (
     pl_business_entity_id integer NOT NULL,
     pl_zone_id integer,
-    sales_quota numeric,
-    bonus numeric DEFAULT 0.00 NOT NULL,
-    commission_pct numeric DEFAULT 0.00 NOT NULL,
-    sales_ytd numeric DEFAULT 0.00 NOT NULL,
-    sales_last_year numeric DEFAULT 0.00 NOT NULL,
+    pl_sales_quota numeric,
+    pl_bonus numeric DEFAULT 0.00 NOT NULL,
+    pl_commission_pct numeric DEFAULT 0.00 NOT NULL,
+    pl_sales_ytd numeric DEFAULT 0.00 NOT NULL,
+    pl_sales_last_year numeric DEFAULT 0.00 NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesPerson_Bonus" CHECK ((bonus >= 0.00)),
-    CONSTRAINT "CK_SalesPerson_CommissionPct" CHECK ((commission_pct >= 0.00)),
-    CONSTRAINT "CK_SalesPerson_SalesLastYear" CHECK ((sales_last_year >= 0.00)),
-    CONSTRAINT "CK_SalesPerson_SalesQuota" CHECK ((sales_quota > 0.00)),
-    CONSTRAINT "CK_SalesPerson_SalesYTD" CHECK ((sales_ytd >= 0.00))
+    CONSTRAINT "CK_SalesPerson_Bonus" CHECK ((pl_bonus >= 0.00)),
+    CONSTRAINT "CK_SalesPerson_CommissionPct" CHECK ((pl_commission_pct >= 0.00)),
+    CONSTRAINT "CK_SalesPerson_SalesLastYear" CHECK ((pl_sales_last_year >= 0.00)),
+    CONSTRAINT "CK_SalesPerson_SalesQuota" CHECK ((pl_sales_quota > 0.00)),
+    CONSTRAINT "CK_SalesPerson_SalesYTD" CHECK ((pl_sales_ytd >= 0.00))
 );
 
 
@@ -1051,11 +1051,11 @@ ALTER TABLE db.pl_sales_person owner TO postgres;
 
 CREATE TABLE db.pl_sales_person_quota_history (
     pl_business_entity_id integer NOT NULL,
-    quota_date timestamp without time zone NOT NULL,
-    sales_quota numeric NOT NULL,
+    pl_quota_date timestamp without time zone NOT NULL,
+    pl_sales_quota numeric NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesPersonQuotaHistory_SalesQuota" CHECK ((sales_quota > 0.00))
+    CONSTRAINT "CK_SalesPersonQuotaHistory_SalesQuota" CHECK ((pl_sales_quota > 0.00))
 );
 
 
@@ -1063,7 +1063,7 @@ ALTER TABLE db.pl_sales_person_quota_history owner TO postgres;
 
 
 CREATE TABLE db.pl_sale_justification (
-    sale_justification_id integer NOT NULL,
+    pl_sale_justification_id integer NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -1071,34 +1071,34 @@ CREATE TABLE db.pl_sale_justification (
 ALTER TABLE db.pl_sale_justification owner TO postgres;
 
 
-CREATE TABLE db.pl_sale_tax_pl_rate (
-    sale_tax_pl_rate_id integer NOT NULL,
+CREATE TABLE db.pl_sale_pl_tax_rate (
+    pl_sale_pl_tax_rate_id integer NOT NULL,
     pl_stat_id integer NOT NULL,
-    tax_type smallint NOT NULL,
-    tax_pl_rate numeric DEFAULT 0.00 NOT NULL,
+    pl_tax_type smallint NOT NULL,
+    pl_tax_rate numeric DEFAULT 0.00 NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesTaxpl_rate_TaxType" CHECK (((tax_type >= 1) AND (tax_type <= 3)))
+    CONSTRAINT "CK_SalesTaxpl_rate_TaxType" CHECK (((pl_tax_type >= 1) AND (pl_tax_type <= 3)))
 );
 
 
-ALTER TABLE db.pl_sale_tax_pl_rate owner TO postgres;
+ALTER TABLE db.pl_sale_pl_tax_rate owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_zone (
     pl_zone_id integer NOT NULL,
     pl_country_region_code character varying(3) NOT NULL,
     "group" character varying(50) NOT NULL,
-    sales_ytd numeric DEFAULT 0.00 NOT NULL,
-    sales_last_year numeric DEFAULT 0.00 NOT NULL,
-    cost_ytd numeric DEFAULT 0.00 NOT NULL,
-    cost_last_year numeric DEFAULT 0.00 NOT NULL,
+    pl_sales_ytd numeric DEFAULT 0.00 NOT NULL,
+    pl_sales_last_year numeric DEFAULT 0.00 NOT NULL,
+    pl_cost_ytd numeric DEFAULT 0.00 NOT NULL,
+    pl_cost_last_year numeric DEFAULT 0.00 NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SalesTerritory_CostLastYear" CHECK ((cost_last_year >= 0.00)),
-    CONSTRAINT "CK_SalesTerritory_CostYTD" CHECK ((cost_ytd >= 0.00)),
-    CONSTRAINT "CK_SalesTerritory_SalesLastYear" CHECK ((sales_last_year >= 0.00)),
-    CONSTRAINT "CK_SalesTerritory_SalesYTD" CHECK ((sales_ytd >= 0.00))
+    CONSTRAINT "CK_SalesTerritory_CostLastYear" CHECK ((pl_cost_last_year >= 0.00)),
+    CONSTRAINT "CK_SalesTerritory_CostYTD" CHECK ((pl_cost_ytd >= 0.00)),
+    CONSTRAINT "CK_SalesTerritory_SalesLastYear" CHECK ((pl_sales_last_year >= 0.00)),
+    CONSTRAINT "CK_SalesTerritory_SalesYTD" CHECK ((pl_sales_ytd >= 0.00))
 );
 
 
@@ -1131,7 +1131,7 @@ CREATE SEQUENCE db.pl_salesorderdetail_salesorderdetailid_seq
 ALTER TABLE db.pl_salesorderdetail_salesorderdetailid_seq owner TO postgres;
 
 
--- db.pl_salesorderdetail_salesorderdetailid_seq OWNED BY db.pl_sales_order_detail.sales_order_detail_id;
+-- db.pl_salesorderdetail_salesorderdetailid_seq OWNED BY db.pl_sales_order_detail.pl_sales_order_detail_id;
 
 
 
@@ -1147,7 +1147,7 @@ CREATE SEQUENCE db.pl_salesorderheader_salesorderid_seq
 ALTER TABLE db.pl_salesorderheader_salesorderid_seq owner TO postgres;
 
 
--- db.pl_salesorderheader_salesorderid_seq OWNED BY db.pl_sales_order_header.sales_order_id;
+-- db.pl_salesorderheader_salesorderid_seq OWNED BY db.pl_sales_order_header.pl_sales_order_id;
 
 
 
@@ -1163,7 +1163,7 @@ CREATE SEQUENCE db.pl_salesreason_salesreasonid_seq
 ALTER TABLE db.pl_salesreason_salesreasonid_seq owner TO postgres;
 
 
--- db.pl_salesreason_salesreasonid_seq OWNED BY db.pl_sale_justification.sale_justification_id;
+-- db.pl_salesreason_salesreasonid_seq OWNED BY db.pl_sale_justification.pl_sale_justification_id;
 
 
 
@@ -1179,7 +1179,7 @@ CREATE SEQUENCE db.pl_salestaxpl_rate_salestaxpl_rateid_seq
 ALTER TABLE db.pl_salestaxpl_rate_salestaxpl_rateid_seq owner TO postgres;
 
 
--- db.pl_salestaxpl_rate_salestaxpl_rateid_seq OWNED BY db.pl_sale_tax_pl_rate.sale_tax_pl_rate_id;
+-- db.pl_salestaxpl_rate_salestaxpl_rateid_seq OWNED BY db.pl_sale_pl_tax_rate.pl_sale_pl_tax_rate_id;
 
 
 
@@ -1200,7 +1200,7 @@ ALTER TABLE db.pl_salesterritory_territoryid_seq owner TO postgres;
 
 
 CREATE TABLE db.pl_scrap_reason (
-    scrap_reason_id integer NOT NULL,
+    pl_scrap_reason_id integer NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -1220,14 +1220,14 @@ CREATE SEQUENCE db.pl_scrapreason_scrapreasonid_seq
 ALTER TABLE db.pl_scrapreason_scrapreasonid_seq owner TO postgres;
 
 
--- db.pl_scrapreason_scrapreasonid_seq OWNED BY db.pl_scrap_reason.scrap_reason_id;
+-- db.pl_scrapreason_scrapreasonid_seq OWNED BY db.pl_scrap_reason.pl_scrap_reason_id;
 
 
 
 CREATE TABLE db.pl_shift (
     pl_shift_id integer NOT NULL,
-    start_time time without time zone NOT NULL,
-    end_time time without time zone NOT NULL,
+    pl_start_time time without time zone NOT NULL,
+    pl_end_time time without time zone NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
 
@@ -1237,12 +1237,12 @@ ALTER TABLE db.pl_shift owner TO postgres;
 
 CREATE TABLE db.pl_ship_method (
     pl_shipment_method integer NOT NULL,
-    ship_base numeric DEFAULT 0.00 NOT NULL,
-    ship_pl_rate numeric DEFAULT 0.00 NOT NULL,
+    pl_ship_base numeric DEFAULT 0.00 NOT NULL,
+    pl_ship_rate numeric DEFAULT 0.00 NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ShipMethod_ShipBase" CHECK ((ship_base > 0.00)),
-    CONSTRAINT "CK_ShipMethod_Shippl_rate" CHECK ((ship_pl_rate > 0.00))
+    CONSTRAINT "CK_ShipMethod_ShipBase" CHECK ((pl_ship_base > 0.00)),
+    CONSTRAINT "CK_ShipMethod_Shippl_rate" CHECK ((pl_ship_rate > 0.00))
 );
 
 
@@ -1266,13 +1266,13 @@ ALTER TABLE db.pl_shipmethod_shipmethodid_seq owner TO postgres;
 
 
 CREATE TABLE db.pl_shopping_cart_item (
-    shopping_cart_item_id integer NOT NULL,
-    shopping_cart_id character varying(50) NOT NULL,
-    amount integer DEFAULT 1 NOT NULL,
+    pl_shopping_cart_item_id integer NOT NULL,
+    pl_shopping_cart_id character varying(50) NOT NULL,
+    pl_amount integer DEFAULT 1 NOT NULL,
     pl_merch_id integer NOT NULL,
-    date_created timestamp without time zone DEFAULT now() NOT NULL,
+    pl_date_created timestamp without time zone DEFAULT now() NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_ShoppingCartItem_amount" CHECK ((amount >= 1))
+    CONSTRAINT "CK_ShoppingCartItem_amount" CHECK ((pl_amount >= 1))
 );
 
 
@@ -1291,26 +1291,26 @@ CREATE SEQUENCE db.pl_shoppingcartitem_shoppingcartitemid_seq
 ALTER TABLE db.pl_shoppingcartitem_shoppingcartitemid_seq owner TO postgres;
 
 
--- db.pl_shoppingcartitem_shoppingcartitemid_seq OWNED BY db.pl_shopping_cart_item.shopping_cart_item_id;
+-- db.pl_shoppingcartitem_shoppingcartitemid_seq OWNED BY db.pl_shopping_cart_item.pl_shopping_cart_item_id;
 
 
 
 CREATE TABLE db.pl_special_offer (
-    promotion_id integer NOT NULL,
-    description character varying(255) NOT NULL,
-    discount_pct numeric DEFAULT 0.00 NOT NULL,
+    pl_promotion_id integer NOT NULL,
+    pl_description character varying(255) NOT NULL,
+    pl_discount_pct numeric DEFAULT 0.00 NOT NULL,
     type character varying(50) NOT NULL,
-    category character varying(50) NOT NULL,
+    pl_category character varying(50) NOT NULL,
     pl_start_date timestamp without time zone NOT NULL,
     pl_end_date timestamp without time zone NOT NULL,
-    min_qty integer DEFAULT 0 NOT NULL,
-    max_qty integer,
+    pl_min_qty integer DEFAULT 0 NOT NULL,
+    pl_max_qty integer,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_SpecialOffer_DiscountPct" CHECK ((discount_pct >= 0.00)),
+    CONSTRAINT "CK_SpecialOffer_DiscountPct" CHECK ((pl_discount_pct >= 0.00)),
     CONSTRAINT "CK_SpecialOffer_EndDate" CHECK ((pl_end_date >= pl_start_date)),
-    CONSTRAINT "CK_SpecialOffer_MaxQty" CHECK ((max_qty >= 0)),
-    CONSTRAINT "CK_SpecialOffer_MinQty" CHECK ((min_qty >= 0))
+    CONSTRAINT "CK_SpecialOffer_MaxQty" CHECK ((pl_max_qty >= 0)),
+    CONSTRAINT "CK_SpecialOffer_MinQty" CHECK ((pl_min_qty >= 0))
 );
 
 
@@ -1318,7 +1318,7 @@ ALTER TABLE db.pl_special_offer owner TO postgres;
 
 
 CREATE TABLE db.pl_special_offer_merchandise (
-    promotion_id integer NOT NULL,
+    pl_promotion_id integer NOT NULL,
     pl_merch_id integer NOT NULL,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
@@ -1340,13 +1340,13 @@ CREATE SEQUENCE db.pl_specialoffer_specialofferid_seq
 ALTER TABLE db.pl_specialoffer_specialofferid_seq owner TO postgres;
 
 
--- db.pl_specialoffer_specialofferid_seq OWNED BY db.pl_special_offer.promotion_id;
+-- db.pl_specialoffer_specialofferid_seq OWNED BY db.pl_special_offer.pl_promotion_id;
 
 
 
 CREATE TABLE db.pl_state_province (
     pl_stat_id integer NOT NULL,
-    state_province_code character(3) NOT NULL,
+    pl_state_province_code character(3) NOT NULL,
     pl_country_region_code character varying(3) NOT NULL,
     pl_zone_id integer NOT NULL,
     row_guid uuid NOT NULL,
@@ -1375,8 +1375,8 @@ ALTER TABLE db.pl_stateprovince_stateprovinceid_seq owner TO postgres;
 
 CREATE TABLE db.pl_store (
     pl_business_entity_id integer NOT NULL,
-    salesman_id integer,
-    demographics xml,
+    pl_salesman_id integer,
+    pl_demographics xml,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -1386,15 +1386,15 @@ ALTER TABLE db.pl_store owner TO postgres;
 
 
 CREATE TABLE db.pl_transaction_history (
-    transaction_id integer NOT NULL,
+    pl_transaction_id integer NOT NULL,
     pl_merch_id integer NOT NULL,
-    order_ref_id integer NOT NULL,
-    transaction_date timestamp without time zone DEFAULT now() NOT NULL,
-    transaction_type character(1) NOT NULL,
-    amount integer NOT NULL,
-    real_price numeric NOT NULL,
+    pl_order_ref_id integer NOT NULL,
+    pl_transaction_date timestamp without time zone DEFAULT now() NOT NULL,
+    pl_transaction_type character(1) NOT NULL,
+    pl_amount integer NOT NULL,
+    pl_real_price numeric NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_TransactionHistory_TransactionType" CHECK ((upper((transaction_type)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
+    CONSTRAINT "CK_TransactionHistory_TransactionType" CHECK ((upper((pl_transaction_type)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
 );
 
 
@@ -1402,15 +1402,15 @@ ALTER TABLE db.pl_transaction_history owner TO postgres;
 
 
 CREATE TABLE db.pl_transaction_history_archive (
-    transaction_id integer NOT NULL,
+    pl_transaction_id integer NOT NULL,
     pl_merch_id integer NOT NULL,
-    order_ref_id integer NOT NULL,
-    transaction_date timestamp without time zone DEFAULT now() NOT NULL,
-    transaction_type character(1) NOT NULL,
+    pl_order_ref_id integer NOT NULL,
+    pl_transaction_date timestamp without time zone DEFAULT now() NOT NULL,
+    pl_transaction_type character(1) NOT NULL,
     amount integer NOT NULL,
     real_price numeric NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_TransactionHistoryArchive_TransactionType" CHECK ((upper((transaction_type)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
+    CONSTRAINT "CK_TransactionHistoryArchive_TransactionType" CHECK ((upper((pl_transaction_type)::text) = ANY (ARRAY['W'::text, 'S'::text, 'P'::text])))
 );
 
 
@@ -1429,7 +1429,7 @@ CREATE SEQUENCE db.pl_transactionhistory_transactionid_seq
 ALTER TABLE db.pl_transactionhistory_transactionid_seq owner TO postgres;
 
 
--- db.pl_transactionhistory_transactionid_seq OWNED BY db.pl_transaction_history.transaction_id;
+-- db.pl_transactionhistory_transactionid_seq OWNED BY db.pl_transaction_history.pl_transaction_id;
 
 
 
@@ -1444,10 +1444,10 @@ ALTER TABLE db.pl_unit_measure owner TO postgres;
 
 CREATE TABLE db.pl_seller (
     pl_business_entity_id integer NOT NULL,
-    credit_score smallint NOT NULL,
-    purchase_webpage_address character varying(1024),
+    pl_credit_score smallint NOT NULL,
+    pl_purchase_webpage_address character varying(1024),
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_Vendor_CreditRating" CHECK (((credit_score >= 1) AND (credit_score <= 5)))
+    CONSTRAINT "CK_Vendor_CreditRating" CHECK (((pl_credit_score >= 1) AND (pl_credit_score <= 5)))
 );
 
 
@@ -1455,18 +1455,18 @@ ALTER TABLE db.pl_seller owner TO postgres;
 
 
 CREATE TABLE db.pl_work_order (
-    work_order_id integer NOT NULL,
+    pl_work_order_id integer NOT NULL,
     pl_merch_id integer NOT NULL,
-    order_qty integer NOT NULL,
-    scrapped_qty smallint NOT NULL,
+    pl_order_qty integer NOT NULL,
+    pl_scrapped_qty smallint NOT NULL,
     pl_start_date timestamp without time zone NOT NULL,
     pl_end_date timestamp without time zone,
     pl_due_date timestamp without time zone NOT NULL,
-    scrap_reason_id smallint,
+    pl_scrap_reason_id smallint,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
     CONSTRAINT "CK_WorkOrder_EndDate" CHECK (((pl_end_date >= pl_start_date) OR (pl_end_date IS NULL))),
-    CONSTRAINT "CK_WorkOrder_OrderQty" CHECK ((order_qty > 0)),
-    CONSTRAINT "CK_WorkOrder_ScrappedQty" CHECK ((scrapped_qty >= 0))
+    CONSTRAINT "CK_WorkOrder_OrderQty" CHECK ((pl_order_qty > 0)),
+    CONSTRAINT "CK_WorkOrder_ScrappedQty" CHECK ((pl_scrapped_qty >= 0))
 );
 
 
@@ -1474,23 +1474,23 @@ ALTER TABLE db.pl_work_order owner TO postgres;
 
 
 CREATE TABLE db.pl_work_order_routing (
-    work_order_id integer NOT NULL,
+    pl_work_order_id integer NOT NULL,
     pl_merch_id integer NOT NULL,
-    operation_sequence smallint NOT NULL,
+    pl_operation_sequence smallint NOT NULL,
     pl_location_id smallint NOT NULL,
-    planned_starting_time timestamp without time zone NOT NULL,
-    planned_ending_time timestamp without time zone NOT NULL,
-    actual_pl_start_date timestamp without time zone,
-    actual_pl_end_date timestamp without time zone,
-    actual_resource_hrs numeric(9,4),
-    expected_price numeric NOT NULL,
-    real_price numeric,
+    pl_planned_starting_time timestamp without time zone NOT NULL,
+    pl_planned_ending_time timestamp without time zone NOT NULL,
+    pl_actual_pl_start_date timestamp without time zone,
+    pl_actual_pl_end_date timestamp without time zone,
+    pl_actual_resource_hrs numeric(9,4),
+    pl_expected_price numeric NOT NULL,
+    pl_real_price numeric,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_WorkOrderRouting_ActualCost" CHECK ((real_price > 0.00)),
-    CONSTRAINT "CK_WorkOrderRouting_ActualEndDate" CHECK (((actual_pl_end_date >= actual_pl_start_date) OR (actual_pl_end_date IS NULL) OR (actual_pl_start_date IS NULL))),
-    CONSTRAINT "CK_WorkOrderRouting_ActualResourceHrs" CHECK ((actual_resource_hrs >= 0.0000)),
-    CONSTRAINT "CK_WorkOrderRouting_PlannedCost" CHECK ((expected_price > 0.00)),
-    CONSTRAINT "CK_WorkOrderRouting_ScheduledEndDate" CHECK ((planned_ending_time >= planned_starting_time))
+    CONSTRAINT "CK_WorkOrderRouting_ActualCost" CHECK ((pl_real_price > 0.00)),
+    CONSTRAINT "CK_WorkOrderRouting_ActualEndDate" CHECK (((pl_actual_pl_end_date >= pl_actual_pl_start_date) OR (pl_actual_pl_end_date IS NULL) OR (pl_actual_pl_start_date IS NULL))),
+    CONSTRAINT "CK_WorkOrderRouting_ActualResourceHrs" CHECK ((pl_actual_resource_hrs >= 0.0000)),
+    CONSTRAINT "CK_WorkOrderRouting_PlannedCost" CHECK ((pl_expected_price > 0.00)),
+    CONSTRAINT "CK_WorkOrderRouting_ScheduledEndDate" CHECK ((pl_planned_ending_time >= pl_planned_starting_time))
 );
 
 
@@ -1509,7 +1509,7 @@ CREATE SEQUENCE db.pl_workorder_workorderid_seq
 ALTER TABLE db.pl_workorder_workorderid_seq owner TO postgres;
 
 
--- db.pl_workorder_workorderid_seq OWNED BY db.pl_work_order.work_order_id;
+-- db.pl_workorder_workorderid_seq OWNED BY db.pl_work_order.pl_work_order_id;
 
 
 
@@ -1569,27 +1569,27 @@ ALTER TABLE ONLY db.pl_merchandise ALTER COLUMN pl_merch_id SET DEFAULT nextval(
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_category ALTER COLUMN pl_merchandise_category_id SET DEFAULT nextval('db.pl_merchandisecategory_merchandisecategoryid_seq'::regclass);
+ALTER TABLE ONLY db.pl_merchandise_pl_category ALTER COLUMN pl_merchandise_pl_category_id SET DEFAULT nextval('db.pl_merchandisepl_category_merchandisepl_categoryid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_description ALTER COLUMN merch_descr_id SET DEFAULT nextval('db.pl_merchandisedescription_merchandisedescriptionid_seq'::regclass);
+ALTER TABLE ONLY db.pl_merchandise_pl_description ALTER COLUMN pl_merch_descr_id SET DEFAULT nextval('db.pl_merchandisepl_description_merchandisepl_descriptionid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_model ALTER COLUMN merchandise_model_id SET DEFAULT nextval('db.pl_merchandisemodel_merchandisemodelid_seq'::regclass);
+ALTER TABLE ONLY db.pl_merchandise_model ALTER COLUMN pl_merchandise_model_id SET DEFAULT nextval('db.pl_merchandisemodel_merchandisemodelid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_image ALTER COLUMN merchandise_image_id SET DEFAULT nextval('db.pl_merchandiseimage_merchandiseimageid_seq'::regclass);
+ALTER TABLE ONLY db.pl_merchandise_image ALTER COLUMN pl_merchandise_image_id SET DEFAULT nextval('db.pl_merchandiseimage_merchandiseimageid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_review ALTER COLUMN merchandise_review_id SET DEFAULT nextval('db.pl_merchandisereview_merchandisereviewid_seq'::regclass);
+ALTER TABLE ONLY db.pl_merchandise_review ALTER COLUMN pl_merchandise_review_id SET DEFAULT nextval('db.pl_merchandisereview_merchandisereviewid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_subcategory ALTER COLUMN pl_merchandise_subcategory_id SET DEFAULT nextval('db.pl_merchandisesubcategory_merchandisesubcategoryid_seq'::regclass);
+ALTER TABLE ONLY db.pl_merchandise_subpl_category ALTER COLUMN pl_merchandise_subpl_category_id SET DEFAULT nextval('db.pl_merchandisesubpl_category_merchandisesubpl_categoryid_seq'::regclass);
 
 
 
@@ -1601,19 +1601,19 @@ ALTER TABLE ONLY db.pl_purchase_order_header ALTER COLUMN pl_purchase_order_id S
 
 
 
-ALTER TABLE ONLY db.pl_sales_order_detail ALTER COLUMN sales_order_detail_id SET DEFAULT nextval('db.pl_salesorderdetail_salesorderdetailid_seq'::regclass);
+ALTER TABLE ONLY db.pl_sales_order_detail ALTER COLUMN pl_sales_order_detail_id SET DEFAULT nextval('db.pl_salesorderdetail_salesorderdetailid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_sales_order_header ALTER COLUMN sales_order_id SET DEFAULT nextval('db.pl_salesorderheader_salesorderid_seq'::regclass);
+ALTER TABLE ONLY db.pl_sales_order_header ALTER COLUMN pl_sales_order_id SET DEFAULT nextval('db.pl_salesorderheader_salesorderid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_sale_justification ALTER COLUMN sale_justification_id SET DEFAULT nextval('db.pl_salesreason_salesreasonid_seq'::regclass);
+ALTER TABLE ONLY db.pl_sale_justification ALTER COLUMN pl_sale_justification_id SET DEFAULT nextval('db.pl_salesreason_salesreasonid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_sale_tax_pl_rate ALTER COLUMN sale_tax_pl_rate_id SET DEFAULT nextval('db.pl_salestaxpl_rate_salestaxpl_rateid_seq'::regclass);
+ALTER TABLE ONLY db.pl_sale_pl_tax_rate ALTER COLUMN pl_sale_pl_tax_rate_id SET DEFAULT nextval('db.pl_salestaxpl_rate_salestaxpl_rateid_seq'::regclass);
 
 
 
@@ -1621,7 +1621,7 @@ ALTER TABLE ONLY db.pl_sales_zone ALTER COLUMN pl_zone_id SET DEFAULT nextval('d
 
 
 
-ALTER TABLE ONLY db.pl_scrap_reason ALTER COLUMN scrap_reason_id SET DEFAULT nextval('db.pl_scrapreason_scrapreasonid_seq'::regclass);
+ALTER TABLE ONLY db.pl_scrap_reason ALTER COLUMN pl_scrap_reason_id SET DEFAULT nextval('db.pl_scrapreason_scrapreasonid_seq'::regclass);
 
 
 
@@ -1629,11 +1629,11 @@ ALTER TABLE ONLY db.pl_ship_method ALTER COLUMN pl_shipment_method SET DEFAULT n
 
 
 
-ALTER TABLE ONLY db.pl_shopping_cart_item ALTER COLUMN shopping_cart_item_id SET DEFAULT nextval('db.pl_shoppingcartitem_shoppingcartitemid_seq'::regclass);
+ALTER TABLE ONLY db.pl_shopping_cart_item ALTER COLUMN pl_shopping_cart_item_id SET DEFAULT nextval('db.pl_shoppingcartitem_shoppingcartitemid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_special_offer ALTER COLUMN promotion_id SET DEFAULT nextval('db.pl_specialoffer_specialofferid_seq'::regclass);
+ALTER TABLE ONLY db.pl_special_offer ALTER COLUMN pl_promotion_id SET DEFAULT nextval('db.pl_specialoffer_specialofferid_seq'::regclass);
 
 
 
@@ -1641,11 +1641,11 @@ ALTER TABLE ONLY db.pl_state_province ALTER COLUMN pl_stat_id SET DEFAULT nextva
 
 
 
-ALTER TABLE ONLY db.pl_transaction_history ALTER COLUMN transaction_id SET DEFAULT nextval('db.pl_transactionhistory_transactionid_seq'::regclass);
+ALTER TABLE ONLY db.pl_transaction_history ALTER COLUMN pl_transaction_id SET DEFAULT nextval('db.pl_transactionhistory_transactionid_seq'::regclass);
 
 
 
-ALTER TABLE ONLY db.pl_work_order ALTER COLUMN work_order_id SET DEFAULT nextval('db.pl_workorder_workorderid_seq'::regclass);
+ALTER TABLE ONLY db.pl_work_order ALTER COLUMN pl_work_order_id SET DEFAULT nextval('db.pl_workorder_workorderid_seq'::regclass);
 
 
 
@@ -1829,10 +1829,10 @@ ALTER TABLE db.pl_phone_number_type CLUSTER ON "PK_PhoneNumberType_PhoneNumberTy
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_category
-    ADD CONSTRAINT "PK_merchandiseCategory_merchandiseCategoryID" PRIMARY KEY (pl_merchandise_category_id);
+ALTER TABLE ONLY db.pl_merchandise_pl_category
+    ADD CONSTRAINT "PK_merchandisepl_category_merchandisepl_categoryID" PRIMARY KEY (pl_merchandise_pl_category_id);
 
-ALTER TABLE db.pl_merchandise_category CLUSTER ON "PK_merchandiseCategory_merchandiseCategoryID";
+ALTER TABLE db.pl_merchandise_pl_category CLUSTER ON "PK_merchandisepl_category_merchandisepl_categoryID";
 
 
 
@@ -1843,10 +1843,10 @@ ALTER TABLE db.pl_merchandise_cost_history CLUSTER ON "PK_merchandiseCostHistory
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_description
-    ADD CONSTRAINT "PK_merchandiseDescription_merchandiseDescriptionID" PRIMARY KEY (merch_descr_id);
+ALTER TABLE ONLY db.pl_merchandise_pl_description
+    ADD CONSTRAINT "PK_merchandisepl_description_merchandisepl_descriptionID" PRIMARY KEY (pl_merch_descr_id);
 
-ALTER TABLE db.pl_merchandise_description CLUSTER ON "PK_merchandiseDescription_merchandiseDescriptionID";
+ALTER TABLE db.pl_merchandise_pl_description CLUSTER ON "PK_merchandisepl_description_merchandisepl_descriptionID";
 
 
 
@@ -1872,49 +1872,49 @@ ALTER TABLE db.pl_merchandise_list_price_history CLUSTER ON "PK_merchandiseListP
 
 
 ALTER TABLE ONLY db.pl_merchandise_model_graphic
-    ADD CONSTRAINT "PK_merchandiseModelgraphic_merchandiseModelID_graphicID" PRIMARY KEY (merchandise_model_id, pl_graphic_id);
+    ADD CONSTRAINT "PK_merchandiseModelgraphic_merchandiseModelID_graphicID" PRIMARY KEY (pl_merchandise_model_id, pl_graphic_id);
 
 ALTER TABLE db.pl_merchandise_model_graphic CLUSTER ON "PK_merchandiseModelgraphic_merchandiseModelID_graphicID";
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_model_merchandise_description_culture
-    ADD CONSTRAINT "PK_merchandiseModelmerchandiseDescriptionCulture_merchandiseModelID_merchandise" PRIMARY KEY (merchandise_model_id, merch_descr_id, pl_culture_id);
+ALTER TABLE ONLY db.pl_merchandise_model_merchandise_pl_description_culture
+    ADD CONSTRAINT "PK_merchandiseModelmerchandisepl_descriptionCulture_merchandiseModelID_merchandise" PRIMARY KEY (pl_merchandise_model_id, pl_merch_descr_id, pl_culture_id);
 
-ALTER TABLE db.pl_merchandise_model_merchandise_description_culture CLUSTER ON "PK_merchandiseModelmerchandiseDescriptionCulture_merchandiseModelID_merchandise";
+ALTER TABLE db.pl_merchandise_model_merchandise_pl_description_culture CLUSTER ON "PK_merchandiseModelmerchandisepl_descriptionCulture_merchandiseModelID_merchandise";
 
 
 
 ALTER TABLE ONLY db.pl_merchandise_model
-    ADD CONSTRAINT "PK_merchandiseModel_merchandiseModelID" PRIMARY KEY (merchandise_model_id);
+    ADD CONSTRAINT "PK_merchandiseModel_merchandiseModelID" PRIMARY KEY (pl_merchandise_model_id);
 
 ALTER TABLE db.pl_merchandise_model CLUSTER ON "PK_merchandiseModel_merchandiseModelID";
 
 
 
 ALTER TABLE ONLY db.pl_merchandise_image
-    ADD CONSTRAINT "PK_merchandiseimage_merchandiseimageID" PRIMARY KEY (merchandise_image_id);
+    ADD CONSTRAINT "PK_merchandiseimage_merchandiseimageID" PRIMARY KEY (pl_merchandise_image_id);
 
 ALTER TABLE db.pl_merchandise_image CLUSTER ON "PK_merchandiseimage_merchandiseimageID";
 
 
 
 ALTER TABLE ONLY db.pl_merchandise_merchandise_image
-    ADD CONSTRAINT "PK_merchandisemerchandiseimage_merchandiseID_merchandiseimageID" PRIMARY KEY (pl_merch_id, merchandise_image_id);
+    ADD CONSTRAINT "PK_merchandisemerchandiseimage_merchandiseID_merchandiseimageID" PRIMARY KEY (pl_merch_id, pl_merchandise_image_id);
 
 
 
 ALTER TABLE ONLY db.pl_merchandise_review
-    ADD CONSTRAINT "PK_merchandiseReview_merchandiseReviewID" PRIMARY KEY (merchandise_review_id);
+    ADD CONSTRAINT "PK_merchandiseReview_merchandiseReviewID" PRIMARY KEY (pl_merchandise_review_id);
 
 ALTER TABLE db.pl_merchandise_review CLUSTER ON "PK_merchandiseReview_merchandiseReviewID";
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_subcategory
-    ADD CONSTRAINT "PK_merchandiseSubcategory_merchandiseSubcategoryID" PRIMARY KEY (pl_merchandise_subcategory_id);
+ALTER TABLE ONLY db.pl_merchandise_subpl_category
+    ADD CONSTRAINT "PK_merchandiseSubpl_category_merchandiseSubpl_categoryID" PRIMARY KEY (pl_merchandise_subpl_category_id);
 
-ALTER TABLE db.pl_merchandise_subcategory CLUSTER ON "PK_merchandiseSubcategory_merchandiseSubcategoryID";
+ALTER TABLE db.pl_merchandise_subpl_category CLUSTER ON "PK_merchandiseSubpl_category_merchandiseSubpl_categoryID";
 
 
 
@@ -1947,28 +1947,28 @@ ALTER TABLE db.pl_purchase_order_header CLUSTER ON "PK_PurchaseOrderHeader_Purch
 
 
 ALTER TABLE ONLY db.pl_sales_order_detail
-    ADD CONSTRAINT "PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID" PRIMARY KEY (sales_order_id, sales_order_detail_id);
+    ADD CONSTRAINT "PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID" PRIMARY KEY (pl_sales_order_id, pl_sales_order_detail_id);
 
 ALTER TABLE db.pl_sales_order_detail CLUSTER ON "PK_SalesOrderDetail_SalesOrderID_SalesOrderDetailID";
 
 
 
 ALTER TABLE ONLY db.pl_sales_order_header_sale_justification
-    ADD CONSTRAINT "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID" PRIMARY KEY (sales_order_id, sale_justification_id);
+    ADD CONSTRAINT "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID" PRIMARY KEY (pl_sales_order_id, pl_sale_justification_id);
 
 ALTER TABLE db.pl_sales_order_header_sale_justification CLUSTER ON "PK_SalesOrderHeaderSalesReason_SalesOrderID_SalesReasonID";
 
 
 
 ALTER TABLE ONLY db.pl_sales_order_header
-    ADD CONSTRAINT "PK_SalesOrderHeader_SalesOrderID" PRIMARY KEY (sales_order_id);
+    ADD CONSTRAINT "PK_SalesOrderHeader_SalesOrderID" PRIMARY KEY (pl_sales_order_id);
 
 ALTER TABLE db.pl_sales_order_header CLUSTER ON "PK_SalesOrderHeader_SalesOrderID";
 
 
 
 ALTER TABLE ONLY db.pl_sales_person_quota_history
-    ADD CONSTRAINT "PK_SalesPersonQuotaHistory_BusinessEntityID_QuotaDate" PRIMARY KEY (pl_business_entity_id, quota_date);
+    ADD CONSTRAINT "PK_SalesPersonQuotaHistory_BusinessEntityID_QuotaDate" PRIMARY KEY (pl_business_entity_id, pl_quota_date);
 
 ALTER TABLE db.pl_sales_person_quota_history CLUSTER ON "PK_SalesPersonQuotaHistory_BusinessEntityID_QuotaDate";
 
@@ -1982,16 +1982,16 @@ ALTER TABLE db.pl_sales_person CLUSTER ON "PK_SalesPerson_BusinessEntityID";
 
 
 ALTER TABLE ONLY db.pl_sale_justification
-    ADD CONSTRAINT "PK_SalesReason_SalesReasonID" PRIMARY KEY (sale_justification_id);
+    ADD CONSTRAINT "PK_SalesReason_SalesReasonID" PRIMARY KEY (pl_sale_justification_id);
 
 ALTER TABLE db.pl_sale_justification CLUSTER ON "PK_SalesReason_SalesReasonID";
 
 
 
-ALTER TABLE ONLY db.pl_sale_tax_pl_rate
-    ADD CONSTRAINT "PK_SalesTaxpl_rate_SalesTaxpl_rateID" PRIMARY KEY (sale_tax_pl_rate_id);
+ALTER TABLE ONLY db.pl_sale_pl_tax_rate
+    ADD CONSTRAINT "PK_SalesTaxpl_rate_SalesTaxpl_rateID" PRIMARY KEY (pl_sale_pl_tax_rate_id);
 
-ALTER TABLE db.pl_sale_tax_pl_rate CLUSTER ON "PK_SalesTaxpl_rate_SalesTaxpl_rateID";
+ALTER TABLE db.pl_sale_pl_tax_rate CLUSTER ON "PK_SalesTaxpl_rate_SalesTaxpl_rateID";
 
 
 
@@ -2010,7 +2010,7 @@ ALTER TABLE db.pl_sales_zone CLUSTER ON "PK_SalesTerritory_TerritoryID";
 
 
 ALTER TABLE ONLY db.pl_scrap_reason
-    ADD CONSTRAINT "PK_ScrapReason_ScrapReasonID" PRIMARY KEY (scrap_reason_id);
+    ADD CONSTRAINT "PK_ScrapReason_ScrapReasonID" PRIMARY KEY (pl_scrap_reason_id);
 
 ALTER TABLE db.pl_scrap_reason CLUSTER ON "PK_ScrapReason_ScrapReasonID";
 
@@ -2031,21 +2031,21 @@ ALTER TABLE db.pl_ship_method CLUSTER ON "PK_ShipMethod_ShipMethodID";
 
 
 ALTER TABLE ONLY db.pl_shopping_cart_item
-    ADD CONSTRAINT "PK_ShoppingCartItem_ShoppingCartItemID" PRIMARY KEY (shopping_cart_item_id);
+    ADD CONSTRAINT "PK_ShoppingCartItem_ShoppingCartItemID" PRIMARY KEY (pl_shopping_cart_item_id);
 
 ALTER TABLE db.pl_shopping_cart_item CLUSTER ON "PK_ShoppingCartItem_ShoppingCartItemID";
 
 
 
 ALTER TABLE ONLY db.pl_special_offer_merchandise
-    ADD CONSTRAINT "PK_SpecialOffermerchandise_SpecialOfferID_merchandiseID" PRIMARY KEY (promotion_id, pl_merch_id);
+    ADD CONSTRAINT "PK_SpecialOffermerchandise_SpecialOfferID_merchandiseID" PRIMARY KEY (pl_promotion_id, pl_merch_id);
 
 ALTER TABLE db.pl_special_offer_merchandise CLUSTER ON "PK_SpecialOffermerchandise_SpecialOfferID_merchandiseID";
 
 
 
 ALTER TABLE ONLY db.pl_special_offer
-    ADD CONSTRAINT "PK_SpecialOffer_SpecialOfferID" PRIMARY KEY (promotion_id);
+    ADD CONSTRAINT "PK_SpecialOffer_SpecialOfferID" PRIMARY KEY (pl_promotion_id);
 
 ALTER TABLE db.pl_special_offer CLUSTER ON "PK_SpecialOffer_SpecialOfferID";
 
@@ -2066,14 +2066,14 @@ ALTER TABLE db.pl_store CLUSTER ON "PK_Store_BusinessEntityID";
 
 
 ALTER TABLE ONLY db.pl_transaction_history_archive
-    ADD CONSTRAINT "PK_TransactionHistoryArchive_TransactionID" PRIMARY KEY (transaction_id);
+    ADD CONSTRAINT "PK_TransactionHistoryArchive_TransactionID" PRIMARY KEY (pl_transaction_id);
 
 ALTER TABLE db.pl_transaction_history_archive CLUSTER ON "PK_TransactionHistoryArchive_TransactionID";
 
 
 
 ALTER TABLE ONLY db.pl_transaction_history
-    ADD CONSTRAINT "PK_TransactionHistory_TransactionID" PRIMARY KEY (transaction_id);
+    ADD CONSTRAINT "PK_TransactionHistory_TransactionID" PRIMARY KEY (pl_transaction_id);
 
 ALTER TABLE db.pl_transaction_history CLUSTER ON "PK_TransactionHistory_TransactionID";
 
@@ -2094,14 +2094,14 @@ ALTER TABLE db.pl_seller CLUSTER ON "PK_Vendor_BusinessEntityID";
 
 
 ALTER TABLE ONLY db.pl_work_order_routing
-    ADD CONSTRAINT "PK_WorkOrderRouting_WorkOrderID_merchandiseID_OperationSequence" PRIMARY KEY (work_order_id, pl_merch_id, operation_sequence);
+    ADD CONSTRAINT "PK_WorkOrderRouting_WorkOrderID_merchandiseID_OperationSequence" PRIMARY KEY (pl_work_order_id, pl_merch_id, pl_operation_sequence);
 
 ALTER TABLE db.pl_work_order_routing CLUSTER ON "PK_WorkOrderRouting_WorkOrderID_merchandiseID_OperationSequence";
 
 
 
 ALTER TABLE ONLY db.pl_work_order
-    ADD CONSTRAINT "PK_WorkOrder_WorkOrderID" PRIMARY KEY (work_order_id);
+    ADD CONSTRAINT "PK_WorkOrder_WorkOrderID" PRIMARY KEY (pl_work_order_id);
 
 ALTER TABLE db.pl_work_order CLUSTER ON "PK_WorkOrder_WorkOrderID";
 
@@ -2278,27 +2278,27 @@ ALTER TABLE ONLY db.pl_merchandise_model_graphic
 
 
 ALTER TABLE ONLY db.pl_merchandise_model_graphic
-    ADD CONSTRAINT "FK_merchandiseModelgraphic_merchandiseModel_merchandiseModelID" FOREIGN KEY (merchandise_model_id) REFERENCES db.pl_merchandise_model(merchandise_model_id);
+    ADD CONSTRAINT "FK_merchandiseModelgraphic_merchandiseModel_merchandiseModelID" FOREIGN KEY (pl_merchandise_model_id) REFERENCES db.pl_merchandise_model(pl_merchandise_model_id);
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_model_merchandise_description_culture
-    ADD CONSTRAINT "FK_merchandiseModelmerchandiseDescriptionCulture_Culture_CultureID" FOREIGN KEY (pl_culture_id) REFERENCES db.pl_culture(pl_culture_id);
+ALTER TABLE ONLY db.pl_merchandise_model_merchandise_pl_description_culture
+    ADD CONSTRAINT "FK_merchandiseModelmerchandisepl_descriptionCulture_Culture_CultureID" FOREIGN KEY (pl_culture_id) REFERENCES db.pl_culture(pl_culture_id);
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_model_merchandise_description_culture
-    ADD CONSTRAINT "FK_merchandiseModelmerchandiseDescriptionCulture_merchandiseDescription_Pro" FOREIGN KEY (merch_descr_id) REFERENCES db.pl_merchandise_description(merch_descr_id);
+ALTER TABLE ONLY db.pl_merchandise_model_merchandise_pl_description_culture
+    ADD CONSTRAINT "FK_merchandiseModelmerchandisepl_descriptionCulture_merchandisepl_description_Pro" FOREIGN KEY (pl_merch_descr_id) REFERENCES db.pl_merchandise_pl_description(pl_merch_descr_id);
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_model_merchandise_description_culture
-    ADD CONSTRAINT "FK_merchandiseModelmerchandiseDescriptionCulture_merchandiseModel_merchandiseMo" FOREIGN KEY (merchandise_model_id) REFERENCES db.pl_merchandise_model(merchandise_model_id);
+ALTER TABLE ONLY db.pl_merchandise_model_merchandise_pl_description_culture
+    ADD CONSTRAINT "FK_merchandiseModelmerchandisepl_descriptionCulture_merchandiseModel_merchandiseMo" FOREIGN KEY (pl_merchandise_model_id) REFERENCES db.pl_merchandise_model(pl_merchandise_model_id);
 
 
 
 ALTER TABLE ONLY db.pl_merchandise_merchandise_image
-    ADD CONSTRAINT "FK_merchandisemerchandiseimage_merchandiseimage_merchandiseimageID" FOREIGN KEY (merchandise_image_id) REFERENCES db.pl_merchandise_image(merchandise_image_id);
+    ADD CONSTRAINT "FK_merchandisemerchandiseimage_merchandiseimage_merchandiseimageID" FOREIGN KEY (pl_merchandise_image_id) REFERENCES db.pl_merchandise_image(pl_merchandise_image_id);
 
 
 
@@ -2307,8 +2307,8 @@ ALTER TABLE ONLY db.pl_merchandise_merchandise_image
 
 
 
-ALTER TABLE ONLY db.pl_merchandise_subcategory
-    ADD CONSTRAINT "FK_merchandiseSubcategory_merchandiseCategory_merchandiseCategoryID" FOREIGN KEY (pl_merchandise_category_id) REFERENCES db.pl_merchandise_category(pl_merchandise_category_id);
+ALTER TABLE ONLY db.pl_merchandise_subpl_category
+    ADD CONSTRAINT "FK_merchandiseSubpl_category_merchandisepl_category_merchandisepl_categoryID" FOREIGN KEY (pl_merchandise_pl_category_id) REFERENCES db.pl_merchandise_pl_category(pl_merchandise_pl_category_id);
 
 
 
@@ -2328,12 +2328,12 @@ ALTER TABLE ONLY db.pl_merchandise_vendor
 
 
 ALTER TABLE ONLY db.pl_merchandise
-    ADD CONSTRAINT "FK_merchandise_merchandiseModel_merchandiseModelID" FOREIGN KEY (merchandise_model_id) REFERENCES db.pl_merchandise_model(merchandise_model_id);
+    ADD CONSTRAINT "FK_merchandise_merchandiseModel_merchandiseModelID" FOREIGN KEY (pl_merchandise_model_id) REFERENCES db.pl_merchandise_model(pl_merchandise_model_id);
 
 
 
 ALTER TABLE ONLY db.pl_merchandise
-    ADD CONSTRAINT "FK_merchandise_merchandiseSubcategory_merchandiseSubcategoryID" FOREIGN KEY (pl_merchandise_subcategory_id) REFERENCES db.pl_merchandise_subcategory(pl_merchandise_subcategory_id);
+    ADD CONSTRAINT "FK_merchandise_merchandiseSubpl_category_merchandiseSubpl_categoryID" FOREIGN KEY (pl_merchandise_subpl_category_id) REFERENCES db.pl_merchandise_subpl_category(pl_merchandise_subpl_category_id);
 
 
 
@@ -2368,32 +2368,32 @@ ALTER TABLE ONLY db.pl_purchase_order_header
 
 
 ALTER TABLE ONLY db.pl_sales_order_detail
-    ADD CONSTRAINT "FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" FOREIGN KEY (sales_order_id) REFERENCES db.pl_sales_order_header(sales_order_id) ON DELETE CASCADE;
+    ADD CONSTRAINT "FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" FOREIGN KEY (pl_sales_order_id) REFERENCES db.pl_sales_order_header(pl_sales_order_id) ON DELETE CASCADE;
 
 
 
 ALTER TABLE ONLY db.pl_sales_order_detail
-    ADD CONSTRAINT "FK_SalesOrderDetail_SpecialOffermerchandise_SpecialOfferIDmerchandiseID" FOREIGN KEY (promotion_id, pl_merch_id) REFERENCES db.pl_special_offer_merchandise(promotion_id, pl_merch_id);
+    ADD CONSTRAINT "FK_SalesOrderDetail_SpecialOffermerchandise_SpecialOfferIDmerchandiseID" FOREIGN KEY (pl_promotion_id, pl_merch_id) REFERENCES db.pl_special_offer_merchandise(pl_promotion_id, pl_merch_id);
 
 
 
 ALTER TABLE ONLY db.pl_sales_order_header_sale_justification
-    ADD CONSTRAINT "FK_SalesOrderHeaderSalesReason_SalesOrderHeader_SalesOrderID" FOREIGN KEY (sales_order_id) REFERENCES db.pl_sales_order_header(sales_order_id) ON DELETE CASCADE;
+    ADD CONSTRAINT "FK_SalesOrderHeaderSalesReason_SalesOrderHeader_SalesOrderID" FOREIGN KEY (pl_sales_order_id) REFERENCES db.pl_sales_order_header(pl_sales_order_id) ON DELETE CASCADE;
 
 
 
 ALTER TABLE ONLY db.pl_sales_order_header_sale_justification
-    ADD CONSTRAINT "FK_SalesOrderHeaderSalesReason_SalesReason_SalesReasonID" FOREIGN KEY (sale_justification_id) REFERENCES db.pl_sale_justification(sale_justification_id);
+    ADD CONSTRAINT "FK_SalesOrderHeaderSalesReason_SalesReason_SalesReasonID" FOREIGN KEY (pl_sale_justification_id) REFERENCES db.pl_sale_justification(pl_sale_justification_id);
 
 
 
 ALTER TABLE ONLY db.pl_sales_order_header
-    ADD CONSTRAINT "FK_SalesOrderHeader_Address_BillToAddressID" FOREIGN KEY (billing_address) REFERENCES db.pl_address(pl_address_id);
+    ADD CONSTRAINT "FK_SalesOrderHeader_Address_BillToAddressID" FOREIGN KEY (pl_billing_address) REFERENCES db.pl_address(pl_address_id);
 
 
 
 ALTER TABLE ONLY db.pl_sales_order_header
-    ADD CONSTRAINT "FK_SalesOrderHeader_Address_ShipToAddressID" FOREIGN KEY (shipping_address) REFERENCES db.pl_address(pl_address_id);
+    ADD CONSTRAINT "FK_SalesOrderHeader_Address_ShipToAddressID" FOREIGN KEY (pl_shipping_address) REFERENCES db.pl_address(pl_address_id);
 
 
 
@@ -2413,7 +2413,7 @@ ALTER TABLE ONLY db.pl_sales_order_header
 
 
 ALTER TABLE ONLY db.pl_sales_order_header
-    ADD CONSTRAINT "FK_SalesOrderHeader_SalesPerson_SalesPersonID" FOREIGN KEY (salesman_id) REFERENCES db.pl_sales_person(pl_business_entity_id);
+    ADD CONSTRAINT "FK_SalesOrderHeader_SalesPerson_SalesPersonID" FOREIGN KEY (pl_salesman_id) REFERENCES db.pl_sales_person(pl_business_entity_id);
 
 
 
@@ -2437,7 +2437,7 @@ ALTER TABLE ONLY db.pl_sales_person
 
 
 
-ALTER TABLE ONLY db.pl_sale_tax_pl_rate
+ALTER TABLE ONLY db.pl_sale_pl_tax_rate
     ADD CONSTRAINT "FK_SalesTaxpl_rate_StateProvince_StateProvinceID" FOREIGN KEY (pl_stat_id) REFERENCES db.pl_state_province(pl_stat_id);
 
 
@@ -2468,7 +2468,7 @@ ALTER TABLE ONLY db.pl_special_offer_merchandise
 
 
 ALTER TABLE ONLY db.pl_special_offer_merchandise
-    ADD CONSTRAINT "FK_SpecialOffermerchandise_SpecialOffer_SpecialOfferID" FOREIGN KEY (promotion_id) REFERENCES db.pl_special_offer(promotion_id);
+    ADD CONSTRAINT "FK_SpecialOffermerchandise_SpecialOffer_SpecialOfferID" FOREIGN KEY (pl_promotion_id) REFERENCES db.pl_special_offer(pl_promotion_id);
 
 
 
@@ -2488,7 +2488,7 @@ ALTER TABLE ONLY db.pl_store
 
 
 ALTER TABLE ONLY db.pl_store
-    ADD CONSTRAINT "FK_Store_SalesPerson_SalesPersonID" FOREIGN KEY (salesman_id) REFERENCES db.pl_sales_person(pl_business_entity_id);
+    ADD CONSTRAINT "FK_Store_SalesPerson_SalesPersonID" FOREIGN KEY (pl_salesman_id) REFERENCES db.pl_sales_person(pl_business_entity_id);
 
 
 
@@ -2508,7 +2508,7 @@ ALTER TABLE ONLY db.pl_work_order_routing
 
 
 ALTER TABLE ONLY db.pl_work_order_routing
-    ADD CONSTRAINT "FK_WorkOrderRouting_WorkOrder_WorkOrderID" FOREIGN KEY (work_order_id) REFERENCES db.pl_work_order(work_order_id);
+    ADD CONSTRAINT "FK_WorkOrderRouting_WorkOrder_WorkOrderID" FOREIGN KEY (pl_work_order_id) REFERENCES db.pl_work_order(pl_work_order_id);
 
 
 
@@ -2518,7 +2518,7 @@ ALTER TABLE ONLY db.pl_work_order
 
 
 ALTER TABLE ONLY db.pl_work_order
-    ADD CONSTRAINT "FK_WorkOrder_ScrapReason_ScrapReasonID" FOREIGN KEY (scrap_reason_id) REFERENCES db.pl_scrap_reason(scrap_reason_id);
+    ADD CONSTRAINT "FK_WorkOrder_ScrapReason_ScrapReasonID" FOREIGN KEY (pl_scrap_reason_id) REFERENCES db.pl_scrap_reason(pl_scrap_reason_id);
 
 
 
