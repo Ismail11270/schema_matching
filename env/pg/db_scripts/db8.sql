@@ -498,12 +498,12 @@ CREATE TABLE db.pl_person (
     pl_person_type character(2) NOT NULL,
     pl_name character varying(8),
     pl_suffix character varying(10),
-    pl_pl_basic_pricetion integer DEFAULT 0 NOT NULL,
+    pl_basic_pricetion integer DEFAULT 0 NOT NULL,
     pl_extract_info xml,
     pl_demo_graphics xml,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
-    CONSTRAINT "CK_Person_EmailPromotion" CHECK (((pl_pl_basic_pricetion >= 0) AND (pl_pl_basic_pricetion <= 2))),
+    CONSTRAINT "CK_Person_EmailPromotion" CHECK (((pl_basic_pricetion >= 0) AND (pl_basic_pricetion <= 2))),
     CONSTRAINT "CK_Person_PersonType" CHECK (((pl_person_type IS NULL) OR (upper((pl_person_type)::text) = ANY (ARRAY['SC'::text, 'VC'::text, 'IN'::text, 'EM'::text, 'SP'::text, 'GC'::text]))))
 );
 
@@ -562,7 +562,7 @@ CREATE TABLE db.pl_merchandise (
     pl_color character varying(15),
     pl_safety_stock_lvl smallint NOT NULL,
     pl_reorder_point smallint NOT NULL,
-    pl_pl_basic_price numeric NOT NULL,
+    pl_basic_price numeric NOT NULL,
     pl_list_price numeric NOT NULL,
     size character varying(5),
     size_pl_unit_measure_code character(3),
@@ -1442,7 +1442,7 @@ CREATE TABLE db.pl_unit_measure (
 ALTER TABLE db.pl_unit_measure owner TO postgres;
 
 
-CREATE TABLE db.pl_pl_seller (
+CREATE TABLE db.pl_seller (
     pl_business_entity_id integer NOT NULL,
     credit_score smallint NOT NULL,
     purchase_webpage_address character varying(1024),
@@ -1451,7 +1451,7 @@ CREATE TABLE db.pl_pl_seller (
 );
 
 
-ALTER TABLE db.pl_pl_seller owner TO postgres;
+ALTER TABLE db.pl_seller owner TO postgres;
 
 
 CREATE TABLE db.pl_work_order (
@@ -2086,10 +2086,10 @@ ALTER TABLE db.pl_unit_measure CLUSTER ON "PK_UnitMeasure_UnitMeasureCode";
 
 
 
-ALTER TABLE ONLY db.pl_pl_seller
+ALTER TABLE ONLY db.pl_seller
     ADD CONSTRAINT "PK_Vendor_BusinessEntityID" PRIMARY KEY (pl_business_entity_id);
 
-ALTER TABLE db.pl_pl_seller CLUSTER ON "PK_Vendor_BusinessEntityID";
+ALTER TABLE db.pl_seller CLUSTER ON "PK_Vendor_BusinessEntityID";
 
 
 
@@ -2323,7 +2323,7 @@ ALTER TABLE ONLY db.pl_merchandise_vendor
 
 
 ALTER TABLE ONLY db.pl_merchandise_vendor
-    ADD CONSTRAINT "FK_merchandiseVendor_Vendor_BusinessEntityID" FOREIGN KEY (pl_business_entity_id) REFERENCES db.pl_pl_seller(pl_business_entity_id);
+    ADD CONSTRAINT "FK_merchandiseVendor_Vendor_BusinessEntityID" FOREIGN KEY (pl_business_entity_id) REFERENCES db.pl_seller(pl_business_entity_id);
 
 
 
@@ -2363,7 +2363,7 @@ ALTER TABLE ONLY db.pl_purchase_order_header
 
 
 ALTER TABLE ONLY db.pl_purchase_order_header
-    ADD CONSTRAINT "FK_PurchaseOrderHeader_Vendor_VendorID" FOREIGN KEY (pl_seller) REFERENCES db.pl_pl_seller(pl_business_entity_id);
+    ADD CONSTRAINT "FK_PurchaseOrderHeader_Vendor_VendorID" FOREIGN KEY (pl_seller) REFERENCES db.pl_seller(pl_business_entity_id);
 
 
 
@@ -2497,7 +2497,7 @@ ALTER TABLE ONLY db.pl_transaction_history
 
 
 
-ALTER TABLE ONLY db.pl_pl_seller
+ALTER TABLE ONLY db.pl_seller
     ADD CONSTRAINT "FK_Vendor_BusinessEntity_BusinessEntityID" FOREIGN KEY (pl_business_entity_id) REFERENCES db.pl_business_entity(pl_business_entity_id);
 
 
