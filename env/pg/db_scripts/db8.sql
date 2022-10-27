@@ -588,7 +588,7 @@ CREATE TABLE db.pl_merchandise (
     CONSTRAINT "CK_merchandise_SellEndDate" CHECK (((pl_sell_end_date >= pl_sell_start_date) OR (pl_sell_end_date IS NULL))),
     CONSTRAINT "CK_merchandise_StandardCost" CHECK ((pl_basic_price >= 0.00)),
     CONSTRAINT "CK_merchandise_Style" CHECK (((upper((pl_style)::text) = ANY (ARRAY['W'::text, 'M'::text, 'U'::text])) OR (pl_style IS NULL))),
-    CONSTRAINT "CK_merchandise_Weight" CHECK ((weight > 0.00))
+    CONSTRAINT "CK_merchandise_Weight" CHECK ((pl_weight > 0.00))
 );
 
 
