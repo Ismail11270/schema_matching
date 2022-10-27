@@ -35,7 +35,7 @@ CREATE TABLE db.pl_address (
 );
 
 
-ALTER TABLE db.pl_address pl_owner TO postgres;
+ALTER TABLE db.pl_address owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_address_addressid_seq
@@ -47,7 +47,7 @@ CREATE SEQUENCE db.pl_address_addressid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_address_addressid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_address_addressid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_address_addressid_seq OWNED BY db.pl_address.pl_address_id;
@@ -61,7 +61,7 @@ CREATE TABLE db.pl_address_type (
 );
 
 
-ALTER TABLE db.pl_address_type pl_owner TO postgres;
+ALTER TABLE db.pl_address_type owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_addresstype_addresstypeid_seq
@@ -73,7 +73,7 @@ CREATE SEQUENCE db.pl_addresstype_addresstypeid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_addresstype_addresstypeid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_addresstype_addresstypeid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_addresstype_addresstypeid_seq OWNED BY db.pl_address_type.pl_address_type_id;
@@ -97,7 +97,7 @@ CREATE TABLE db.pl_bom (
 );
 
 
-ALTER TABLE db.pl_bom pl_owner TO postgres;
+ALTER TABLE db.pl_bom owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_billofmaterials_billofmaterialsid_seq
@@ -109,7 +109,7 @@ CREATE SEQUENCE db.pl_billofmaterials_billofmaterialsid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_billofmaterials_billofmaterialsid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_billofmaterials_billofmaterialsid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_billofmaterials_billofmaterialsid_seq OWNED BY db.pl_bom.pl_bom_id;
@@ -123,7 +123,7 @@ CREATE TABLE db.pl_business_entity (
 );
 
 
-ALTER TABLE db.pl_business_entity pl_owner TO postgres;
+ALTER TABLE db.pl_business_entity owner TO postgres;
 
 
 CREATE TABLE db.pl_business_entity_address (
@@ -135,7 +135,7 @@ CREATE TABLE db.pl_business_entity_address (
 );
 
 
-ALTER TABLE db.pl_business_entity_address pl_owner TO postgres;
+ALTER TABLE db.pl_business_entity_address owner TO postgres;
 
 
 CREATE TABLE db.pl_business_entity_contact (
@@ -147,7 +147,7 @@ CREATE TABLE db.pl_business_entity_contact (
 );
 
 
-ALTER TABLE db.pl_business_entity_contact pl_owner TO postgres;
+ALTER TABLE db.pl_business_entity_contact owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_businessentity_businessentityid_seq
@@ -159,7 +159,7 @@ CREATE SEQUENCE db.pl_businessentity_businessentityid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_businessentity_businessentityid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_businessentity_businessentityid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_businessentity_businessentityid_seq OWNED BY db.pl_business_entity.pl_business_entity_id;
@@ -172,7 +172,7 @@ CREATE TABLE db.pl_contact_type (
 );
 
 
-ALTER TABLE db.pl_contact_type pl_owner TO postgres;
+ALTER TABLE db.pl_contact_type owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_contacttype_contacttypeid_seq
@@ -184,7 +184,7 @@ CREATE SEQUENCE db.pl_contacttype_contacttypeid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_contacttype_contacttypeid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_contacttype_contacttypeid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_contacttype_contacttypeid_seq OWNED BY db.pl_contact_type.pl_contact_type_id;
@@ -197,7 +197,7 @@ CREATE TABLE db.pl_country_region (
 );
 
 
-ALTER TABLE db.pl_country_region pl_owner TO postgres;
+ALTER TABLE db.pl_country_region owner TO postgres;
 
 
 CREATE TABLE db.pl_country_region_currency (
@@ -207,7 +207,7 @@ CREATE TABLE db.pl_country_region_currency (
 );
 
 
-ALTER TABLE db.pl_country_region_currency pl_owner TO postgres;
+ALTER TABLE db.pl_country_region_currency owner TO postgres;
 
 
 CREATE TABLE db.pl_credit_card (
@@ -220,7 +220,7 @@ CREATE TABLE db.pl_credit_card (
 );
 
 
-ALTER TABLE db.pl_credit_card pl_owner TO postgres;
+ALTER TABLE db.pl_credit_card owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_creditcard_creditcardid_seq
@@ -232,7 +232,7 @@ CREATE SEQUENCE db.pl_creditcard_creditcardid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_creditcard_creditcardid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_creditcard_creditcardid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_creditcard_creditcardid_seq OWNED BY db.pl_credit_card.pl_bank_card_id;
@@ -245,7 +245,7 @@ CREATE TABLE db.pl_culture (
 );
 
 
-ALTER TABLE db.pl_culture pl_owner TO postgres;
+ALTER TABLE db.pl_culture owner TO postgres;
 
 
 CREATE TABLE db.pl_currency (
@@ -254,7 +254,7 @@ CREATE TABLE db.pl_currency (
 );
 
 
-ALTER TABLE db.pl_currency pl_owner TO postgres;
+ALTER TABLE db.pl_currency owner TO postgres;
 
 
 CREATE TABLE db.pl_exchange_pl_rate (
@@ -268,7 +268,7 @@ CREATE TABLE db.pl_exchange_pl_rate (
 );
 
 
-ALTER TABLE db.pl_exchange_pl_rate pl_owner TO postgres;
+ALTER TABLE db.pl_exchange_pl_rate owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_currencypl_rate_currencypl_rateid_seq
@@ -280,7 +280,7 @@ CREATE SEQUENCE db.pl_currencypl_rate_currencypl_rateid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_currencypl_rate_currencypl_rateid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_currencypl_rate_currencypl_rateid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_currencypl_rate_currencypl_rateid_seq OWNED BY db.pl_exchange_pl_rate.pl_exchange_rate_it;
@@ -297,7 +297,7 @@ CREATE TABLE db.pl_client (
 );
 
 
-ALTER TABLE db.pl_client pl_owner TO postgres;
+ALTER TABLE db.pl_client owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_client_clientid_seq
@@ -309,7 +309,7 @@ CREATE SEQUENCE db.pl_client_clientid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_client_clientid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_client_clientid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_client_clientid_seq OWNED BY db.pl_client.pl_client_id;
@@ -323,7 +323,7 @@ CREATE TABLE db.pl_department (
 );
 
 
-ALTER TABLE db.pl_department pl_owner TO postgres;
+ALTER TABLE db.pl_department owner TO postgres;
 
 
 CREATE TABLE db.pl_document (
@@ -341,7 +341,7 @@ CREATE TABLE db.pl_document (
 );
 
 
-ALTER TABLE db.pl_document pl_owner TO postgres;
+ALTER TABLE db.pl_document owner TO postgres;
 
 
 CREATE TABLE db.pl_email (
@@ -353,7 +353,7 @@ CREATE TABLE db.pl_email (
 );
 
 
-ALTER TABLE db.pl_email pl_owner TO postgres;
+ALTER TABLE db.pl_email owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_emailaddress_emailaddressid_seq
@@ -365,7 +365,7 @@ CREATE SEQUENCE db.pl_emailaddress_emailaddressid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_emailaddress_emailaddressid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_emailaddress_emailaddressid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_emailaddress_emailaddressid_seq OWNED BY db.pl_email.pl_email_id;
@@ -383,7 +383,7 @@ CREATE TABLE db.pl_employee_department_history (
 );
 
 
-ALTER TABLE db.pl_employee_department_history pl_owner TO postgres;
+ALTER TABLE db.pl_employee_department_history owner TO postgres;
 
 
 CREATE TABLE db.pl_employee_wage_history (
@@ -397,7 +397,7 @@ CREATE TABLE db.pl_employee_wage_history (
 );
 
 
-ALTER TABLE db.pl_employee_wage_history pl_owner TO postgres;
+ALTER TABLE db.pl_employee_wage_history owner TO postgres;
 
 
 CREATE TABLE db.pl_graphic (
@@ -407,7 +407,7 @@ CREATE TABLE db.pl_graphic (
 );
 
 
-ALTER TABLE db.pl_graphic pl_owner TO postgres;
+ALTER TABLE db.pl_graphic owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_graphic_graphicid_seq
@@ -419,7 +419,7 @@ CREATE SEQUENCE db.pl_graphic_graphicid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_graphic_graphicid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_graphic_graphicid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_graphic_graphicid_seq OWNED BY db.pl_graphic.pl_graphic_id;
@@ -434,7 +434,7 @@ CREATE TABLE db.pl_job_candidate (
 );
 
 
-ALTER TABLE db.pl_job_candidate pl_owner TO postgres;
+ALTER TABLE db.pl_job_candidate owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_jobcandidate_jobcandidateid_seq
@@ -446,7 +446,7 @@ CREATE SEQUENCE db.pl_jobcandidate_jobcandidateid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_jobcandidate_jobcandidateid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_jobcandidate_jobcandidateid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_jobcandidate_jobcandidateid_seq OWNED BY db.pl_job_candidate.pl_job_candidate_id;
@@ -463,7 +463,7 @@ CREATE TABLE db.pl_location (
 );
 
 
-ALTER TABLE db.pl_location pl_owner TO postgres;
+ALTER TABLE db.pl_location owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_location_locationid_seq
@@ -475,7 +475,7 @@ CREATE SEQUENCE db.pl_location_locationid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_location_locationid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_location_locationid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_location_locationid_seq OWNED BY db.pl_location.pl_location_id;
@@ -490,7 +490,7 @@ CREATE TABLE db.pl_password (
 );
 
 
-ALTER TABLE db.pl_password pl_owner TO postgres;
+ALTER TABLE db.pl_password owner TO postgres;
 
 
 CREATE TABLE db.pl_person (
@@ -508,7 +508,7 @@ CREATE TABLE db.pl_person (
 );
 
 
-ALTER TABLE db.pl_person pl_owner TO postgres;
+ALTER TABLE db.pl_person owner TO postgres;
 
 
 CREATE TABLE db.pl_person_credit_card (
@@ -518,7 +518,7 @@ CREATE TABLE db.pl_person_credit_card (
 );
 
 
-ALTER TABLE db.pl_person_credit_card pl_owner TO postgres;
+ALTER TABLE db.pl_person_credit_card owner TO postgres;
 
 
 CREATE TABLE db.pl_person_phone (
@@ -528,7 +528,7 @@ CREATE TABLE db.pl_person_phone (
 );
 
 
-ALTER TABLE db.pl_person_phone pl_owner TO postgres;
+ALTER TABLE db.pl_person_phone owner TO postgres;
 
 
 CREATE TABLE db.pl_phone_number_type (
@@ -537,7 +537,7 @@ CREATE TABLE db.pl_phone_number_type (
 );
 
 
-ALTER TABLE db.pl_phone_number_type pl_owner TO postgres;
+ALTER TABLE db.pl_phone_number_type owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_phonenumbertype_phonenumbertypeid_seq
@@ -549,7 +549,7 @@ CREATE SEQUENCE db.pl_phonenumbertype_phonenumbertypeid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_phonenumbertype_phonenumbertypeid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_phonenumbertype_phonenumbertypeid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_phonenumbertype_phonenumbertypeid_seq OWNED BY db.pl_phone_number_type.pl_phone_number_type_id;
@@ -592,7 +592,7 @@ CREATE TABLE db.pl_merchandise (
 );
 
 
-ALTER TABLE db.pl_merchandise pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_category (
@@ -602,7 +602,7 @@ CREATE TABLE db.pl_merchandise_category (
 );
 
 
-ALTER TABLE db.pl_merchandise_category pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_category owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_cost_history (
@@ -616,7 +616,7 @@ CREATE TABLE db.pl_merchandise_cost_history (
 );
 
 
-ALTER TABLE db.pl_merchandise_cost_history pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_cost_history owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_description (
@@ -627,7 +627,7 @@ CREATE TABLE db.pl_merchandise_description (
 );
 
 
-ALTER TABLE db.pl_merchandise_description pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_description owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_document (
@@ -637,7 +637,7 @@ CREATE TABLE db.pl_merchandise_document (
 );
 
 
-ALTER TABLE db.pl_merchandise_document pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_document owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_stock (
@@ -652,7 +652,7 @@ CREATE TABLE db.pl_merchandise_stock (
 );
 
 
-ALTER TABLE db.pl_merchandise_stock pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_stock owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_list_price_history (
@@ -666,7 +666,7 @@ CREATE TABLE db.pl_merchandise_list_price_history (
 );
 
 
-ALTER TABLE db.pl_merchandise_list_price_history pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_list_price_history owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_model (
@@ -678,7 +678,7 @@ CREATE TABLE db.pl_merchandise_model (
 );
 
 
-ALTER TABLE db.pl_merchandise_model pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_model owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_model_graphic (
@@ -688,7 +688,7 @@ CREATE TABLE db.pl_merchandise_model_graphic (
 );
 
 
-ALTER TABLE db.pl_merchandise_model_graphic pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_model_graphic owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_model_merchandise_description_culture (
@@ -699,7 +699,7 @@ CREATE TABLE db.pl_merchandise_model_merchandise_description_culture (
 );
 
 
-ALTER TABLE db.pl_merchandise_model_merchandise_description_culture pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_model_merchandise_description_culture owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_image (
@@ -712,7 +712,7 @@ CREATE TABLE db.pl_merchandise_image (
 );
 
 
-ALTER TABLE db.pl_merchandise_image pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_image owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_merchandise_image (
@@ -722,7 +722,7 @@ CREATE TABLE db.pl_merchandise_merchandise_image (
 );
 
 
-ALTER TABLE db.pl_merchandise_merchandise_image pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_merchandise_image owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_merchandise_merchandiseid_seq
@@ -734,7 +734,7 @@ CREATE SEQUENCE db.pl_merchandise_merchandiseid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandise_merchandiseid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_merchandiseid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_merchandise_merchandiseid_seq OWNED BY db.pl_merchandise.pl_merch_id;
@@ -753,7 +753,7 @@ CREATE TABLE db.pl_merchandise_review (
 );
 
 
-ALTER TABLE db.pl_merchandise_review pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_review owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_subcategory (
@@ -764,7 +764,7 @@ CREATE TABLE db.pl_merchandise_subcategory (
 );
 
 
-ALTER TABLE db.pl_merchandise_subcategory pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_subcategory owner TO postgres;
 
 
 CREATE TABLE db.pl_merchandise_vendor (
@@ -788,7 +788,7 @@ CREATE TABLE db.pl_merchandise_vendor (
 );
 
 
-ALTER TABLE db.pl_merchandise_vendor pl_owner TO postgres;
+ALTER TABLE db.pl_merchandise_vendor owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_merchandisecategory_merchandisecategoryid_seq
@@ -800,7 +800,7 @@ CREATE SEQUENCE db.pl_merchandisecategory_merchandisecategoryid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandisecategory_merchandisecategoryid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_merchandisecategory_merchandisecategoryid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_merchandisecategory_merchandisecategoryid_seq OWNED BY db.pl_merchandise_category.pl_merchandise_category_id;
@@ -816,7 +816,7 @@ CREATE SEQUENCE db.pl_merchandisedescription_merchandisedescriptionid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandisedescription_merchandisedescriptionid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_merchandisedescription_merchandisedescriptionid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_merchandisedescription_merchandisedescriptionid_seq OWNED BY db.pl_merchandise_description.merch_descr_id;
@@ -832,7 +832,7 @@ CREATE SEQUENCE db.pl_merchandisemodel_merchandisemodelid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandisemodel_merchandisemodelid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_merchandisemodel_merchandisemodelid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_merchandisemodel_merchandisemodelid_seq OWNED BY db.pl_merchandise_model.merchandise_model_id;
@@ -848,7 +848,7 @@ CREATE SEQUENCE db.pl_merchandiseimage_merchandiseimageid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandiseimage_merchandiseimageid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_merchandiseimage_merchandiseimageid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_merchandiseimage_merchandiseimageid_seq OWNED BY db.pl_merchandise_image.merchandise_image_id;
@@ -864,7 +864,7 @@ CREATE SEQUENCE db.pl_merchandisereview_merchandisereviewid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandisereview_merchandisereviewid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_merchandisereview_merchandisereviewid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_merchandisereview_merchandisereviewid_seq OWNED BY db.pl_merchandise_review.merchandise_review_id;
@@ -880,7 +880,7 @@ CREATE SEQUENCE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq OWNED BY db.pl_merchandise_subcategory.pl_merchandise_subcategory_id;
@@ -904,7 +904,7 @@ CREATE TABLE db.pl_purchase_order_detail (
 );
 
 
-ALTER TABLE db.pl_purchase_order_detail pl_owner TO postgres;
+ALTER TABLE db.pl_purchase_order_detail owner TO postgres;
 
 
 CREATE TABLE db.pl_purchase_order_header (
@@ -928,7 +928,7 @@ CREATE TABLE db.pl_purchase_order_header (
 );
 
 
-ALTER TABLE db.pl_purchase_order_header pl_owner TO postgres;
+ALTER TABLE db.pl_purchase_order_header owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_purchaseorderdetail_purchaseorderdetailid_seq
@@ -940,7 +940,7 @@ CREATE SEQUENCE db.pl_purchaseorderdetail_purchaseorderdetailid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_purchaseorderdetail_purchaseorderdetailid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_purchaseorderdetail_purchaseorderdetailid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_purchaseorderdetail_purchaseorderdetailid_seq OWNED BY db.pl_purchase_order_detail.purchase_order_detail_id;
@@ -956,7 +956,7 @@ CREATE SEQUENCE db.pl_purchaseorderheader_purchaseorderid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_purchaseorderheader_purchaseorderid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_purchaseorderheader_purchaseorderid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_purchaseorderheader_purchaseorderid_seq OWNED BY db.pl_purchase_order_header.pl_purchase_order_id;
@@ -980,7 +980,7 @@ CREATE TABLE db.pl_sales_order_detail (
 );
 
 
-ALTER TABLE db.pl_sales_order_detail pl_owner TO postgres;
+ALTER TABLE db.pl_sales_order_detail owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_order_header (
@@ -1015,7 +1015,7 @@ CREATE TABLE db.pl_sales_order_header (
 );
 
 
-ALTER TABLE db.pl_sales_order_header pl_owner TO postgres;
+ALTER TABLE db.pl_sales_order_header owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_order_header_sale_justification (
@@ -1025,7 +1025,7 @@ CREATE TABLE db.pl_sales_order_header_sale_justification (
 );
 
 
-ALTER TABLE db.pl_sales_order_header_sale_justification pl_owner TO postgres;
+ALTER TABLE db.pl_sales_order_header_sale_justification owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_person (
@@ -1046,7 +1046,7 @@ CREATE TABLE db.pl_sales_person (
 );
 
 
-ALTER TABLE db.pl_sales_person pl_owner TO postgres;
+ALTER TABLE db.pl_sales_person owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_person_quota_history (
@@ -1059,7 +1059,7 @@ CREATE TABLE db.pl_sales_person_quota_history (
 );
 
 
-ALTER TABLE db.pl_sales_person_quota_history pl_owner TO postgres;
+ALTER TABLE db.pl_sales_person_quota_history owner TO postgres;
 
 
 CREATE TABLE db.pl_sale_justification (
@@ -1068,7 +1068,7 @@ CREATE TABLE db.pl_sale_justification (
 );
 
 
-ALTER TABLE db.pl_sale_justification pl_owner TO postgres;
+ALTER TABLE db.pl_sale_justification owner TO postgres;
 
 
 CREATE TABLE db.pl_sale_tax_pl_rate (
@@ -1082,7 +1082,7 @@ CREATE TABLE db.pl_sale_tax_pl_rate (
 );
 
 
-ALTER TABLE db.pl_sale_tax_pl_rate pl_owner TO postgres;
+ALTER TABLE db.pl_sale_tax_pl_rate owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_zone (
@@ -1102,7 +1102,7 @@ CREATE TABLE db.pl_sales_zone (
 );
 
 
-ALTER TABLE db.pl_sales_zone pl_owner TO postgres;
+ALTER TABLE db.pl_sales_zone owner TO postgres;
 
 
 CREATE TABLE db.pl_sales_zone_history (
@@ -1116,7 +1116,7 @@ CREATE TABLE db.pl_sales_zone_history (
 );
 
 
-ALTER TABLE db.pl_sales_zone_history pl_owner TO postgres;
+ALTER TABLE db.pl_sales_zone_history owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_salesorderdetail_salesorderdetailid_seq
@@ -1128,7 +1128,7 @@ CREATE SEQUENCE db.pl_salesorderdetail_salesorderdetailid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_salesorderdetail_salesorderdetailid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_salesorderdetail_salesorderdetailid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_salesorderdetail_salesorderdetailid_seq OWNED BY db.pl_sales_order_detail.sales_order_detail_id;
@@ -1144,7 +1144,7 @@ CREATE SEQUENCE db.pl_salesorderheader_salesorderid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_salesorderheader_salesorderid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_salesorderheader_salesorderid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_salesorderheader_salesorderid_seq OWNED BY db.pl_sales_order_header.sales_order_id;
@@ -1160,7 +1160,7 @@ CREATE SEQUENCE db.pl_salesreason_salesreasonid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_salesreason_salesreasonid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_salesreason_salesreasonid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_salesreason_salesreasonid_seq OWNED BY db.pl_sale_justification.sale_justification_id;
@@ -1176,7 +1176,7 @@ CREATE SEQUENCE db.pl_salestaxpl_rate_salestaxpl_rateid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_salestaxpl_rate_salestaxpl_rateid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_salestaxpl_rate_salestaxpl_rateid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_salestaxpl_rate_salestaxpl_rateid_seq OWNED BY db.pl_sale_tax_pl_rate.sale_tax_pl_rate_id;
@@ -1192,7 +1192,7 @@ CREATE SEQUENCE db.pl_salesterritory_territoryid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_salesterritory_territoryid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_salesterritory_territoryid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_salesterritory_territoryid_seq OWNED BY db.pl_sales_zone.pl_zone_id;
@@ -1205,7 +1205,7 @@ CREATE TABLE db.pl_scrap_reason (
 );
 
 
-ALTER TABLE db.pl_scrap_reason pl_owner TO postgres;
+ALTER TABLE db.pl_scrap_reason owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_scrapreason_scrapreasonid_seq
@@ -1217,7 +1217,7 @@ CREATE SEQUENCE db.pl_scrapreason_scrapreasonid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_scrapreason_scrapreasonid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_scrapreason_scrapreasonid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_scrapreason_scrapreasonid_seq OWNED BY db.pl_scrap_reason.scrap_reason_id;
@@ -1232,7 +1232,7 @@ CREATE TABLE db.pl_shift (
 );
 
 
-ALTER TABLE db.pl_shift pl_owner TO postgres;
+ALTER TABLE db.pl_shift owner TO postgres;
 
 
 CREATE TABLE db.pl_ship_method (
@@ -1246,7 +1246,7 @@ CREATE TABLE db.pl_ship_method (
 );
 
 
-ALTER TABLE db.pl_ship_method pl_owner TO postgres;
+ALTER TABLE db.pl_ship_method owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_shipmethod_shipmethodid_seq
@@ -1258,7 +1258,7 @@ CREATE SEQUENCE db.pl_shipmethod_shipmethodid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_shipmethod_shipmethodid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_shipmethod_shipmethodid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_shipmethod_shipmethodid_seq OWNED BY db.pl_ship_method.pl_shipment_method;
@@ -1276,7 +1276,7 @@ CREATE TABLE db.pl_shopping_cart_item (
 );
 
 
-ALTER TABLE db.pl_shopping_cart_item pl_owner TO postgres;
+ALTER TABLE db.pl_shopping_cart_item owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_shoppingcartitem_shoppingcartitemid_seq
@@ -1288,7 +1288,7 @@ CREATE SEQUENCE db.pl_shoppingcartitem_shoppingcartitemid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_shoppingcartitem_shoppingcartitemid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_shoppingcartitem_shoppingcartitemid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_shoppingcartitem_shoppingcartitemid_seq OWNED BY db.pl_shopping_cart_item.shopping_cart_item_id;
@@ -1314,7 +1314,7 @@ CREATE TABLE db.pl_special_offer (
 );
 
 
-ALTER TABLE db.pl_special_offer pl_owner TO postgres;
+ALTER TABLE db.pl_special_offer owner TO postgres;
 
 
 CREATE TABLE db.pl_special_offer_merchandise (
@@ -1325,7 +1325,7 @@ CREATE TABLE db.pl_special_offer_merchandise (
 );
 
 
-ALTER TABLE db.pl_special_offer_merchandise pl_owner TO postgres;
+ALTER TABLE db.pl_special_offer_merchandise owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_specialoffer_specialofferid_seq
@@ -1337,7 +1337,7 @@ CREATE SEQUENCE db.pl_specialoffer_specialofferid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_specialoffer_specialofferid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_specialoffer_specialofferid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_specialoffer_specialofferid_seq OWNED BY db.pl_special_offer.promotion_id;
@@ -1354,7 +1354,7 @@ CREATE TABLE db.pl_state_province (
 );
 
 
-ALTER TABLE db.pl_state_province pl_owner TO postgres;
+ALTER TABLE db.pl_state_province owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_stateprovince_stateprovinceid_seq
@@ -1366,7 +1366,7 @@ CREATE SEQUENCE db.pl_stateprovince_stateprovinceid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_stateprovince_stateprovinceid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_stateprovince_stateprovinceid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_stateprovince_stateprovinceid_seq OWNED BY db.pl_state_province.pl_stat_id;
@@ -1382,7 +1382,7 @@ CREATE TABLE db.pl_store (
 );
 
 
-ALTER TABLE db.pl_store pl_owner TO postgres;
+ALTER TABLE db.pl_store owner TO postgres;
 
 
 CREATE TABLE db.pl_transaction_history (
@@ -1398,7 +1398,7 @@ CREATE TABLE db.pl_transaction_history (
 );
 
 
-ALTER TABLE db.pl_transaction_history pl_owner TO postgres;
+ALTER TABLE db.pl_transaction_history owner TO postgres;
 
 
 CREATE TABLE db.pl_transaction_history_archive (
@@ -1414,7 +1414,7 @@ CREATE TABLE db.pl_transaction_history_archive (
 );
 
 
-ALTER TABLE db.pl_transaction_history_archive pl_owner TO postgres;
+ALTER TABLE db.pl_transaction_history_archive owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_transactionhistory_transactionid_seq
@@ -1426,7 +1426,7 @@ CREATE SEQUENCE db.pl_transactionhistory_transactionid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_transactionhistory_transactionid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_transactionhistory_transactionid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_transactionhistory_transactionid_seq OWNED BY db.pl_transaction_history.transaction_id;
@@ -1439,7 +1439,7 @@ CREATE TABLE db.pl_unit_measure (
 );
 
 
-ALTER TABLE db.pl_unit_measure pl_owner TO postgres;
+ALTER TABLE db.pl_unit_measure owner TO postgres;
 
 
 CREATE TABLE db.pl_pl_seller (
@@ -1451,7 +1451,7 @@ CREATE TABLE db.pl_pl_seller (
 );
 
 
-ALTER TABLE db.pl_pl_seller pl_owner TO postgres;
+ALTER TABLE db.pl_pl_seller owner TO postgres;
 
 
 CREATE TABLE db.pl_work_order (
@@ -1470,7 +1470,7 @@ CREATE TABLE db.pl_work_order (
 );
 
 
-ALTER TABLE db.pl_work_order pl_owner TO postgres;
+ALTER TABLE db.pl_work_order owner TO postgres;
 
 
 CREATE TABLE db.pl_work_order_routing (
@@ -1494,7 +1494,7 @@ CREATE TABLE db.pl_work_order_routing (
 );
 
 
-ALTER TABLE db.pl_work_order_routing pl_owner TO postgres;
+ALTER TABLE db.pl_work_order_routing owner TO postgres;
 
 
 CREATE SEQUENCE db.pl_workorder_workorderid_seq
@@ -1506,7 +1506,7 @@ CREATE SEQUENCE db.pl_workorder_workorderid_seq
     CACHE 1;
 
 
-ALTER TABLE db.pl_workorder_workorderid_seq pl_owner TO postgres;
+ALTER TABLE db.pl_workorder_workorderid_seq owner TO postgres;
 
 
 ALTER SEQUENCE db.pl_workorder_workorderid_seq OWNED BY db.pl_work_order.work_order_id;
