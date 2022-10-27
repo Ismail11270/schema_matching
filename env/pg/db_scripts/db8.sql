@@ -50,7 +50,7 @@ CREATE SEQUENCE db.pl_address_addressid_seq
 ALTER TABLE db.pl_address_addressid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_address_addressid_seq OWNED BY db.pl_address.pl_address_id;
+-- db.pl_address_addressid_seq OWNED BY db.pl_address.pl_address_id;
 
 
 
@@ -76,7 +76,7 @@ CREATE SEQUENCE db.pl_addresstype_addresstypeid_seq
 ALTER TABLE db.pl_addresstype_addresstypeid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_addresstype_addresstypeid_seq OWNED BY db.pl_address_type.pl_address_type_id;
+-- db.pl_addresstype_addresstypeid_seq OWNED BY db.pl_address_type.pl_address_type_id;
 
 
 
@@ -112,7 +112,7 @@ CREATE SEQUENCE db.pl_billofmaterials_billofmaterialsid_seq
 ALTER TABLE db.pl_billofmaterials_billofmaterialsid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_billofmaterials_billofmaterialsid_seq OWNED BY db.pl_bom.pl_bom_id;
+-- db.pl_billofmaterials_billofmaterialsid_seq OWNED BY db.pl_bom.pl_bom_id;
 
 
 
@@ -162,7 +162,7 @@ CREATE SEQUENCE db.pl_businessentity_businessentityid_seq
 ALTER TABLE db.pl_businessentity_businessentityid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_businessentity_businessentityid_seq OWNED BY db.pl_business_entity.pl_business_entity_id;
+-- db.pl_businessentity_businessentityid_seq OWNED BY db.pl_business_entity.pl_business_entity_id;
 
 
 
@@ -187,7 +187,7 @@ CREATE SEQUENCE db.pl_contacttype_contacttypeid_seq
 ALTER TABLE db.pl_contacttype_contacttypeid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_contacttype_contacttypeid_seq OWNED BY db.pl_contact_type.pl_contact_type_id;
+-- db.pl_contacttype_contacttypeid_seq OWNED BY db.pl_contact_type.pl_contact_type_id;
 
 
 
@@ -235,7 +235,7 @@ CREATE SEQUENCE db.pl_creditcard_creditcardid_seq
 ALTER TABLE db.pl_creditcard_creditcardid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_creditcard_creditcardid_seq OWNED BY db.pl_credit_card.pl_bank_card_id;
+-- db.pl_creditcard_creditcardid_seq OWNED BY db.pl_credit_card.pl_bank_card_id;
 
 
 
@@ -283,7 +283,7 @@ CREATE SEQUENCE db.pl_currencypl_rate_currencypl_rateid_seq
 ALTER TABLE db.pl_currencypl_rate_currencypl_rateid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_currencypl_rate_currencypl_rateid_seq OWNED BY db.pl_exchange_pl_rate.pl_exchange_rate_it;
+-- db.pl_currencypl_rate_currencypl_rateid_seq OWNED BY db.pl_exchange_pl_rate.pl_exchange_rate_it;
 
 
 
@@ -312,7 +312,7 @@ CREATE SEQUENCE db.pl_client_clientid_seq
 ALTER TABLE db.pl_client_clientid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_client_clientid_seq OWNED BY db.pl_client.pl_client_id;
+-- db.pl_client_clientid_seq OWNED BY db.pl_client.pl_client_id;
 
 
 
@@ -368,7 +368,7 @@ CREATE SEQUENCE db.pl_emailaddress_emailaddressid_seq
 ALTER TABLE db.pl_emailaddress_emailaddressid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_emailaddress_emailaddressid_seq OWNED BY db.pl_email.pl_email_id;
+-- db.pl_emailaddress_emailaddressid_seq OWNED BY db.pl_email.pl_email_id;
 
 
 
@@ -422,7 +422,7 @@ CREATE SEQUENCE db.pl_graphic_graphicid_seq
 ALTER TABLE db.pl_graphic_graphicid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_graphic_graphicid_seq OWNED BY db.pl_graphic.pl_graphic_id;
+-- db.pl_graphic_graphicid_seq OWNED BY db.pl_graphic.pl_graphic_id;
 
 
 
@@ -449,7 +449,7 @@ CREATE SEQUENCE db.pl_jobcandidate_jobcandidateid_seq
 ALTER TABLE db.pl_jobcandidate_jobcandidateid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_jobcandidate_jobcandidateid_seq OWNED BY db.pl_job_candidate.pl_job_candidate_id;
+-- db.pl_jobcandidate_jobcandidateid_seq OWNED BY db.pl_job_candidate.pl_job_candidate_id;
 
 
 
@@ -478,7 +478,7 @@ CREATE SEQUENCE db.pl_location_locationid_seq
 ALTER TABLE db.pl_location_locationid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_location_locationid_seq OWNED BY db.pl_location.pl_location_id;
+-- db.pl_location_locationid_seq OWNED BY db.pl_location.pl_location_id;
 
 
 
@@ -552,7 +552,7 @@ CREATE SEQUENCE db.pl_phonenumbertype_phonenumbertypeid_seq
 ALTER TABLE db.pl_phonenumbertype_phonenumbertypeid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_phonenumbertype_phonenumbertypeid_seq OWNED BY db.pl_phone_number_type.pl_phone_number_type_id;
+-- db.pl_phonenumbertype_phonenumbertypeid_seq OWNED BY db.pl_phone_number_type.pl_phone_number_type_id;
 
 
 
@@ -574,20 +574,20 @@ CREATE TABLE db.pl_merchandise (
     pl_style character(2),
     pl_merchandise_subcategory_id integer,
     merchandise_model_id integer,
-    sell_pl_start_date timestamp without time zone NOT NULL,
-    sellpl_end_date timestamp without time zone,
-    discontinued_date timestamp without time zone,
+    pl_sell_start_date timestamp without time zone NOT NULL,
+    pl_sell_end_date timestamp without time zone,
+    pl_discontinued_date timestamp without time zone,
     row_guid uuid NOT NULL,
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
     CONSTRAINT "CK_merchandise_Class" CHECK (((upper((class)::text) = ANY (ARRAY['L'::text, 'M'::text, 'H'::text])) OR (class IS NULL))),
-    CONSTRAINT "CK_merchandise_DaysToManufacture" CHECK ((days_to_manufacture >= 0)),
-    CONSTRAINT "CK_merchandise_ListPrice" CHECK ((list_price >= 0.00)),
-    CONSTRAINT "CK_merchandise_merchandiseLine" CHECK (((upper((merchandise_line)::text) = ANY (ARRAY['S'::text, 'T'::text, 'M'::text, 'R'::text])) OR (merchandise_line IS NULL))),
-    CONSTRAINT "CK_merchandise_ReorderPoint" CHECK ((reorder_point > 0)),
-    CONSTRAINT "CK_merchandise_SafetyStocklvl" CHECK ((safety_stock_lvl > 0)),
-    CONSTRAINT "CK_merchandise_SellEndDate" CHECK (((sellpl_end_date >= sell_pl_start_date) OR (sellpl_end_date IS NULL))),
+    CONSTRAINT "CK_merchandise_DaysToManufacture" CHECK ((pl_days_to_manufacture >= 0)),
+    CONSTRAINT "CK_merchandise_ListPrice" CHECK ((pl_list_price >= 0.00)),
+    CONSTRAINT "CK_merchandise_merchandiseLine" CHECK (((upper((pl_merchandise_line)::text) = ANY (ARRAY['S'::text, 'T'::text, 'M'::text, 'R'::text])) OR (pl_merchandise_line IS NULL))),
+    CONSTRAINT "CK_merchandise_ReorderPoint" CHECK ((pl_reorder_point > 0)),
+    CONSTRAINT "CK_merchandise_SafetyStocklvl" CHECK ((pl_safety_stock_lvl > 0)),
+    CONSTRAINT "CK_merchandise_SellEndDate" CHECK (((pl_sell_end_date >= pl_sell_start_date) OR (pl_sell_end_date IS NULL))),
     CONSTRAINT "CK_merchandise_StandardCost" CHECK ((pl_basic_price >= 0.00)),
-    CONSTRAINT "CK_merchandise_Style" CHECK (((upper((style)::text) = ANY (ARRAY['W'::text, 'M'::text, 'U'::text])) OR (style IS NULL))),
+    CONSTRAINT "CK_merchandise_Style" CHECK (((upper((pl_style)::text) = ANY (ARRAY['W'::text, 'M'::text, 'U'::text])) OR (pl_style IS NULL))),
     CONSTRAINT "CK_merchandise_Weight" CHECK ((weight > 0.00))
 );
 
@@ -737,7 +737,7 @@ CREATE SEQUENCE db.pl_merchandise_merchandiseid_seq
 ALTER TABLE db.pl_merchandise_merchandiseid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_merchandise_merchandiseid_seq OWNED BY db.pl_merchandise.pl_merch_id;
+-- db.pl_merchandise_merchandiseid_seq OWNED BY db.pl_merchandise.pl_merch_id;
 
 
 
@@ -803,7 +803,7 @@ CREATE SEQUENCE db.pl_merchandisecategory_merchandisecategoryid_seq
 ALTER TABLE db.pl_merchandisecategory_merchandisecategoryid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_merchandisecategory_merchandisecategoryid_seq OWNED BY db.pl_merchandise_category.pl_merchandise_category_id;
+-- db.pl_merchandisecategory_merchandisecategoryid_seq OWNED BY db.pl_merchandise_category.pl_merchandise_category_id;
 
 
 
@@ -819,7 +819,7 @@ CREATE SEQUENCE db.pl_merchandisedescription_merchandisedescriptionid_seq
 ALTER TABLE db.pl_merchandisedescription_merchandisedescriptionid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_merchandisedescription_merchandisedescriptionid_seq OWNED BY db.pl_merchandise_description.merch_descr_id;
+-- db.pl_merchandisedescription_merchandisedescriptionid_seq OWNED BY db.pl_merchandise_description.merch_descr_id;
 
 
 
@@ -835,7 +835,7 @@ CREATE SEQUENCE db.pl_merchandisemodel_merchandisemodelid_seq
 ALTER TABLE db.pl_merchandisemodel_merchandisemodelid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_merchandisemodel_merchandisemodelid_seq OWNED BY db.pl_merchandise_model.merchandise_model_id;
+-- db.pl_merchandisemodel_merchandisemodelid_seq OWNED BY db.pl_merchandise_model.merchandise_model_id;
 
 
 
@@ -851,7 +851,7 @@ CREATE SEQUENCE db.pl_merchandiseimage_merchandiseimageid_seq
 ALTER TABLE db.pl_merchandiseimage_merchandiseimageid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_merchandiseimage_merchandiseimageid_seq OWNED BY db.pl_merchandise_image.merchandise_image_id;
+-- db.pl_merchandiseimage_merchandiseimageid_seq OWNED BY db.pl_merchandise_image.merchandise_image_id;
 
 
 
@@ -867,7 +867,7 @@ CREATE SEQUENCE db.pl_merchandisereview_merchandisereviewid_seq
 ALTER TABLE db.pl_merchandisereview_merchandisereviewid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_merchandisereview_merchandisereviewid_seq OWNED BY db.pl_merchandise_review.merchandise_review_id;
+-- db.pl_merchandisereview_merchandisereviewid_seq OWNED BY db.pl_merchandise_review.merchandise_review_id;
 
 
 
@@ -883,7 +883,7 @@ CREATE SEQUENCE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq
 ALTER TABLE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_merchandisesubcategory_merchandisesubcategoryid_seq OWNED BY db.pl_merchandise_subcategory.pl_merchandise_subcategory_id;
+-- db.pl_merchandisesubcategory_merchandisesubcategoryid_seq OWNED BY db.pl_merchandise_subcategory.pl_merchandise_subcategory_id;
 
 
 
@@ -943,7 +943,7 @@ CREATE SEQUENCE db.pl_purchaseorderdetail_purchaseorderdetailid_seq
 ALTER TABLE db.pl_purchaseorderdetail_purchaseorderdetailid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_purchaseorderdetail_purchaseorderdetailid_seq OWNED BY db.pl_purchase_order_detail.purchase_order_detail_id;
+-- db.pl_purchaseorderdetail_purchaseorderdetailid_seq OWNED BY db.pl_purchase_order_detail.purchase_order_detail_id;
 
 
 
@@ -959,7 +959,7 @@ CREATE SEQUENCE db.pl_purchaseorderheader_purchaseorderid_seq
 ALTER TABLE db.pl_purchaseorderheader_purchaseorderid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_purchaseorderheader_purchaseorderid_seq OWNED BY db.pl_purchase_order_header.pl_purchase_order_id;
+-- db.pl_purchaseorderheader_purchaseorderid_seq OWNED BY db.pl_purchase_order_header.pl_purchase_order_id;
 
 
 
@@ -1131,7 +1131,7 @@ CREATE SEQUENCE db.pl_salesorderdetail_salesorderdetailid_seq
 ALTER TABLE db.pl_salesorderdetail_salesorderdetailid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_salesorderdetail_salesorderdetailid_seq OWNED BY db.pl_sales_order_detail.sales_order_detail_id;
+-- db.pl_salesorderdetail_salesorderdetailid_seq OWNED BY db.pl_sales_order_detail.sales_order_detail_id;
 
 
 
@@ -1147,7 +1147,7 @@ CREATE SEQUENCE db.pl_salesorderheader_salesorderid_seq
 ALTER TABLE db.pl_salesorderheader_salesorderid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_salesorderheader_salesorderid_seq OWNED BY db.pl_sales_order_header.sales_order_id;
+-- db.pl_salesorderheader_salesorderid_seq OWNED BY db.pl_sales_order_header.sales_order_id;
 
 
 
@@ -1163,7 +1163,7 @@ CREATE SEQUENCE db.pl_salesreason_salesreasonid_seq
 ALTER TABLE db.pl_salesreason_salesreasonid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_salesreason_salesreasonid_seq OWNED BY db.pl_sale_justification.sale_justification_id;
+-- db.pl_salesreason_salesreasonid_seq OWNED BY db.pl_sale_justification.sale_justification_id;
 
 
 
@@ -1179,7 +1179,7 @@ CREATE SEQUENCE db.pl_salestaxpl_rate_salestaxpl_rateid_seq
 ALTER TABLE db.pl_salestaxpl_rate_salestaxpl_rateid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_salestaxpl_rate_salestaxpl_rateid_seq OWNED BY db.pl_sale_tax_pl_rate.sale_tax_pl_rate_id;
+-- db.pl_salestaxpl_rate_salestaxpl_rateid_seq OWNED BY db.pl_sale_tax_pl_rate.sale_tax_pl_rate_id;
 
 
 
@@ -1195,7 +1195,7 @@ CREATE SEQUENCE db.pl_salesterritory_territoryid_seq
 ALTER TABLE db.pl_salesterritory_territoryid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_salesterritory_territoryid_seq OWNED BY db.pl_sales_zone.pl_zone_id;
+-- db.pl_salesterritory_territoryid_seq OWNED BY db.pl_sales_zone.pl_zone_id;
 
 
 
@@ -1220,7 +1220,7 @@ CREATE SEQUENCE db.pl_scrapreason_scrapreasonid_seq
 ALTER TABLE db.pl_scrapreason_scrapreasonid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_scrapreason_scrapreasonid_seq OWNED BY db.pl_scrap_reason.scrap_reason_id;
+-- db.pl_scrapreason_scrapreasonid_seq OWNED BY db.pl_scrap_reason.scrap_reason_id;
 
 
 
@@ -1261,7 +1261,7 @@ CREATE SEQUENCE db.pl_shipmethod_shipmethodid_seq
 ALTER TABLE db.pl_shipmethod_shipmethodid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_shipmethod_shipmethodid_seq OWNED BY db.pl_ship_method.pl_shipment_method;
+-- db.pl_shipmethod_shipmethodid_seq OWNED BY db.pl_ship_method.pl_shipment_method;
 
 
 
@@ -1291,7 +1291,7 @@ CREATE SEQUENCE db.pl_shoppingcartitem_shoppingcartitemid_seq
 ALTER TABLE db.pl_shoppingcartitem_shoppingcartitemid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_shoppingcartitem_shoppingcartitemid_seq OWNED BY db.pl_shopping_cart_item.shopping_cart_item_id;
+-- db.pl_shoppingcartitem_shoppingcartitemid_seq OWNED BY db.pl_shopping_cart_item.shopping_cart_item_id;
 
 
 
@@ -1340,7 +1340,7 @@ CREATE SEQUENCE db.pl_specialoffer_specialofferid_seq
 ALTER TABLE db.pl_specialoffer_specialofferid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_specialoffer_specialofferid_seq OWNED BY db.pl_special_offer.promotion_id;
+-- db.pl_specialoffer_specialofferid_seq OWNED BY db.pl_special_offer.promotion_id;
 
 
 
@@ -1369,7 +1369,7 @@ CREATE SEQUENCE db.pl_stateprovince_stateprovinceid_seq
 ALTER TABLE db.pl_stateprovince_stateprovinceid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_stateprovince_stateprovinceid_seq OWNED BY db.pl_state_province.pl_stat_id;
+-- db.pl_stateprovince_stateprovinceid_seq OWNED BY db.pl_state_province.pl_stat_id;
 
 
 
@@ -1429,7 +1429,7 @@ CREATE SEQUENCE db.pl_transactionhistory_transactionid_seq
 ALTER TABLE db.pl_transactionhistory_transactionid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_transactionhistory_transactionid_seq OWNED BY db.pl_transaction_history.transaction_id;
+-- db.pl_transactionhistory_transactionid_seq OWNED BY db.pl_transaction_history.transaction_id;
 
 
 
@@ -1509,7 +1509,7 @@ CREATE SEQUENCE db.pl_workorder_workorderid_seq
 ALTER TABLE db.pl_workorder_workorderid_seq owner TO postgres;
 
 
-ALTER SEQUENCE db.pl_workorder_workorderid_seq OWNED BY db.pl_work_order.work_order_id;
+-- db.pl_workorder_workorderid_seq OWNED BY db.pl_work_order.work_order_id;
 
 
 
