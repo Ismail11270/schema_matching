@@ -2288,12 +2288,12 @@ ALTER TABLE ONLY db.pl_merchandise_model_merchandise_pl_description_culture
 
 
 ALTER TABLE ONLY db.pl_merchandise_model_merchandise_pl_description_culture
-    ADD CONSTRAINT "FK_merchandiseModelmerchandisepl_descriptionCulture_merchandisepl_description_Pro" FOREIGN KEY (pl_merch_descr_id) REFERENCES db.pl_merchandise_pl_description(pl_merch_descr_id);
+    ADD CONSTRAINT "fdasdasfasdfasdfasdffasdfsa" FOREIGN KEY (pl_merch_descr_id) REFERENCES db.pl_merchandise_pl_description(pl_merch_descr_id);
 
 
 
 ALTER TABLE ONLY db.pl_merchandise_model_merchandise_pl_description_culture
-    ADD CONSTRAINT "FK_merchandiseModelmerchandisepl_descriptionCulture_merchandiseModel_merchandiseMo" FOREIGN KEY (pl_merchandise_model_id) REFERENCES db.pl_merchandise_model(pl_merchandise_model_id);
+    ADD CONSTRAINT "fdafsdfsadafsdfas" FOREIGN KEY (pl_merchandise_model_id) REFERENCES db.pl_merchandise_model(pl_merchandise_model_id);
 
 
 
