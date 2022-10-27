@@ -976,7 +976,7 @@ CREATE TABLE db.pl_sales_order_detail (
     pl_modification_timestamp timestamp without time zone DEFAULT now() NOT NULL,
     CONSTRAINT "CK_SalesOrderDetail_OrderQty" CHECK ((pl_order_qty > 0)),
     CONSTRAINT "CK_SalesOrderDetail_UnitPrice" CHECK ((pl_unit_price >= 0.00)),
-    CONSTRAINT "CK_SalesOrderDetail_UnitPriceDiscount" CHECK ((unit_price_discount >= 0.00))
+    CONSTRAINT "CK_SalesOrderDetail_UnitPriceDiscount" CHECK ((pl_unit_price_discount >= 0.00))
 );
 
 
