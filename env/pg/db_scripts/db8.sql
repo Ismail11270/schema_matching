@@ -943,7 +943,7 @@ CREATE SEQUENCE db.pl_purchaseorderdetail_purchaseorderdetailid_seq
 ALTER TABLE db.pl_purchaseorderdetail_purchaseorderdetailid_seq owner TO postgres;
 
 
--- db.pl_purchaseorderdetail_purchaseorderdetailid_seq OWNED BY db.pl_purchase_order_detail.purchase_order_detail_id;
+-- db.pl_purchaseorderdetail_purchaseorderdetailid_seq OWNED BY db.pl_purchase_order_detail.pl_purchase_order_detail_id;
 
 
 
@@ -1593,7 +1593,7 @@ ALTER TABLE ONLY db.pl_merchandise_subcategory ALTER COLUMN pl_merchandise_subca
 
 
 
-ALTER TABLE ONLY db.pl_purchase_order_detail ALTER COLUMN purchase_order_detail_id SET DEFAULT nextval('db.pl_purchaseorderdetail_purchaseorderdetailid_seq'::regclass);
+ALTER TABLE ONLY db.pl_purchase_order_detail ALTER COLUMN pl_purchase_order_detail_id SET DEFAULT nextval('db.pl_purchaseorderdetail_purchaseorderdetailid_seq'::regclass);
 
 
 
@@ -1933,7 +1933,7 @@ ALTER TABLE db.pl_merchandise CLUSTER ON "PK_merchandise_merchandiseID";
 
 
 ALTER TABLE ONLY db.pl_purchase_order_detail
-    ADD CONSTRAINT "PK_PurchaseOrderDetail_PurchaseOrderID_PurchaseOrderDetailID" PRIMARY KEY (pl_purchase_order_id, purchase_order_detail_id);
+    ADD CONSTRAINT "PK_PurchaseOrderDetail_PurchaseOrderID_PurchaseOrderDetailID" PRIMARY KEY (pl_purchase_order_id, pl_purchase_order_detail_id);
 
 ALTER TABLE db.pl_purchase_order_detail CLUSTER ON "PK_PurchaseOrderDetail_PurchaseOrderID_PurchaseOrderDetailID";
 
