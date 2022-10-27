@@ -25,7 +25,7 @@ SET default_table_access_method = heap;
 CREATE TABLE db.pl_address (
     pl_address_id integer NOT NULL,
     pl_address_line_1 character varying(60) NOT NULL,
-    pl_address_line_1 character varying(60),
+    pl_address_line_2 character varying(60),
     pl_city character varying(30) NOT NULL,
     pl_stat_id integer NOT NULL,
     pl_zipcode character varying(15) NOT NULL,
