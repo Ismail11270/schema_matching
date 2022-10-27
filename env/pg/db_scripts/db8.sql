@@ -15,7 +15,7 @@ SET row_security = off;
 CREATE SCHEMA db;
 
 
-ALTER SCHEMA db pl_owner TO postgres;
+ALTER SCHEMA db owner TO postgres;
 
 SET default_tablespace = '';
 
